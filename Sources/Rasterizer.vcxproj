@@ -224,6 +224,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Entities\Camera.cpp" />
     <ClCompile Include="src\Rasterizer\Entities\Model.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp" />
+    <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Context\EWindowState.h" />
@@ -242,6 +243,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Entities\Model.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
     <ClInclude Include="include\Rasterizer\Utils\Event.h" />
+    <ClInclude Include="include\Rasterizer\Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\window.ini" />

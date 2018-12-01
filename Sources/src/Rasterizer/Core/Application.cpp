@@ -4,11 +4,12 @@
 * @version 1.0
 */
 
+#include <AltMath/AltMath.h>
+
 #include "Rasterizer/Core/Application.h"
 #include "Rasterizer/Data/Vertex.h"
 #include "Rasterizer/Data/Triangle2D.h"
-
-#include <AltMath/AltMath.h>
+#include "Rasterizer/Utils/Math.h"
 
 Rasterizer::Core::Application::Application() :
 	m_windowINI("config/window.ini"),
@@ -68,8 +69,7 @@ int Rasterizer::Core::Application::Run()
 		std::cout << m_clock.GetFramerate() << std::endl;
 
 		AltMath::Quaternion eulerRotation;
-		eulerRotation.MakeFromEuler({ 0.0f, AltMath::Tools::Utils::ToRadians(m_modelRotation), 0.0f });
-		m_model.transform.SetRotation(eulerRotation);
+		m_model.transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ 0.0f, m_modelRotation, 0.0f }));
 		m_modelRotation += m_clock.GetDeltaTime() * 90.0f;
 
 		for (auto mesh : m_model.GetMeshes())
