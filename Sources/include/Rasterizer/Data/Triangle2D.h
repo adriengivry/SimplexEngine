@@ -45,6 +45,11 @@ namespace Rasterizer::Data
 		float CalculateArea();
 
 		/**
+		* Calculate a bounding box for the triangle
+		*/
+		std::tuple<int, int, int, int> GetBoundingBox();
+
+		/**
 		* Calculate the area of a triangle defined by 3 points
 		* @param p_point1
 		* @param p_point2

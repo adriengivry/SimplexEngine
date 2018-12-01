@@ -80,9 +80,11 @@ int Rasterizer::Core::Application::Run()
 			{
 				Data::Triangle2D triangle(m_camera, m_model.transform.GetWorldMatrix(), vertices[i - 2], vertices[i - 1], vertices[i]);
 
-				for (uint16_t x = 0; x < 1280; ++x)
+				auto[xmin, xmax, ymin, ymax] = triangle.GetBoundingBox();
+
+				for (uint16_t x = std::min(xmin, xmax); x < std::max(xmin, xmax); ++x)
 				{
-					for (uint16_t y = 0; y < 720; ++y)
+					for (uint16_t y = std::min(ymin, ymax); y < std::max(ymin, ymax); ++y)
 					{
 						if (triangle.IsPointIn(AltMath::Vector2i(x, y)))
 							m_renderer.SetPixel(x, y, Data::Color::Red);

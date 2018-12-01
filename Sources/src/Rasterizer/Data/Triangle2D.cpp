@@ -42,6 +42,17 @@ float Rasterizer::Data::Triangle2D::CalculateArea()
 	);
 }
 
+std::tuple<int, int, int, int> Rasterizer::Data::Triangle2D::GetBoundingBox()
+{
+	return std::make_tuple
+	(
+		m_points[0].x > m_points[1].x ? (m_points[0].x > m_points[2].x ? m_points[0].x : m_points[2].x) : (m_points[1].x > m_points[2].x ? m_points[1].x : m_points[2].x),
+		m_points[0].y > m_points[1].y ? (m_points[0].y > m_points[2].y ? m_points[0].y : m_points[2].y) : (m_points[1].y > m_points[2].y ? m_points[1].y : m_points[2].y),
+		m_points[0].x < m_points[1].x ? (m_points[0].x < m_points[2].x ? m_points[0].x : m_points[2].x) : (m_points[1].x < m_points[2].x ? m_points[1].x : m_points[2].x),
+		m_points[0].y < m_points[1].y ? (m_points[0].y < m_points[2].y ? m_points[0].y : m_points[2].y) : (m_points[1].y < m_points[2].y ? m_points[1].y : m_points[2].y)
+	);
+}
+
 float Rasterizer::Data::Triangle2D::CalculateArea(const AltMath::Vector2i & p_point1, const AltMath::Vector2i & p_point2, const AltMath::Vector2i & p_point3)
 {
 	return abs
