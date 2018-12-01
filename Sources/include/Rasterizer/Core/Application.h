@@ -14,6 +14,7 @@
 #include "Rasterizer/Context/EventHandler.h"
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
 
@@ -52,6 +53,7 @@ namespace Rasterizer::Core
 		Rasterizer::Context::Window m_window;
 		Rasterizer::Context::EventHandler m_eventHandler;
 		Rasterizer::Core::Renderer m_renderer;
+		Rasterizer::Utils::Clock m_clock;
 			
 		EApplicationState m_applicationState;
 

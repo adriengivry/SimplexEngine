@@ -35,6 +35,8 @@ int Rasterizer::Core::Application::Run()
 		auto mesh = m_model.GetPrimaryMesh();
 		auto vertices = mesh.GetVertices();
 
+		std::cout << 1.0f / m_clock.GetDeltaTime() << std::endl;
+
 		Data::Triangle2D triangle(m_camera, vertices[0], vertices[1], vertices[2]);
 
 		for (uint16_t x = 0; x < 1280; ++x)
@@ -51,6 +53,8 @@ int Rasterizer::Core::Application::Run()
 		m_renderer.DrawFinalTexture();
 
 		m_renderer.Render();
+
+		m_clock.Tick();
 	}
 
 	return EXIT_SUCCESS;
