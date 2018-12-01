@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <thread>
+
 #include <AltMath/AltMath.h>
 
 #include "Rasterizer/Core/Application.h"
@@ -62,19 +64,30 @@ Rasterizer::Core::Application::Application() :
 
 int Rasterizer::Core::Application::Run()
 {
+	float logFPStimer = 0.0f;
 	while (m_applicationState == EApplicationState::RUNNING)
 	{
 		m_eventHandler.HandleEvents(m_window);
 
-		std::cout << m_clock.GetFramerate() << std::endl;
+		logFPStimer += m_clock.GetDeltaTime();
+
+		if (logFPStimer >= 0.5f)
+		{
+			system("CLS");
+			std::cout << static_cast<uint16_t>(m_clock.GetFramerate()) << std::endl;
+			logFPStimer = 0.0f;
+		}
 
 		AltMath::Quaternion eulerRotation;
 		m_model.transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ 0.0f, m_modelRotation, 0.0f }));
 		m_modelRotation += m_clock.GetDeltaTime() * 90.0f;
 
+	
 		for (auto mesh : m_model.GetMeshes())
 		{
 			auto vertices = mesh.get().GetVertices();
+
+			uint32_t counter = 0;
 
 			for (uint32_t i = 2; i < vertices.size(); i += 3)
 			{
@@ -90,6 +103,11 @@ int Rasterizer::Core::Application::Run()
 							m_renderer.SetPixel(x, y, Data::Color::Red);
 					}
 				}
+
+				++counter;
+
+				if (counter == 8)
+					counter = 0;
 			}
 		}
 
