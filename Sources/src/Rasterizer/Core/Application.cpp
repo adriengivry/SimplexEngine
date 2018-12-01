@@ -37,6 +37,12 @@ int Rasterizer::Core::Application::Run()
 
 		std::cout << 1.0f / m_clock.GetDeltaTime() << std::endl;
 
+		AltMath::Quaternion eulerRotation;
+		eulerRotation.MakeFromEuler({ 0.0f, 0.0f, m_modelRotation });
+		m_model.transform.SetRotation(eulerRotation);
+
+		m_modelRotation += m_clock.GetDeltaTime() * 90.0f;
+
 		Data::Triangle2D triangle(m_camera, vertices[0], vertices[1], vertices[2]);
 
 		for (uint16_t x = 0; x < 1280; ++x)

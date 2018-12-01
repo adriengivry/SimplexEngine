@@ -63,6 +63,9 @@ namespace Rasterizer::Core
 		/* Scene relatives */
 		Rasterizer::Entities::Camera m_camera;
 		Rasterizer::Entities::Model m_model;
+
+		/* Animation stuffs */
+		float m_modelRotation = 0.0f;
 	};
 }
 
