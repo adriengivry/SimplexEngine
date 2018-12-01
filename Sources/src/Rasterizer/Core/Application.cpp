@@ -86,7 +86,7 @@ int Rasterizer::Core::Application::Run()
 				{
 					for (uint16_t y = std::min(ymin, ymax); y < std::max(ymin, ymax); ++y)
 					{
-						if (triangle.IsPointIn(AltMath::Vector2i(x, y)))
+						if (triangle.IsPointInArea(AltMath::Vector2i(x, y)))
 							m_renderer.SetPixel(x, y, Data::Color::Red);
 					}
 				}

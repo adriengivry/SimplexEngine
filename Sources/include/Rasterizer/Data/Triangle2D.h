@@ -59,8 +59,15 @@ namespace Rasterizer::Data
 
 		/**
 		* Verify if a point is in the triangle
+		* @param p_point
 		*/
-		bool IsPointIn(const AltMath::Vector2i& p_point);
+		bool IsPointInArea(const AltMath::Vector2i& p_point);
+
+		/**
+		* Verify if a point is in the permiter of the triangle
+		* @param p_point
+		*/
+		bool IsPointInPerimeter(const AltMath::Vector2i& p_point);
 
 	private:
 		AltMath::Vector2i m_points[3];

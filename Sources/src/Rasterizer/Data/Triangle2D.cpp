@@ -65,11 +65,23 @@ float Rasterizer::Data::Triangle2D::CalculateArea(const AltMath::Vector2i & p_po
 	);
 }
 
-bool Rasterizer::Data::Triangle2D::IsPointIn(const AltMath::Vector2i& p_point)
+bool Rasterizer::Data::Triangle2D::IsPointInArea(const AltMath::Vector2i& p_point)
 {
 	float A1 = CalculateArea(p_point, m_points[1], m_points[2]);
 	float A2 = CalculateArea(m_points[0], p_point, m_points[2]);
 	float A3 = CalculateArea(m_points[0], m_points[1], p_point);
 
 	return (m_area == A1 + A2 + A3);
+}
+
+bool Rasterizer::Data::Triangle2D::IsPointInPerimeter(const AltMath::Vector2i & p_point)
+{
+	float ab = sqrtf(AltMath::Vector2i::LengthSquare(m_points[0] - m_points[1]));
+	float ac = sqrtf(AltMath::Vector2i::LengthSquare(m_points[0] - m_points[2]));
+	float bc = sqrtf(AltMath::Vector2i::LengthSquare(m_points[1] - m_points[2]));
+	float ap = sqrtf(AltMath::Vector2i::LengthSquare(m_points[0] - p_point));
+	float bp = sqrtf(AltMath::Vector2i::LengthSquare(m_points[1] - p_point));
+	float cp = sqrtf(AltMath::Vector2i::LengthSquare(m_points[2] - p_point));
+
+	return ap + bp == ab || bp + cp == bc || cp + ap == ac;
 }
