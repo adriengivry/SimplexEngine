@@ -14,6 +14,7 @@
 #include "Rasterizer/Context/EventHandler.h"
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Entities/Camera.h"
 
 namespace Rasterizer::Core
 {
@@ -50,10 +51,11 @@ namespace Rasterizer::Core
 		Rasterizer::Context::Window m_window;
 		Rasterizer::Context::EventHandler m_eventHandler;
 		Rasterizer::Core::Renderer m_renderer;
-
-		float m_test;
-
+			
 		EApplicationState m_applicationState;
+
+		/* Scene relatives */
+		Rasterizer::Entities::Camera m_camera;
 	};
 }
 

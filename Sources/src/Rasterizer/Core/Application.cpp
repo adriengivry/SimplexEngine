@@ -14,7 +14,8 @@ Rasterizer::Core::Application::Application() :
 	m_windowINI("config/window.ini"),
 	m_window(m_windowINI.Get<std::string>("title"), m_windowINI.Get<uint16_t>("width"), m_windowINI.Get<uint16_t>("height")),
 	m_renderer(m_window),
-	m_applicationState(EApplicationState::RUNNING)
+	m_applicationState(EApplicationState::RUNNING),
+	m_camera(AltMath::Vector3f(2.5f, 2.5f, 2.0f), AltMath::Quaternion::Identity(), 45.0f, 16.0f / 9.0f, 0.1f, 1000.0f, AltMath::Vector3f::Zero, AltMath::Vector3f(0.0f, 1.0f, 0.0f))
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
@@ -33,7 +34,7 @@ int Rasterizer::Core::Application::Run()
 			{1.0f, 1.0f, 0.0f}
 		};
 
-		Data::Triangle2D triangle(vertices[0], vertices[1], vertices[2]);
+		Data::Triangle2D triangle(m_camera, vertices[0], vertices[1], vertices[2]);
 
 		for (uint16_t x = 0; x < 1280; ++x)
 		{

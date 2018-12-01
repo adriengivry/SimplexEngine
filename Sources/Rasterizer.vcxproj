@@ -216,8 +216,11 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Core\Application.cpp" />
     <ClCompile Include="src\Rasterizer\Core\Renderer.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Color.cpp" />
+    <ClCompile Include="src\Rasterizer\Data\Transform.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Triangle2D.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Vertex.cpp" />
+    <ClCompile Include="src\Rasterizer\Entities\AEntity.cpp" />
+    <ClCompile Include="src\Rasterizer\Entities\Camera.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Context\EWindowState.h" />
@@ -227,8 +230,11 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h" />
     <ClInclude Include="include\Rasterizer\Core\Renderer.h" />
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
+    <ClInclude Include="include\Rasterizer\Data\Transform.h" />
     <ClInclude Include="include\Rasterizer\Data\Triangle2D.h" />
     <ClInclude Include="include\Rasterizer\Data\Vertex.h" />
+    <ClInclude Include="include\Rasterizer\Entities\AEntity.h" />
+    <ClInclude Include="include\Rasterizer\Entities\Camera.h" />
     <ClInclude Include="include\Rasterizer\Utils\Event.h" />
   </ItemGroup>
   <ItemGroup>
