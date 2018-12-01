@@ -6,9 +6,9 @@
 
 #include "Rasterizer/Data/Triangle2D.h"
 
-Rasterizer::Data::Triangle2D::Triangle2D(const Entities::Camera& p_camera, const const Data::Vertex & p_firstVertex, const Data::Vertex & p_secondVertex, const Data::Vertex & p_thirdVertex)
+Rasterizer::Data::Triangle2D::Triangle2D(const Entities::Camera& p_camera, const AltMath::Matrix4f& p_verticesTransformation, const const Data::Vertex & p_firstVertex, const Data::Vertex & p_secondVertex, const Data::Vertex & p_thirdVertex)
 {
-	AltMath::Matrix4f mvp = p_camera.GetViewProjectionMatrix();
+	AltMath::Matrix4f mvp = p_camera.GetViewProjectionMatrix() * p_verticesTransformation;
 
 	auto toScreen = [](const AltMath::Vector4f& p_vector, float p_width, float p_height)
 	{
