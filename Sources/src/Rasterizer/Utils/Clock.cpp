@@ -11,3 +11,8 @@ float Rasterizer::Utils::Clock::GetDeltaTime() const
 {
 	return m_deltaTime;
 }
+
+float Rasterizer::Utils::Clock::GetFramerate() const
+{
+	return 1.0f / m_deltaTime;
+}

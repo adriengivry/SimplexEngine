@@ -17,7 +17,15 @@ namespace Rasterizer::Utils
 		*/
 		void Tick();
 
+		/**
+		* Return the current delta time (Time since last frame)
+		*/
 		float GetDeltaTime() const;
+
+		/**
+		* Return the current frame rate
+		*/
+		float GetFramerate() const;
 
 	private:
 		uint32_t m_currentTime = 0;
