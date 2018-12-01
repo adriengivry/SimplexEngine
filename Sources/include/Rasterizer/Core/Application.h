@@ -15,6 +15,7 @@
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Entities/Camera.h"
+#include "Rasterizer/Entities/Model.h"
 
 namespace Rasterizer::Core
 {
@@ -54,8 +55,12 @@ namespace Rasterizer::Core
 			
 		EApplicationState m_applicationState;
 
+		/* Some data */
+		Rasterizer::Data::Mesh m_defaultMesh;
+
 		/* Scene relatives */
 		Rasterizer::Entities::Camera m_camera;
+		Rasterizer::Entities::Model m_model;
 	};
 }
 

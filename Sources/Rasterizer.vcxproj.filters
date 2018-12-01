@@ -48,6 +48,12 @@
     <ClCompile Include="src\Rasterizer\Entities\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rasterizer\Data\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Entities\Model.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Context\Window.h">
@@ -87,6 +93,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Entities\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Data\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Entities\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
