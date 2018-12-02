@@ -19,6 +19,8 @@ Rasterizer::Core::Application::Application() :
 	m_applicationState(EApplicationState::RUNNING),
 	m_monkeyMesh("resources/monkey.fbx"),
 	m_cubeMesh("resources/cube.fbx"),
+	m_sphereMesh("resources/sphere.fbx"),
+	m_icoSphereMesh("resources/icosphere.fbx"),
 	m_camera(AltMath::Vector3f(2.5f, 2.5f, 5.0f), AltMath::Quaternion::Identity(), 45.0f, 16.0f / 9.0f, 0.1f, 1000.0f, AltMath::Vector3f::Zero, AltMath::Vector3f(0.0f, 1.0f, 0.0f))
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
@@ -99,9 +101,9 @@ void Rasterizer::Core::Application::RasterizeModel(const Entities::Model & p_act
 			{
 				for (uint16_t y = ymin; y < ymax; ++y)
 				{
-					float depth = -1.0f;
+					float depth = (firstVertexPosition.z + secondVertexPosition.z + thirdVertexPosition.z) * 0.33333f;
 
-					if (triangle.IsPointInArea({ x, y }) && m_window.IsPointInWindow({ x ,y })/* && depth < m_renderer.GetDepth(x, y)*/)
+					if (triangle.IsPointInArea({ x, y }) && m_window.IsPointInWindow({ x ,y }) && depth < m_renderer.GetDepth(x, y))
 					{
 						Data::Color pixelColor;
 

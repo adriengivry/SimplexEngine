@@ -67,6 +67,8 @@ namespace Rasterizer::Core
 		/* Some data */
 		Rasterizer::Data::Mesh m_monkeyMesh;
 		Rasterizer::Data::Mesh m_cubeMesh;
+		Rasterizer::Data::Mesh m_sphereMesh;
+		Rasterizer::Data::Mesh m_icoSphereMesh;
 
 		/* Scene relatives */
 		Rasterizer::Entities::Camera m_camera;

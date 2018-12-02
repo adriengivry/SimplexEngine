@@ -50,7 +50,8 @@ void Rasterizer::Core::Renderer::SetDepth(uint16_t p_x, uint16_t p_y, float p_de
 
 float Rasterizer::Core::Renderer::GetDepth(uint16_t p_x, uint16_t p_y)
 {
-	return m_depthBuffer[p_y * m_bufferWidth + p_x];
+	float depth = m_depthBuffer[p_y * m_bufferWidth + p_x];
+	return depth == 0 ? 100000000.0f : depth;
 }
 
 void Rasterizer::Core::Renderer::GenerateFinalTexture()
