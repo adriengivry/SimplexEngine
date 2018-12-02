@@ -24,7 +24,7 @@ void Rasterizer::Core::Renderer::InitializePixelBufferSize(std::pair<uint16_t, u
 
 void Rasterizer::Core::Renderer::ClearPixelBuffer()
 {
-	memset(m_pixelBuffer.data(), 0, m_pixelBuffer.size() * sizeof(Data::Color));
+	memset(m_pixelBuffer.data(), 0, m_pixelBuffer.size() * sizeof(decltype(m_pixelBuffer)::value_type));
 }
 
 void Rasterizer::Core::Renderer::SetPixel(uint16_t p_x, uint16_t p_y, const Data::Color& p_color)

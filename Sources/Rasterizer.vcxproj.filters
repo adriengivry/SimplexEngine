@@ -60,6 +60,9 @@
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rasterizer\Utils\EasyAssimp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Context\Window.h">
@@ -113,8 +116,20 @@
     <ClInclude Include="include\Rasterizer\Utils\Math.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Rasterizer\Utils\EasyAssimp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Data\EPrimitive.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\window.ini" />
+    <None Include="resources\cone.fbx" />
+    <None Include="resources\cube.fbx" />
+    <None Include="resources\cylinder.fbx" />
+    <None Include="resources\icosphere.fbx" />
+    <None Include="resources\monkey.fbx" />
+    <None Include="resources\sphere.fbx" />
   </ItemGroup>
 </Project>
