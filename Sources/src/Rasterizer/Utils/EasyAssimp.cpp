@@ -15,6 +15,7 @@ bool Rasterizer::Utils::EasyAssimp::LoadVertices(const std::string & p_fileName,
 
 	ProcessNode(scene->mRootNode, scene, p_outBuffer, p_indices);
 
+	return true;
 }
 
 void Rasterizer::Utils::EasyAssimp::ProcessNode(aiNode * p_node, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)

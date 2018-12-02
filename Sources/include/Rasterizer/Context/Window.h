@@ -2,10 +2,6 @@
 #ifndef _WINDOW_H
 #define _WINDOW_H
 
-#include <string>
-
-#include <SDL.h>
-
 #include <AltMath/AltMath.h>
 
 #include "Rasterizer/Context/EWindowState.h"
@@ -44,7 +40,7 @@ namespace Rasterizer::Context
 		/**
 		* Return the SDL_Window* instance
 		*/
-		SDL_Window* GetSDLWindow() const;
+		struct SDL_Window* GetSDLWindow() const;
 
 		/**
 		* Return the window width
@@ -77,7 +73,7 @@ namespace Rasterizer::Context
 		EWindowState m_windowState;
 
 		/* SDL relatives */
-		SDL_Window* m_sdlWindow;
+		struct SDL_Window* m_sdlWindow;
 	};
 }
 

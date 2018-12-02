@@ -2,8 +2,6 @@
 #ifndef _CLOCK_H
 #define _CLOCK_H
 
-#include <SDL.h>
-
 namespace Rasterizer::Utils
 {
 	/**

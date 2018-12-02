@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <SDL.h>
+
 #include "Rasterizer/Core/Renderer.h"
 
 Rasterizer::Core::Renderer::Renderer(const Context::Window& p_window)

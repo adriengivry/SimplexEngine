@@ -10,8 +10,6 @@
 
 #include <vector>
 
-#include <SDL.h>
-
 #include "Rasterizer/Context/Window.h"
 #include "Rasterizer/Data/Color.h"
 
@@ -87,8 +85,8 @@ namespace Rasterizer::Core
 		uint16_t m_bufferWidth;
 		uint16_t m_bufferHeight;
 
-		SDL_Renderer* m_sdlRenderer;
-		SDL_Texture* m_finalTexture;
+		struct SDL_Renderer* m_sdlRenderer;
+		struct SDL_Texture* m_finalTexture;
 		std::vector<uint32_t> m_pixelBuffer;
 		std::vector<float> m_depthBuffer;
 	};

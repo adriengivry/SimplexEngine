@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Data/Triangle2D.h"
 
-Rasterizer::Data::Triangle2D::Triangle2D(const Entities::Camera& p_camera, const AltMath::Matrix4f& p_verticesTransformation, const const Data::Vertex & p_firstVertex, const Data::Vertex & p_secondVertex, const Data::Vertex & p_thirdVertex)
+Rasterizer::Data::Triangle2D::Triangle2D(const Entities::Camera& p_camera, const AltMath::Matrix4f& p_verticesTransformation, const Data::Vertex & p_firstVertex, const Data::Vertex & p_secondVertex, const Data::Vertex & p_thirdVertex)
 {
 	AltMath::Matrix4f mvp = p_camera.GetViewProjectionMatrix() * p_verticesTransformation;
 
@@ -76,12 +76,12 @@ bool Rasterizer::Data::Triangle2D::IsPointInArea(const AltMath::Vector2i& p_poin
 
 bool Rasterizer::Data::Triangle2D::IsPointInPerimeter(const AltMath::Vector2i & p_point)
 {
-	float ab = sqrtf(AltMath::Vector2i::LengthSquare(m_points[0] - m_points[1]));
-	float ac = sqrtf(AltMath::Vector2i::LengthSquare(m_points[0] - m_points[2]));
-	float bc = sqrtf(AltMath::Vector2i::LengthSquare(m_points[1] - m_points[2]));
-	float ap = sqrtf(AltMath::Vector2i::LengthSquare(m_points[0] - p_point));
-	float bp = sqrtf(AltMath::Vector2i::LengthSquare(m_points[1] - p_point));
-	float cp = sqrtf(AltMath::Vector2i::LengthSquare(m_points[2] - p_point));
+	float ab = sqrtf(static_cast<float>(AltMath::Vector2i::LengthSquare(m_points[0] - m_points[1])));
+	float ac = sqrtf(static_cast<float>(AltMath::Vector2i::LengthSquare(m_points[0] - m_points[2])));
+	float bc = sqrtf(static_cast<float>(AltMath::Vector2i::LengthSquare(m_points[1] - m_points[2])));
+	float ap = sqrtf(static_cast<float>(AltMath::Vector2i::LengthSquare(m_points[0] - p_point)));
+	float bp = sqrtf(static_cast<float>(AltMath::Vector2i::LengthSquare(m_points[1] - p_point)));
+	float cp = sqrtf(static_cast<float>(AltMath::Vector2i::LengthSquare(m_points[2] - p_point)));
 
 	return ap + bp == ab || bp + cp == bc || cp + ap == ac;
 }

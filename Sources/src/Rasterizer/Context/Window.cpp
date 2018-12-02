@@ -1,3 +1,11 @@
+/**
+* Project Rasterizer
+* @author Adrien Givry
+* @version 1.0
+*/
+
+#include <SDL.h>
+
 #include "Rasterizer/Context/Window.h"
 
 Rasterizer::Context::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :

@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <SDL.h>
+
 #include "Rasterizer/Context/EventHandler.h"
 
 void Rasterizer::Context::EventHandler::HandleEvents(const Window& p_window)

@@ -4,8 +4,6 @@
 * @version 1.0
 */
 
-#include <thread>
-
 #include <AltMath/AltMath.h>
 
 #include "Rasterizer/Core/Application.h"

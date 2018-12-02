@@ -1,3 +1,11 @@
+/**
+* Project Rasterizer
+* @author Adrien Givry
+* @version 1.0
+*/
+
+#include <SDL.h>
+
 #include "Rasterizer/Utils/Clock.h"
 
 void Rasterizer::Utils::Clock::Tick()
