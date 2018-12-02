@@ -16,7 +16,7 @@
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Entities/Camera.h"
-#include "Rasterizer/Entities/Model.h"
+#include "Rasterizer/Entities/Actor.h"
 
 namespace Rasterizer::Core
 {
@@ -36,6 +36,12 @@ namespace Rasterizer::Core
 		* Returns an exit code.
 		*/
 		int Run();
+
+		/**
+		* Rasterize actor
+		* @param p_actor
+		*/
+		void RasterizeActor(const Entities::Actor& p_actor);
 
 		/**
 		* Return true if the current state of the application is RUNNING
@@ -59,11 +65,12 @@ namespace Rasterizer::Core
 		EApplicationState m_applicationState;
 
 		/* Some data */
-		Rasterizer::Data::Mesh m_defaultMesh;
+		Rasterizer::Data::Mesh m_monkeyMesh;
+		Rasterizer::Data::Mesh m_cubeMesh;
 
 		/* Scene relatives */
 		Rasterizer::Entities::Camera m_camera;
-		Rasterizer::Entities::Model m_model;
+		std::vector<Rasterizer::Entities::Actor> m_actors;
 
 		/* Animation stuffs */
 		float m_modelRotation = 0.0f;

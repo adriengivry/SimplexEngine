@@ -231,7 +231,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Data\Vertex.cpp" />
     <ClCompile Include="src\Rasterizer\Entities\AEntity.cpp" />
     <ClCompile Include="src\Rasterizer\Entities\Camera.cpp" />
-    <ClCompile Include="src\Rasterizer\Entities\Model.cpp" />
+    <ClCompile Include="src\Rasterizer\Entities\Actor.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
   </ItemGroup>
@@ -250,7 +250,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Data\Vertex.h" />
     <ClInclude Include="include\Rasterizer\Entities\AEntity.h" />
     <ClInclude Include="include\Rasterizer\Entities\Camera.h" />
-    <ClInclude Include="include\Rasterizer\Entities\Model.h" />
+    <ClInclude Include="include\Rasterizer\Entities\Actor.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
     <ClInclude Include="include\Rasterizer\Utils\EasyAssimp.h" />
     <ClInclude Include="include\Rasterizer\Utils\Event.h" />

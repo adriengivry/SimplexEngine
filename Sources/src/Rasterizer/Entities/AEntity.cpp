@@ -10,3 +10,9 @@ Rasterizer::Entities::AEntity::AEntity(AltMath::Vector3f p_position, AltMath::Qu
 	transform(p_position, p_rotation)
 {
 }
+
+void Rasterizer::Entities::AEntity::SetParent(AEntity & p_parent)
+{
+	m_parent = &p_parent;
+	transform.SetParent(m_parent->transform);
+}

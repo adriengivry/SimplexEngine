@@ -25,7 +25,16 @@ namespace Rasterizer::Entities
 		*/
 		AEntity(AltMath::Vector3f p_position, AltMath::Quaternion p_rotation);
 
+		/**
+		* Defines a parent to the entity
+		* @param p_parent
+		*/
+		void SetParent(AEntity& p_parent);
+
 		Data::Transform transform;
+
+	private:
+		AEntity* m_parent;
 	};
 }
 

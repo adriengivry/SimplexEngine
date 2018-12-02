@@ -25,10 +25,16 @@ namespace Rasterizer::Utils
 		*/
 		float GetFramerate() const;
 
+		/**
+		* Return the elapsed time
+		*/
+		float GetElapsedTime() const;
+
 	private:
 		uint32_t m_currentTime = 0;
 		uint32_t m_lastTime = 0;
 		float m_deltaTime = 0;
+		float m_elapsedTime;
 	};
 }
 
