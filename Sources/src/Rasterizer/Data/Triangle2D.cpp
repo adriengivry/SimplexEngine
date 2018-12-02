@@ -6,24 +6,6 @@
 
 #include "Rasterizer/Data/Triangle2D.h"
 
-Rasterizer::Data::Triangle2D::Triangle2D(const Entities::Camera& p_camera, const AltMath::Matrix4f& p_verticesTransformation, const Data::Vertex & p_firstVertex, const Data::Vertex & p_secondVertex, const Data::Vertex & p_thirdVertex)
-{
-	AltMath::Matrix4f mvp = p_camera.GetViewProjectionMatrix() * p_verticesTransformation;
-
-	auto toScreen = [](const AltMath::Vector4f& p_vector, float p_width, float p_height)
-	{
-		const float widthHalf = p_width / 2.0f;
-		const float heightHalf = p_height / 2.0f;
-		return AltMath::Vector2i(static_cast<int>(((p_vector.x / 5.0f) + 1) * widthHalf), static_cast<int>(p_height - ((p_vector.y / 5.0f) + 1) * heightHalf));
-	};
-
-	m_points[0] = toScreen(mvp * AltMath::Vector4f(p_firstVertex.position), 1280, 720);
-	m_points[1] = toScreen(mvp * AltMath::Vector4f(p_secondVertex.position), 1280, 720);
-	m_points[2] = toScreen(mvp * AltMath::Vector4f(p_thirdVertex.position), 1280, 720);
-
-	m_area = CalculateArea();
-}
-
 Rasterizer::Data::Triangle2D::Triangle2D(const AltMath::Vector2i & p_firstPoint, const AltMath::Vector2i & p_secondPoint, const AltMath::Vector2i & p_thirdPoint) :
 	m_points { p_firstPoint, p_secondPoint, p_thirdPoint },
 	m_area{ CalculateArea() }

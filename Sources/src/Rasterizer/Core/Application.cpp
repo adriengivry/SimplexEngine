@@ -42,14 +42,19 @@ int Rasterizer::Core::Application::Run()
 		}
 
 		AltMath::Quaternion eulerRotation;
-		m_model.transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ 0.0f, m_modelRotation, 0.0f }));
+		m_model.transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ -90.0f, m_modelRotation, 0.0f }));
 		m_modelRotation += m_clock.GetDeltaTime() * m_applicationINI.Get<float>("model_rotation_per_second");
 
+		m_camera.transform.SetPosition({ -10.0f, 0.0f, 0.0f });
+
+		AltMath::Matrix4 mvp = m_camera.GetViewProjectionMatrix() * m_model.transform.GetWorldMatrix();
 	
 		for (auto mesh : m_model.GetMeshes())
 		{
 			auto vertices = mesh.get().GetVertices();
 			auto indices = mesh.get().GetIndices();
+
+			
 
 			for (uint32_t i = 0; i < indices.size(); i += 3)
 			{
@@ -57,7 +62,15 @@ int Rasterizer::Core::Application::Run()
 				Data::Vertex& secondVertex = vertices[indices[i + 1]];
 				Data::Vertex& thirdVertex = vertices[indices[i + 2]];
 
-				Data::Triangle2D triangle(m_camera, m_model.transform.GetWorldMatrix(), firstVertex, secondVertex, thirdVertex);
+				AltMath::Vector4f firstVertexPosition = mvp * AltMath::Vector4f(firstVertex.position);
+				AltMath::Vector4f secondVertexPosition = mvp * AltMath::Vector4f(secondVertex.position);
+				AltMath::Vector4f thirdVertexPosition = mvp * AltMath::Vector4f(thirdVertex.position);
+
+				AltMath::Vector2i firstPixelCoordinate = m_camera.ProjectToCameraSpace({ firstVertexPosition.x, firstVertexPosition.y, firstVertexPosition.z });
+				AltMath::Vector2i secondPixelCoordinate = m_camera.ProjectToCameraSpace({ secondVertexPosition.x, secondVertexPosition.y, secondVertexPosition.z });
+				AltMath::Vector2i thirdPixelCoordinate = m_camera.ProjectToCameraSpace({ thirdVertexPosition.x, thirdVertexPosition.y, thirdVertexPosition.z });
+
+				Data::Triangle2D triangle(firstPixelCoordinate, secondPixelCoordinate, thirdPixelCoordinate);
 
 				auto[xmin, ymin, xmax, ymax] = triangle.GetBoundingBox();
 

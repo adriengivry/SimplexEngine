@@ -21,18 +21,7 @@ namespace Rasterizer::Data
 	{
 	public:
 		/**
-		* Create a triangle from screen projection
-		* @param p_camera
-		* @param p_verticesTransformation
-		* @param p_firstVertex
-		* @param p_secondVertex
-		* @param p_thirdVertex
-		*/
-		Triangle2D(const Entities::Camera& p_camera, const AltMath::Matrix4f& p_verticesTransformation, const Data::Vertex& p_firstVertex, const Data::Vertex& p_secondVertex, const Data::Vertex& p_thirdVertex);
-
-		/**
-		* Create a triangle with the given points and
-		* calculate his area
+		* Create a triangle with the given points
 		* @param p_firstPoint
 		* @param p_secondPoint
 		* @param p_thirdPoint

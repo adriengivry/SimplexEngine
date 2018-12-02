@@ -20,6 +20,17 @@ Rasterizer::Entities::Camera::Camera(const AltMath::Vector3f& p_position, const 
 	UpdateViewProjectionMatrix();
 }
 
+AltMath::Vector2i Rasterizer::Entities::Camera::ProjectToCameraSpace(const AltMath::Vector3f& p_point)
+{
+	const float width = 1280;
+	const float height = 720;
+
+	const float widthHalf = width * 0.5f;
+	const float heightHalf = height * 0.5f;
+
+	return AltMath::Vector2i(static_cast<int>(((p_point.x / 5.0f) + 1) * widthHalf), static_cast<int>(height - ((p_point.y / 5.0f) + 1) * heightHalf));
+}
+
 void Rasterizer::Entities::Camera::UpdateProjectionMatrix()
 {
 	m_projectionMatrix = AltMath::Matrix4f::CreatePerspective(m_fov, m_ratio, m_near, m_far);

@@ -32,6 +32,12 @@ namespace Rasterizer::Entities
 		Camera(const AltMath::Vector3f& p_position, const AltMath::Quaternion& p_rotation, float p_fov, float p_ratio, float p_near, float p_far, const AltMath::Vector3f& p_lookAt, const AltMath::Vector3f& p_upVector);
 
 		/**
+		* Project a point to camera sapce
+		* @param p_point
+		*/
+		AltMath::Vector2i ProjectToCameraSpace(const AltMath::Vector3f& p_point);
+
+		/**
 		* Update the projection matrix with the current camera settings
 		*/
 		void UpdateProjectionMatrix();
