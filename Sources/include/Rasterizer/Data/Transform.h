@@ -16,12 +16,6 @@
 namespace Rasterizer::Data
 {
 	/**
-	* A "Transformation" represents a position (Vector3f from AltMath) and a quaternion (Quaternion from AltMath).
-	* It is used to simplify code reading
-	*/
-	using Transformation = std::pair<glm::vec3, glm::quat>;
-
-	/**
 	* Represent a local or world transformation (Position and rotation)
 	*/
 	struct Transform final
@@ -95,7 +89,7 @@ namespace Rasterizer::Data
 		const glm::mat4& GetLocalMatrix() const;
 
 		/**
-		* Return the local matrix
+		* Return the world matrix
 		*/
 		const glm::mat4& GetWorldMatrix() const;
 

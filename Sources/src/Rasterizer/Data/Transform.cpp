@@ -29,9 +29,7 @@ void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::qu
 	m_localMatrix = glm::translate(glm::mat4(1.0f), p_position);
 	m_localMatrix *= glm::toMat4(p_rotation);
 
-	m_worldMatrix = HasParent() ? m_parent->GetWorldMatrix() * m_localMatrix : m_localMatrix;
-
-	TransformChangedEvent.Invoke();
+	UpdateWorldMatrices();
 }
 
 void Rasterizer::Data::Transform::UpdateWorldMatrices()

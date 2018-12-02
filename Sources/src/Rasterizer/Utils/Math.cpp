@@ -1,18 +1,19 @@
-#include "Rasterizer/Utils/Math.h"
+/**
+* Project Rasterizer
+* @author Adrien Givry
+* @version 1.0
+*/
 
-float Rasterizer::Utils::Math::ToRadians(float p_value)
-{
-	return p_value * 3.14f / 180.0f;
-}
+#include "Rasterizer/Utils/Math.h"
 
 glm::quat Rasterizer::Utils::Math::CreateQuaternionFromEuler(const glm::vec3 & p_euler)
 {
-	const float cy = cosf(ToRadians(p_euler.z) * 0.5f);
-	const float sy = sinf(ToRadians(p_euler.z) * 0.5f);
-	const float cp = cosf(ToRadians(p_euler.y) * 0.5f);
-	const float sp = sinf(ToRadians(p_euler.y) * 0.5f);
-	const float cr = cosf(ToRadians(p_euler.x) * 0.5f);
-	const float sr = sinf(ToRadians(p_euler.x) * 0.5f);
+	const float cy = cosf(glm::radians(p_euler.z) * 0.5f);
+	const float sy = sinf(glm::radians(p_euler.z) * 0.5f);
+	const float cp = cosf(glm::radians(p_euler.y) * 0.5f);
+	const float sp = sinf(glm::radians(p_euler.y) * 0.5f);
+	const float cr = cosf(glm::radians(p_euler.x) * 0.5f);
+	const float sr = sinf(glm::radians(p_euler.x) * 0.5f);
 
 	return glm::quat
 	(

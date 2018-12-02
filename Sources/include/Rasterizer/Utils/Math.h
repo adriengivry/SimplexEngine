@@ -23,12 +23,6 @@ namespace Rasterizer::Utils
 		Math() = delete;
 
 		/**
-		* Convert a degree value to radians
-		* @param p_value
-		*/
-		static float ToRadians(float p_value);
-
-		/**
 		* Create a quaternion from euler
 		* @param p_euler
 		*/

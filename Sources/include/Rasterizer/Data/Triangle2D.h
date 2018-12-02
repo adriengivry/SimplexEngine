@@ -20,7 +20,7 @@ namespace Rasterizer::Data
 	class Triangle2D final
 	{
 	public:
-		using Point = std::pair<int32_t, int32_t>;
+		using Point = glm::ivec2;
 		using BoundingBox = std::tuple<int32_t, int32_t, int32_t, int32_t>;
 
 		/**

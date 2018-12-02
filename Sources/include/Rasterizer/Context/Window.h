@@ -56,6 +56,11 @@ namespace Rasterizer::Context
 		uint32_t GetHeight() const;
 
 		/**
+		* Return the aspect ratio of the window
+		*/
+		float GetAspectRatio() const;
+
+		/**
 		* Return the window size as a pair of uint16_t
 		*/
 		std::pair<uint16_t, uint16_t> GetSize() const;
@@ -64,13 +69,15 @@ namespace Rasterizer::Context
 		* Verify if the given point is in window
 		* @param p_point
 		*/
-		bool IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point);
+		bool IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point) const;
 
 	private:
 		/* Window settings */
 		uint16_t m_width;
 		uint16_t m_height;
 		std::string m_title;
+
+		float m_aspectRatio;
 
 		/* Window current state */
 		EWindowState m_windowState;

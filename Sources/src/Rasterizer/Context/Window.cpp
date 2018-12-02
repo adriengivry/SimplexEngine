@@ -9,7 +9,11 @@
 #include "Rasterizer/Context/Window.h"
 
 Rasterizer::Context::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :
-	m_width(p_width), m_height(p_height), m_title(p_title), m_windowState(EWindowState::NONE), m_sdlWindow(nullptr)
+	m_width(p_width),
+	m_height(p_height),
+	m_title(p_title),
+	m_aspectRatio(static_cast<float>(p_width) / static_cast<float>(p_height)),
+	m_windowState(EWindowState::NONE), m_sdlWindow(nullptr)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 	{
@@ -55,12 +59,17 @@ uint32_t Rasterizer::Context::Window::GetHeight() const
 	return m_height;
 }
 
+float Rasterizer::Context::Window::GetAspectRatio() const
+{
+	return m_aspectRatio;
+}
+
 std::pair<uint16_t, uint16_t> Rasterizer::Context::Window::GetSize() const
 {
 	return std::pair(m_width, m_height);
 }
 
-bool Rasterizer::Context::Window::IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point)
+bool Rasterizer::Context::Window::IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point) const
 {
-	return p_point.first >= 0 && p_point.second >= 0 && p_point.first <= m_width && p_point.second <= m_height;
+	return p_point.first >= 0 && p_point.second >= 0 && p_point.first < m_width && p_point.second < m_height;
 }

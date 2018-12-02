@@ -19,22 +19,27 @@ float Rasterizer::Data::Triangle2D::CalculateArea()
 	return abs
 	(
 		(
-			m_points[0].first * (m_points[1].second - m_points[2].second) +
-			m_points[1].first * (m_points[2].second - m_points[0].second) +
-			m_points[2].first * (m_points[0].second - m_points[1].second)
+			m_points[0].x * (m_points[1].y - m_points[2].y) +
+			m_points[1].x * (m_points[2].y - m_points[0].y) +
+			m_points[2].x * (m_points[0].y - m_points[1].y)
 		) * 0.5f
 	);
 }
 
 Rasterizer::Data::Triangle2D::BoundingBox Rasterizer::Data::Triangle2D::GetBoundingBox()
 {
-	return std::make_tuple
+	auto result = std::make_tuple
 	(
-		m_points[0].first > m_points[1].first ? (m_points[0].first > m_points[2].first ? m_points[0].first : m_points[2].first) : (m_points[1].first > m_points[2].first ? m_points[1].first : m_points[2].first),
-		m_points[0].second > m_points[1].second ? (m_points[0].second > m_points[2].second ? m_points[0].second : m_points[2].second) : (m_points[1].second > m_points[2].second ? m_points[1].second : m_points[2].second),
-		m_points[0].first < m_points[1].first ? (m_points[0].first < m_points[2].first ? m_points[0].first : m_points[2].first) : (m_points[1].first < m_points[2].first ? m_points[1].first : m_points[2].first),
-		m_points[0].second < m_points[1].second ? (m_points[0].second < m_points[2].second ? m_points[0].second : m_points[2].second) : (m_points[1].second < m_points[2].second ? m_points[1].second : m_points[2].second)
+		m_points[0].x > m_points[1].x ? (m_points[0].x > m_points[2].x ? m_points[0].x : m_points[2].x) : (m_points[1].x > m_points[2].x ? m_points[1].x : m_points[2].x),
+		m_points[0].y > m_points[1].y ? (m_points[0].y > m_points[2].y ? m_points[0].y : m_points[2].y) : (m_points[1].y > m_points[2].y ? m_points[1].y : m_points[2].y),
+		m_points[0].x < m_points[1].x ? (m_points[0].x < m_points[2].x ? m_points[0].x : m_points[2].x) : (m_points[1].x < m_points[2].x ? m_points[1].x : m_points[2].x),
+		m_points[0].y < m_points[1].y ? (m_points[0].y < m_points[2].y ? m_points[0].y : m_points[2].y) : (m_points[1].y < m_points[2].y ? m_points[1].y : m_points[2].y)
 	);
+
+	if (std::get<0>(result) > std::get<2>(result)) std::swap(std::get<0>(result), std::get<2>(result));
+	if (std::get<1>(result) > std::get<3>(result)) std::swap(std::get<1>(result), std::get<3>(result));
+
+	return result;
 }
 
 float Rasterizer::Data::Triangle2D::CalculateArea(const Point & p_point1, const Point & p_point2, const Point & p_point3)
@@ -42,9 +47,9 @@ float Rasterizer::Data::Triangle2D::CalculateArea(const Point & p_point1, const 
 	return abs
 	(
 		(
-			p_point1.first * (p_point2.second - p_point3.second) +
-			p_point2.first * (p_point3.second - p_point1.second) +
-			p_point3.first * (p_point1.second - p_point2.second)
+			p_point1.x * (p_point2.y - p_point3.y) +
+			p_point2.x * (p_point3.y - p_point1.y) +
+			p_point3.x * (p_point1.y - p_point2.y)
 			) * 0.5f
 	);
 }
@@ -60,11 +65,11 @@ bool Rasterizer::Data::Triangle2D::IsPointInArea(const Point& p_point)
 
 bool Rasterizer::Data::Triangle2D::IsPointInPerimeter(const Point& p_point)
 {
-	glm::vec2 p(p_point.first, p_point.second);
+	glm::vec2 p(p_point.x, p_point.y);
 
-	glm::vec2 a(m_points[0].first, m_points[0].second);
-	glm::vec2 b(m_points[1].first, m_points[1].second);
-	glm::vec2 c(m_points[2].first, m_points[2].second);
+	glm::vec2 a(m_points[0].x, m_points[0].y);
+	glm::vec2 b(m_points[1].x, m_points[1].y);
+	glm::vec2 c(m_points[2].x, m_points[2].y);
 
 	float ab = sqrtf(static_cast<float>((a - b).length()));
 	float ac = sqrtf(static_cast<float>((a - c).length()));
