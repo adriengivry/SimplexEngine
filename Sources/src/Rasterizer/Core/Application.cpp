@@ -70,7 +70,9 @@ int Rasterizer::Core::Application::Run()
 				{
 					for (uint16_t y = ymin; y < ymax; ++y)
 					{
-						if (triangle.IsPointInArea(AltMath::Vector2i(x, y)) && x >= 0 && x <= 1280 && y >= 0 && y <= 720)
+						float depth = -1.0f;
+
+						if (triangle.IsPointInArea({ x, y }) && m_window.IsPointInWindow({ x ,y }) && depth < m_renderer.GetDepth(x, y))
 						{
 							Data::Color pixelColor;
 
@@ -79,6 +81,7 @@ int Rasterizer::Core::Application::Run()
 							pixelColor.b = static_cast<uint8_t>((firstVertex.normal.z * 0.5f + 0.5f) * 255.0f);
 
 							m_renderer.SetPixel(x, y, pixelColor);
+							// m_renderer.SetDepth(x, y, depth);
 						}
 					}
 				}

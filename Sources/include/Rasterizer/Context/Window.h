@@ -6,6 +6,8 @@
 
 #include <SDL.h>
 
+#include <AltMath/AltMath.h>
+
 #include "Rasterizer/Context/EWindowState.h"
 
 namespace Rasterizer::Context
@@ -58,6 +60,12 @@ namespace Rasterizer::Context
 		* Return the window size as a pair of uint16_t
 		*/
 		std::pair<uint16_t, uint16_t> GetSize() const;
+
+		/**
+		* Verify if the given point is in window
+		* @param p_point
+		*/
+		bool IsPointInWindow(const AltMath::Vector2i& p_point);
 
 	private:
 		/* Window settings */

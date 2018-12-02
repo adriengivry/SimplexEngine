@@ -47,6 +47,28 @@ namespace Rasterizer::Core
 		void SetPixel(uint16_t p_x, uint16_t p_y, const Data::Color& p_color);
 
 		/**
+		* Return the pixel color on the screen
+		* @param p_x
+		* @param p_y
+		*/
+		uint32_t GetColor(uint16_t p_x, uint16_t p_y);
+
+		/**
+		* Set a depth for the given screen coordinate
+		* @param p_x
+		* @param p_y
+		* @param p_depth
+		*/
+		void SetDepth(uint16_t p_x, uint16_t p_y, float p_depth);
+
+		/**
+		* Return the depth buffer value for the screen coordinate
+		* @param p_x
+		* @param p_y
+		*/
+		float GetDepth(uint16_t p_x, uint16_t p_y);
+
+		/**
 		* Generate the final texture using the current pixel buffer
 		*/
 		void GenerateFinalTexture();
@@ -68,6 +90,7 @@ namespace Rasterizer::Core
 		SDL_Renderer* m_sdlRenderer;
 		SDL_Texture* m_finalTexture;
 		std::vector<uint32_t> m_pixelBuffer;
+		std::vector<float> m_depthBuffer;
 	};
 }
 

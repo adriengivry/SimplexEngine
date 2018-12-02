@@ -19,17 +19,36 @@ void Rasterizer::Core::Renderer::InitializePixelBufferSize(std::pair<uint16_t, u
 	m_bufferWidth = p_windowSize.first;
 	m_bufferHeight = p_windowSize.second;
 
-	m_pixelBuffer.resize(m_bufferWidth * m_bufferHeight);
+	size_t bufferSize = m_bufferWidth * m_bufferHeight;
+
+	m_pixelBuffer.resize(bufferSize);
+	m_depthBuffer.resize(bufferSize);
 }
 
 void Rasterizer::Core::Renderer::ClearPixelBuffer()
 {
+	memset(m_depthBuffer.data(), 0, m_depthBuffer.size() * sizeof(decltype(m_depthBuffer)::value_type));
 	memset(m_pixelBuffer.data(), 0, m_pixelBuffer.size() * sizeof(decltype(m_pixelBuffer)::value_type));
 }
 
 void Rasterizer::Core::Renderer::SetPixel(uint16_t p_x, uint16_t p_y, const Data::Color& p_color)
 {
 	m_pixelBuffer[p_y * m_bufferWidth + p_x] = p_color.Pack();
+}
+
+uint32_t Rasterizer::Core::Renderer::GetColor(uint16_t p_x, uint16_t p_y)
+{
+	return m_pixelBuffer[p_y * m_bufferWidth + p_x];
+}
+
+void Rasterizer::Core::Renderer::SetDepth(uint16_t p_x, uint16_t p_y, float p_depth)
+{
+	m_depthBuffer[p_y * m_bufferWidth + p_x] = p_depth;
+}
+
+float Rasterizer::Core::Renderer::GetDepth(uint16_t p_x, uint16_t p_y)
+{
+	return m_depthBuffer[p_y * m_bufferWidth + p_x];
 }
 
 void Rasterizer::Core::Renderer::GenerateFinalTexture()
