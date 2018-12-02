@@ -214,6 +214,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rasterizer\Context\InputManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\RasterBoy.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\EasyAssimp.cpp" />
     <ClCompile Include="src\Rasterizer\Context\EventHandler.cpp" />
@@ -235,6 +236,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Context\EWindowState.h" />
     <ClInclude Include="include\Rasterizer\Context\EventHandler.h" />
+    <ClInclude Include="include\Rasterizer\Context\InputManager.h" />
     <ClInclude Include="include\Rasterizer\Context\Window.h" />
     <ClInclude Include="include\Rasterizer\Core\Application.h" />
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h" />

@@ -5,6 +5,7 @@
 */
 
 #include <iostream>
+#include <SDL.h>
 
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/quaternion.hpp>
@@ -38,6 +39,7 @@ int Rasterizer::Core::Application::Run()
 	while (m_applicationState == EApplicationState::RUNNING)
 	{
 		m_eventHandler.HandleEvents(m_window);
+		m_inputManager.Update();
 
 		Update(m_clock.GetDeltaTime());
 
@@ -67,9 +69,26 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 		m_logFPStimer = 0.0f;
 	}
 
+	glm::vec3 movement;
+
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_A))
+		movement += glm::vec3(-1.0f, 0.0f, 0.0f);
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_D))
+		movement += glm::vec3(1.0f, 0.0f, 0.0f); 
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_W))
+		movement += glm::vec3(0.0f, 0.0f, -1.0f);
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_S))
+		movement += glm::vec3(0.0f, 0.0f, 1.0f);
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_Q))
+		movement += glm::vec3(0.0f, -1.0f, 0.0f);
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_E))
+		movement += glm::vec3(0.0f, 1.0f, 0.0f);
+
+	m_camera.Move(movement * m_applicationINI.Get<float>("movement_speed") * p_deltaTime);
+
 	glm::quat eulerRotation;
 	m_models[0].transform.SetRotation(glm::quat({ 0.0f, m_modelRotation, 0.0f }));
-	m_modelRotation += glm::radians(m_applicationINI.Get<float>("model_rotation_per_second")) * m_clock.GetDeltaTime();
+	m_modelRotation += glm::radians(m_applicationINI.Get<float>("model_rotation_per_second")) * p_deltaTime;
 }
 
 bool Rasterizer::Core::Application::IsRunning()

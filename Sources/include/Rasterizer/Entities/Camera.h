@@ -34,6 +34,12 @@ namespace Rasterizer::Entities
 		Camera(const glm::vec3& p_position, const glm::vec3& p_lookAt, const glm::vec3& p_upVector, float p_ratio, float p_fov = 45.0f, float p_near = 0.1f, float p_far = 1000.0f);
 
 		/**
+		* Move the camera and keep the lookat vector in the current direction, relative to the new position
+		* @param p_translation
+		*/
+		void Move(const glm::vec3 p_translation);
+
+		/**
 		* Return the current projection matrix
 		*/
 		const glm::mat4& GetProjectionMatrix() const;

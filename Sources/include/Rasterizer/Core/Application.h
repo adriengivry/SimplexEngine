@@ -12,6 +12,7 @@
 
 #include "Rasterizer/Context/Window.h"
 #include "Rasterizer/Context/EventHandler.h"
+#include "Rasterizer/Context/InputManager.h"
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Core/RasterBoy.h"
@@ -58,8 +59,11 @@ namespace Rasterizer::Core
 		GyvrIni::Core::IniFile m_windowINI;
 		GyvrIni::Core::IniFile m_applicationINI;
 
+		/* SDL Relatives */
 		Rasterizer::Context::Window m_window;
 		Rasterizer::Context::EventHandler m_eventHandler;
+		Rasterizer::Context::InputManager m_inputManager;
+
 		Rasterizer::Core::Renderer m_renderer;
 		Rasterizer::Core::RasterBoy m_rasterBoy;
 		Rasterizer::Utils::Clock m_clock;
