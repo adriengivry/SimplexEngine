@@ -8,7 +8,7 @@
 #ifndef _VERTEX_H
 #define _VERTEX_H
 
-#include <AltMath/AltMath.h>
+#include <glm/glm.hpp>
 
 namespace Rasterizer::Data
 {
@@ -28,8 +28,8 @@ namespace Rasterizer::Data
 		*/
 		Vertex(float p_x, float p_y, float p_z, float p_nx = 0.0f, float p_ny = 0.0f, float p_nz = 0.0f);
 
-		AltMath::Vector3f position;
-		AltMath::Vector3f normal;
+		glm::vec3 position;
+		glm::vec3 normal;
 	};
 }
 

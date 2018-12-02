@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <vector>
+
 #include <assimp/Importer.hpp>
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>

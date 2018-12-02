@@ -25,7 +25,7 @@ namespace Rasterizer::Entities
 		* @param p_position
 		* @param p_rotation
 		*/
-		Model(const Data::Mesh& p_mesh, const AltMath::Vector3f& p_position, const AltMath::Quaternion& p_rotation);
+		Model(const Data::Mesh& p_mesh, const glm::vec3& p_position, const glm::quat& p_rotation);
 
 		/**
 		* Return the default mesh

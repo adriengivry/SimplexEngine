@@ -38,6 +38,12 @@ namespace Rasterizer::Core
 		int Run();
 
 		/**
+		* Update the current application
+		* @param p_deltaTime
+		*/
+		void Update(float p_deltaTime);
+
+		/**
 		* Rasterize actor
 		* @param p_actor
 		*/
@@ -74,8 +80,9 @@ namespace Rasterizer::Core
 		Rasterizer::Entities::Camera m_camera;
 		std::vector<Rasterizer::Entities::Model> m_models;
 
-		/* Animation stuffs */
+		/* Other stuffs */
 		float m_modelRotation = 0.0f;
+		float m_logFPStimer = 0.0f;
 	};
 }
 

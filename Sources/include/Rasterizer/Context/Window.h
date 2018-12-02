@@ -2,7 +2,10 @@
 #ifndef _WINDOW_H
 #define _WINDOW_H
 
-#include <AltMath/AltMath.h>
+#include <tuple>
+#include <string>
+
+#include <glm/glm.hpp>
 
 #include "Rasterizer/Context/EWindowState.h"
 
@@ -61,7 +64,7 @@ namespace Rasterizer::Context
 		* Verify if the given point is in window
 		* @param p_point
 		*/
-		bool IsPointInWindow(const AltMath::Vector2i& p_point);
+		bool IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point);
 
 	private:
 		/* Window settings */

@@ -4,7 +4,9 @@
 * @version 1.0
 */
 
-#include <AltMath/AltMath.h>
+#include <iostream>
+
+#include <glm/gtx/quaternion.hpp>
 
 #include "Rasterizer/Core/Application.h"
 #include "Rasterizer/Data/Vertex.h"
@@ -21,36 +23,21 @@ Rasterizer::Core::Application::Application() :
 	m_cubeMesh("resources/cube.fbx"),
 	m_sphereMesh("resources/sphere.fbx"),
 	m_icoSphereMesh("resources/icosphere.fbx"),
-	m_camera(AltMath::Vector3f(2.5f, 2.5f, 5.0f), AltMath::Quaternion::Identity(), 45.0f, 16.0f / 9.0f, 0.1f, 1000.0f, AltMath::Vector3f::Zero, AltMath::Vector3f(0.0f, 1.0f, 0.0f))
+	m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetWidth(), m_window.GetHeight())
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
-	m_models.emplace_back(m_monkeyMesh, AltMath::Vector3f::Zero, AltMath::Quaternion::Identity());
+	m_models.emplace_back(m_monkeyMesh, glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
 }
 
 int Rasterizer::Core::Application::Run()
 {
-	float logFPStimer = 0.0f;
 	while (m_applicationState == EApplicationState::RUNNING)
 	{
 		m_eventHandler.HandleEvents(m_window);
 
-		logFPStimer += m_clock.GetDeltaTime();
-
-		if (logFPStimer >= 0.5f)
-		{
-			system("CLS");
-			std::cout << static_cast<uint16_t>(m_clock.GetFramerate()) << std::endl;
-			logFPStimer = 0.0f;
-		}
-
-		AltMath::Quaternion eulerRotation;
-		m_models[0].transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ -90.0f, m_modelRotation, 0.0f }));
-		m_models[0].transform.SetPosition({ cos(m_clock.GetElapsedTime()), sin(m_clock.GetElapsedTime()), 0.0f });
-		m_modelRotation += m_clock.GetDeltaTime() * m_applicationINI.Get<float>("model_rotation_per_second");
-
-		m_camera.transform.SetPosition({ -10.0f, 0.0f, 0.0f });
+		Update(m_clock.GetDeltaTime());
 
 		for (auto& model : m_models)
 			RasterizeModel(model);
@@ -67,9 +54,25 @@ int Rasterizer::Core::Application::Run()
 	return EXIT_SUCCESS;
 }
 
+void Rasterizer::Core::Application::Update(float p_deltaTime)
+{
+	m_logFPStimer += p_deltaTime;
+
+	if (m_logFPStimer >= 0.5f)
+	{
+		system("CLS");
+		std::cout << static_cast<uint16_t>(m_clock.GetFramerate()) << std::endl;
+		m_logFPStimer = 0.0f;
+	}
+
+	glm::quat eulerRotation;
+	m_models[0].transform.SetRotation(glm::quat({ -90.0f, m_modelRotation, 0.0f }));
+	m_modelRotation += m_clock.GetDeltaTime() * m_applicationINI.Get<float>("model_rotation_per_second") * 3.14f / 180.0f;
+}
+
 void Rasterizer::Core::Application::RasterizeModel(const Entities::Model & p_actor)
 {
-	AltMath::Matrix4 mvp = m_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
+	glm::mat4 mvp = m_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
 
 	for (auto mesh : p_actor.GetMeshes())
 	{
@@ -82,13 +85,13 @@ void Rasterizer::Core::Application::RasterizeModel(const Entities::Model & p_act
 			Data::Vertex& secondVertex = vertices[indices[i + 1]];
 			Data::Vertex& thirdVertex = vertices[indices[i + 2]];
 
-			AltMath::Vector4f firstVertexPosition = mvp * AltMath::Vector4f(firstVertex.position);
-			AltMath::Vector4f secondVertexPosition = mvp * AltMath::Vector4f(secondVertex.position);
-			AltMath::Vector4f thirdVertexPosition = mvp * AltMath::Vector4f(thirdVertex.position);
+			glm::vec4 firstVertexPosition = mvp * glm::vec4(firstVertex.position, 1.0f);
+			glm::vec4 secondVertexPosition = mvp * glm::vec4(secondVertex.position, 1.0f);
+			glm::vec4 thirdVertexPosition = mvp * glm::vec4(thirdVertex.position, 1.0f);
 
-			AltMath::Vector2i firstPixelCoordinate = m_camera.ProjectToCameraSpace({ firstVertexPosition.x, firstVertexPosition.y, firstVertexPosition.z });
-			AltMath::Vector2i secondPixelCoordinate = m_camera.ProjectToCameraSpace({ secondVertexPosition.x, secondVertexPosition.y, secondVertexPosition.z });
-			AltMath::Vector2i thirdPixelCoordinate = m_camera.ProjectToCameraSpace({ thirdVertexPosition.x, thirdVertexPosition.y, thirdVertexPosition.z });
+			std::pair<int32_t, int32_t> firstPixelCoordinate = m_camera.ProjectToCameraSpace(firstVertexPosition);
+			std::pair<int32_t, int32_t> secondPixelCoordinate = m_camera.ProjectToCameraSpace(secondVertexPosition);
+			std::pair<int32_t, int32_t> thirdPixelCoordinate = m_camera.ProjectToCameraSpace(thirdVertexPosition);
 
 			Data::Triangle2D triangle(firstPixelCoordinate, secondPixelCoordinate, thirdPixelCoordinate);
 

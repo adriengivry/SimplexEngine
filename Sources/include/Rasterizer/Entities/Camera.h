@@ -8,6 +8,8 @@
 #ifndef _CAMERA_H
 #define _CAMERA_H
 
+#include <glm/glm.hpp>
+
 #include "Rasterizer/Entities/AEntity.h"
 
 namespace Rasterizer::Entities
@@ -21,21 +23,21 @@ namespace Rasterizer::Entities
 		/**
 		* Camera constructor
 		* @param p_position
-		* @param p_rotation
-		* @param p_fov
-		* @param p_ratio
-		* @param p_near
-		* @param p_far
 		* @param p_lookAt
 		* @param p_upVector
+		* @param p_windowWidth
+		* @param p_windowHeight
+		* @param p_fov (Default = 45.0f)
+		* @param p_near (Default = 0.1f)
+		* @param p_far (Default = 1000.0f)
 		*/
-		Camera(const AltMath::Vector3f& p_position, const AltMath::Quaternion& p_rotation, float p_fov, float p_ratio, float p_near, float p_far, const AltMath::Vector3f& p_lookAt, const AltMath::Vector3f& p_upVector);
+		Camera(const glm::vec3& p_position, const glm::vec3& p_lookAt, const glm::vec3& p_upVector, uint32_t p_windowWidth, uint32_t p_windowHeight, float p_fov = 45.0f, float p_near = 0.1f, float p_far = 1000.0f);
 
 		/**
 		* Project a point to camera sapce
 		* @param p_point
 		*/
-		AltMath::Vector2i ProjectToCameraSpace(const AltMath::Vector3f& p_point);
+		std::pair<int32_t, int32_t> ProjectToCameraSpace(const glm::vec3& p_point) const;
 
 		/**
 		* Update the projection matrix with the current camera settings
@@ -55,30 +57,35 @@ namespace Rasterizer::Entities
 		/**
 		* Return the current projection matrix
 		*/
-		const AltMath::Matrix4f& GetProjectionMatrix() const;
+		const glm::mat4& GetProjectionMatrix() const;
 
 		/**
 		* Return the current view matrix
 		*/
-		const AltMath::Matrix4f& GetViewMatrix() const;
+		const glm::mat4& GetViewMatrix() const;
 
 		/**
 		* Return the current view projection matrix
 		*/
-		const AltMath::Matrix4f& GetViewProjectionMatrix() const;
+		const glm::mat4& GetViewProjectionMatrix() const;
 
 	private:
+		glm::vec3 m_lookAt;
+		glm::vec3 m_upVector;
+
+		uint32_t m_windowWidth;
+		uint32_t m_windowHeight;
+		float m_windowHalfWidth;
+		float m_windowHalfHeight;
+
 		float m_fov;
 		float m_ratio;
 		float m_near;
 		float m_far;
 
-		AltMath::Vector3f m_lookAt;
-		AltMath::Vector3f m_upVector;
-
-		AltMath::Matrix4f m_projectionMatrix;
-		AltMath::Matrix4f m_viewMatrix;
-		AltMath::Matrix4f m_viewProjectionMatrix;
+		glm::mat4 m_projectionMatrix;
+		glm::mat4 m_viewMatrix;
+		glm::mat4 m_viewProjectionMatrix;
 	};
 }
 

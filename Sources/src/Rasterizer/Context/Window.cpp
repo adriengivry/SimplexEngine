@@ -60,7 +60,7 @@ std::pair<uint16_t, uint16_t> Rasterizer::Context::Window::GetSize() const
 	return std::pair(m_width, m_height);
 }
 
-bool Rasterizer::Context::Window::IsPointInWindow(const AltMath::Vector2i & p_point)
+bool Rasterizer::Context::Window::IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point)
 {
-	return p_point.x >= 0 && p_point.y >= 0 && p_point.x <= m_width && p_point.y <= m_height;
+	return p_point.first >= 0 && p_point.second >= 0 && p_point.first <= m_width && p_point.second <= m_height;
 }

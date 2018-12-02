@@ -8,6 +8,8 @@
 #ifndef _MESH_H
 #define _MESH_H
 
+#include <vector>
+
 #include "Rasterizer/Data/Vertex.h"
 #include "Rasterizer/Data/EPrimitive.h"
 

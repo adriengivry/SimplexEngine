@@ -23,7 +23,7 @@ namespace Rasterizer::Entities
 		* @param p_position
 		* @param p_rotation
 		*/
-		AEntity(AltMath::Vector3f p_position, AltMath::Quaternion p_rotation);
+		AEntity(glm::vec3 p_position = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat p_rotation = glm::quat(0.0f, 0.0f, 0.0f, 1.0f));
 
 		/**
 		* Defines a parent to the entity

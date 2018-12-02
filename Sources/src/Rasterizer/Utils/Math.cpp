@@ -1,15 +1,20 @@
 #include "Rasterizer/Utils/Math.h"
 
-AltMath::Quaternion Rasterizer::Utils::Math::CreateQuaternionFromEuler(const AltMath::Vector3f & p_euler)
+float Rasterizer::Utils::Math::ToRadians(float p_value)
 {
-	const float cy = AltMath::Tools::Utils::CosF(AltMath::Tools::Utils::ToRadians(p_euler.z) * 0.5f);
-	const float sy = AltMath::Tools::Utils::SinF(AltMath::Tools::Utils::ToRadians(p_euler.z) * 0.5f);
-	const float cp = AltMath::Tools::Utils::CosF(AltMath::Tools::Utils::ToRadians(p_euler.y) * 0.5f);
-	const float sp = AltMath::Tools::Utils::SinF(AltMath::Tools::Utils::ToRadians(p_euler.y) * 0.5f);
-	const float cr = AltMath::Tools::Utils::CosF(AltMath::Tools::Utils::ToRadians(p_euler.x) * 0.5f);
-	const float sr = AltMath::Tools::Utils::SinF(AltMath::Tools::Utils::ToRadians(p_euler.x) * 0.5f);
+	return p_value * 3.14f / 180.0f;
+}
 
-	return AltMath::Quaternion
+glm::quat Rasterizer::Utils::Math::CreateQuaternionFromEuler(const glm::vec3 & p_euler)
+{
+	const float cy = cosf(ToRadians(p_euler.z) * 0.5f);
+	const float sy = sinf(ToRadians(p_euler.z) * 0.5f);
+	const float cp = cosf(ToRadians(p_euler.y) * 0.5f);
+	const float sp = sinf(ToRadians(p_euler.y) * 0.5f);
+	const float cr = cosf(ToRadians(p_euler.x) * 0.5f);
+	const float sr = sinf(ToRadians(p_euler.x) * 0.5f);
+
+	return glm::quat
 	(
 		cy * cp * sr - sy * sp * cr,
 		sy * cp * sr + cy * sp * cr,

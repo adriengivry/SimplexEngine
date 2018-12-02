@@ -8,7 +8,8 @@
 #ifndef _MATH_H
 #define _MATH_H
 
-#include <AltMath/AltMath.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 namespace Rasterizer::Utils
 {
@@ -22,10 +23,16 @@ namespace Rasterizer::Utils
 		Math() = delete;
 
 		/**
+		* Convert a degree value to radians
+		* @param p_value
+		*/
+		static float ToRadians(float p_value);
+
+		/**
 		* Create a quaternion from euler
 		* @param p_euler
 		*/
-		static AltMath::Quaternion CreateQuaternionFromEuler(const AltMath::Vector3f& p_euler);
+		static glm::quat CreateQuaternionFromEuler(const glm::vec3& p_euler);
 	};
 }
 

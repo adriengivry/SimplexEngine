@@ -1,3 +1,11 @@
+/**
+* Project Rasterizer
+* @author Adrien Givry
+* @version 1.0
+*/
+
+#include <iostream>
+
 #include "Rasterizer/Utils/EasyAssimp.h"
 
 bool Rasterizer::Utils::EasyAssimp::LoadVertices(const std::string & p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)

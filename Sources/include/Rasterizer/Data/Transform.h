@@ -8,7 +8,8 @@
 #ifndef _TRANSFORM_H
 #define _TRANSFORM_H
 
-#include <AltMath/AltMath.h>
+#include <glm/glm.hpp>
+#include <glm/gtx/quaternion.hpp>
 
 #include "Rasterizer/Utils/Event.h"
 
@@ -18,7 +19,7 @@ namespace Rasterizer::Data
 	* A "Transformation" represents a position (Vector3f from AltMath) and a quaternion (Quaternion from AltMath).
 	* It is used to simplify code reading
 	*/
-	using Transformation = std::pair<AltMath::Vector3f, AltMath::Quaternion>;
+	using Transformation = std::pair<glm::vec3, glm::quat>;
 
 	/**
 	* Represent a local or world transformation (Position and rotation)
@@ -30,7 +31,7 @@ namespace Rasterizer::Data
 		* @param p_localPosition
 		* @param p_localRotation
 		*/
-		Transform(AltMath::Vector3f p_localPosition, AltMath::Quaternion p_localRotation);
+		Transform(glm::vec3 p_localPosition, glm::quat p_localRotation);
 
 		/**
 		* Defines a parent to the transform
@@ -44,7 +45,7 @@ namespace Rasterizer::Data
 		* @param p_position
 		* @param p_rotation
 		*/
-		void GenerateMatrices(AltMath::Vector3f p_position, AltMath::Quaternion p_rotation);
+		void GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation);
 
 		/**
 		* Re-update world matrices to use parent transformations
@@ -60,51 +61,51 @@ namespace Rasterizer::Data
 		* Set the position of the transform
 		* @param p_newPosition
 		*/
-		void SetPosition(AltMath::Vector3f p_newPosition);
+		void SetPosition(glm::vec3 p_newPosition);
 
 		/**
 		* Set the rotation of the transform
 		* @param p_newRotation
 		*/
-		void SetRotation(AltMath::Quaternion p_newRotation);
+		void SetRotation(glm::quat p_newRotation);
 
 		/**
 		* Return the local position of the transform
 		*/
-		AltMath::Vector3f GetLocalPosition() /* SHOULD BE CONST BUT CANT */;
+		glm::vec3 GetLocalPosition() /* SHOULD BE CONST BUT CANT */;
 
 		/**
 		* Return local rotation of the transform
 		*/
-		AltMath::Quaternion GetLocalRotation() /* SHOULD BE CONST BUT CANT */;
+		glm::quat GetLocalRotation() /* SHOULD BE CONST BUT CANT */;
 
 		/**
 		* Return the world position of the transform
 		*/
-		AltMath::Vector3f GetWorldPosition() /* SHOULD BE CONST BUT CANT */;
+		glm::vec3 GetWorldPosition() /* SHOULD BE CONST BUT CANT */;
 
 		/**
 		* Return the world rotation of the transform
 		*/
-		AltMath::Quaternion GetWorldRotation() /* SHOULD BE CONST BUT CANT */;
+		glm::quat GetWorldRotation() /* SHOULD BE CONST BUT CANT */;
 
 		/**
 		* Return the local matrix
 		*/
-		const AltMath::Matrix4f& GetLocalMatrix() const;
+		const glm::mat4& GetLocalMatrix() const;
 
 		/**
 		* Return the local matrix
 		*/
-		const AltMath::Matrix4f& GetWorldMatrix() const;
+		const glm::mat4& GetWorldMatrix() const;
 
 	public:
 		Utils::Event<> TransformChangedEvent;
 
 	private:
-		AltMath::Matrix4f								m_localMatrix;
-		AltMath::Matrix4f								m_worldMatrix;
-		Transform*										m_parent;
+		glm::mat4	m_localMatrix;
+		glm::mat4	m_worldMatrix;
+		Transform*	m_parent;
 	};
 }
 

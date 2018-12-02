@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Entities/Model.h"
 
-Rasterizer::Entities::Model::Model(const Data::Mesh & p_mesh, const AltMath::Vector3f & p_position, const AltMath::Quaternion & p_rotation)
+Rasterizer::Entities::Model::Model(const Data::Mesh & p_mesh, const glm::vec3 & p_position, const glm::quat & p_rotation)
 	: AEntity(p_position, p_rotation)
 {
 	m_meshes.push_back(std::cref(p_mesh));

@@ -20,13 +20,16 @@ namespace Rasterizer::Data
 	class Triangle2D final
 	{
 	public:
+		using Point = std::pair<int32_t, int32_t>;
+		using BoundingBox = std::tuple<int32_t, int32_t, int32_t, int32_t>;
+
 		/**
 		* Create a triangle with the given points
 		* @param p_firstPoint
 		* @param p_secondPoint
 		* @param p_thirdPoint
 		*/
-		Triangle2D(const AltMath::Vector2i& p_firstPoint, const AltMath::Vector2i& p_secondPoint, const AltMath::Vector2i& p_thirdPoint);
+		Triangle2D(const Point& p_firstPoint, const Point& p_secondPoint, const Point& p_thirdPoint);
 
 		/**
 		* Calculate the area of the triangle
@@ -36,7 +39,7 @@ namespace Rasterizer::Data
 		/**
 		* Calculate a bounding box for the triangle
 		*/
-		std::tuple<int, int, int, int> GetBoundingBox();
+		BoundingBox GetBoundingBox();
 
 		/**
 		* Calculate the area of a triangle defined by 3 points
@@ -44,22 +47,22 @@ namespace Rasterizer::Data
 		* @param p_point2
 		* @param p_point3
 		*/
-		static float CalculateArea(const AltMath::Vector2i& p_point1, const AltMath::Vector2i& p_point2, const AltMath::Vector2i& p_point3);
+		static float CalculateArea(const Point& p_point1, const Point& p_point2, const Point& p_point3);
 
 		/**
 		* Verify if a point is in the triangle
 		* @param p_point
 		*/
-		bool IsPointInArea(const AltMath::Vector2i& p_point);
+		bool IsPointInArea(const Point& p_point);
 
 		/**
 		* Verify if a point is in the permiter of the triangle
 		* @param p_point
 		*/
-		bool IsPointInPerimeter(const AltMath::Vector2i& p_point);
+		bool IsPointInPerimeter(const Point& p_point);
 
 	private:
-		AltMath::Vector2i m_points[3];
+		Point m_points[3];
 
 		float m_area;
 	};
