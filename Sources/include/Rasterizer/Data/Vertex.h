@@ -22,10 +22,14 @@ namespace Rasterizer::Data
 		* @param p_x
 		* @param p_y
 		* @param p_z
+		* @param p_nx
+		* @param p_ny
+		* @param p_nz
 		*/
-		Vertex(float p_x, float p_y, float p_z);
+		Vertex(float p_x, float p_y, float p_z, float p_nx = 0.0f, float p_ny = 0.0f, float p_nz = 0.0f);
 
 		AltMath::Vector3f position;
+		AltMath::Vector3f normal;
 	};
 }
 

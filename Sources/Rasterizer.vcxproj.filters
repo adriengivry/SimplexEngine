@@ -131,5 +131,6 @@
     <None Include="resources\icosphere.fbx" />
     <None Include="resources\monkey.fbx" />
     <None Include="resources\sphere.fbx" />
+    <None Include="config\application.ini" />
   </ItemGroup>
 </Project>

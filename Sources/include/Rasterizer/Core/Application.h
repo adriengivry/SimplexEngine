@@ -49,6 +49,7 @@ namespace Rasterizer::Core
 
 	private:
 		GyvrIni::Core::IniFile m_windowINI;
+		GyvrIni::Core::IniFile m_applicationINI;
 
 		Rasterizer::Context::Window m_window;
 		Rasterizer::Context::EventHandler m_eventHandler;

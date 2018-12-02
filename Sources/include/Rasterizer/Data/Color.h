@@ -28,12 +28,13 @@ namespace Rasterizer::Data
 		static const Color Magenta;
 
 		/**
-		* Create a color with given values
-		* @param p_r (Red value)
-		* @param p_g (Green value)
-		* @param p_b (Blue value)
+		* Create a color with given integer values
+		* @param p_r (Red value [0 to 255])
+		* @param p_g (Green value [0 to 255])
+		* @param p_b (Blue value [0 to 255])
+		* @param p_a (Alpha value [0 to 255])
 		*/
-		Color(uint8_t p_r = 0, uint8_t p_g = 0, uint8_t p_b = 0, uint8_t p_a = 255);
+		explicit Color(uint8_t p_r = 0, uint8_t p_g = 0, uint8_t p_b = 0, uint8_t p_a = 255);
 
 		uint8_t r;
 		uint8_t g;

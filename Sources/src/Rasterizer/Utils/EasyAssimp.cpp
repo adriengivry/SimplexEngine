@@ -36,10 +36,19 @@ void Rasterizer::Utils::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene *
 {
 	for (unsigned int i = 0; i < p_mesh->mNumVertices; ++i)
 	{
-		p_outBuffer.push_back({ p_mesh->mVertices[i].x, p_mesh->mVertices[i].y, p_mesh->mVertices[i].z });
+		p_outBuffer.push_back
+		(
+			{ 
+				p_mesh->mVertices[i].x,
+				p_mesh->mVertices[i].y,
+				p_mesh->mVertices[i].z,
+				p_mesh->mNormals[i].x,
+				p_mesh->mNormals[i].y,
+				p_mesh->mNormals[i].z 
+			}
+		);
 	}
 
-	// process indices
 	for (unsigned int i = 0; i < p_mesh->mNumFaces; i++)
 	{
 		const aiFace face = p_mesh->mFaces[i];

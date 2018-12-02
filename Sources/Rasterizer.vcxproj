@@ -257,6 +257,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="config\application.ini" />
     <None Include="config\window.ini" />
     <None Include="resources\cone.fbx" />
     <None Include="resources\cube.fbx" />
