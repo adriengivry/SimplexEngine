@@ -5,8 +5,8 @@
 */
 
 #pragma once
-#ifndef _ACTOR_H
-#define _ACTOR_H
+#ifndef _MODEL_H
+#define _MODEL_H
 
 #include "Rasterizer/Data/Mesh.h"
 #include "Rasterizer/Entities/AEntity.h"
@@ -14,9 +14,9 @@
 namespace Rasterizer::Entities
 {
 	/**
-	* The Actor class is an entity (Localized in world space) with at least one mesh 
+	* The Model class is an entity (Localized in world space) with at least one mesh 
 	*/
-	class Actor final : public AEntity
+	class Model final : public AEntity
 	{
 	public:
 		/**
@@ -25,7 +25,7 @@ namespace Rasterizer::Entities
 		* @param p_position
 		* @param p_rotation
 		*/
-		Actor(const Data::Mesh& p_mesh, const AltMath::Vector3f& p_position, const AltMath::Quaternion& p_rotation);
+		Model(const Data::Mesh& p_mesh, const AltMath::Vector3f& p_position, const AltMath::Quaternion& p_rotation);
 
 		/**
 		* Return the default mesh
@@ -42,4 +42,4 @@ namespace Rasterizer::Entities
 	};
 }
 
-#endif // _ACTOR_H
+#endif // _MODEL_H

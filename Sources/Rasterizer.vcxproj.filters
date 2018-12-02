@@ -60,7 +60,7 @@
     <ClCompile Include="src\Rasterizer\Utils\EasyAssimp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rasterizer\Entities\Actor.cpp">
+    <ClCompile Include="src\Rasterizer\Entities\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -119,7 +119,7 @@
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rasterizer\Entities\Actor.h">
+    <ClInclude Include="include\Rasterizer\Entities\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -16,7 +16,7 @@
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Entities/Camera.h"
-#include "Rasterizer/Entities/Actor.h"
+#include "Rasterizer/Entities/Model.h"
 
 namespace Rasterizer::Core
 {
@@ -41,7 +41,7 @@ namespace Rasterizer::Core
 		* Rasterize actor
 		* @param p_actor
 		*/
-		void RasterizeActor(const Entities::Actor& p_actor);
+		void RasterizeModel(const Entities::Model& p_actor);
 
 		/**
 		* Return true if the current state of the application is RUNNING
@@ -70,7 +70,7 @@ namespace Rasterizer::Core
 
 		/* Scene relatives */
 		Rasterizer::Entities::Camera m_camera;
-		std::vector<Rasterizer::Entities::Actor> m_actors;
+		std::vector<Rasterizer::Entities::Model> m_models;
 
 		/* Animation stuffs */
 		float m_modelRotation = 0.0f;

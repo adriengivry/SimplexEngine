@@ -24,7 +24,7 @@ Rasterizer::Core::Application::Application() :
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
-	m_actors.emplace_back(m_monkeyMesh, AltMath::Vector3f::Zero, AltMath::Quaternion::Identity());
+	m_models.emplace_back(m_monkeyMesh, AltMath::Vector3f::Zero, AltMath::Quaternion::Identity());
 }
 
 int Rasterizer::Core::Application::Run()
@@ -44,14 +44,14 @@ int Rasterizer::Core::Application::Run()
 		}
 
 		AltMath::Quaternion eulerRotation;
-		m_actors[0].transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ -90.0f, m_modelRotation, 0.0f }));
-		m_actors[0].transform.SetPosition({ cos(m_clock.GetElapsedTime()), sin(m_clock.GetElapsedTime()), 0.0f });
+		m_models[0].transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ -90.0f, m_modelRotation, 0.0f }));
+		m_models[0].transform.SetPosition({ cos(m_clock.GetElapsedTime()), sin(m_clock.GetElapsedTime()), 0.0f });
 		m_modelRotation += m_clock.GetDeltaTime() * m_applicationINI.Get<float>("model_rotation_per_second");
 
 		m_camera.transform.SetPosition({ -10.0f, 0.0f, 0.0f });
 
-		for (auto& actor : m_actors)
-			RasterizeActor(actor);
+		for (auto& model : m_models)
+			RasterizeModel(model);
 
 		m_renderer.GenerateFinalTexture();
 		m_renderer.ClearPixelBuffer();
@@ -65,7 +65,7 @@ int Rasterizer::Core::Application::Run()
 	return EXIT_SUCCESS;
 }
 
-void Rasterizer::Core::Application::RasterizeActor(const Entities::Actor & p_actor)
+void Rasterizer::Core::Application::RasterizeModel(const Entities::Model & p_actor)
 {
 	AltMath::Matrix4 mvp = m_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
 
