@@ -50,9 +50,7 @@ namespace Rasterizer::Scripts
 		Entities::Camera& m_camera;
 
 		/* Internal stuffs */
-		float m_mouseSensitivity = 0.1f;
-		bool m_firstMouse = true;
-		std::pair<int, int> m_lastMouse;
+		float m_mouseSensitivity = 1.0f;
 	};
 }
 

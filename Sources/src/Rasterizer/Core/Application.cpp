@@ -53,7 +53,7 @@ Rasterizer::Core::Application::Application() :
 void Rasterizer::Core::Application::CreateScripts()
 {
 	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
-	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
+	// AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_inputManager);
 	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);
@@ -71,8 +71,8 @@ int Rasterizer::Core::Application::Run()
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
 {
-	m_eventHandler.HandleEvents(m_window);
 	m_inputManager.Update();
+	m_eventHandler.HandleEvents(m_window);
 
 	UpdateScripts(p_deltaTime);
 

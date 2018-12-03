@@ -23,32 +23,14 @@ void Rasterizer::Scripts::SCameraController::Update(float p_deltaTime)
 
 void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 {
-	const auto&[mouseX, mouseY] = m_inputManager.GetCursorPosition();
 	const auto&[motionX, motionY] = m_inputManager.GetMouseMotion();
-	auto&[lastX, lastY] = m_lastMouse;
 
-	if (m_firstMouse)
-	{
-		lastX = mouseX;
-		lastY = mouseY;
-		m_firstMouse = false;
-	}
-
-	/*
-	const float xOffset = (mouseX - lastX) * m_mouseSensitivity;
-	const float yOffset = (lastY - mouseY) * m_mouseSensitivity;
-	*/
-
-	const float xOffset = motionX * m_mouseSensitivity;
-	const float yOffset = motionY * m_mouseSensitivity;
-
-	lastX = mouseX;
-	lastY = mouseY;
+	const float xOffset = motionX * m_mouseSensitivity * p_deltaTime;
+	const float yOffset = -motionY * m_mouseSensitivity * p_deltaTime;
 
 	m_camera.Rotate({ xOffset, yOffset, 0.0f });
 
-	std::cout << mouseX << "|" << mouseY << std::endl;
-	// std::cout << xOffset << "|" << yOffset << std::endl;
+	std::cout << xOffset << "|" << yOffset << std::endl;
 	// std::cout << m_camera.GetLookAt().x << "|" << m_camera.GetLookAt().y << "|" << m_camera.GetLookAt().z << std::endl;
 }
 
