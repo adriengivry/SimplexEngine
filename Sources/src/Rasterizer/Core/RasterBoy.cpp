@@ -75,6 +75,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 
 std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec3& p_point)
 {
+	
 	glm::vec2 clipped = VertexToScreenSpace(p_point);
 
 	glm::ivec2 result;
@@ -83,6 +84,16 @@ std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordina
 	result.y = (int)std::round(((1 - clipped.y) * 0.5f) * m_window.GetHeight());
 
 	return std::make_pair(result, p_point.z);
+}
+
+std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinatesHansdrien(const glm::vec3 & p_point)
+{
+	const float widthHalf = m_window.GetWidth() / 2.0f;
+	const float heightHalf = m_window.GetHeight() / 2.0f;
+
+	auto screenPixel = glm::vec2(((p_point.x / 5.0f) + 1) * widthHalf, m_window.GetHeight() - ((p_point.y / 5.0f) + 1) * heightHalf);
+
+	return std::make_pair(glm::ivec2(static_cast<int>(screenPixel.x), static_cast<int>(screenPixel.y)), p_point.z);
 }
 
 glm::ivec2 Rasterizer::Core::RasterBoy::RasterizeVertex(const glm::vec3 & p_vertexPosition, const glm::mat4 & p_vertexTransformations)

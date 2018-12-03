@@ -26,8 +26,7 @@ void Rasterizer::Data::Transform::SetParent(Data::Transform& p_parent, bool p_ad
 
 void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation)
 {
-	m_localMatrix = glm::translate(glm::mat4(1.0f), p_position);
-	m_localMatrix *= glm::toMat4(p_rotation);
+	m_localMatrix = glm::translate(glm::mat4(1.0f), p_position) * glm::toMat4(p_rotation);
 
 	UpdateWorldMatrices();
 }
@@ -56,12 +55,12 @@ void Rasterizer::Data::Transform::SetRotation(glm::quat p_newRotation)
 
 void Rasterizer::Data::Transform::Translate(const glm::vec3& p_translation)
 {
-	GenerateMatrices(GetLocalPosition() + p_translation, GetLocalRotation());
+	SetPosition(GetLocalPosition() + p_translation);
 }
 
 void Rasterizer::Data::Transform::Rotate(const glm::quat& p_rotation)
 {
-	GenerateMatrices(GetLocalPosition(), GetLocalRotation() * p_rotation);
+	SetRotation(GetLocalRotation() * p_rotation);
 }
 
 glm::vec3 Rasterizer::Data::Transform::GetLocalPosition()
@@ -71,7 +70,7 @@ glm::vec3 Rasterizer::Data::Transform::GetLocalPosition()
 
 glm::quat Rasterizer::Data::Transform::GetLocalRotation()
 {
-	glm::mat3 rotationMatrix(m_localMatrix[0][0], m_localMatrix[1][0], m_localMatrix[2][0], m_localMatrix[0][1], m_localMatrix[1][1], m_localMatrix[2][1], m_localMatrix[0][2], m_localMatrix[1][2], m_localMatrix[2][2]);
+	glm::mat3 rotationMatrix(m_localMatrix[0][0], m_localMatrix[0][1], m_localMatrix[0][2], m_localMatrix[1][0], m_localMatrix[1][1], m_localMatrix[1][2], m_localMatrix[2][0], m_localMatrix[2][1], m_localMatrix[2][2]);
 	return glm::quat(rotationMatrix);
 }
 
@@ -82,7 +81,7 @@ glm::vec3 Rasterizer::Data::Transform::GetWorldPosition()
 
 glm::quat Rasterizer::Data::Transform::GetWorldRotation()
 {
-	glm::mat3 rotationMatrix(m_worldMatrix[0][0], m_worldMatrix[1][0], m_worldMatrix[2][0], m_worldMatrix[0][1], m_worldMatrix[1][1], m_worldMatrix[2][1], m_worldMatrix[0][2], m_worldMatrix[1][2], m_worldMatrix[2][2]);
+	glm::mat3 rotationMatrix(m_worldMatrix[0][0], m_worldMatrix[0][1], m_worldMatrix[0][2], m_worldMatrix[1][0], m_worldMatrix[1][1], m_worldMatrix[1][2], m_worldMatrix[2][0], m_worldMatrix[2][1], m_worldMatrix[2][2]);
 	return glm::quat(rotationMatrix);
 }
 

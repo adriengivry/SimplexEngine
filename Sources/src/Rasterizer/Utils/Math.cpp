@@ -6,20 +6,31 @@
 
 #include "Rasterizer/Utils/Math.h"
 
-glm::quat Rasterizer::Utils::Math::CreateQuaternionFromEuler(const glm::vec3 & p_euler)
+glm::quat Rasterizer::Utils::Math::CreateQuaternionFromEuler(const glm::vec3 & p_euler, bool p_degrees)
 {
-	const float cy = cosf(glm::radians(p_euler.z) * 0.5f);
-	const float sy = sinf(glm::radians(p_euler.z) * 0.5f);
-	const float cp = cosf(glm::radians(p_euler.y) * 0.5f);
-	const float sp = sinf(glm::radians(p_euler.y) * 0.5f);
-	const float cr = cosf(glm::radians(p_euler.x) * 0.5f);
-	const float sr = sinf(glm::radians(p_euler.x) * 0.5f);
+	float yaw = p_euler.y;
+	float pitch = p_euler.x;
+	float roll = p_euler.z;
+	
+	if (p_degrees)
+	{
+		yaw = glm::radians(yaw);
+		pitch = glm::radians(pitch);
+		roll = glm::radians(roll);
+	}
+
+	float cy = cos(yaw * 0.5f);
+	float sy = sin(yaw * 0.5f);
+	float cp = cos(pitch * 0.5f);
+	float sp = sin(pitch * 0.5f);
+	float cr = cos(roll * 0.5f);
+	float sr = sin(roll * 0.5f);
 
 	return glm::quat
 	(
+		cy * cp * cr + sy * sp * sr,
 		cy * cp * sr - sy * sp * cr,
 		sy * cp * sr + cy * sp * cr,
-		sy * cp * cr - cy * sp * sr,
-		cy * cp * cr + sy * sp * sr
+		sy * cp * cr - cy * sp * sr
 	);
 }

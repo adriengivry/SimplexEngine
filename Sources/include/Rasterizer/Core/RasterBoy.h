@@ -56,6 +56,13 @@ namespace Rasterizer::Core
 		std::pair<glm::ivec2, float> ProjectToPixelCoordinates(const glm::vec3& p_point);
 
 		/**
+		* Project a point to the screen coordinate (From Hansdrien Rasterizer)
+		* @param p_point (In camera space, aka after applying MVP)
+		* @warning For test ony, it has trouble with Z
+		*/
+		std::pair<glm::ivec2, float> ProjectToPixelCoordinatesHansdrien(const glm::vec3& p_point);
+
+		/**
 		* Process the full process of transformation and rasterization of a vertex
 		* @param p_vertexPosition (As given in the obj or fbx file)
 		* @param p_vertexTransformations (The model matrix)

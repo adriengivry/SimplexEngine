@@ -25,8 +25,9 @@ namespace Rasterizer::Utils
 		/**
 		* Create a quaternion from euler
 		* @param p_euler
+		* @param p_degrees (True to use degrees and false to use radians)
 		*/
-		static glm::quat CreateQuaternionFromEuler(const glm::vec3& p_euler);
+		static glm::quat CreateQuaternionFromEuler(const glm::vec3& p_euler, bool p_degrees = true);
 	};
 }
 

@@ -9,13 +9,11 @@
 
 Rasterizer::Scripts::SRotateOverTime::SRotateOverTime(Entities::AEntity & p_target, float p_rotationSpeed) :
 	m_target(p_target),
-	m_rotationSpeed(p_rotationSpeed),
-	m_rotationAngle(0.0f)
+	m_rotationSpeed(p_rotationSpeed)
 {
 }
 
 void Rasterizer::Scripts::SRotateOverTime::Update(float p_deltaTime)
 {
-	m_target.transform.SetRotation(Utils::Math::CreateQuaternionFromEuler({ 0.0f, m_rotationAngle, 0.0f }));
-	m_rotationAngle += m_rotationSpeed * p_deltaTime;
+	m_target.transform.Rotate(Utils::Math::CreateQuaternionFromEuler({ 0.0f, m_rotationSpeed * p_deltaTime, 0.0f }));
 }

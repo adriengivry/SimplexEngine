@@ -18,6 +18,7 @@ Rasterizer::Entities::Camera::Camera(const glm::vec3 & p_position, const glm::qu
 	m_near(p_near),
 	m_far(p_far)
 {
+	UpdateForwardVector();
 	UpdateViewProjectionMatrix();
 
 	transform.TransformChangedEvent.AddListener(std::bind(&Camera::UpdateForwardVector, this));

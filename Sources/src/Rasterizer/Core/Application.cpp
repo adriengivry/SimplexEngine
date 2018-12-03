@@ -26,41 +26,24 @@ Rasterizer::Core::Application::Application() :
 	m_inputManager(m_eventHandler),
 	m_renderer(m_window),
 	m_rasterBoy(m_window, m_camera, m_renderer),
-	m_camera
-	(
-		glm::vec3
-		(
-			Utils::IniIndexer::Application->Get<float>("camera_position_x"),
-			Utils::IniIndexer::Application->Get<float>("camera_position_y"),
-			Utils::IniIndexer::Application->Get<float>("camera_position_z")
-		),
-		Utils::Math::CreateQuaternionFromEuler
-		(
-			{
-				Utils::IniIndexer::Application->Get<float>("camera_rotation_x"),
-				Utils::IniIndexer::Application->Get<float>("camera_rotation_y"),
-				Utils::IniIndexer::Application->Get<float>("camera_rotation_z")
-			}
-		),
-		glm::vec3(0.0f, 1.0f, 0.0f),
-		m_window.GetAspectRatio()
-	),
+	m_camera({ Utils::IniIndexer::Application->Get<float>("camera_position_x"), Utils::IniIndexer::Application->Get<float>("camera_position_y"), Utils::IniIndexer::Application->Get<float>("camera_position_z")},Utils::Math::CreateQuaternionFromEuler({ Utils::IniIndexer::Application->Get<float>("camera_rotation_x"), Utils::IniIndexer::Application->Get<float>("camera_rotation_y"), Utils::IniIndexer::Application->Get<float>("camera_rotation_z")}), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
 	m_applicationState(EApplicationState::RUNNING)
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
-	m_models.emplace_back(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(3.0f, 0.0f, 0.0f));
-	m_models[1].SetParent(m_models[0]);
+
+	// m_models.emplace_back(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(3.0f, 0.0f, 0.0f));
+	// m_models[1].SetParent(m_models[0]);
 
 	CreateScripts();
 }
 
 void Rasterizer::Core::Application::CreateScripts()
 {
-	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
-	// AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
+	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
+	// AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_inputManager);
 	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);

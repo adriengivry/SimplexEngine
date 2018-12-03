@@ -35,8 +35,6 @@ namespace Rasterizer::Scripts
 	private:
 		Entities::AEntity& m_target;
 		float m_rotationSpeed;
-		float m_rotationAngle;
-
 	};
 }
 
