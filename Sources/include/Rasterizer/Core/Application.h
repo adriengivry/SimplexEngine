@@ -19,6 +19,7 @@
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
 #include "Rasterizer/Resources/Managers/MeshManager.h"
+#include "Rasterizer/Scripts/IScript.h"
 
 namespace Rasterizer::Core
 {
@@ -32,6 +33,18 @@ namespace Rasterizer::Core
 		* Constructor of the application
  		*/
 		Application();
+
+		/**
+		* Create scripts
+		*/
+		void CreateScripts();
+
+		/**
+		* Add a script to the application
+		* @param p_args (Arguments forwarded to the std::make_unique)
+		*/
+		template<typename T, typename... Args>
+		void AddScript(Args&&... p_args) { m_scripts.push_back(std::make_unique<T>(p_args...)); }
 
 		/**
 		* Run the actual application (Blocking method, it is a loop).
@@ -79,6 +92,8 @@ namespace Rasterizer::Core
 		EApplicationState m_applicationState;
 		float m_modelRotation = 0.0f;
 		float m_logFPStimer = 0.0f;
+
+		std::vector<std::unique_ptr<Scripts::IScript>> m_scripts;
 	};
 }
 

@@ -14,6 +14,9 @@
 #include "Rasterizer/Data/Vertex.h"
 #include "Rasterizer/Data/Triangle2D.h"
 #include "Rasterizer/Utils/Math.h"
+#include "Rasterizer/Scripts/SCameraController.h"
+#include "Rasterizer/Scripts/SRotateOverTime.h"
+#include "Rasterizer/Scripts/SFPSCounter.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -26,27 +29,22 @@ Rasterizer::Core::Application::Application() :
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
+	
+	CreateScripts();
+}
+
+void Rasterizer::Core::Application::CreateScripts()
+{
+	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
+	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
+	AddScript<Scripts::SFPSCounter>();
 }
 
 int Rasterizer::Core::Application::Run()
 {
 	while (m_applicationState == EApplicationState::RUNNING)
 	{
-		m_eventHandler.HandleEvents(m_window);
-		m_inputManager.Update();
-
 		Update(m_clock.GetDeltaTime());
-
-		for (auto& model : m_models)
-			m_rasterBoy.RasterizeModel(model);
-
-		m_renderer.GenerateFinalTexture();
-		m_renderer.ClearPixelBuffer();
-		m_renderer.DrawFinalTexture();
-
-		m_renderer.Render();
-
-		m_clock.Tick();
 	}
 
 	return EXIT_SUCCESS;
@@ -54,35 +52,21 @@ int Rasterizer::Core::Application::Run()
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
 {
-	m_logFPStimer += p_deltaTime;
+	m_eventHandler.HandleEvents(m_window);
+	m_inputManager.Update();
 
-	if (m_logFPStimer >= 0.5f)
-	{
-		system("CLS");
-		std::cout << static_cast<uint16_t>(m_clock.GetFramerate()) << std::endl;
-		m_logFPStimer = 0.0f;
-	}
+	for (auto& script : m_scripts)
+		script->Update(p_deltaTime);
 
-	glm::vec3 movement;
+	for (auto& model : m_models)
+		m_rasterBoy.RasterizeModel(model);
 
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_A))
-		movement += glm::vec3(-1.0f, 0.0f, 0.0f);
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_D))
-		movement += glm::vec3(1.0f, 0.0f, 0.0f); 
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_W))
-		movement += glm::vec3(0.0f, 0.0f, -1.0f);
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_S))
-		movement += glm::vec3(0.0f, 0.0f, 1.0f);
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_Q))
-		movement += glm::vec3(0.0f, -1.0f, 0.0f);
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_E))
-		movement += glm::vec3(0.0f, 1.0f, 0.0f);
+	m_renderer.GenerateFinalTexture();
+	m_renderer.ClearPixelBuffer();
+	m_renderer.DrawFinalTexture();
+	m_renderer.Render();
 
-	m_camera.Move(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
-
-	glm::quat eulerRotation;
-	m_models[0].transform.SetRotation(glm::quat({ 0.0f, m_modelRotation, 0.0f }));
-	m_modelRotation += glm::radians(Utils::IniIndexer::Controls->Get<float>("model_rotation_per_second")) * p_deltaTime;
+	m_clock.Tick();
 }
 
 bool Rasterizer::Core::Application::IsRunning()

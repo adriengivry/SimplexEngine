@@ -214,7 +214,10 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
+    <ClCompile Include="src\Rasterizer\Scripts\SFPSCounter.cpp" />
+    <ClCompile Include="src\Rasterizer\Scripts\SRotateOverTime.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp" />
     <ClCompile Include="src\Rasterizer\Context\InputManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\RasterBoy.cpp" />
@@ -247,6 +250,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Core\Renderer.h" />
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Mesh.h" />
@@ -256,6 +260,9 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Entities\AEntity.h" />
     <ClInclude Include="include\Rasterizer\Entities\Camera.h" />
     <ClInclude Include="include\Rasterizer\Entities\Model.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\IScript.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\SFPSCounter.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\SRotateOverTime.h" />
     <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
     <ClInclude Include="include\Rasterizer\Tools\EasyAssimp.h" />

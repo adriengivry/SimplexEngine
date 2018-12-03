@@ -23,12 +23,12 @@ void Rasterizer::Context::InputManager::Update()
 	}
 }
 
-bool Rasterizer::Context::InputManager::IsKeyPressed(int p_key)
+bool Rasterizer::Context::InputManager::IsKeyPressed(int p_key) const
 {
-	return m_keyStates[p_key];
+	return m_keyStates.find(p_key) != m_keyStates.end() && m_keyStates.at(p_key);
 }
 
-bool Rasterizer::Context::InputManager::IsKeyEventOccured(int p_key)
+bool Rasterizer::Context::InputManager::IsKeyEventOccured(int p_key) const
 {
-	return m_keyEvents[p_key];
+	return m_keyEvents.find(p_key) != m_keyEvents.end() && m_keyEvents.at(p_key);
 }

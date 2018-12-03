@@ -31,13 +31,13 @@ namespace Rasterizer::Context
 		* Check if the given key is pressed
 		* @param p_key (SDL Key Code)
 		*/
-		bool IsKeyPressed(int p_keyCode);
+		bool IsKeyPressed(int p_keyCode) const;
 
 		/**
 		* Check if the given key has been pressed during this frame
 		* @param p_key (SDL Key Code)
 		*/
-		bool IsKeyEventOccured(int p_keyCode);
+		bool IsKeyEventOccured(int p_keyCode) const;
 
 	private:
 		std::unordered_map<int, bool> m_keyEvents;
