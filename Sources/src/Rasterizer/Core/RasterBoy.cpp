@@ -24,7 +24,7 @@ void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model & p_actor
 		RasterizeMesh(mesh.get(), mvp);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeMesh(const Data::Mesh & p_mesh, const glm::mat4 & p_mvp)
+void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh & p_mesh, const glm::mat4 & p_mvp)
 {
 	auto vertices = p_mesh.GetVertices();
 	auto indices = p_mesh.GetIndices();

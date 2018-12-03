@@ -48,16 +48,10 @@
     <ClCompile Include="src\Rasterizer\Entities\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rasterizer\Data\Mesh.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rasterizer\Utils\EasyAssimp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rasterizer\Entities\Model.cpp">
@@ -67,6 +61,21 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rasterizer\Context\InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Resources\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Tools\EasyAssimp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Utils\IniIndexer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -110,16 +119,10 @@
     <ClInclude Include="include\Rasterizer\Entities\Camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rasterizer\Data\Mesh.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Rasterizer\Utils\Clock.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Utils\Math.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rasterizer\Utils\EasyAssimp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h">
@@ -134,6 +137,24 @@
     <ClInclude Include="include\Rasterizer\Context\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Rasterizer\Resources\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Tools\EasyAssimp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Utils\IniIndexer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\window.ini" />
@@ -144,5 +165,11 @@
     <None Include="resources\monkey.fbx" />
     <None Include="resources\sphere.fbx" />
     <None Include="config\application.ini" />
+    <None Include="include\Rasterizer\Resources\Managers\AResourceManager.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="config\rendering.ini" />
+    <None Include="config\resources\meshes.cfg" />
+    <None Include="config\controls.ini" />
   </ItemGroup>
 </Project>

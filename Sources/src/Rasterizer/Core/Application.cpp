@@ -16,22 +16,16 @@
 #include "Rasterizer/Utils/Math.h"
 
 Rasterizer::Core::Application::Application() :
-	m_windowINI("config/window.ini"),
-	m_applicationINI("config/application.ini"),
-	m_window(m_windowINI.Get<std::string>("title"), m_windowINI.Get<uint16_t>("width"), m_windowINI.Get<uint16_t>("height")),
+	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
 	m_renderer(m_window),
 	m_rasterBoy(m_window, m_camera, m_renderer),
-	m_applicationState(EApplicationState::RUNNING),
-	m_monkeyMesh("resources/monkey.fbx"),
-	m_cubeMesh("resources/cube.fbx"),
-	m_sphereMesh("resources/sphere.fbx"),
-	m_icoSphereMesh("resources/icosphere.fbx"),
-	m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio())
+	m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
+	m_applicationState(EApplicationState::RUNNING)
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
-	m_models.emplace_back(m_monkeyMesh, glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
+	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
 }
 
 int Rasterizer::Core::Application::Run()
@@ -84,11 +78,11 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_E))
 		movement += glm::vec3(0.0f, 1.0f, 0.0f);
 
-	m_camera.Move(movement * m_applicationINI.Get<float>("movement_speed") * p_deltaTime);
+	m_camera.Move(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
 
 	glm::quat eulerRotation;
 	m_models[0].transform.SetRotation(glm::quat({ 0.0f, m_modelRotation, 0.0f }));
-	m_modelRotation += glm::radians(m_applicationINI.Get<float>("model_rotation_per_second")) * p_deltaTime;
+	m_modelRotation += glm::radians(Utils::IniIndexer::Controls->Get<float>("model_rotation_per_second")) * p_deltaTime;
 }
 
 bool Rasterizer::Core::Application::IsRunning()

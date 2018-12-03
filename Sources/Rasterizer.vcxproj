@@ -214,16 +214,18 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
+    <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp" />
     <ClCompile Include="src\Rasterizer\Context\InputManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\RasterBoy.cpp" />
-    <ClCompile Include="src\Rasterizer\Utils\EasyAssimp.cpp" />
+    <ClCompile Include="src\Rasterizer\Tools\EasyAssimp.cpp" />
     <ClCompile Include="src\Rasterizer\Context\EventHandler.cpp" />
     <ClCompile Include="src\Rasterizer\Context\Window.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Rasterizer\Core\Application.cpp" />
     <ClCompile Include="src\Rasterizer\Core\Renderer.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Color.cpp" />
-    <ClCompile Include="src\Rasterizer\Data\Mesh.cpp" />
+    <ClCompile Include="src\Rasterizer\Resources\Mesh.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Transform.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Triangle2D.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Vertex.cpp" />
@@ -231,6 +233,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Entities\Camera.cpp" />
     <ClCompile Include="src\Rasterizer\Entities\Model.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp" />
+    <ClCompile Include="src\Rasterizer\Utils\IniIndexer.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -244,21 +247,29 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Core\Renderer.h" />
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
-    <ClInclude Include="include\Rasterizer\Data\Mesh.h" />
+    <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
+    <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />
+    <ClInclude Include="include\Rasterizer\Resources\Mesh.h" />
     <ClInclude Include="include\Rasterizer\Data\Transform.h" />
     <ClInclude Include="include\Rasterizer\Data\Triangle2D.h" />
     <ClInclude Include="include\Rasterizer\Data\Vertex.h" />
     <ClInclude Include="include\Rasterizer\Entities\AEntity.h" />
     <ClInclude Include="include\Rasterizer\Entities\Camera.h" />
     <ClInclude Include="include\Rasterizer\Entities\Model.h" />
+    <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
-    <ClInclude Include="include\Rasterizer\Utils\EasyAssimp.h" />
+    <ClInclude Include="include\Rasterizer\Tools\EasyAssimp.h" />
     <ClInclude Include="include\Rasterizer\Utils\Event.h" />
+    <ClInclude Include="include\Rasterizer\Utils\IniIndexer.h" />
     <ClInclude Include="include\Rasterizer\Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\application.ini" />
+    <None Include="config\rendering.ini" />
+    <None Include="config\controls.ini" />
+    <None Include="config\resources\meshes.cfg" />
     <None Include="config\window.ini" />
+    <None Include="include\Rasterizer\Resources\Managers\AResourceManager.inl" />
     <None Include="resources\cone.fbx" />
     <None Include="resources\cube.fbx" />
     <None Include="resources\cylinder.fbx" />

@@ -8,6 +8,7 @@
 
 int main()
 {
+	Rasterizer::Utils::IniIndexer::Initialize();
 	Rasterizer::Core::Application app;
 	app.Run();
 	return 0;

@@ -8,7 +8,7 @@
 #ifndef _MODEL_H
 #define _MODEL_H
 
-#include "Rasterizer/Data/Mesh.h"
+#include "Rasterizer/Resources/Mesh.h"
 #include "Rasterizer/Entities/AEntity.h"
 
 namespace Rasterizer::Entities
@@ -25,20 +25,20 @@ namespace Rasterizer::Entities
 		* @param p_position
 		* @param p_rotation
 		*/
-		Model(const Data::Mesh& p_mesh, const glm::vec3& p_position, const glm::quat& p_rotation);
+		Model(const Resources::Mesh& p_mesh, const glm::vec3& p_position, const glm::quat& p_rotation);
 
 		/**
 		* Return the default mesh
 		*/
-		const Data::Mesh& GetPrimaryMesh() const;
+		const Resources::Mesh& GetPrimaryMesh() const;
 
 		/**
 		* Return the vector of meshes
 		*/
-		const std::vector<std::reference_wrapper<const Data::Mesh>>& GetMeshes() const;
+		const std::vector<std::reference_wrapper<const Resources::Mesh>>& GetMeshes() const;
 
 	private:
-		std::vector<std::reference_wrapper<const Data::Mesh>> m_meshes;
+		std::vector<std::reference_wrapper<const Resources::Mesh>> m_meshes;
 	};
 }
 

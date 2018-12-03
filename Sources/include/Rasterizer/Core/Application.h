@@ -8,8 +8,6 @@
 #ifndef _APPLICATION_H
 #define _APPLICATION_H
 
-#include <GyvrIni/Core/IniFile.h>
-
 #include "Rasterizer/Context/Window.h"
 #include "Rasterizer/Context/EventHandler.h"
 #include "Rasterizer/Context/InputManager.h"
@@ -17,8 +15,10 @@
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Core/RasterBoy.h"
 #include "Rasterizer/Utils/Clock.h"
+#include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
+#include "Rasterizer/Resources/Managers/MeshManager.h"
 
 namespace Rasterizer::Core
 {
@@ -56,31 +56,27 @@ namespace Rasterizer::Core
 		void Stop();
 
 	private:
-		GyvrIni::Core::IniFile m_windowINI;
-		GyvrIni::Core::IniFile m_applicationINI;
-
 		/* SDL Relatives */
 		Rasterizer::Context::Window m_window;
 		Rasterizer::Context::EventHandler m_eventHandler;
 		Rasterizer::Context::InputManager m_inputManager;
 
+		/* Core */
 		Rasterizer::Core::Renderer m_renderer;
 		Rasterizer::Core::RasterBoy m_rasterBoy;
-		Rasterizer::Utils::Clock m_clock;
-			
-		EApplicationState m_applicationState;
 
-		/* Some data */
-		Rasterizer::Data::Mesh m_monkeyMesh;
-		Rasterizer::Data::Mesh m_cubeMesh;
-		Rasterizer::Data::Mesh m_sphereMesh;
-		Rasterizer::Data::Mesh m_icoSphereMesh;
+		/* Utils */
+		Rasterizer::Utils::Clock m_clock;
+
+		/* Resource managers */
+		Rasterizer::Resources::Managers::MeshManager m_meshManager;
 
 		/* Scene relatives */
 		Rasterizer::Entities::Camera m_camera;
 		std::vector<Rasterizer::Entities::Model> m_models;
 
 		/* Other stuffs */
+		EApplicationState m_applicationState;
 		float m_modelRotation = 0.0f;
 		float m_logFPStimer = 0.0f;
 	};

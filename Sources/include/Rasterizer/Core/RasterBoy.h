@@ -40,7 +40,7 @@ namespace Rasterizer::Core
 		* @param p_mesh
 		* @param p_mvp
 		*/
-		void RasterizeMesh(const Data::Mesh& p_mesh, const glm::mat4& p_mvp);
+		void RasterizeMesh(const Resources::Mesh& p_mesh, const glm::mat4& p_mvp);
 
 		/**
 		* Rasterize a triangle to the screen

@@ -16,7 +16,7 @@
 #ifndef _EASYASSIMP_H
 #define _EASYASSIMP_H
 
-namespace Rasterizer::Utils
+namespace Rasterizer::Tools
 {
 	/**
 	* A simple class to load assimp model data (Vertices only)

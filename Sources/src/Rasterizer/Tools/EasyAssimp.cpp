@@ -6,9 +6,9 @@
 
 #include <iostream>
 
-#include "Rasterizer/Utils/EasyAssimp.h"
+#include "Rasterizer/Tools/EasyAssimp.h"
 
-bool Rasterizer::Utils::EasyAssimp::LoadVertices(const std::string & p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+bool Rasterizer::Tools::EasyAssimp::LoadVertices(const std::string & p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	p_outBuffer.clear();
 
@@ -26,7 +26,7 @@ bool Rasterizer::Utils::EasyAssimp::LoadVertices(const std::string & p_fileName,
 	return true;
 }
 
-void Rasterizer::Utils::EasyAssimp::ProcessNode(aiNode * p_node, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+void Rasterizer::Tools::EasyAssimp::ProcessNode(aiNode * p_node, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	// process all the node's meshes (if any)
 	for (unsigned int i = 0; i < p_node->mNumMeshes; ++i)
@@ -41,7 +41,7 @@ void Rasterizer::Utils::EasyAssimp::ProcessNode(aiNode * p_node, const aiScene *
 	}
 }
 
-void Rasterizer::Utils::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+void Rasterizer::Tools::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	for (unsigned int i = 0; i < p_mesh->mNumVertices; ++i)
 	{
