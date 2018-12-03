@@ -60,9 +60,25 @@ namespace Rasterizer::Core
 		void Update(float p_deltaTime);
 
 		/**
+		* Update every scripts
+		* @param p_deltaTime
+		*/
+		void UpdateScripts(float p_deltaTime);
+
+		/**
+		* Rasterize every model
+		*/
+		void RasterizeModels();
+
+		/**
+		* Update the renderer and ask for the rendering
+		*/
+		void UpdateRenderer();
+
+		/**
 		* Return true if the current state of the application is RUNNING
 		*/
-		bool IsRunning();
+		bool IsRunning() const;
 
 		/**
 		* Stops the application. This method is listening to the WindowClosedEvent from the EventListener

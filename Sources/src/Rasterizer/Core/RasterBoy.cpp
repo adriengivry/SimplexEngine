@@ -19,8 +19,6 @@ Rasterizer::Core::RasterBoy::RasterBoy(const Context::Window& p_window, const En
 
 void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model & p_actor)
 {
-	PROFILER_SPY("RasterBoy::RasterizeModel");
-
 	glm::mat4 mvp = m_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
 
 	for (auto mesh : p_actor.GetMeshes())

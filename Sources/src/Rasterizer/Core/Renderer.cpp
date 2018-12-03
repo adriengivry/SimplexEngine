@@ -8,6 +8,7 @@
 
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Utils/IniIndexer.h"
+#include "Rasterizer/Analytics/ProfilerSpy.h"
 
 Rasterizer::Core::Renderer::Renderer(const Context::Window& p_window)
 {
@@ -38,6 +39,8 @@ void Rasterizer::Core::Renderer::InitializePixelBufferSize(std::pair<uint16_t, u
 
 void Rasterizer::Core::Renderer::ClearPixelBuffer()
 {
+	PROFILER_SPY("Renderer::ClearPixelBuffer");
+
 	memset(m_depthBuffer.data(), 0, m_depthBuffer.size() * sizeof(decltype(m_depthBuffer)::value_type));
 	memset(m_pixelBuffer.data(), 0, m_pixelBuffer.size() * sizeof(decltype(m_pixelBuffer)::value_type));
 }
@@ -65,16 +68,22 @@ float Rasterizer::Core::Renderer::GetDepth(uint16_t p_x, uint16_t p_y)
 
 void Rasterizer::Core::Renderer::GenerateFinalTexture()
 {
+	PROFILER_SPY("Renderer::GenerateFinalTexture");
+
 	size_t bufferRowSize = m_bufferWidth * sizeof(decltype(m_pixelBuffer)::value_type);
 	SDL_UpdateTexture(m_finalTexture, nullptr, m_pixelBuffer.data(), static_cast<int>(bufferRowSize));
 }
 
 void Rasterizer::Core::Renderer::DrawFinalTexture()
 {
+	PROFILER_SPY("Renderer::DrawFinalTexture");
+
 	SDL_RenderCopy(m_sdlRenderer, m_finalTexture, nullptr, nullptr);
 }
 
 void Rasterizer::Core::Renderer::Render()
 {
+	PROFILER_SPY("Renderer::Render");
+
 	SDL_RenderPresent(m_sdlRenderer);
 }
