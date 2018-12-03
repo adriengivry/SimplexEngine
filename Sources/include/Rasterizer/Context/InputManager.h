@@ -56,7 +56,7 @@ namespace Rasterizer::Context
 		/**
 		* Return the current cursor position
 		*/
-		const std::pair<float, float>& GetMouseMotion() const;
+		std::pair<int, int> GetMouseMotion() const;
 
 	private:
 		std::unordered_map<int, bool> m_keyEvents;

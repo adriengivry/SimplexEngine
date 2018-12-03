@@ -30,11 +30,18 @@ Rasterizer::Core::Application::Application() :
 	(
 		glm::vec3
 		(
-			Utils::IniIndexer::Application->Get<float>("camera_default_x"),
-			Utils::IniIndexer::Application->Get<float>("camera_default_y"),
-			Utils::IniIndexer::Application->Get<float>("camera_default_z")
+			Utils::IniIndexer::Application->Get<float>("camera_position_x"),
+			Utils::IniIndexer::Application->Get<float>("camera_position_y"),
+			Utils::IniIndexer::Application->Get<float>("camera_position_z")
 		),
-		glm::vec3(0.0f, 0.0f, 0.0f),
+		Utils::Math::CreateQuaternionFromEuler
+		(
+			{
+				Utils::IniIndexer::Application->Get<float>("camera_rotation_x"),
+				Utils::IniIndexer::Application->Get<float>("camera_rotation_y"),
+				Utils::IniIndexer::Application->Get<float>("camera_rotation_z")
+			}
+		),
 		glm::vec3(0.0f, 1.0f, 0.0f),
 		m_window.GetAspectRatio()
 	),

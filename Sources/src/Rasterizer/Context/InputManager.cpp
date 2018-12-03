@@ -51,7 +51,7 @@ void Rasterizer::Context::InputManager::OnMouseMotion(std::pair<int, int> p_moti
 	m_mouseMotion = p_motion;
 }
 
-const std::pair<float, float>& Rasterizer::Context::InputManager::GetMouseMotion() const
+std::pair<int, int> Rasterizer::Context::InputManager::GetMouseMotion() const
 {
 	return m_mouseMotion;
 }

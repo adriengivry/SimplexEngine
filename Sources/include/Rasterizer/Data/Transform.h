@@ -52,16 +52,28 @@ namespace Rasterizer::Data
 		bool HasParent() const;
 
 		/**
-		* Set the position of the transform
+		* Set the position of the transform in the local space
 		* @param p_newPosition
 		*/
 		void SetPosition(glm::vec3 p_newPosition);
 
 		/**
-		* Set the rotation of the transform
+		* Set the rotation of the transform in the local space
 		* @param p_newRotation
 		*/
 		void SetRotation(glm::quat p_newRotation);
+
+		/**
+		* Translate in the local space
+		* @param p_translation
+		*/
+		void Translate(const glm::vec3& p_translation);
+
+		/**
+		* Rotate in the local space
+		* @param p_rotation
+		*/
+		void Rotate(const glm::quat& p_rotation);
 
 		/**
 		* Return the local position of the transform

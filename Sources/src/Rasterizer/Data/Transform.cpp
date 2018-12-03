@@ -54,6 +54,16 @@ void Rasterizer::Data::Transform::SetRotation(glm::quat p_newRotation)
 	GenerateMatrices(GetLocalPosition(), p_newRotation);
 }
 
+void Rasterizer::Data::Transform::Translate(const glm::vec3& p_translation)
+{
+	GenerateMatrices(GetLocalPosition() + p_translation, GetLocalRotation());
+}
+
+void Rasterizer::Data::Transform::Rotate(const glm::quat& p_rotation)
+{
+	GenerateMatrices(GetLocalPosition(), GetLocalRotation() * p_rotation);
+}
+
 glm::vec3 Rasterizer::Data::Transform::GetLocalPosition()
 {
 	return glm::vec3(m_localMatrix[3][0], m_localMatrix[3][1], m_localMatrix[3][2]);

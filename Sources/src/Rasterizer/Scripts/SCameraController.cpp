@@ -6,6 +6,7 @@
 
 #include "Rasterizer/Scripts/SCameraController.h"
 #include "Rasterizer/Utils/IniIndexer.h"
+#include "Rasterizer/Utils/Math.h"
 
 #include <iostream>
 
@@ -23,14 +24,12 @@ void Rasterizer::Scripts::SCameraController::Update(float p_deltaTime)
 
 void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 {
-	const auto&[motionX, motionY] = m_inputManager.GetMouseMotion();
+	auto [motionX, motionY] = m_inputManager.GetMouseMotion();
 
 	const float xOffset = motionX * m_mouseSensitivity * p_deltaTime;
 	const float yOffset = -motionY * m_mouseSensitivity * p_deltaTime;
 
-	m_camera.Rotate({ xOffset, yOffset, 0.0f });
-
-	std::cout << xOffset << "|" << yOffset << std::endl;
+	// std::cout << xOffset << "|" << yOffset << std::endl;
 	// std::cout << m_camera.GetLookAt().x << "|" << m_camera.GetLookAt().y << "|" << m_camera.GetLookAt().z << std::endl;
 }
 
@@ -38,7 +37,7 @@ void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
 {
 	glm::vec3 movement;
 
-	glm::vec3 forward = glm::normalize((m_camera.GetLookAt() - m_camera.transform.GetWorldPosition()) * glm::vec3(1.0f, 0.0f, 1.0f));
+	glm::vec3 forward = m_camera.GetForward();
 	glm::vec3 up = glm::vec3(0.0f, 1.0, 0.0f);
 	glm::vec3 right = glm::cross(forward, up);
 

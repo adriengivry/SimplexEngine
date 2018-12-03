@@ -23,7 +23,7 @@ namespace Rasterizer::Entities
 		/**
 		* Camera constructor
 		* @param p_position
-		* @param p_lookAt
+		* @param p_rotation
 		* @param p_upVector
 		* @param p_windowWidth
 		* @param p_windowHeight
@@ -31,7 +31,7 @@ namespace Rasterizer::Entities
 		* @param p_near (Default = 0.1f)
 		* @param p_far (Default = 1000.0f)
 		*/
-		Camera(const glm::vec3& p_position, const glm::vec3& p_lookAt, const glm::vec3& p_upVector, float p_ratio, float p_fov = 45.0f, float p_near = 0.1f, float p_far = 1000.0f);
+		Camera(const glm::vec3& p_position, const glm::quat& p_rotation, const glm::vec3& p_upVector, float p_ratio, float p_fov = 45.0f, float p_near = 0.1f, float p_far = 1000.0f);
 
 		/**
 		* Move the camera and keep the lookat vector in the current direction, relative to the new position
@@ -61,17 +61,18 @@ namespace Rasterizer::Entities
 		const glm::mat4& GetViewProjectionMatrix() const;
 
 		/**
-		* Return the look at direction
+		* Return the forward vector of the camera
 		*/
-		const glm::vec3& GetLookAt() const;
+		const glm::vec3& GetForward() const;
 
 	private:
+		void UpdateForwardVector();
 		void UpdateProjectionMatrix();
 		void UpdateViewMatrix();
 		void UpdateViewProjectionMatrix();
 
 	private:
-		glm::vec3 m_lookAt;
+		glm::vec3 m_forward;
 		glm::vec3 m_upVector;
 
 		float m_ratio;

@@ -10,9 +10,8 @@
 
 #include "Rasterizer/Entities/Camera.h"
 
-Rasterizer::Entities::Camera::Camera(const glm::vec3 & p_position, const glm::vec3 & p_lookAt, const glm::vec3 & p_upVector, float p_ratio, float p_fov, float p_near, float p_far) :
-	AEntity(p_position),
-	m_lookAt(p_lookAt),
+Rasterizer::Entities::Camera::Camera(const glm::vec3 & p_position, const glm::quat& p_rotation, const glm::vec3 & p_upVector, float p_ratio, float p_fov, float p_near, float p_far) :
+	AEntity(p_position, p_rotation),
 	m_upVector(p_upVector),
 	m_ratio(p_ratio),
 	m_fov(p_fov),
@@ -21,13 +20,18 @@ Rasterizer::Entities::Camera::Camera(const glm::vec3 & p_position, const glm::ve
 {
 	UpdateViewProjectionMatrix();
 
-	/* Automate the view projection update with an even listener */
+	transform.TransformChangedEvent.AddListener(std::bind(&Camera::UpdateForwardVector, this));
 	transform.TransformChangedEvent.AddListener(std::bind(&Camera::UpdateViewProjectionMatrix, this));
 }
 
-const glm::vec3 & Rasterizer::Entities::Camera::GetLookAt() const
+const glm::vec3 & Rasterizer::Entities::Camera::GetForward() const
 {
-	return m_lookAt;
+	return m_forward;
+}
+
+void Rasterizer::Entities::Camera::UpdateForwardVector()
+{
+	m_forward = glm::normalize(transform.GetWorldRotation() * glm::vec3(0.0f, 0.0f, -1.0f));
 }
 
 void Rasterizer::Entities::Camera::UpdateProjectionMatrix()
@@ -37,7 +41,7 @@ void Rasterizer::Entities::Camera::UpdateProjectionMatrix()
 
 void Rasterizer::Entities::Camera::UpdateViewMatrix()
 {
-	m_viewMatrix = glm::lookAt(transform.GetWorldPosition(), m_lookAt, m_upVector);
+	m_viewMatrix = glm::lookAt(transform.GetWorldPosition(), transform.GetWorldPosition() + m_forward, m_upVector);
 }
 
 void Rasterizer::Entities::Camera::UpdateViewProjectionMatrix()
@@ -50,13 +54,7 @@ void Rasterizer::Entities::Camera::UpdateViewProjectionMatrix()
 
 void Rasterizer::Entities::Camera::Move(const glm::vec3& p_translation)
 {
-	m_lookAt += p_translation;
 	transform.SetPosition(transform.GetLocalPosition() + p_translation);
-}
-
-void Rasterizer::Entities::Camera::Rotate(const glm::vec3& p_rotation)
-{
-	m_lookAt += p_rotation;
 }
 
 const glm::mat4& Rasterizer::Entities::Camera::GetProjectionMatrix() const
