@@ -214,9 +214,13 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp" />
+    <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
+    <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SFPSCounter.cpp" />
+    <ClCompile Include="src\Rasterizer\Scripts\SProfilerLogger.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SRotateOverTime.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp" />
     <ClCompile Include="src\Rasterizer\Context\InputManager.cpp" />
@@ -240,6 +244,8 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Rasterizer\Analytics\Profiler.h" />
+    <ClInclude Include="include\Rasterizer\Analytics\ProfilerSpy.h" />
     <ClInclude Include="include\Rasterizer\Context\EWindowState.h" />
     <ClInclude Include="include\Rasterizer\Context\EventHandler.h" />
     <ClInclude Include="include\Rasterizer\Context\InputManager.h" />
@@ -261,7 +267,9 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Entities\Camera.h" />
     <ClInclude Include="include\Rasterizer\Entities\Model.h" />
     <ClInclude Include="include\Rasterizer\Scripts\IScript.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\SConsoleController.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SFPSCounter.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\SProfilerLogger.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SRotateOverTime.h" />
     <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />

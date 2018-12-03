@@ -17,6 +17,8 @@
 #include "Rasterizer/Scripts/SCameraController.h"
 #include "Rasterizer/Scripts/SRotateOverTime.h"
 #include "Rasterizer/Scripts/SFPSCounter.h"
+#include "Rasterizer/Scripts/SProfilerLogger.h"
+#include "Rasterizer/Scripts/SConsoleController.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -50,7 +52,9 @@ void Rasterizer::Core::Application::CreateScripts()
 {
 	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
-	AddScript<Scripts::SFPSCounter>();
+	AddScript<Scripts::SConsoleController>(m_inputManager);
+	AddScript<Scripts::SFPSCounter>(m_inputManager);
+	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);
 }
 
 int Rasterizer::Core::Application::Run()

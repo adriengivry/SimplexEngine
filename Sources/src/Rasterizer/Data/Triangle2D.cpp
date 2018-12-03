@@ -7,6 +7,7 @@
 #include <glm/geometric.hpp>
 
 #include "Rasterizer/Data/Triangle2D.h"
+#include "Rasterizer/Analytics/ProfilerSpy.h"
 
 Rasterizer::Data::Triangle2D::Triangle2D(const Point& p_firstPoint, const Point & p_secondPoint, const Point & p_thirdPoint) :
 	m_points { p_firstPoint, p_secondPoint, p_thirdPoint },

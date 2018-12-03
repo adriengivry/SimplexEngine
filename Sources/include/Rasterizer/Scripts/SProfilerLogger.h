@@ -5,25 +5,26 @@
 */
 
 #include "Rasterizer/Scripts/IScript.h"
+#include "Rasterizer/Analytics/Profiler.h"
 #include "Rasterizer/Context/InputManager.h"
 
 #pragma once
-#ifndef _SFPSCOUNTER_H
-#define _SFPSCOUNTER_H
+#ifndef _SPROFILERLOGGER_H
+#define _SPROFILERLOGGER_H
 
 namespace Rasterizer::Scripts
 {
 	/**
 	* Rotate an entity over time
 	*/
-	class SFPSCounter final : public IScript
+	class SProfilerLogger final : public IScript
 	{
 	public:
 		/**
 		* Constructor of the script
-		* @p_inputManager
+		* @param p_profiler
 		*/
-		SFPSCounter(const Context::InputManager& p_inputManager);
+		SProfilerLogger(Analytics::Profiler& p_profiler, const Context::InputManager& p_inputManager);
 
 		/**
 		* Update the script
@@ -31,17 +32,11 @@ namespace Rasterizer::Scripts
 		*/
 		virtual void Update(float p_deltaTime) override;
 
-		/**
-		* Print the current FPS in the console
-		* @param p_deltaTime
-		*/
-		void PrintFPS(float p_deltaTime);
-
 	private:
 		const Context::InputManager& m_inputManager;
+		Analytics::Profiler& m_profiler;
 
 		float m_logTimer;
-		float m_logFrequency;
 	};
 }
 

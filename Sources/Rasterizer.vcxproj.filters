@@ -87,6 +87,18 @@
     <ClCompile Include="src\Rasterizer\Scripts\SFPSCounter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Scripts\SProfilerLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Context\Window.h">
@@ -174,6 +186,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Scripts\SFPSCounter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Analytics\Profiler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Scripts\SProfilerLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Analytics\ProfilerSpy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Scripts\SConsoleController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -8,22 +8,22 @@
 #include "Rasterizer/Context/InputManager.h"
 
 #pragma once
-#ifndef _SFPSCOUNTER_H
-#define _SFPSCOUNTER_H
+#ifndef _SCONSOLECONTROLLER_H
+#define _SCONSOLECONTROLLER_H
 
 namespace Rasterizer::Scripts
 {
 	/**
 	* Rotate an entity over time
 	*/
-	class SFPSCounter final : public IScript
+	class SConsoleController final : public IScript
 	{
 	public:
 		/**
 		* Constructor of the script
 		* @p_inputManager
 		*/
-		SFPSCounter(const Context::InputManager& p_inputManager);
+		SConsoleController(const Context::InputManager& p_inputManager);
 
 		/**
 		* Update the script
@@ -32,17 +32,13 @@ namespace Rasterizer::Scripts
 		virtual void Update(float p_deltaTime) override;
 
 		/**
-		* Print the current FPS in the console
-		* @param p_deltaTime
+		* Clear the console
 		*/
-		void PrintFPS(float p_deltaTime);
+		void ClearConsole();
 
 	private:
 		const Context::InputManager& m_inputManager;
-
-		float m_logTimer;
-		float m_logFrequency;
 	};
 }
 
-#endif // _SFPSCOUNTER_H
+#endif // _SCONSOLECONTROLLER_H

@@ -14,6 +14,7 @@
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Core/RasterBoy.h"
+#include "Rasterizer/Analytics/Profiler.h"
 #include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Entities/Camera.h"
@@ -77,6 +78,9 @@ namespace Rasterizer::Core
 		/* Core */
 		Rasterizer::Core::Renderer m_renderer;
 		Rasterizer::Core::RasterBoy m_rasterBoy;
+
+		/* Analytics */
+		Rasterizer::Analytics::Profiler m_profiler;
 
 		/* Utils */
 		Rasterizer::Utils::Clock m_clock;
