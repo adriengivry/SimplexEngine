@@ -23,6 +23,7 @@
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
+	m_inputManager(m_eventHandler),
 	m_renderer(m_window),
 	m_rasterBoy(m_window, m_camera, m_renderer),
 	m_camera

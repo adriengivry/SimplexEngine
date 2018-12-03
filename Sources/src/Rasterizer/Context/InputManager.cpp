@@ -6,6 +6,11 @@
 
 #include "Rasterizer/Context/InputManager.h"
 
+Rasterizer::Context::InputManager::InputManager(EventHandler& p_eventHandler)
+{
+	p_eventHandler.SDLMouseMovedEvent.AddListener(std::bind(&InputManager::OnMouseMotion, this, std::placeholders::_1));
+}
+
 void Rasterizer::Context::InputManager::Update()
 {
 	// m_keyEvents.clear();
@@ -21,6 +26,8 @@ void Rasterizer::Context::InputManager::Update()
 		m_keyEvents[i] = keyState && !m_keyStates[i]; /* Boolean = the key wasn't pressed and is now pressed */
 		m_keyStates[i] = keyState;
 	}
+
+	SDL_GetMouseState(&m_cursorPosition.first, &m_cursorPosition.second);
 }
 
 bool Rasterizer::Context::InputManager::IsKeyPressed(int p_key) const
@@ -31,4 +38,19 @@ bool Rasterizer::Context::InputManager::IsKeyPressed(int p_key) const
 bool Rasterizer::Context::InputManager::IsKeyEventOccured(int p_key) const
 {
 	return m_keyEvents.find(p_key) != m_keyEvents.end() && m_keyEvents.at(p_key);
+}
+
+const std::pair<int, int>& Rasterizer::Context::InputManager::GetCursorPosition() const
+{
+	return m_cursorPosition;
+}
+
+void Rasterizer::Context::InputManager::OnMouseMotion(std::pair<int, int> p_motion)
+{
+	m_mouseMotion = p_motion;
+}
+
+const std::pair<float, float>& Rasterizer::Context::InputManager::GetMouseMotion() const
+{
+	return m_mouseMotion;
 }

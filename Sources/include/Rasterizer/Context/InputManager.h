@@ -12,6 +12,8 @@
 
 #include <SDL.h>
 
+#include "Rasterizer/Context/EventHandler.h"
+
 namespace Rasterizer::Context
 {
 	class InputManager final
@@ -19,8 +21,9 @@ namespace Rasterizer::Context
 	public:
 		/**
 		* Contructor of the InputManager
+		* @param p_eventHandler
 		*/
-		InputManager() = default;
+		InputManager(EventHandler& p_eventHandler);
 
 		/**
 		* Update the input manager
@@ -39,9 +42,28 @@ namespace Rasterizer::Context
 		*/
 		bool IsKeyEventOccured(int p_keyCode) const;
 
+		/**
+		* Return the current cursor position
+		*/
+		const std::pair<int, int>& GetCursorPosition() const;
+
+		/**
+		* This method is fired when mouse move
+		* @param p_motion
+		*/
+		void OnMouseMotion(std::pair<int, int> p_motion);
+
+		/**
+		* Return the current cursor position
+		*/
+		const std::pair<float, float>& GetMouseMotion() const;
+
 	private:
 		std::unordered_map<int, bool> m_keyEvents;
 		std::unordered_map<int, bool> m_keyStates;
+
+		std::pair<int, int> m_cursorPosition;
+		std::pair<int, int> m_mouseMotion;
 	};
 }
 

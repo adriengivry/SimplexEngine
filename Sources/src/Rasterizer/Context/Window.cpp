@@ -25,6 +25,7 @@ Rasterizer::Context::Window::Window(const std::string& p_title, uint16_t p_width
 		/* SDL Initiailization succeed*/
 		m_sdlWindow = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, static_cast<int>(m_width), static_cast<int>(m_height), 0);
 		m_windowState = EWindowState::OK;
+		SDL_SetRelativeMouseMode(SDL_TRUE);
 	}
 }
 

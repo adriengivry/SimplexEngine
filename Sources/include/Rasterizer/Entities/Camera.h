@@ -37,7 +37,13 @@ namespace Rasterizer::Entities
 		* Move the camera and keep the lookat vector in the current direction, relative to the new position
 		* @param p_translation
 		*/
-		void Move(const glm::vec3 p_translation);
+		void Move(const glm::vec3& p_translation);
+
+		/**
+		* Rotate the camera
+		* @param p_rotation
+		*/
+		void Rotate(const glm::vec3& p_rotation);
 
 		/**
 		* Return the current projection matrix
@@ -53,6 +59,11 @@ namespace Rasterizer::Entities
 		* Return the current view projection matrix
 		*/
 		const glm::mat4& GetViewProjectionMatrix() const;
+
+		/**
+		* Return the look at direction
+		*/
+		const glm::vec3& GetLookAt() const;
 
 	private:
 		void UpdateProjectionMatrix();

@@ -27,7 +27,8 @@ namespace Rasterizer::Context
 
 	public:
 		/* Events */
-		Rasterizer::Utils::Event<> SDLQuitEvent;
+		Rasterizer::Utils::Event<>							SDLQuitEvent;
+		Rasterizer::Utils::Event<std::pair<int, int>>		SDLMouseMovedEvent;
 	};
 }
 

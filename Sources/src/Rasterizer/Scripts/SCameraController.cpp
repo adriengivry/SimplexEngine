@@ -7,6 +7,8 @@
 #include "Rasterizer/Scripts/SCameraController.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 
+#include <iostream>
+
 Rasterizer::Scripts::SCameraController::SCameraController(const Context::InputManager & p_inputManager, Entities::Camera & p_camera) :
 	m_inputManager(p_inputManager),
 	m_camera(p_camera)
@@ -21,24 +23,55 @@ void Rasterizer::Scripts::SCameraController::Update(float p_deltaTime)
 
 void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 {
+	const auto&[mouseX, mouseY] = m_inputManager.GetCursorPosition();
+	const auto&[motionX, motionY] = m_inputManager.GetMouseMotion();
+	auto&[lastX, lastY] = m_lastMouse;
+
+	if (m_firstMouse)
+	{
+		lastX = mouseX;
+		lastY = mouseY;
+		m_firstMouse = false;
+	}
+
+	/*
+	const float xOffset = (mouseX - lastX) * m_mouseSensitivity;
+	const float yOffset = (lastY - mouseY) * m_mouseSensitivity;
+	*/
+
+	const float xOffset = motionX * m_mouseSensitivity;
+	const float yOffset = motionY * m_mouseSensitivity;
+
+	lastX = mouseX;
+	lastY = mouseY;
+
+	m_camera.Rotate({ xOffset, yOffset, 0.0f });
+
+	std::cout << mouseX << "|" << mouseY << std::endl;
+	// std::cout << xOffset << "|" << yOffset << std::endl;
+	// std::cout << m_camera.GetLookAt().x << "|" << m_camera.GetLookAt().y << "|" << m_camera.GetLookAt().z << std::endl;
 }
 
 void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
 {
 	glm::vec3 movement;
 
+	glm::vec3 forward = glm::normalize((m_camera.GetLookAt() - m_camera.transform.GetWorldPosition()) * glm::vec3(1.0f, 0.0f, 1.0f));
+	glm::vec3 up = glm::vec3(0.0f, 1.0, 0.0f);
+	glm::vec3 right = glm::cross(forward, up);
+
 	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_A))
-		movement += glm::vec3(-1.0f, 0.0f, 0.0f);
+		movement -= right;
 	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_D))
-		movement += glm::vec3(1.0f, 0.0f, 0.0f);
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_W))
-		movement += glm::vec3(0.0f, 0.0f, -1.0f);
+		movement += right;
 	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_S))
-		movement += glm::vec3(0.0f, 0.0f, 1.0f);
-	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_Q))
-		movement += glm::vec3(0.0f, -1.0f, 0.0f);
+		movement -= forward;
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_W))
+		movement += forward;
 	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_E))
-		movement += glm::vec3(0.0f, 1.0f, 0.0f);
+		movement += up;
+	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_Q))
+		movement -= up;
 
 	m_camera.Move(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
 }

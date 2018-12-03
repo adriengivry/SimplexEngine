@@ -25,6 +25,11 @@ Rasterizer::Entities::Camera::Camera(const glm::vec3 & p_position, const glm::ve
 	transform.TransformChangedEvent.AddListener(std::bind(&Camera::UpdateViewProjectionMatrix, this));
 }
 
+const glm::vec3 & Rasterizer::Entities::Camera::GetLookAt() const
+{
+	return m_lookAt;
+}
+
 void Rasterizer::Entities::Camera::UpdateProjectionMatrix()
 {
 	m_projectionMatrix = glm::perspective(glm::radians(m_fov), m_ratio, m_near, m_far);
@@ -43,10 +48,15 @@ void Rasterizer::Entities::Camera::UpdateViewProjectionMatrix()
 	m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
 }
 
-void Rasterizer::Entities::Camera::Move(const glm::vec3 p_translation)
+void Rasterizer::Entities::Camera::Move(const glm::vec3& p_translation)
 {
 	m_lookAt += p_translation;
 	transform.SetPosition(transform.GetLocalPosition() + p_translation);
+}
+
+void Rasterizer::Entities::Camera::Rotate(const glm::vec3& p_rotation)
+{
+	m_lookAt += p_rotation;
 }
 
 const glm::mat4& Rasterizer::Entities::Camera::GetProjectionMatrix() const
