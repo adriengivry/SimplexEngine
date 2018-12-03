@@ -40,30 +40,33 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 	auto[v2, depth2] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<1>(p_vertices).position, 1.0f));
 	auto[v3, depth3] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<2>(p_vertices).position, 1.0f));
 
-	/* Calculate face normal by computing the average of the 3 vertices normals */
-	glm::vec3 faceNormal = (std::get<0>(p_vertices).normal + std::get<0>(p_vertices).normal + std::get<0>(p_vertices).normal) * 0.33f;
-
-	/* Calculate face normal color as a vec3 */
-	glm::vec3 faceNormalColorVec = (faceNormal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f)) * 255.0f;
-
-	/* Converting face normal color to Data::Color */
-	Data::Color faceNormalColor(static_cast<uint8_t>(faceNormalColorVec.x), static_cast<uint8_t>(faceNormalColorVec.y), (static_cast<uint8_t>(faceNormalColorVec.z)));
-
-	/* Create a 2D triangle to automate computations (Bouding box, point position check) */
-	Data::Triangle2D triangle(v1, v2, v3);
-
-	float verticesAverageDepth = (depth1 + depth2 + depth3) * 0.33f;
-
-	auto[xmin, ymin, xmax, ymax] = triangle.GetBoundingBox();
-
-	for (uint16_t x = xmin; x < xmax; ++x)
+	if (m_window.IsPointInWindow({ v1.x , v1.y }) || m_window.IsPointInWindow({ v2.x , v2.y }) || m_window.IsPointInWindow({ v3.x , v3.y }))
 	{
-		for (uint16_t y = ymin; y < ymax; ++y)
+		/* Calculate face normal by computing the average of the 3 vertices normals */
+		glm::vec3 faceNormal = (std::get<0>(p_vertices).normal + std::get<0>(p_vertices).normal + std::get<0>(p_vertices).normal) * 0.33f;
+
+		/* Calculate face normal color as a vec3 */
+		glm::vec3 faceNormalColorVec = (faceNormal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f)) * 255.0f;
+
+		/* Converting face normal color to Data::Color */
+		Data::Color faceNormalColor(static_cast<uint8_t>(faceNormalColorVec.x), static_cast<uint8_t>(faceNormalColorVec.y), (static_cast<uint8_t>(faceNormalColorVec.z)));
+
+		/* Create a 2D triangle to automate computations (Bouding box, point position check) */
+		Data::Triangle2D triangle(v1, v2, v3);
+
+		float verticesAverageDepth = (depth1 + depth2 + depth3) * 0.33f;
+
+		auto[xmin, ymin, xmax, ymax] = triangle.GetBoundingBox();
+
+		for (uint16_t x = xmin; x < xmax && x < m_window.GetWidth(); ++x)
 		{
-			if (triangle.IsPointInArea({ x, y }) && m_window.IsPointInWindow({ x ,y }) && verticesAverageDepth < m_renderer.GetDepth(x, y))
+			for (uint16_t y = ymin; y < ymax && y < m_window.GetHeight(); ++y)
 			{
-				m_renderer.SetPixel(x, y, faceNormalColor);
-				m_renderer.SetDepth(x, y, verticesAverageDepth);
+				if (triangle.IsPointInArea({ x, y }) && m_window.IsPointInWindow({ x ,y }) && verticesAverageDepth < m_renderer.GetDepth(x, y))
+				{
+					m_renderer.SetPixel(x, y, faceNormalColor);
+					m_renderer.SetDepth(x, y, verticesAverageDepth);
+				}
 			}
 		}
 	}

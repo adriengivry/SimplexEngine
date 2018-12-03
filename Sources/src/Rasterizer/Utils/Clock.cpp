@@ -8,11 +8,15 @@
 
 #include "Rasterizer/Utils/Clock.h"
 
+Rasterizer::Utils::Clock::Clock() : m_lastTime(std::chrono::steady_clock::now())
+{
+}
+
 void Rasterizer::Utils::Clock::Tick()
 {
-	uint32_t m_currentTime = SDL_GetTicks();
-	m_deltaTime = (m_currentTime - m_lastTime) * 0.001f;
-	m_lastTime = m_currentTime;
+	m_currentTime = std::chrono::steady_clock::now();
+	m_deltaTime = static_cast<float>(std::chrono::duration_cast<std::chrono::nanoseconds>(m_currentTime - m_lastTime).count() * 0.000000001);
+	m_lastTime = std::chrono::steady_clock::now();
 
 	m_elapsedTime += m_deltaTime;
 }

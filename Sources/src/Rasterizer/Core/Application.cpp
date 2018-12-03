@@ -22,14 +22,27 @@ Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
 	m_renderer(m_window),
 	m_rasterBoy(m_window, m_camera, m_renderer),
-	m_camera(glm::vec3(0.0f, 0.0f, 10.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
+	m_camera
+	(
+		glm::vec3
+		(
+			Utils::IniIndexer::Application->Get<float>("camera_default_x"),
+			Utils::IniIndexer::Application->Get<float>("camera_default_y"),
+			Utils::IniIndexer::Application->Get<float>("camera_default_z")
+		),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 1.0f, 0.0f),
+		m_window.GetAspectRatio()
+	),
 	m_applicationState(EApplicationState::RUNNING)
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
-	
+	m_models.emplace_back(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(3.0f, 0.0f, 0.0f));
+	m_models[1].SetParent(m_models[0]);
+
 	CreateScripts();
 }
 

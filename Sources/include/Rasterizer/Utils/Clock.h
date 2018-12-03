@@ -1,6 +1,14 @@
+/**
+* Project Rasterizer
+* @author Adrien Givry
+* @version 1.0
+*/
+
 #pragma once
 #ifndef _CLOCK_H
 #define _CLOCK_H
+
+#include <chrono>
 
 namespace Rasterizer::Utils
 {
@@ -9,7 +17,12 @@ namespace Rasterizer::Utils
 	*/
 	class Clock final
 	{
-	public:
+	public: 
+		/**
+		* Constructor
+		*/
+		Clock();
+
 		/**
 		* Updates the delta time
 		*/
@@ -31,10 +44,10 @@ namespace Rasterizer::Utils
 		float GetElapsedTime() const;
 
 	private:
-		uint32_t m_currentTime = 0;
-		uint32_t m_lastTime = 0;
-		float m_deltaTime = 0;
-		float m_elapsedTime;
+		std::chrono::steady_clock::time_point m_currentTime;
+		std::chrono::steady_clock::time_point m_lastTime;
+		float m_elapsedTime = 0.0f;
+		float m_deltaTime = 0.0f;
 	};
 }
 

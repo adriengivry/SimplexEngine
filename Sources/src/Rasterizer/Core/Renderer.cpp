@@ -7,12 +7,21 @@
 #include <SDL.h>
 
 #include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Utils/IniIndexer.h"
 
 Rasterizer::Core::Renderer::Renderer(const Context::Window& p_window)
 {
 	auto[windowWidth, windowHeight] = p_window.GetSize();
 
-	m_sdlRenderer = SDL_CreateRenderer(p_window.GetSDLWindow(), -1, SDL_RENDERER_PRESENTVSYNC | SDL_RENDERER_ACCELERATED);
+	int flags = 0;
+
+	if (Utils::IniIndexer::Rendering->Get<bool>("vertical_sync"))
+		flags |= SDL_RENDERER_PRESENTVSYNC;
+
+	if (Utils::IniIndexer::Rendering->Get<bool>("hardware_acceleration"))
+		flags |= SDL_RENDERER_ACCELERATED;
+
+	m_sdlRenderer = SDL_CreateRenderer(p_window.GetSDLWindow(), -1, flags);
 	m_finalTexture = SDL_CreateTexture(m_sdlRenderer, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, static_cast<int>(windowWidth), static_cast<int>(windowHeight));
 }
 
