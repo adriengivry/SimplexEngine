@@ -215,6 +215,9 @@
     <ClInclude Include="include\Rasterizer\Data\EFontSize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Rasterizer\Analytics\ProfilerReport.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\window.ini" />

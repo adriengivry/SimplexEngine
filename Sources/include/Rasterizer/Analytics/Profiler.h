@@ -11,6 +11,8 @@
 #include <unordered_map>
 #include <chrono>
 
+#include "Rasterizer/Analytics/ProfilerReport.h"
+
 namespace Rasterizer::Analytics
 {
 	/* Forward declaration of the profiler spy structure */
@@ -31,6 +33,11 @@ namespace Rasterizer::Analytics
 		* Print collected data to the console
 		*/
 		void Log();
+
+		/**
+		* Generate a report containing data about the last profiling session
+		*/
+		ProfilerReport GenerateReport();
 
 		/**
 		* Clear any collected data

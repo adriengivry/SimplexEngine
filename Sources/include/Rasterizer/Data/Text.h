@@ -18,7 +18,7 @@ namespace Rasterizer::Data
 	/**
 	* A simple data container used to render text on screen
 	*/
-	struct Text
+	struct Text final
 	{
 		std::string content;
 		std::pair<int16_t, int16_t> position;

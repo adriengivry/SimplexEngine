@@ -55,10 +55,30 @@ void Rasterizer::Analytics::Profiler::Log()
 	}	
 }
 
+Rasterizer::Analytics::ProfilerReport Rasterizer::Analytics::Profiler::GenerateReport()
+{
+	ProfilerReport report;
+
+	m_currentTime = std::chrono::high_resolution_clock::now();
+	m_elapsed = m_currentTime - m_lastTime;
+
+	report.elaspedTime = m_elapsed.count();
+
+	std::multimap<double, std::string> sortedHistory;
+
+	/* Fill the sorted history with the current history (Auto sort) */
+	for (auto& data : __ELPASED_HISTORY)
+		sortedHistory.insert(std::pair<double, std::string>(data.second, data.first));
+
+	/* Log the history the console */
+	for (auto& data : sortedHistory)
+		report.actions.push_back({ data.second, data.first, (data.first / m_elapsed.count()) * 100.0, __CALLS_COUNTER[data.second] });
+
+	return report;
+}
+
 void Rasterizer::Analytics::Profiler::ClearHistory()
 {
-	std::cout << "PROFILER HISTORY CLEARED" << std::endl;
-
 	__ELPASED_HISTORY.clear();
 	__CALLS_COUNTER.clear();
 

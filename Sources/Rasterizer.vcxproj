@@ -250,6 +250,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Analytics\Profiler.h" />
+    <ClInclude Include="include\Rasterizer\Analytics\ProfilerReport.h" />
     <ClInclude Include="include\Rasterizer\Analytics\ProfilerSpy.h" />
     <ClInclude Include="include\Rasterizer\Context\EWindowState.h" />
     <ClInclude Include="include\Rasterizer\Context\EventHandler.h" />

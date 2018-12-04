@@ -54,7 +54,7 @@ void Rasterizer::Core::Application::CreateScripts()
 	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_userInterface);
-	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);
+	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
 }
 
 int Rasterizer::Core::Application::Run()
