@@ -6,8 +6,8 @@
 
 #include "Rasterizer/Entities/AEntity.h"
 
-Rasterizer::Entities::AEntity::AEntity(glm::vec3 p_position, glm::quat p_rotation) :
-	transform(p_position, p_rotation)
+Rasterizer::Entities::AEntity::AEntity(glm::vec3 p_localPosition, glm::quat p_localRotation, glm::vec3 p_localScale) :
+	transform(p_localPosition, p_localRotation, p_localScale)
 {
 }
 

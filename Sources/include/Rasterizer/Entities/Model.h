@@ -22,10 +22,11 @@ namespace Rasterizer::Entities
 		/**
 		* Create a model with a mesh and some transformations
 		* @param p_mesh
-		* @param p_position
-		* @param p_rotation
+		* @param p_localPosition
+		* @param p_localRotation
+		* @param p_localScale
 		*/
-		Model(const Resources::Mesh& p_mesh, const glm::vec3& p_position = glm::vec3(0.0f, 0.0f, 0.0f), const glm::quat& p_rotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f));
+		Model(const Resources::Mesh& p_mesh, const glm::vec3& p_localPosition = glm::vec3(0.0f, 0.0f, 0.0f), const glm::quat& p_localRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f), const glm::vec3& p_localScale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		/**
 		* Return the default mesh

@@ -20,10 +20,11 @@ namespace Rasterizer::Entities
 	public:
 		/**
 		* Entity constructor
-		* @param p_position
-		* @param p_rotation
+		* @param p_localPosition
+		* @param p_localRotation
+		* @param p_localScale
 		*/
-		AEntity(glm::vec3 p_position = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat p_rotation = glm::quat(0.0f, 0.0f, 0.0f, 1.0f));
+		AEntity(glm::vec3 p_localPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat p_localRotation = glm::quat(0.0f, 0.0f, 0.0f, 1.0f), glm::vec3 p_localScale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		/**
 		* Defines a parent to the entity

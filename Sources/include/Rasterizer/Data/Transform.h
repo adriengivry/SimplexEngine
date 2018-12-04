@@ -24,8 +24,9 @@ namespace Rasterizer::Data
 		* Create a transform without setting a parent
 		* @param p_localPosition
 		* @param p_localRotation
+		* @param p_localScale
 		*/
-		Transform(glm::vec3 p_localPosition, glm::quat p_localRotation);
+		Transform(glm::vec3 p_localPosition = glm::vec3(0.0f, 0.0f, 0.0f), glm::quat p_localRotation = glm::quat(1.0f, 0.0f, 0.0f, 0.0f), glm::vec3 p_localScale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 		/**
 		* Defines a parent to the transform
@@ -42,8 +43,9 @@ namespace Rasterizer::Data
 		* Initialize transform with raw data
 		* @param p_position
 		* @param p_rotation
+		* @param p_scale
 		*/
-		void GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation);
+		void GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation, glm::vec3 p_scale);
 
 		/**
 		* Re-update world matrices to use parent transformations
@@ -63,6 +65,12 @@ namespace Rasterizer::Data
 		void SetLocalRotation(glm::quat p_newRotation);
 
 		/**
+		* Set the scale of the transform in the local space
+		* @param p_newScale
+		*/
+		void SetLocalScale(glm::vec3 p_newScale);
+
+		/**
 		* Translate in the local space
 		* @param p_translation
 		*/
@@ -75,24 +83,40 @@ namespace Rasterizer::Data
 		void RotateLocal(const glm::quat& p_rotation);
 
 		/**
-		* Return the local position of the transform
+		* Scale in the local space
+		* @param p_scale
 		*/
-		glm::vec3 GetLocalPosition() const;
+		void ScaleLocal(const glm::vec3& p_scale);
 
 		/**
-		* Return local rotation of the transform
+		* Return the position in local space
 		*/
-		glm::quat GetLocalRotation() const;
+		const glm::vec3& GetLocalPosition() const;
 
 		/**
-		* Return the world position of the transform
+		* Return the rotation in local space
 		*/
-		glm::vec3 GetWorldPosition() const;
+		const glm::quat& GetLocalRotation() const;
 
 		/**
-		* Return the world rotation of the transform
+		* Return the scale in local space
 		*/
-		glm::quat GetWorldRotation() const;
+		const glm::vec3& GetLocalScale() const;
+
+		/**
+		* Return the position in world space
+		*/
+		const glm::vec3& GetWorldPosition() const;
+
+		/**
+		* Return the rotation in world space
+		*/
+		const glm::quat& GetWorldRotation() const;
+
+		/**
+		* Return the scale in world space
+		*/
+		const glm::vec3& GetWorldScale() const;
 
 		/**
 		* Return the local matrix
@@ -109,8 +133,18 @@ namespace Rasterizer::Data
 
 	private:
 
-		glm::mat4	m_localMatrix;
-		glm::mat4	m_worldMatrix;
+		void UpdateDecomposedData();
+
+		/* Pre-decomposed data to prevent multiple decomposition */
+		glm::vec3 m_localPosition;
+		glm::quat m_localRotation;
+		glm::vec3 m_localScale;
+		glm::vec3 m_worldPosition;
+		glm::quat m_worldRotation;
+		glm::vec3 m_worldScale;
+		glm::mat4 m_localMatrix;
+		glm::mat4 m_worldMatrix;
+
 		Transform*	m_parent;
 	};
 }

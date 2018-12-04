@@ -9,10 +9,10 @@
 
 #include "Rasterizer/Data/Transform.h"
 
-Rasterizer::Data::Transform::Transform(glm::vec3 p_localPosition, glm::quat p_localRotation) :
+Rasterizer::Data::Transform::Transform(glm::vec3 p_localPosition, glm::quat p_localRotation, glm::vec3 p_localScale) :
 	m_parent(nullptr)
 {
-	GenerateMatrices(p_localPosition, p_localRotation);
+	GenerateMatrices(p_localPosition, p_localRotation, p_localScale);
 }
 
 void Rasterizer::Data::Transform::SetParent(Data::Transform& p_parent)
@@ -29,58 +29,80 @@ bool Rasterizer::Data::Transform::HasParent() const
 	return m_parent != nullptr;
 }
 
-void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation)
+void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation, glm::vec3 p_scale)
 {
-	m_localMatrix = glm::translate(glm::mat4(1.0f), p_position) * glm::toMat4(p_rotation);
+	m_localMatrix = glm::translate(glm::mat4(1.0f), p_position) * glm::toMat4(p_rotation) * glm::scale(glm::mat4(1.0f), p_scale);
 
 	UpdateWorldMatrices();
 }
 
 void Rasterizer::Data::Transform::UpdateWorldMatrices()
-{;
-	m_worldMatrix = HasParent() ? m_parent->GetWorldMatrix() * m_localMatrix : m_localMatrix;
+{
+	m_worldMatrix = HasParent() ? m_parent->m_worldMatrix * m_localMatrix : m_localMatrix;
+
+	UpdateDecomposedData();
 
 	TransformChangedEvent.Invoke();
 }
 
 void Rasterizer::Data::Transform::SetLocalPosition(glm::vec3 p_newPosition)
 {
-	GenerateMatrices(p_newPosition, GetLocalRotation());
+	GenerateMatrices(p_newPosition, m_localRotation, m_localScale);
 }
 
 void Rasterizer::Data::Transform::SetLocalRotation(glm::quat p_newRotation)
 {
-	GenerateMatrices(GetLocalPosition(), p_newRotation);
+	GenerateMatrices(m_localPosition, p_newRotation, m_localScale);
+}
+
+void Rasterizer::Data::Transform::SetLocalScale(glm::vec3 p_newScale)
+{
+	GenerateMatrices(m_localPosition, m_localRotation, p_newScale);
 }
 
 void Rasterizer::Data::Transform::TranslateLocal(const glm::vec3& p_translation)
 {
-	SetLocalPosition(GetLocalPosition() + p_translation);
+	SetLocalPosition(m_localPosition + p_translation);
 }
 
 void Rasterizer::Data::Transform::RotateLocal(const glm::quat& p_rotation)
 {
-	SetLocalRotation(GetLocalRotation() * p_rotation);
+	SetLocalRotation(m_localRotation * p_rotation);
 }
 
-glm::vec3 Rasterizer::Data::Transform::GetLocalPosition() const
+void Rasterizer::Data::Transform::ScaleLocal(const glm::vec3 & p_scale)
 {
-	return glm::vec3(m_localMatrix[3]);
+	SetLocalScale(m_localScale * p_scale);
 }
 
-glm::quat Rasterizer::Data::Transform::GetLocalRotation() const
+const glm::vec3 & Rasterizer::Data::Transform::GetLocalPosition() const
 {
-	return glm::quat(glm::mat3(m_localMatrix[0], m_localMatrix[1], m_localMatrix[2]));
+	return m_localPosition;
 }
 
-glm::vec3 Rasterizer::Data::Transform::GetWorldPosition() const
+const glm::quat & Rasterizer::Data::Transform::GetLocalRotation() const
 {
-	return glm::vec3(m_worldMatrix[3]);
+	return m_localRotation;
 }
 
-glm::quat Rasterizer::Data::Transform::GetWorldRotation() const
+const glm::vec3 & Rasterizer::Data::Transform::GetLocalScale() const
 {
-	return glm::quat(glm::mat3(m_worldMatrix[0], m_worldMatrix[1], m_worldMatrix[2]));
+	return m_localScale;
+}
+
+const glm::vec3 & Rasterizer::Data::Transform::GetWorldPosition() const
+{
+	return m_worldPosition;
+}
+
+const glm::quat & Rasterizer::Data::Transform::GetWorldRotation() const
+{
+	return m_worldRotation;
+}
+
+const glm::vec3 & Rasterizer::Data::Transform::GetWorldScale() const
+{
+	return m_worldScale;
 }
 
 const glm::mat4 & Rasterizer::Data::Transform::GetLocalMatrix() const
@@ -91,4 +113,16 @@ const glm::mat4 & Rasterizer::Data::Transform::GetLocalMatrix() const
 const glm::mat4 & Rasterizer::Data::Transform::GetWorldMatrix() const
 {
 	return m_worldMatrix;
+}
+
+void Rasterizer::Data::Transform::UpdateDecomposedData()
+{
+	glm::vec3 skew;
+	glm::vec4 perspective;
+
+	glm::decompose(m_localMatrix, m_localScale, m_localRotation, m_localPosition, skew, perspective);
+	glm::decompose(m_worldMatrix, m_worldScale, m_worldRotation, m_worldPosition, skew, perspective);
+
+	m_localRotation = glm::conjugate(m_localRotation);
+	m_worldRotation = glm::conjugate(m_worldRotation);
 }

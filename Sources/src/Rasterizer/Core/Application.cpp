@@ -33,10 +33,16 @@ Rasterizer::Core::Application::Application() :
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
-	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }));
-	m_models.emplace_back(*m_meshManager.RequireAndGet("Monkey"), glm::vec3(-5.0f, 0.0f, 0.0f));
+	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 0.0f, 0.0f }), glm::vec3(1.0f));
+	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
+	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
+	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
+	m_models.emplace_back(*m_meshManager.RequireAndGet("Monkey"), glm::vec3(3.0f, 0.0f, 0.0f), glm::quat(), glm::vec3(1.0f));
 
 	m_models[1].SetParent(m_models[0]);
+	m_models[2].SetParent(m_models[1]);
+	m_models[3].SetParent(m_models[2]);
+	m_models[4].SetParent(m_models[0]);
 
 	CreateScripts();
 }
@@ -44,6 +50,7 @@ Rasterizer::Core::Application::Application() :
 void Rasterizer::Core::Application::CreateScripts()
 {
 	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
+	AddScript<Scripts::SRotateOverTime>(m_models[4], 360.0f);
 	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_inputManager);
