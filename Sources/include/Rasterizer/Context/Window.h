@@ -7,6 +7,8 @@
 
 #include <glm/glm.hpp>
 
+#include <SDL.h>
+
 #include "Rasterizer/Context/EWindowState.h"
 
 namespace Rasterizer::Context
@@ -43,7 +45,12 @@ namespace Rasterizer::Context
 		/**
 		* Return the SDL_Window* instance
 		*/
-		struct SDL_Window* GetSDLWindow() const;
+		SDL_Window* GetSDLWindow() const;
+
+		/**
+		* Return the SDL_GLContext instance
+		*/
+		SDL_GLContext GetGLContext() const;
 
 		/**
 		* Return the window width
@@ -83,7 +90,8 @@ namespace Rasterizer::Context
 		EWindowState m_windowState;
 
 		/* SDL relatives */
-		struct SDL_Window* m_sdlWindow;
+		SDL_Window* m_sdlWindow;
+		SDL_GLContext m_glContext;
 	};
 }
 

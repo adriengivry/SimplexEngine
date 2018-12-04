@@ -24,7 +24,7 @@ namespace Rasterizer::Core
 		* Constructor of the user interface
 		* @param p_window
 		*/
-		UserInterface(Context::Window& p_window);
+		UserInterface(const Context::Window& p_window);
 
 		/**
 		* Update imgui components
@@ -32,7 +32,13 @@ namespace Rasterizer::Core
 		*/
 		void Update(float p_deltaTime);
 
+		/**
+		* Render
+		*/
+		void Render();
+
 	private:
+		const Context::Window& m_window;
 	};
 }
 

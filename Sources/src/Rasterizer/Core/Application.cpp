@@ -61,11 +61,13 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 {
 	m_inputManager.Update();
 	m_eventHandler.HandleEvents(m_window);
+	m_userInterface.Update(p_deltaTime);
 
 	UpdateScripts(p_deltaTime);
 
 	RasterizeModels();
 
+	m_userInterface.Render();
 	UpdateRenderer();
 
 	m_clock.Tick();
