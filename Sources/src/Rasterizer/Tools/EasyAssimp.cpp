@@ -13,7 +13,7 @@ bool Rasterizer::Tools::EasyAssimp::LoadVertices(const std::string & p_fileName,
 	p_outBuffer.clear();
 
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate | aiProcess_OptimizeMeshes | aiProcess_JoinIdenticalVertices);
+	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate | aiProcess_OptimizeMeshes);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -55,16 +55,17 @@ void Rasterizer::Tools::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene *
 		vertex = transformation * vertex;
 		normal = transformation * normal;
 		*/
+		
 
 		p_outBuffer.push_back
 		(
 			{
 				vertex.x,
-				vertex.y,
 				vertex.z,
+				-vertex.y,
 				normal.x,
-				normal.y,
-				normal.z
+				normal.z,
+				-normal.y
 			}
 		);
 	}

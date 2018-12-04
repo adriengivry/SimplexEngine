@@ -27,9 +27,9 @@ void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 	auto [motionX, motionY] = m_inputManager.GetMouseMotion();
 
 	const float xOffset = motionX * m_mouseSensitivity * p_deltaTime;
-	const float yOffset = -motionY * m_mouseSensitivity * p_deltaTime;
+	const float yOffset = motionY * m_mouseSensitivity * p_deltaTime;
 
-	m_camera.transform.RotateLocal(Utils::Math::CreateQuaternionFromEuler({ yOffset, 0.0f, 0.0f }));
+	m_camera.transform.RotateLocal(Utils::Math::CreateQuaternionFromEuler({ -yOffset, -xOffset, 0.0f }));
 }
 
 void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)

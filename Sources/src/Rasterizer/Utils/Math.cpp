@@ -8,9 +8,9 @@
 
 glm::quat Rasterizer::Utils::Math::CreateQuaternionFromEuler(const glm::vec3 & p_euler, bool p_degrees)
 {
-	float yaw = p_euler.y;
-	float pitch = p_euler.x;
-	float roll = p_euler.z;
+	float yaw = p_euler.z;
+	float pitch = p_euler.y;
+	float roll = p_euler.x;
 	
 	if (p_degrees)
 	{
