@@ -32,6 +32,7 @@ bool Rasterizer::Data::Transform::HasParent() const
 void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation, glm::vec3 p_scale)
 {
 	m_localMatrix = glm::translate(glm::mat4(1.0f), p_position) * glm::toMat4(p_rotation) * glm::scale(glm::mat4(1.0f), p_scale);
+	PreDecomposeLocalMatrix();
 
 	UpdateWorldMatrices();
 }
@@ -39,8 +40,7 @@ void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::qu
 void Rasterizer::Data::Transform::UpdateWorldMatrices()
 {
 	m_worldMatrix = HasParent() ? m_parent->m_worldMatrix * m_localMatrix : m_localMatrix;
-
-	UpdateDecomposedData();
+	PreDecomposeWorldMatrix();
 
 	TransformChangedEvent.Invoke();
 }
@@ -115,14 +115,31 @@ const glm::mat4 & Rasterizer::Data::Transform::GetWorldMatrix() const
 	return m_worldMatrix;
 }
 
-void Rasterizer::Data::Transform::UpdateDecomposedData()
+void Rasterizer::Data::Transform::PreDecomposeWorldMatrix()
 {
+	/* Not used */
+	glm::vec3 skew;
+	glm::vec4 perspective;
+
+	glm::decompose(m_worldMatrix, m_worldScale, m_worldRotation, m_worldPosition, skew, perspective);
+
+	m_worldRotation = glm::conjugate(m_worldRotation);
+
+}
+
+void Rasterizer::Data::Transform::PreDecomposeLocalMatrix()
+{
+	/* Not used */
 	glm::vec3 skew;
 	glm::vec4 perspective;
 
 	glm::decompose(m_localMatrix, m_localScale, m_localRotation, m_localPosition, skew, perspective);
-	glm::decompose(m_worldMatrix, m_worldScale, m_worldRotation, m_worldPosition, skew, perspective);
 
 	m_localRotation = glm::conjugate(m_localRotation);
-	m_worldRotation = glm::conjugate(m_worldRotation);
+}
+
+void Rasterizer::Data::Transform::PreDecomposeMatrices()
+{
+	PreDecomposeLocalMatrix();
+	PreDecomposeWorldMatrix();
 }

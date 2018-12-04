@@ -132,8 +132,9 @@ namespace Rasterizer::Data
 		Utils::Event<> TransformChangedEvent;
 
 	private:
-
-		void UpdateDecomposedData();
+		void PreDecomposeWorldMatrix();
+		void PreDecomposeLocalMatrix();
+		void PreDecomposeMatrices();
 
 		/* Pre-decomposed data to prevent multiple decomposition */
 		glm::vec3 m_localPosition;
