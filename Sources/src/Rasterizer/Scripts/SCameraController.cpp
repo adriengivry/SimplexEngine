@@ -36,7 +36,7 @@ void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
 {
 	glm::vec3 movement;
 
-	glm::vec3 forward = m_camera.GetForward();
+	glm::vec3 forward = glm::normalize(m_camera.GetForward() * glm::vec3(1.0f, 0.0f, 1.0f)); /* Scale Y to 0 to keep only X and Z (Fake forward) */
 	glm::vec3 up = glm::vec3(0.0f, 1.0, 0.0f);
 	glm::vec3 right = glm::cross(forward, up);
 
