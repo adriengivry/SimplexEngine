@@ -8,27 +8,36 @@
 
 Rasterizer::Core::UserInterface::UserInterface(const Context::Window& p_window, const Core::Renderer& p_renderer) :
 	m_window(p_window),
-	m_renderer(p_renderer)
+	m_renderer(p_renderer),
+	width(m_window.GetWidth()),
+	height(m_window.GetHeight()),
+	topLeftAnchor(0, 0),
+	topRightAnchor(width, 0),
+	bottomLeftAnchor(0, height),
+	bottomRightAnchor(width, height),
+	centerAnchor(width / 2, height / 2)
 {
 	TTF_Init();
-	m_arialFont = TTF_OpenFont("arial.ttf", 24);
 
-	m_framerateUpdateFrequency = 0.5f;
-	m_framerateUpdateTimer = m_framerateUpdateFrequency;
+	m_smallFont = TTF_OpenFont("arial.ttf", 12);
+	m_normalFont = TTF_OpenFont("arial.ttf", 18);
+	m_bigFont = TTF_OpenFont("arial.ttf", 24);
 }
 
-void Rasterizer::Core::UserInterface::Update(float p_deltaTime)
+void Rasterizer::Core::UserInterface::AddText(const Data::Text & p_text)
 {
-	m_framerateUpdateTimer += p_deltaTime;
-
-	if (m_framerateUpdateTimer >= m_framerateUpdateFrequency)
-	{
-		m_framerate = static_cast<uint16_t>(1.0f / p_deltaTime);
-		m_framerateUpdateTimer = 0.0f;
-	}
+	m_texts.push(p_text);
 }
 
 void Rasterizer::Core::UserInterface::Draw()
 {
-	m_renderer.DrawText("FPS: " + std::to_string(m_framerate), m_arialFont, { 0, 0 }, Data::Color::Yellow);
+	while (!m_texts.empty())
+	{
+		const Data::Text& text = m_texts.front();
+		TTF_Font* toUse = text.fontSize == Data::EFontSize::NORMAL_FONT ? m_normalFont : (text.fontSize == Data::EFontSize::SMALL_FONT ? m_smallFont : m_bigFont);
+
+		m_renderer.DrawText(text.content, toUse, { text.position.first, text.position.second}, text.color, text.horizontalAlign, text.verticalAlign);
+
+		m_texts.pop();
+	}
 }

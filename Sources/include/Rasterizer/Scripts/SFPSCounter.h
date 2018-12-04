@@ -5,7 +5,7 @@
 */
 
 #include "Rasterizer/Scripts/IScript.h"
-#include "Rasterizer/Context/InputManager.h"
+#include "Rasterizer/Core/UserInterface.h"
 
 #pragma once
 #ifndef _SFPSCOUNTER_H
@@ -23,7 +23,7 @@ namespace Rasterizer::Scripts
 		* Constructor of the script
 		* @p_inputManager
 		*/
-		SFPSCounter(const Context::InputManager& p_inputManager);
+		SFPSCounter(Core::UserInterface& p_userInterface);
 
 		/**
 		* Update the script
@@ -32,16 +32,16 @@ namespace Rasterizer::Scripts
 		virtual void Update(float p_deltaTime) override;
 
 		/**
-		* Print the current FPS in the console
-		* @param p_deltaTime
+		* Register a text to draw in the UI
 		*/
-		void PrintFPS(float p_deltaTime);
+		void ShowFPS();
 
 	private:
-		const Context::InputManager& m_inputManager;
+		Core::UserInterface& m_userInterface;
 
 		float m_logTimer;
 		float m_logFrequency;
+		uint16_t m_fps;
 	};
 }
 

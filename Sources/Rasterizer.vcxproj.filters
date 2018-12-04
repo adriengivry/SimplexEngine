@@ -209,6 +209,12 @@
     <ClInclude Include="include\Rasterizer\Data\ETextAlignment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Rasterizer\Data\Text.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Data\EFontSize.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\window.ini" />

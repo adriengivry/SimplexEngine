@@ -257,12 +257,14 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Context\Window.h" />
     <ClInclude Include="include\Rasterizer\Core\Application.h" />
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h" />
+    <ClInclude Include="include\Rasterizer\Data\EFontSize.h" />
     <ClInclude Include="include\Rasterizer\Data\ETextAlignment.h" />
     <ClInclude Include="include\Rasterizer\Core\RasterBoy.h" />
     <ClInclude Include="include\Rasterizer\Core\Renderer.h" />
     <ClInclude Include="include\Rasterizer\Core\UserInterface.h" />
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
+    <ClInclude Include="include\Rasterizer\Data\Text.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />

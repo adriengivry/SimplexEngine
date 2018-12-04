@@ -53,7 +53,7 @@ void Rasterizer::Core::Application::CreateScripts()
 	AddScript<Scripts::SRotateOverTime>(m_models[4], 360.0f);
 	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SConsoleController>(m_inputManager);
-	AddScript<Scripts::SFPSCounter>(m_inputManager);
+	AddScript<Scripts::SFPSCounter>(m_userInterface);
 	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);
 }
 
@@ -71,21 +71,26 @@ int Rasterizer::Core::Application::Run()
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
 {
+	/* Events/Inputs */
 	m_inputManager.Update();
 	m_eventHandler.HandleEvents(m_window);
-	m_userInterface.Update(p_deltaTime);
 
+	/* Update scripts */
 	UpdateScripts(p_deltaTime);
 
+	/* Rasterization process */
 	RasterizeModels();
 
+	/* Draw order */
 	m_renderer.GenerateFinalTexture();
 	m_renderer.ClearPixelBuffer();
 	m_renderer.DrawFinalTexture();
-	
 	m_userInterface.Draw();
+
+	/* Render on screen */
 	m_renderer.Render();
 
+	/* Time managment */
 	m_clock.Tick();
 }
 
