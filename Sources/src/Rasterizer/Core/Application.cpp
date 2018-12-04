@@ -36,6 +36,8 @@ Rasterizer::Core::Application::Application() :
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")));
 	m_models.emplace_back(*m_meshManager.RequireAndGet("Cube"), glm::vec3(-5.0f, 0.0f, 0.0f));
 
+	m_models[1].SetParent(m_models[0]);
+
 	CreateScripts();
 }
 

@@ -50,7 +50,9 @@ namespace Rasterizer::Scripts
 		Entities::Camera& m_camera;
 
 		/* Internal stuffs */
-		float m_mouseSensitivity = 10.0f;
+		float m_mouseSensitivity = 30.0f;
+		float m_yaw = 0.0f;
+		float m_pitch = 0.0f;
 	};
 }
 
