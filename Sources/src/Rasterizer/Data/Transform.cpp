@@ -15,13 +15,16 @@ Rasterizer::Data::Transform::Transform(glm::vec3 p_localPosition, glm::quat p_lo
 	GenerateMatrices(p_localPosition, p_localRotation);
 }
 
-void Rasterizer::Data::Transform::SetParent(Data::Transform& p_parent, bool p_addChild)
+void Rasterizer::Data::Transform::SetParent(Data::Transform& p_parent)
 {
 	m_parent = &p_parent;
 
 	UpdateWorldMatrices();
+}
 
-	p_parent.TransformChangedEvent.AddListener(std::bind(&Transform::UpdateWorldMatrices, this));
+bool Rasterizer::Data::Transform::HasParent() const
+{
+	return m_parent != nullptr;
 }
 
 void Rasterizer::Data::Transform::GenerateMatrices(glm::vec3 p_position, glm::quat p_rotation)
@@ -38,51 +41,44 @@ void Rasterizer::Data::Transform::UpdateWorldMatrices()
 	TransformChangedEvent.Invoke();
 }
 
-bool Rasterizer::Data::Transform::HasParent() const
-{
-	return m_parent != nullptr;
-}
-
-void Rasterizer::Data::Transform::SetPosition(glm::vec3 p_newPosition)
+void Rasterizer::Data::Transform::SetLocalPosition(glm::vec3 p_newPosition)
 {
 	GenerateMatrices(p_newPosition, GetLocalRotation());
 }
 
-void Rasterizer::Data::Transform::SetRotation(glm::quat p_newRotation)
+void Rasterizer::Data::Transform::SetLocalRotation(glm::quat p_newRotation)
 {
 	GenerateMatrices(GetLocalPosition(), p_newRotation);
 }
 
-void Rasterizer::Data::Transform::Translate(const glm::vec3& p_translation)
+void Rasterizer::Data::Transform::TranslateLocal(const glm::vec3& p_translation)
 {
-	SetPosition(GetLocalPosition() + p_translation);
+	SetLocalPosition(GetLocalPosition() + p_translation);
 }
 
-void Rasterizer::Data::Transform::Rotate(const glm::quat& p_rotation)
+void Rasterizer::Data::Transform::RotateLocal(const glm::quat& p_rotation)
 {
-	SetRotation(GetLocalRotation() * p_rotation);
+	SetLocalRotation(GetLocalRotation() * p_rotation);
 }
 
-glm::vec3 Rasterizer::Data::Transform::GetLocalPosition()
+glm::vec3 Rasterizer::Data::Transform::GetLocalPosition() const
 {
-	return glm::vec3(m_localMatrix[3][0], m_localMatrix[3][1], m_localMatrix[3][2]);
+	return glm::vec3(m_localMatrix[3]);
 }
 
-glm::quat Rasterizer::Data::Transform::GetLocalRotation()
+glm::quat Rasterizer::Data::Transform::GetLocalRotation() const
 {
-	glm::mat3 rotationMatrix(m_localMatrix[0][0], m_localMatrix[0][1], m_localMatrix[0][2], m_localMatrix[1][0], m_localMatrix[1][1], m_localMatrix[1][2], m_localMatrix[2][0], m_localMatrix[2][1], m_localMatrix[2][2]);
-	return glm::quat(rotationMatrix);
+	return glm::quat(glm::mat3(m_localMatrix[0], m_localMatrix[1], m_localMatrix[2]));
 }
 
-glm::vec3 Rasterizer::Data::Transform::GetWorldPosition()
+glm::vec3 Rasterizer::Data::Transform::GetWorldPosition() const
 {
-	return glm::vec3(m_worldMatrix[3][0], m_worldMatrix[3][1], m_worldMatrix[3][2]);
+	return glm::vec3(m_worldMatrix[3]);
 }
 
-glm::quat Rasterizer::Data::Transform::GetWorldRotation()
+glm::quat Rasterizer::Data::Transform::GetWorldRotation() const
 {
-	glm::mat3 rotationMatrix(m_worldMatrix[0][0], m_worldMatrix[0][1], m_worldMatrix[0][2], m_worldMatrix[1][0], m_worldMatrix[1][1], m_worldMatrix[1][2], m_worldMatrix[2][0], m_worldMatrix[2][1], m_worldMatrix[2][2]);
-	return glm::quat(rotationMatrix);
+	return glm::quat(glm::mat3(m_worldMatrix[0], m_worldMatrix[1], m_worldMatrix[2]));
 }
 
 const glm::mat4 & Rasterizer::Data::Transform::GetLocalMatrix() const

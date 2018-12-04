@@ -30,9 +30,13 @@ namespace Rasterizer::Data
 		/**
 		* Defines a parent to the transform
 		* @param p_parent
-		* @param p_addChild (Directly add this as a child of the parent)
 		*/
-		void SetParent(Data::Transform& p_parent, bool p_addChild = true);
+		void SetParent(Data::Transform& p_parent);
+
+		/**
+		* Check if the transform has a parent
+		*/
+		bool HasParent() const;
 
 		/**
 		* Initialize transform with raw data
@@ -47,53 +51,48 @@ namespace Rasterizer::Data
 		void UpdateWorldMatrices();
 
 		/**
-		* Check if the transform has a parent
-		*/
-		bool HasParent() const;
-
-		/**
 		* Set the position of the transform in the local space
 		* @param p_newPosition
 		*/
-		void SetPosition(glm::vec3 p_newPosition);
+		void SetLocalPosition(glm::vec3 p_newPosition);
 
 		/**
 		* Set the rotation of the transform in the local space
 		* @param p_newRotation
 		*/
-		void SetRotation(glm::quat p_newRotation);
+		void SetLocalRotation(glm::quat p_newRotation);
 
 		/**
 		* Translate in the local space
 		* @param p_translation
 		*/
-		void Translate(const glm::vec3& p_translation);
+		void TranslateLocal(const glm::vec3& p_translation);
 
 		/**
 		* Rotate in the local space
 		* @param p_rotation
 		*/
-		void Rotate(const glm::quat& p_rotation);
+		void RotateLocal(const glm::quat& p_rotation);
 
 		/**
 		* Return the local position of the transform
 		*/
-		glm::vec3 GetLocalPosition() /* SHOULD BE CONST BUT CANT */;
+		glm::vec3 GetLocalPosition() const;
 
 		/**
 		* Return local rotation of the transform
 		*/
-		glm::quat GetLocalRotation() /* SHOULD BE CONST BUT CANT */;
+		glm::quat GetLocalRotation() const;
 
 		/**
 		* Return the world position of the transform
 		*/
-		glm::vec3 GetWorldPosition() /* SHOULD BE CONST BUT CANT */;
+		glm::vec3 GetWorldPosition() const;
 
 		/**
 		* Return the world rotation of the transform
 		*/
-		glm::quat GetWorldRotation() /* SHOULD BE CONST BUT CANT */;
+		glm::quat GetWorldRotation() const;
 
 		/**
 		* Return the local matrix
@@ -109,6 +108,7 @@ namespace Rasterizer::Data
 		Utils::Event<> TransformChangedEvent;
 
 	private:
+
 		glm::mat4	m_localMatrix;
 		glm::mat4	m_worldMatrix;
 		Transform*	m_parent;

@@ -41,7 +41,7 @@ Rasterizer::Core::Application::Application() :
 void Rasterizer::Core::Application::CreateScripts()
 {
 	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
-	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
+	// AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_inputManager);
 	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);

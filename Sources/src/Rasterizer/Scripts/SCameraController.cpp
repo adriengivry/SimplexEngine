@@ -29,7 +29,7 @@ void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 	const float xOffset = motionX * m_mouseSensitivity * p_deltaTime;
 	const float yOffset = -motionY * m_mouseSensitivity * p_deltaTime;
 
-	m_camera.transform.Rotate(Utils::Math::CreateQuaternionFromEuler({ xOffset, yOffset, 0.0f }));
+	m_camera.transform.RotateLocal(Utils::Math::CreateQuaternionFromEuler({ yOffset, 0.0f, 0.0f }));
 }
 
 void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
@@ -53,5 +53,5 @@ void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
 	if (m_inputManager.IsKeyPressed(SDL_SCANCODE_Q))
 		movement -= up;
 
-	m_camera.transform.Translate(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
+	m_camera.transform.TranslateLocal(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
 }
