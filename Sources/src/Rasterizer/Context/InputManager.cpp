@@ -13,6 +13,8 @@ Rasterizer::Context::InputManager::InputManager(EventHandler& p_eventHandler)
 
 void Rasterizer::Context::InputManager::Update()
 {
+	m_keyEvents.clear();
+
 	m_mouseMotion.first = 0;
 	m_mouseMotion.second = 0;
 

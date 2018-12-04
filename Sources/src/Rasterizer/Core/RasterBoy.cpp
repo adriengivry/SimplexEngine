@@ -46,7 +46,11 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 	if (m_window.IsPointInWindow({ v1.x , v1.y }) || m_window.IsPointInWindow({ v2.x , v2.y }) || m_window.IsPointInWindow({ v3.x , v3.y }))
 	{
 		/* Calculate face normal by computing the average of the 3 vertices normals */
-		glm::vec3 faceNormal = (std::get<0>(p_vertices).normal + std::get<0>(p_vertices).normal + std::get<0>(p_vertices).normal) * 0.33f;
+		glm::vec3 normal1 = std::get<0>(p_vertices).normal;
+		glm::vec3 normal2 = std::get<1>(p_vertices).normal;
+		glm::vec3 normal3 = std::get<2>(p_vertices).normal;
+
+		glm::vec3 faceNormal = (normal1 + normal2 + normal3) * 0.33f;
 
 		/* Calculate face normal color as a vec3 */
 		glm::vec3 faceNormalColorVec = (faceNormal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f)) * 255.0f;

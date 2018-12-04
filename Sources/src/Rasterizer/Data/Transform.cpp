@@ -19,6 +19,8 @@ void Rasterizer::Data::Transform::SetParent(Data::Transform& p_parent)
 {
 	m_parent = &p_parent;
 
+	m_parent->TransformChangedEvent.AddListener(std::bind(&Transform::UpdateWorldMatrices, this));
+
 	UpdateWorldMatrices();
 }
 
