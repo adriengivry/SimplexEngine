@@ -17,7 +17,7 @@ Rasterizer::Core::RasterBoy::RasterBoy(const Context::Window& p_window, const En
 {
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model & p_actor)
+void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor)
 {
 	glm::mat4 mvp = m_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
 
@@ -25,7 +25,7 @@ void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model & p_actor
 		RasterizeMesh(mesh.get(), mvp);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh & p_mesh, const glm::mat4 & p_mvp)
+void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, const glm::mat4& p_mvp)
 {
 	auto vertices = p_mesh.GetVertices();
 	auto indices = p_mesh.GetIndices();
@@ -75,7 +75,6 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 
 std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec3& p_point)
 {
-	
 	glm::vec2 clipped = VertexToScreenSpace(p_point);
 
 	glm::ivec2 result;

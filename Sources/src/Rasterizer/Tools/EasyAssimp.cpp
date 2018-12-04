@@ -13,7 +13,7 @@ bool Rasterizer::Tools::EasyAssimp::LoadVertices(const std::string & p_fileName,
 	p_outBuffer.clear();
 
 	Assimp::Importer import;
-	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
+	const aiScene* scene = import.ReadFile(p_fileName, aiProcess_Triangulate | aiProcess_OptimizeMeshes | aiProcess_JoinIdenticalVertices);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
 	{
@@ -26,7 +26,7 @@ bool Rasterizer::Tools::EasyAssimp::LoadVertices(const std::string & p_fileName,
 	return true;
 }
 
-void Rasterizer::Tools::EasyAssimp::ProcessNode(aiNode * p_node, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+void Rasterizer::Tools::EasyAssimp::ProcessNode(aiNode* p_node, const aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	// process all the node's meshes (if any)
 	for (unsigned int i = 0; i < p_node->mNumMeshes; ++i)
@@ -45,22 +45,33 @@ void Rasterizer::Tools::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene *
 {
 	for (unsigned int i = 0; i < p_mesh->mNumVertices; ++i)
 	{
+		auto vertex = p_mesh->mVertices[i];
+		auto normal = p_mesh->mNormals[i];
+
+		/*
+		aiMatrix4x4 transformation;
+		transformation.FromEulerAnglesXYZ(aiVector3D(90.0f, 0.0f, 0.0f));
+
+		vertex = transformation * vertex;
+		normal = transformation * normal;
+		*/
+
 		p_outBuffer.push_back
 		(
-			{ 
-				p_mesh->mVertices[i].x,
-				p_mesh->mVertices[i].y,
-				p_mesh->mVertices[i].z,
-				p_mesh->mNormals[i].x,
-				p_mesh->mNormals[i].y,
-				p_mesh->mNormals[i].z 
+			{
+				vertex.x,
+				vertex.y,
+				vertex.z,
+				normal.x,
+				normal.y,
+				normal.z
 			}
 		);
 	}
 
 	for (unsigned int i = 0; i < p_mesh->mNumFaces; i++)
 	{
-		const aiFace face = p_mesh->mFaces[i];
+		const aiFace& face = p_mesh->mFaces[i];
 		for (unsigned int j = 0; j < face.mNumIndices; j++)
 			p_indices.push_back(static_cast<uint32_t>(face.mIndices[j]));
 	}
