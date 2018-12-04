@@ -9,9 +9,11 @@
 #define _RENDERER_H
 
 #include <vector>
+#include <SDL_ttf.h>
 
 #include "Rasterizer/Context/Window.h"
 #include "Rasterizer/Data/Color.h"
+#include "Rasterizer/Data/ETextAlignment.h"
 
 namespace Rasterizer::Core
 {
@@ -30,6 +32,17 @@ namespace Rasterizer::Core
 		* @param p_windowSize
 		*/
 		void InitializePixelBufferSize(std::pair<uint16_t, uint16_t> p_windowSize);
+
+		/**
+		* Render a text on the screen
+		* @param p_text
+		* @param p_font
+		* @param p_position
+		* @param p_color
+		* @param p_horizontalAlign
+		* @param p_verticalAlign
+		*/
+		void DrawText(const std::string& p_text, TTF_Font* p_font, const std::pair<int, int>& p_position, const Data::Color& p_color = Data::Color::White, Data::ETextHorizontalAlignment = Data::ETextHorizontalAlignment::ALIGN_LEFT, Data::ETextVerticalAlignment p_verticalAlign = Data::ETextVerticalAlignment::ALIGN_TOP) const;
 
 		/**
 		* Clear the pixel buffer

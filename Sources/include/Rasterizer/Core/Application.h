@@ -72,11 +72,6 @@ namespace Rasterizer::Core
 		void RasterizeModels();
 
 		/**
-		* Update the renderer and ask for the rendering
-		*/
-		void UpdateRenderer();
-
-		/**
 		* Return true if the current state of the application is RUNNING
 		*/
 		bool IsRunning() const;

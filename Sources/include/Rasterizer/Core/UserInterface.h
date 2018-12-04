@@ -9,8 +9,10 @@
 #define _USERINTERFACE_H
 
 #include <SDL.h>
+#include <SDL_ttf.h>
 
 #include "Rasterizer/Context/Window.h"
+#include "Rasterizer/Core/Renderer.h"
 
 namespace Rasterizer::Core
 {
@@ -24,7 +26,7 @@ namespace Rasterizer::Core
 		* Constructor of the user interface
 		* @param p_window
 		*/
-		UserInterface(const Context::Window& p_window);
+		UserInterface(const Context::Window& p_window, const Core::Renderer& p_renderer);
 
 		/**
 		* Update imgui components
@@ -33,12 +35,20 @@ namespace Rasterizer::Core
 		void Update(float p_deltaTime);
 
 		/**
-		* Render
+		* Draw
 		*/
-		void Render();
+		void Draw();
 
 	private:
 		const Context::Window& m_window;
+		const Core::Renderer& m_renderer;
+		
+		float m_framerateUpdateTimer;
+		float m_framerateUpdateFrequency;
+
+		uint16_t m_framerate;
+
+		TTF_Font* m_arialFont;
 	};
 }
 

@@ -25,7 +25,7 @@ Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
 	m_inputManager(m_eventHandler),
 	m_renderer(m_window),
-	m_userInterface(m_window),
+	m_userInterface(m_window, m_renderer),
 	m_rasterBoy(m_window, m_camera, m_renderer),
 	m_camera({ Utils::IniIndexer::Application->Get<float>("camera_position_x"), Utils::IniIndexer::Application->Get<float>("camera_position_y"), Utils::IniIndexer::Application->Get<float>("camera_position_z")},Utils::Math::CreateQuaternionFromEuler({ Utils::IniIndexer::Application->Get<float>("camera_rotation_x"), Utils::IniIndexer::Application->Get<float>("camera_rotation_y"), Utils::IniIndexer::Application->Get<float>("camera_rotation_z")}), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
 	m_applicationState(EApplicationState::RUNNING)
@@ -59,6 +59,8 @@ void Rasterizer::Core::Application::CreateScripts()
 
 int Rasterizer::Core::Application::Run()
 {
+	m_clock.Tick();
+
 	while (m_applicationState == EApplicationState::RUNNING)
 	{
 		Update(m_clock.GetDeltaTime());
@@ -77,8 +79,12 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 
 	RasterizeModels();
 
-	m_userInterface.Render();
-	UpdateRenderer();
+	m_renderer.GenerateFinalTexture();
+	m_renderer.ClearPixelBuffer();
+	m_renderer.DrawFinalTexture();
+	
+	m_userInterface.Draw();
+	m_renderer.Render();
 
 	m_clock.Tick();
 }
@@ -97,16 +103,6 @@ void Rasterizer::Core::Application::RasterizeModels()
 
 	for (auto& model : m_models)
 		m_rasterBoy.RasterizeModel(model);
-}
-
-void Rasterizer::Core::Application::UpdateRenderer()
-{
-	PROFILER_SPY("Application::UpdateRenderer");
-
-	m_renderer.GenerateFinalTexture();
-	m_renderer.ClearPixelBuffer();
-	m_renderer.DrawFinalTexture();
-	m_renderer.Render();
 }
 
 bool Rasterizer::Core::Application::IsRunning() const

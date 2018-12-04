@@ -206,6 +206,9 @@
     <ClInclude Include="include\Rasterizer\Core\UserInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Rasterizer\Data\ETextAlignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="config\window.ini" />
