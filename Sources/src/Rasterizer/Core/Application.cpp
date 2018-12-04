@@ -34,16 +34,13 @@ Rasterizer::Core::Application::Application() :
 
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
 
-	// m_models.emplace_back(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(3.0f, 0.0f, 0.0f));
-	// m_models[1].SetParent(m_models[0]);
-
 	CreateScripts();
 }
 
 void Rasterizer::Core::Application::CreateScripts()
 {
 	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
-	// AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
+	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_inputManager);
 	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager);

@@ -53,11 +53,6 @@ void Rasterizer::Entities::Camera::UpdateViewProjectionMatrix()
 	m_viewProjectionMatrix = m_projectionMatrix * m_viewMatrix;
 }
 
-void Rasterizer::Entities::Camera::Move(const glm::vec3& p_translation)
-{
-	transform.SetPosition(transform.GetLocalPosition() + p_translation);
-}
-
 const glm::mat4& Rasterizer::Entities::Camera::GetProjectionMatrix() const
 {
 	return m_projectionMatrix;
