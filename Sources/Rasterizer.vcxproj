@@ -216,6 +216,12 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
   <ItemGroup>
     <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp" />
+    <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
+    <ClCompile Include="src\Rasterizer\ImGUI\imgui.cpp" />
+    <ClCompile Include="src\Rasterizer\ImGUI\imgui_demo.cpp" />
+    <ClCompile Include="src\Rasterizer\ImGUI\imgui_draw.cpp" />
+    <ClCompile Include="src\Rasterizer\ImGUI\imgui_impl_sdl.cpp" />
+    <ClCompile Include="src\Rasterizer\ImGUI\imgui_widgets.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp" />
@@ -254,8 +260,16 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h" />
     <ClInclude Include="include\Rasterizer\Core\RasterBoy.h" />
     <ClInclude Include="include\Rasterizer\Core\Renderer.h" />
+    <ClInclude Include="include\Rasterizer\Core\UserInterface.h" />
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imconfig.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imgui.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imgui_impl_sdl.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imgui_internal.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imstb_rectpack.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imstb_textedit.h" />
+    <ClInclude Include="include\Rasterizer\ImGUI\imstb_truetype.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />

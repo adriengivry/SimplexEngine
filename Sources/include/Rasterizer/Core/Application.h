@@ -13,6 +13,7 @@
 #include "Rasterizer/Context/InputManager.h"
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Core/UserInterface.h"
 #include "Rasterizer/Core/RasterBoy.h"
 #include "Rasterizer/Analytics/Profiler.h"
 #include "Rasterizer/Utils/Clock.h"
@@ -93,6 +94,7 @@ namespace Rasterizer::Core
 
 		/* Core */
 		Rasterizer::Core::Renderer m_renderer;
+		Rasterizer::Core::UserInterface m_userInterface;
 		Rasterizer::Core::RasterBoy m_rasterBoy;
 
 		/* Analytics */
