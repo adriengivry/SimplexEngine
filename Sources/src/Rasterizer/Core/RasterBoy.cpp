@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <iostream>
+
 #include <glm/gtc/matrix_inverse.hpp>
 
 #include "Rasterizer/Core/RasterBoy.h"
@@ -75,7 +77,10 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 
 std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec3& p_point)
 {
-	glm::vec2 clipped = VertexToScreenSpace(p_point);
+	if (p_point.z <= 0.0f)
+		return std::make_pair(glm::ivec2(-1, -1), 0.0f);
+
+	glm::vec2 clipped = p_point / p_point.z;
 
 	glm::ivec2 result;
 
@@ -83,65 +88,4 @@ std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordina
 	result.y = (int)std::round(((1 - clipped.y) * 0.5f) * m_window.GetHeight());
 
 	return std::make_pair(result, p_point.z);
-}
-
-std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinatesHansdrien(const glm::vec3 & p_point)
-{
-	const float widthHalf = m_window.GetWidth() / 2.0f;
-	const float heightHalf = m_window.GetHeight() / 2.0f;
-
-	auto screenPixel = glm::vec2(((p_point.x / 5.0f) + 1) * widthHalf, m_window.GetHeight() - ((p_point.y / 5.0f) + 1) * heightHalf);
-
-	return std::make_pair(glm::ivec2(static_cast<int>(screenPixel.x), static_cast<int>(screenPixel.y)), p_point.z);
-}
-
-glm::ivec2 Rasterizer::Core::RasterBoy::RasterizeVertex(const glm::vec3 & p_vertexPosition, const glm::mat4 & p_vertexTransformations)
-{
-	return
-		VertexToRasterSpace
-		(
-			VertexToNormalizedCoordinates
-			(
-				VertexToScreenSpace
-				(
-					VertexToCameraSpace
-					(
-						VertexToWorldSpace(p_vertexPosition, p_vertexTransformations)
-					)
-				)
-			)
-		);
-}
-
-glm::vec3 Rasterizer::Core::RasterBoy::VertexToWorldSpace(const glm::vec3 & p_vertexPosition, const glm::mat4 & p_vertexTransformations)
-{
-	return p_vertexTransformations * glm::vec4(p_vertexPosition, 1.0f);
-}
-
-glm::vec3 Rasterizer::Core::RasterBoy::VertexToCameraSpace(const glm::vec3 & p_vertexWorldPosition)
-{
-	return m_camera.GetViewProjectionMatrix() * glm::vec4(p_vertexWorldPosition, 1.0f);
-}
-
-glm::vec2 Rasterizer::Core::RasterBoy::VertexToScreenSpace(const glm::vec3& p_vertexCameraSpace)
-{
-	return p_vertexCameraSpace / p_vertexCameraSpace.z;
-}
-
-glm::vec2 Rasterizer::Core::RasterBoy::VertexToNormalizedCoordinates(const glm::vec2 & p_vertexScreenSpace)
-{
-	return glm::vec2
-	(
-		(p_vertexScreenSpace.x + m_window.GetWidth() * 0.5f) / m_window.GetWidth(),
-		(p_vertexScreenSpace.y + m_window.GetHeight() * 0.5f) / m_window.GetHeight()
-	);
-}
-
-glm::ivec2 Rasterizer::Core::RasterBoy::VertexToRasterSpace(const glm::vec2 & p_vertexNormalizedCoordinates)
-{
-	return glm::ivec2
-	(
-		std::floor(p_vertexNormalizedCoordinates.x * m_window.GetWidth()),
-		std::floor((1 - p_vertexNormalizedCoordinates.y) * m_window.GetHeight())
-	);
 }
