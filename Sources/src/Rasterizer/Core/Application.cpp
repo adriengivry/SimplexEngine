@@ -33,7 +33,7 @@ Rasterizer::Core::Application::Application() :
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
-	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), glm::quat());
+	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")));
 
 	CreateScripts();
 }
