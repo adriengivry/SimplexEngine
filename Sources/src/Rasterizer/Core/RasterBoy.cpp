@@ -5,6 +5,7 @@
 */
 
 #include <iostream>
+#include <algorithm>
 
 #include <glm/gtc/matrix_inverse.hpp>
 
@@ -12,11 +13,18 @@
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 #include "Rasterizer/Data/Triangle2D.h"
 
+#include <thread>
+
 Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer) :
 	m_window(p_window),
 	m_camera(p_camera),
 	m_renderer(p_renderer)
 {
+}
+
+void Rasterizer::Core::RasterBoy::Update(float p_deltaTime)
+{
+	m_rasterizedTriangles = 0;
 }
 
 void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor)
@@ -39,6 +47,9 @@ void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, c
 
 void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Data::Vertex, Data::Vertex> p_vertices, const glm::mat4 & p_mvp)
 {
+	if (!CanRasterize())
+		return;
+
 	auto[v1, depth1] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<0>(p_vertices).position, 1.0f));
 	auto[v2, depth2] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<1>(p_vertices).position, 1.0f));
 	auto[v3, depth3] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<2>(p_vertices).position, 1.0f));
@@ -48,6 +59,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 	glm::vec3 normal2 = std::get<1>(p_vertices).normal;
 	glm::vec3 normal3 = std::get<2>(p_vertices).normal;
 
+	/* Calculate average normal of the face */
 	glm::vec3 faceNormal = (normal1 + normal2 + normal3) * 0.33f;
 
 	/* Calculate face normal color as a vec3 */
@@ -59,34 +71,59 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 	/* Create a 2D triangle to automate computations (Bouding box, point position check) */
 	Data::Triangle2D triangle(v1, v2, v3);
 
-	float verticesAverageDepth = (depth1 + depth2 + depth3) * 0.33f;
-
+	/* Getting bounding box from the triangle to prevent iterating over all the screen */
 	auto[xmin, ymin, xmax, ymax] = triangle.GetBoundingBox();
 
-	for (int32_t x = xmin; x < xmax && x < m_window.GetWidthSigned(); ++x)
+	/* Clamp triangle bounds to window size */
+	xmin = std::max(0, xmin);
+	xmax = std::min(xmax, m_window.GetWidthSigned() - 1);
+	ymin = std::max(0, ymin);
+	ymax = std::min(ymax, m_window.GetHeightSigned() - 1);
+
+	for (int32_t x = xmin; x < xmax; ++x)
 	{
-		for (int32_t y = ymin; y < ymax && y < m_window.GetHeightSigned(); ++y)
+		for (int32_t y = ymin; y < ymax; ++y)
 		{
-			if (m_window.IsPointInWindow({ x ,y }) && triangle.IsPointInArea({ x, y }) && verticesAverageDepth < m_renderer.GetDepth(x, y))
+			glm::vec3 bary = triangle.Barycentric({ x, y });
+			if (bary.x >= 0.0f && bary.y >= 0.0f && bary.x + bary.y <= 1.0f)
 			{
-				m_renderer.SetPixel(x, y, faceNormalColor);
-				m_renderer.SetDepth(x, y, verticesAverageDepth);
+				float depth = depth1 * bary.z + depth2 * bary.x + bary.y * depth3;
+				if (depth <= m_renderer.GetDepth(x, y))
+				{
+					m_renderer.SetPixel(x, y, faceNormalColor);
+					m_renderer.SetDepth(x, y, depth);
+				}
 			}
+	
 		}
 	}
+
+	++m_rasterizedTriangles;
 }
 
-std::pair<glm::ivec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec3& p_point)
+std::pair<glm::vec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec3& p_point)
 {
-	if (p_point.z <= 0.0f)
-		return std::make_pair(glm::ivec2(-1, -1), 0.0f);
-
 	glm::vec2 clipped = p_point / p_point.z;
 
-	glm::ivec2 result;
+	glm::vec2 result;
 
-	result.x = (int)std::round(((clipped.x + 1) * 0.5f) * m_window.GetWidth());
-	result.y = (int)std::round(((1 - clipped.y) * 0.5f) * m_window.GetHeight());
+	result.x = std::round(((clipped.x + 1) * 0.5f) * m_window.GetWidth());
+	result.y = std::round(((1 - clipped.y) * 0.5f) * m_window.GetHeight());
 
 	return std::make_pair(result, p_point.z);
+}
+
+bool Rasterizer::Core::RasterBoy::CanRasterize()
+{
+	return !m_limitTriangleRasterization || m_rasterizedTriangles < m_rasterizedTrianglesLimit;
+}
+
+void Rasterizer::Core::RasterBoy::LimitTriangleRasterization(bool p_enable)
+{
+	m_limitTriangleRasterization = p_enable;
+}
+
+void Rasterizer::Core::RasterBoy::SetRasterizedTriangleLimit(uint64_t p_limit)
+{
+	m_rasterizedTrianglesLimit = p_limit;
 }

@@ -113,7 +113,7 @@ void Rasterizer::Core::Renderer::SetDepth(uint16_t p_x, uint16_t p_y, float p_de
 float Rasterizer::Core::Renderer::GetDepth(uint16_t p_x, uint16_t p_y)
 {
 	float depth = m_depthBuffer[p_y * m_bufferWidth + p_x];
-	return depth == 0 ? std::numeric_limits<float>::max() : depth;
+	return depth == 0.0f ? std::numeric_limits<float>::max() : depth;
 }
 
 void Rasterizer::Core::Renderer::GenerateFinalTexture()

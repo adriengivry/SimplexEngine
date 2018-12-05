@@ -19,6 +19,7 @@
 #include "Rasterizer/Scripts/SFPSCounter.h"
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
+#include "Rasterizer/Scripts/SRasterizationLimiter.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 
 Rasterizer::Core::Application::Application() :
@@ -38,8 +39,8 @@ Rasterizer::Core::Application::Application() :
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
 	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
 	m_models.emplace_back(*m_meshManager.RequireAndGet("Monkey"), glm::vec3(3.0f, 0.0f, 0.0f), glm::quat(), glm::vec3(1.0f));
+	m_models.emplace_back(*m_meshManager.RequireAndGet("Cube"), glm::vec3(0.0f, -3.0f, 0.0f), glm::quat(), glm::vec3(1.0f, 1.0f, 1.0f));
 
-	m_models.emplace_back(*m_meshManager.RequireAndGet("Plane"), glm::vec3(0.0f, -2.0f, 0.0f), glm::quat(), glm::vec3(5.0f, 0.0f, 5.0f));
 
 	m_models[1].SetParent(m_models[0]);
 	m_models[2].SetParent(m_models[1]);
@@ -57,6 +58,7 @@ void Rasterizer::Core::Application::CreateScripts()
 	AddScript<Scripts::SConsoleController>(m_inputManager);
 	AddScript<Scripts::SFPSCounter>(m_userInterface);
 	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
+	AddScript<Scripts::SRasterizationLimiter>(m_rasterBoy);
 }
 
 int Rasterizer::Core::Application::Run()
@@ -81,6 +83,7 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	UpdateScripts(p_deltaTime);
 
 	/* Rasterization process */
+	m_rasterBoy.Update(p_deltaTime);
 	RasterizeModels();
 
 	/* Draw order */

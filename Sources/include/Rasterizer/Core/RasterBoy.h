@@ -30,6 +30,13 @@ namespace Rasterizer::Core
 		RasterBoy(const Core::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer);
 
 		/**
+		* Update rasterizer data (Nothing is rasterized here)
+		* This update is essentially used to reset rasterized triangles count
+		* @param p_deltaTime
+		*/
+		void Update(float p_deltaTime);
+
+		/**
 		* Rasterize a model to the screen
 		* @param p_actor
 		*/
@@ -53,13 +60,34 @@ namespace Rasterizer::Core
 		* Project a point to the screen and calculate his depth buffer
 		* @param p_point (In camera space, aka after applying MVP)
 		*/
-		std::pair<glm::ivec2, float> ProjectToPixelCoordinates(const glm::vec3& p_point);
+		std::pair<glm::vec2, float> ProjectToPixelCoordinates(const glm::vec3& p_point);
+
+		/**
+		* Verify is RasterBoy is allow to rasterize
+		*/
+		bool CanRasterize();
+
+		/**
+		* Use this method to limit/unlimit the triangle rasterization process
+		* @param p_enable
+		*/
+		void LimitTriangleRasterization(bool p_enable);
+
+		/**
+		* Defines the maximum number of triangles to rasterize
+		* @param p_limit
+		*/
+		void SetRasterizedTriangleLimit(uint64_t p_limit);
 
 	private:
 		const Core::Window& m_window;
 		const Entities::Camera& m_camera;
 
 		Core::Renderer& m_renderer;
+
+		bool m_limitTriangleRasterization;
+		uint64_t m_rasterizedTrianglesLimit;
+		uint64_t m_rasterizedTriangles;
 	};
 }
 

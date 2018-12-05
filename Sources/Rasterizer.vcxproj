@@ -226,6 +226,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SFPSCounter.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SProfilerLogger.cpp" />
+    <ClCompile Include="src\Rasterizer\Scripts\SRasterizationLimiter.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SRotateOverTime.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp" />
     <ClCompile Include="src\Rasterizer\Core\InputManager.cpp" />
@@ -280,6 +281,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Scripts\SConsoleController.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SFPSCounter.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SProfilerLogger.h" />
+    <ClInclude Include="include\Rasterizer\Scripts\SRasterizationLimiter.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SRotateOverTime.h" />
     <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
