@@ -39,6 +39,8 @@ void Rasterizer::Core::Renderer::InitializePixelBufferSize(std::pair<uint16_t, u
 
 void Rasterizer::Core::Renderer::DrawText(const std::string & p_text, TTF_Font * p_font, const std::pair<int, int>& p_position, const Data::Color & p_color, Data::ETextHorizontalAlignment p_horizontalAlign, Data::ETextVerticalAlignment p_verticalAlign) const
 {
+	PROFILER_SPY("Renderer::DrawText");
+
 	SDL_Surface* surface = TTF_RenderText_Solid(p_font, p_text.c_str(), { p_color.r, p_color.g, p_color.b });
 
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(m_sdlRenderer, surface);
