@@ -30,7 +30,7 @@ void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 	auto [motionX, motionY] = m_inputManager.GetMouseMotion();
 
 	/* Prevent very big movement to get applied (These movement are usually caused by alt tab, gaining focus */
-	if (std::abs(motionX) + std::abs(motionY) > 50.0f)
+	if (std::abs(motionX) + std::abs(motionY) > 100.0f)
 		return;
 
 	const float xOffset = motionX * m_mouseSensitivity * p_deltaTime;
