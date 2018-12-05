@@ -87,6 +87,7 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	m_renderer.GenerateFinalTexture();
 	m_renderer.DrawFinalTexture();
 	m_renderer.ClearPixelBuffer();
+	m_renderer.ClearDepthBuffer();
 	m_userInterface.Draw();
 
 	/* Render on screen */

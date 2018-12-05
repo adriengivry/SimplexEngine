@@ -50,6 +50,11 @@ namespace Rasterizer::Core
 		void ClearPixelBuffer();
 
 		/**
+		* Clear the depth buffer
+		*/
+		void ClearDepthBuffer();
+
+		/**
 		* Modify a pixel on the screen
 		* @param p_x
 		* @param p_y
@@ -100,8 +105,14 @@ namespace Rasterizer::Core
 
 		struct SDL_Renderer* m_sdlRenderer;
 		struct SDL_Texture* m_finalTexture;
+
 		std::vector<uint32_t> m_pixelBuffer;
 		std::vector<float> m_depthBuffer;
+
+		uint32_t m_pixelBufferSizeof;
+		uint32_t m_depthBufferSizeof;
+
+		int m_pixelBufferRowSize;
 	};
 }
 
