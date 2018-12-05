@@ -53,6 +53,12 @@ float Rasterizer::Data::Triangle2D::CalculateArea(const Point & p_point1, const 
 			p_point3.x * (p_point1.y - p_point2.y)
 			) * 0.5f
 	);
+
+	/*
+	glm::vec2 v(p_point2.x - p_point1.x, p_point2.y - p_point1.y);
+	glm::vec2 w(p_point3.x - p_point1.x, p_point3.y - p_point1.y);
+	return (v.x * w.y - v.y * w.x);
+	*/
 }
 
 bool Rasterizer::Data::Triangle2D::IsPointInArea(const Point& p_point)
