@@ -9,6 +9,8 @@
 Rasterizer::Core::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :
 	m_width(p_width),
 	m_height(p_height),
+	m_halfWidth(p_width / 2),
+	m_halfHeight(p_height / 2),
 	m_title(p_title),
 	m_aspectRatio(static_cast<float>(p_width) / static_cast<float>(p_height)),
 	m_windowState(EWindowState::NONE), m_sdlWindow(nullptr)
@@ -63,17 +65,42 @@ uint32_t Rasterizer::Core::Window::GetHeight() const
 	return m_height;
 }
 
+int32_t Rasterizer::Core::Window::GetWidthSigned() const
+{
+	return static_cast<int32_t>(m_width);
+}
+
+int32_t Rasterizer::Core::Window::GetHeightSigned() const
+{
+	return static_cast<int32_t>(m_height);
+}
+
+int32_t Rasterizer::Core::Window::GetHalfWidth() const
+{
+	return m_halfWidth;
+}
+
+int32_t Rasterizer::Core::Window::GetHalfHeight() const
+{
+	return m_halfHeight;
+}
+
 float Rasterizer::Core::Window::GetAspectRatio() const
 {
 	return m_aspectRatio;
 }
 
-std::pair<uint16_t, uint16_t> Rasterizer::Core::Window::GetSize() const
+std::pair<uint32_t, uint32_t> Rasterizer::Core::Window::GetSize() const
 {
 	return std::pair(m_width, m_height);
 }
 
-bool Rasterizer::Core::Window::IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point) const
+std::pair<int32_t, int32_t> Rasterizer::Core::Window::GetSizeSigned() const
+{
+	return std::pair(static_cast<int32_t>(m_width), static_cast<int32_t>(m_height));
+}
+
+bool Rasterizer::Core::Window::IsPointInWindow(const std::pair<int32_t, int32_t>& p_point) const
 {
 	return p_point.first >= 0 && p_point.second >= 0 && p_point.first < m_width && p_point.second < m_height;
 }
