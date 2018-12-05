@@ -34,16 +34,43 @@ namespace Rasterizer::Core
 		void Update();
 
 		/**
-		* Check if the given key is pressed
-		* @param p_key (SDL Key Code)
+		* Lock the mouse to the window
 		*/
-		bool IsKeyPressed(int p_keyCode) const;
+		void LockMouse() const;
+
+		/**
+		* Unlock the mouse from the window
+		*/
+		void UnlockMouse() const;
+
+		/**
+		* Check if the mouse is currently locked
+		*/
+		bool IsMouseLocked() const;
+
+		/**
+		* Check if the given key is currently down
+		* @param p_keyCode (SDL Key Code)
+		*/
+		bool IsKeyDown(int p_keyCode) const;
+
+		/**
+		* Check if the given key is currently up
+		* @param p_keyCode (SDL Key Code)
+		*/
+		bool IsKeyUp(int p_keyCode) const;
 
 		/**
 		* Check if the given key has been pressed during this frame
-		* @param p_key (SDL Key Code)
+		* @param p_keyCode (SDL Key Code)
 		*/
-		bool IsKeyEventOccured(int p_keyCode) const;
+		bool HasKeyBeenPressed(int p_keyCode) const;
+
+		/**
+		* Check if the given key has been released during this frame
+		* @param p_keyCode (SDL Key Code)
+		*/
+		bool HasKeyBeenReleased(int p_keyCode) const;
 
 		/**
 		* Return the current cursor position
@@ -62,7 +89,8 @@ namespace Rasterizer::Core
 		std::pair<int, int> GetMouseMotion() const;
 
 	private:
-		std::unordered_map<int, bool> m_keyEvents;
+		std::unordered_map<int, bool> m_keyPressedEvents;
+		std::unordered_map<int, bool> m_keyReleasedEvents;
 		std::unordered_map<int, bool> m_keyStates;
 
 		std::pair<int, int> m_cursorPosition;

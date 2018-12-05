@@ -14,7 +14,7 @@ Rasterizer::Scripts::SConsoleController::SConsoleController(const Core::InputMan
 
 void Rasterizer::Scripts::SConsoleController::Update(float p_deltaTime)
 {
-	if (m_inputManager.IsKeyEventOccured(SDL_SCANCODE_C))
+	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_C))
 		ClearConsole();
 }
 

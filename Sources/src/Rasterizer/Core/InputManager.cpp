@@ -13,7 +13,8 @@ Rasterizer::Core::InputManager::InputManager(EventHandler& p_eventHandler)
 
 void Rasterizer::Core::InputManager::Update()
 {
-	m_keyEvents.clear();
+	m_keyPressedEvents.clear();
+	m_keyReleasedEvents.clear();
 
 	m_mouseMotion.first = 0;
 	m_mouseMotion.second = 0;
@@ -26,21 +27,49 @@ void Rasterizer::Core::InputManager::Update()
 	for (int i = 0; i < keyCount; ++i)
 	{
 		bool keyState = keyboardState[i];
-		m_keyEvents[i] = keyState && !m_keyStates[i]; /* Boolean = the key wasn't pressed and is now pressed */
-		m_keyStates[i] = keyState;
+		m_keyPressedEvents[i] = keyState && !m_keyStates[i];	/* The key wasn't pressed and is now pressed */
+		m_keyReleasedEvents[i] = !keyState && m_keyStates[i];	/* The key was pressed and is now not pressed */
+		m_keyStates[i] = keyState;								/* Save the current state of the key (True for pressed, false for realeased) */
 	}
 
 	SDL_GetMouseState(&m_cursorPosition.first, &m_cursorPosition.second);
 }
 
-bool Rasterizer::Core::InputManager::IsKeyPressed(int p_key) const
+void Rasterizer::Core::InputManager::LockMouse() const
 {
-	return m_keyStates.find(p_key) != m_keyStates.end() && m_keyStates.at(p_key);
+	if (!IsMouseLocked())
+		SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
-bool Rasterizer::Core::InputManager::IsKeyEventOccured(int p_key) const
+void Rasterizer::Core::InputManager::UnlockMouse() const
 {
-	return m_keyEvents.find(p_key) != m_keyEvents.end() && m_keyEvents.at(p_key);
+	if (IsMouseLocked())
+		SDL_SetRelativeMouseMode(SDL_FALSE);
+}
+
+bool Rasterizer::Core::InputManager::IsMouseLocked() const
+{
+	return SDL_GetRelativeMouseMode() == SDL_TRUE;
+}
+
+bool Rasterizer::Core::InputManager::IsKeyDown(int p_keyCode) const
+{
+	return m_keyStates.at(p_keyCode);
+}
+
+bool Rasterizer::Core::InputManager::IsKeyUp(int p_keyCode) const
+{
+	return !m_keyStates.at(p_keyCode);
+}
+
+bool Rasterizer::Core::InputManager::HasKeyBeenPressed(int p_keyCode) const
+{
+	return m_keyPressedEvents.at(p_keyCode);
+}
+
+bool Rasterizer::Core::InputManager::HasKeyBeenReleased(int p_keyCode) const
+{
+	return m_keyReleasedEvents.at(p_keyCode);
 }
 
 const std::pair<int, int>& Rasterizer::Core::InputManager::GetCursorPosition() const

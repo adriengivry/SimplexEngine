@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Core/Application.h"
 
-int main()
+int main(int argc, char* argv[])
 {
 	Rasterizer::Utils::IniIndexer::Initialize();
 	Rasterizer::Core::Application app;

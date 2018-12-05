@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <iostream>
+
 #include <SDL.h>
 
 #include "Rasterizer/Core/EventHandler.h"
@@ -13,6 +15,8 @@ void Rasterizer::Core::EventHandler::HandleEvents(const Window& p_window)
 	SDL_Event event;
 
 	SDLMouseMovedEvent.Invoke(std::make_pair(0, 0));
+
+	Uint32 windowFlags = SDL_GetWindowFlags(p_window.GetSDLWindow());
 
 	while (SDL_PollEvent(&event))
 	{
