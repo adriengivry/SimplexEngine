@@ -18,10 +18,7 @@ Rasterizer::Core::UserInterface::UserInterface(const Context::Window& p_window, 
 	centerAnchor(width / 2, height / 2)
 {
 	TTF_Init();
-
-	m_smallFont = TTF_OpenFont("arial.ttf", 12);
-	m_normalFont = TTF_OpenFont("arial.ttf", 18);
-	m_bigFont = TTF_OpenFont("arial.ttf", 24);
+	LoadFonts();
 }
 
 void Rasterizer::Core::UserInterface::AddText(const Data::Text & p_text)
@@ -40,4 +37,12 @@ void Rasterizer::Core::UserInterface::Draw()
 
 		m_texts.pop();
 	}
+}
+
+void Rasterizer::Core::UserInterface::LoadFonts()
+{
+	const char* fontPath = "resources/fonts/arial.ttf";
+	m_smallFont = TTF_OpenFont(fontPath, 12);
+	m_normalFont = TTF_OpenFont(fontPath, 18);
+	m_bigFont = TTF_OpenFont(fontPath, 24);
 }

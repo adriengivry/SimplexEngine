@@ -32,7 +32,7 @@ namespace Rasterizer::Core
 		UserInterface(const Context::Window& p_window, const Core::Renderer& p_renderer);
 
 		/**
-		* Add a text to queue
+		* Add a text to queue. The text will get renderer at the end of the frame
 		* @param p_text
 		*/
 		void AddText(const Data::Text& p_text);
@@ -43,6 +43,8 @@ namespace Rasterizer::Core
 		void Draw();
 
 	private:
+		void LoadFonts();
+
 		const Context::Window& m_window;
 		const Core::Renderer& m_renderer;
 
