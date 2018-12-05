@@ -72,9 +72,7 @@ namespace Rasterizer::Analytics
 
 	private:
 		/* Time relatives */
-		std::chrono::steady_clock::time_point m_currentTime;
 		std::chrono::steady_clock::time_point m_lastTime;
-		std::chrono::duration<double> m_elapsed;
 
 		/* Profiler settings */
 		static bool __ENABLED;

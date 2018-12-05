@@ -34,5 +34,5 @@ void Rasterizer::Scripts::SFPSCounter::ShowFPS()
 {
 	std::string textContent = std::to_string(m_fps) + " FPS";
 
-	m_userInterface.AddText({ textContent, m_userInterface.topRightAnchor, Data::EFontSize::SMALL_FONT, Data::Color::Yellow, Data::ETextHorizontalAlignment::ALIGN_RIGHT });
+	m_userInterface.AddText({ textContent, m_userInterface.topRightAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White, Data::ETextHorizontalAlignment::ALIGN_RIGHT });
 }

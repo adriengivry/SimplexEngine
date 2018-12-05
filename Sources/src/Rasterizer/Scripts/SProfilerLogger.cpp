@@ -6,6 +6,7 @@
 
 #include <iostream>
 
+#include "Rasterizer/Analytics/ProfilerSpy.h"
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 
@@ -20,6 +21,8 @@ Rasterizer::Scripts::SProfilerLogger::SProfilerLogger(Rasterizer::Analytics::Pro
 
 void Rasterizer::Scripts::SProfilerLogger::Update(float p_deltaTime)
 {
+	PROFILER_SPY("SProfilerLogger::Update");
+
 	if (m_profiler.IsEnabled())
 	{
 		m_logTimer += p_deltaTime;
@@ -31,11 +34,22 @@ void Rasterizer::Scripts::SProfilerLogger::Update(float p_deltaTime)
 			m_logTimer = 0.0f;
 		}		
 
-		int16_t yOffset = 0;
-		for (const auto& action : m_report.actions)
+		if (m_report.actions.empty())
 		{
-			ShowAction(action, yOffset);
-			yOffset += 15;
+			m_userInterface.AddText({ "Collecting data...", m_userInterface.topLeftAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White });
+		}
+		else
+		{
+			m_userInterface.AddText({ "Report period duration: " + std::to_string(m_report.elaspedTime) + "s", m_userInterface.topLeftAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White });
+			int16_t yOffset = 15;
+			for (const auto& action : m_report.actions)
+			{
+				if (yOffset > m_userInterface.height)
+					break;
+
+				ShowAction(action, yOffset);
+				yOffset += 15;
+			}
 		}
 	}
 
@@ -60,7 +74,7 @@ void Rasterizer::Scripts::SProfilerLogger::Update(float p_deltaTime)
 void Rasterizer::Scripts::SProfilerLogger::ShowAction(const Analytics::ProfilerReport::Action & p_action, int16_t yOffset)
 {
 	std::string textContent1 = "[" + p_action.name + "]";
-	std::string textContent2 = std::to_string(p_action.duration) + "s | " + std::to_string(p_action.percentage) + "% | " + std::to_string(p_action.calls) + " calls";
+	std::string textContent2 = std::to_string(p_action.duration) + "s (total) | " + std::to_string(p_action.duration / p_action.calls) + "s (frame average) | " + std::to_string(p_action.percentage) + "% | " + std::to_string(p_action.calls) + " calls";
 	std::pair<int16_t, int16_t> position = m_userInterface.topLeftAnchor;
 
 	Data::Color textColor;

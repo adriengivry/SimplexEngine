@@ -19,20 +19,18 @@ bool Rasterizer::Analytics::Profiler::__ENABLED;
 Rasterizer::Analytics::Profiler::Profiler()
 {
 	m_lastTime = std::chrono::high_resolution_clock::now();
-	m_currentTime = m_lastTime;
 	__ENABLED = false;
 }
 
 void Rasterizer::Analytics::Profiler::Log()
 {
-	m_currentTime = std::chrono::high_resolution_clock::now();
-	m_elapsed = m_currentTime - m_lastTime;
+	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - m_lastTime;
 
 	std::multimap<double, std::string> sortedHistory;
 
 	std::cout << "---- [Profiler Stats] ----" << std::endl;
 
-	std::cout << "TOTAL ELAPSED TIME: " << m_elapsed.count() << "s" << std::endl;
+	std::cout << "TOTAL ELAPSED TIME: " << elapsed.count() << "s" << std::endl;
 
 	/* Fill the sorted history with the current history (Auto sort) */
 	for (auto& data : __ELPASED_HISTORY)
@@ -43,7 +41,7 @@ void Rasterizer::Analytics::Profiler::Log()
 	{
 		std::string action = data.second;
 		std::string duration = std::to_string(data.first) + "s";
-		std::string percentage = std::to_string((data.first / m_elapsed.count()) * 100.0) + "%";
+		std::string percentage = std::to_string((data.first / elapsed.count()) * 100.0) + "%";
 		std::string calls = std::to_string(__CALLS_COUNTER[data.second]);
 
 		std::cout << "METHOD:"			+ action		<< std::endl;
@@ -59,10 +57,9 @@ Rasterizer::Analytics::ProfilerReport Rasterizer::Analytics::Profiler::GenerateR
 {
 	ProfilerReport report;
 
-	m_currentTime = std::chrono::high_resolution_clock::now();
-	m_elapsed = m_currentTime - m_lastTime;
+	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - m_lastTime;
 
-	report.elaspedTime = m_elapsed.count();
+	report.elaspedTime = elapsed.count();
 
 	std::multimap<double, std::string> sortedHistory;
 
@@ -72,7 +69,7 @@ Rasterizer::Analytics::ProfilerReport Rasterizer::Analytics::Profiler::GenerateR
 
 	/* Log the history the console */
 	for (auto& data : sortedHistory)
-		report.actions.push_back({ data.second, data.first, (data.first / m_elapsed.count()) * 100.0, __CALLS_COUNTER[data.second] });
+		report.actions.push_back({ data.second, data.first, (data.first / elapsed.count()) * 100.0, __CALLS_COUNTER[data.second] });
 
 	return report;
 }
@@ -82,7 +79,7 @@ void Rasterizer::Analytics::Profiler::ClearHistory()
 	__ELPASED_HISTORY.clear();
 	__CALLS_COUNTER.clear();
 
-	m_lastTime = m_currentTime;
+	m_lastTime = std::chrono::high_resolution_clock::now();
 }
 
 void Rasterizer::Analytics::Profiler::Save(Rasterizer::Analytics::ProfilerSpy& p_spy)
