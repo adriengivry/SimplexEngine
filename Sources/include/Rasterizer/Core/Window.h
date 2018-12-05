@@ -9,9 +9,9 @@
 
 #include <SDL.h>
 
-#include "Rasterizer/Context/EWindowState.h"
+#include "Rasterizer/Core/EWindowState.h"
 
-namespace Rasterizer::Context
+namespace Rasterizer::Core
 {
 	/**
 	* The window class is using SDL to create the window context

@@ -6,9 +6,9 @@
 
 #include <SDL.h>
 
-#include "Rasterizer/Context/EventHandler.h"
+#include "Rasterizer/Core/EventHandler.h"
 
-void Rasterizer::Context::EventHandler::HandleEvents(const Window& p_window)
+void Rasterizer::Core::EventHandler::HandleEvents(const Window& p_window)
 {
 	SDL_Event event;
 

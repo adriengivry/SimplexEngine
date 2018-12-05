@@ -4,9 +4,9 @@
 * @version 1.0
 */
 
-#include "Rasterizer/Context/Window.h"
+#include "Rasterizer/Core/Window.h"
 
-Rasterizer::Context::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :
+Rasterizer::Core::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :
 	m_width(p_width),
 	m_height(p_height),
 	m_title(p_title),
@@ -28,53 +28,53 @@ Rasterizer::Context::Window::Window(const std::string& p_title, uint16_t p_width
 	}
 }
 
-Rasterizer::Context::Window::~Window()
+Rasterizer::Core::Window::~Window()
 {
 	SDL_DestroyWindow(m_sdlWindow);
 	SDL_Quit();
 }
 
-bool Rasterizer::Context::Window::IsOpened() const
+bool Rasterizer::Core::Window::IsOpened() const
 {
 	return m_windowState == EWindowState::OK;
 }
 
-Rasterizer::Context::EWindowState Rasterizer::Context::Window::GetWindowState() const
+Rasterizer::Core::EWindowState Rasterizer::Core::Window::GetWindowState() const
 {
 	return m_windowState;
 }
 
-SDL_Window * Rasterizer::Context::Window::GetSDLWindow() const
+SDL_Window * Rasterizer::Core::Window::GetSDLWindow() const
 {
 	return m_sdlWindow;
 }
 
-SDL_GLContext Rasterizer::Context::Window::GetGLContext() const
+SDL_GLContext Rasterizer::Core::Window::GetGLContext() const
 {
 	return m_glContext;
 }
 
-uint32_t Rasterizer::Context::Window::GetWidth() const
+uint32_t Rasterizer::Core::Window::GetWidth() const
 {
 	return m_width;
 }
 
-uint32_t Rasterizer::Context::Window::GetHeight() const
+uint32_t Rasterizer::Core::Window::GetHeight() const
 {
 	return m_height;
 }
 
-float Rasterizer::Context::Window::GetAspectRatio() const
+float Rasterizer::Core::Window::GetAspectRatio() const
 {
 	return m_aspectRatio;
 }
 
-std::pair<uint16_t, uint16_t> Rasterizer::Context::Window::GetSize() const
+std::pair<uint16_t, uint16_t> Rasterizer::Core::Window::GetSize() const
 {
 	return std::pair(m_width, m_height);
 }
 
-bool Rasterizer::Context::Window::IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point) const
+bool Rasterizer::Core::Window::IsPointInWindow(const std::pair<uint32_t, uint32_t>& p_point) const
 {
 	return p_point.first >= 0 && p_point.second >= 0 && p_point.first < m_width && p_point.second < m_height;
 }

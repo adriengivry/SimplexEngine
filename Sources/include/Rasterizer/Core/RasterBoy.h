@@ -8,7 +8,7 @@
 #ifndef _RASTERBOY_H
 #define _RASTERBOY_H
 
-#include "Rasterizer/Context/Window.h"
+#include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
@@ -27,7 +27,7 @@ namespace Rasterizer::Core
 		* @param p_camera
 		* @param p_rendrerer
 		*/
-		RasterBoy(const Context::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer);
+		RasterBoy(const Core::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer);
 
 		/**
 		* Rasterize a model to the screen
@@ -56,7 +56,7 @@ namespace Rasterizer::Core
 		std::pair<glm::ivec2, float> ProjectToPixelCoordinates(const glm::vec3& p_point);
 
 	private:
-		const Context::Window& m_window;
+		const Core::Window& m_window;
 		const Entities::Camera& m_camera;
 
 		Core::Renderer& m_renderer;

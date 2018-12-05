@@ -7,7 +7,7 @@
 #include "Rasterizer/Scripts/SConsoleController.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 
-Rasterizer::Scripts::SConsoleController::SConsoleController(const Context::InputManager & p_inputManager) :
+Rasterizer::Scripts::SConsoleController::SConsoleController(const Core::InputManager & p_inputManager) :
 	m_inputManager(p_inputManager)
 {
 }

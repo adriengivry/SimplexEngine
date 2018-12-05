@@ -8,9 +8,9 @@
 #ifndef _APPLICATION_H
 #define _APPLICATION_H
 
-#include "Rasterizer/Context/Window.h"
-#include "Rasterizer/Context/EventHandler.h"
-#include "Rasterizer/Context/InputManager.h"
+#include "Rasterizer/Core/Window.h"
+#include "Rasterizer/Core/EventHandler.h"
+#include "Rasterizer/Core/InputManager.h"
 #include "Rasterizer/Core/EApplicationState.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Core/UserInterface.h"
@@ -83,9 +83,9 @@ namespace Rasterizer::Core
 
 	private:
 		/* SDL Relatives */
-		Rasterizer::Context::Window m_window;
-		Rasterizer::Context::EventHandler m_eventHandler;
-		Rasterizer::Context::InputManager m_inputManager;
+		Rasterizer::Core::Window m_window;
+		Rasterizer::Core::EventHandler m_eventHandler;
+		Rasterizer::Core::InputManager m_inputManager;
 
 		/* Core */
 		Rasterizer::Core::Renderer m_renderer;

@@ -12,10 +12,13 @@
 
 #include <SDL.h>
 
-#include "Rasterizer/Context/EventHandler.h"
+#include "Rasterizer/Core/EventHandler.h"
 
-namespace Rasterizer::Context
+namespace Rasterizer::Core
 {
+	/**
+	* The input manager is an easy way to check inputs
+	*/
 	class InputManager final
 	{
 	public:

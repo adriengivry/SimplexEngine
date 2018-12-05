@@ -11,7 +11,7 @@
 #include <vector>
 #include <SDL_ttf.h>
 
-#include "Rasterizer/Context/Window.h"
+#include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Data/Color.h"
 #include "Rasterizer/Data/ETextAlignment.h"
 
@@ -24,7 +24,7 @@ namespace Rasterizer::Core
 		* Create the renderer
 		* @param p_window
 		*/
-		Renderer(const Context::Window& p_window);
+		Renderer(const Core::Window& p_window);
 
 		/**
 		* Defines a size of the pixel buffer calculated with the window width and height.

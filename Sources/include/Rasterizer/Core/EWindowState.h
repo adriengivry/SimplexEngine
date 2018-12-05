@@ -8,7 +8,7 @@
 #ifndef _WINDOWSTATE_H
 #define _WINDOWSTATE_H
 
-namespace Rasterizer::Context
+namespace Rasterizer::Core
 {
 	enum class EWindowState
 	{

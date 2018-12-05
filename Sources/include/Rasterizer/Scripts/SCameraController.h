@@ -5,7 +5,7 @@
 */
 
 #include "Rasterizer/Scripts/IScript.h"
-#include "Rasterizer/Context/InputManager.h"
+#include "Rasterizer/Core/InputManager.h"
 #include "Rasterizer/Entities/Camera.h"
 
 #pragma once
@@ -25,7 +25,7 @@ namespace Rasterizer::Scripts
 		* @param p_inputManager
 		* @param p_camera (The camera to control with this script)
 		*/
-		SCameraController(const Context::InputManager& p_inputManager, Entities::Camera& p_camera);
+		SCameraController(const Core::InputManager& p_inputManager, Entities::Camera& p_camera);
 
 		/**
 		* Update the script
@@ -46,7 +46,7 @@ namespace Rasterizer::Scripts
 		void HandleKeyboard(float p_deltaTime);
 
 	private:
-		const Context::InputManager& m_inputManager;
+		const Core::InputManager& m_inputManager;
 		Entities::Camera& m_camera;
 
 		/* Internal stuffs */

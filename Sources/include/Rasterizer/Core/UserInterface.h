@@ -13,7 +13,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "Rasterizer/Context/Window.h"
+#include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Data/Text.h"
 
@@ -29,7 +29,7 @@ namespace Rasterizer::Core
 		* Constructor of the user interface
 		* @param p_window
 		*/
-		UserInterface(const Context::Window& p_window, const Core::Renderer& p_renderer);
+		UserInterface(const Core::Window& p_window, const Core::Renderer& p_renderer);
 
 		/**
 		* Add a text to queue. The text will get renderer at the end of the frame
@@ -38,14 +38,14 @@ namespace Rasterizer::Core
 		void AddText(const Data::Text& p_text);
 
 		/**
-		* Draw
+		* Draw every queued texts to the screen
 		*/
 		void Draw();
 
 	private:
 		void LoadFonts();
 
-		const Context::Window& m_window;
+		const Core::Window& m_window;
 		const Core::Renderer& m_renderer;
 
 	public:
@@ -59,7 +59,6 @@ namespace Rasterizer::Core
 		const std::pair<int16_t, int16_t> centerAnchor;
 
 	private:
-
 		TTF_Font* m_smallFont;
 		TTF_Font* m_normalFont;
 		TTF_Font* m_bigFont;

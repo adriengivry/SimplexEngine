@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Core/UserInterface.h"
 
-Rasterizer::Core::UserInterface::UserInterface(const Context::Window& p_window, const Core::Renderer& p_renderer) :
+Rasterizer::Core::UserInterface::UserInterface(const Core::Window& p_window, const Core::Renderer& p_renderer) :
 	m_window(p_window),
 	m_renderer(p_renderer),
 	width(m_window.GetWidth()),
@@ -32,9 +32,7 @@ void Rasterizer::Core::UserInterface::Draw()
 	{
 		const Data::Text& text = m_texts.front();
 		TTF_Font* toUse = text.fontSize == Data::EFontSize::NORMAL_FONT ? m_normalFont : (text.fontSize == Data::EFontSize::SMALL_FONT ? m_smallFont : m_bigFont);
-
 		m_renderer.DrawText(text.content, toUse, { text.position.first, text.position.second}, text.color, text.horizontalAlign, text.verticalAlign);
-
 		m_texts.pop();
 	}
 }

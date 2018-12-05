@@ -12,7 +12,7 @@
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 #include "Rasterizer/Data/Triangle2D.h"
 
-Rasterizer::Core::RasterBoy::RasterBoy(const Context::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer) :
+Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer) :
 	m_window(p_window),
 	m_camera(p_camera),
 	m_renderer(p_renderer)

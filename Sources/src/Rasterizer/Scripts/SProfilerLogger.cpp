@@ -10,7 +10,7 @@
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 
-Rasterizer::Scripts::SProfilerLogger::SProfilerLogger(Rasterizer::Analytics::Profiler& p_profiler, const Context::InputManager& p_inputManager, Core::UserInterface& p_userInterface) :
+Rasterizer::Scripts::SProfilerLogger::SProfilerLogger(Rasterizer::Analytics::Profiler& p_profiler, const Core::InputManager& p_inputManager, Core::UserInterface& p_userInterface) :
 	m_inputManager(p_inputManager),
 	m_profiler(p_profiler),
 	m_userInterface(p_userInterface),

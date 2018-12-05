@@ -10,7 +10,7 @@
 #include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 
-Rasterizer::Core::Renderer::Renderer(const Context::Window& p_window)
+Rasterizer::Core::Renderer::Renderer(const Core::Window& p_window)
 {
 	auto[windowWidth, windowHeight] = p_window.GetSize();
 

@@ -14,14 +14,14 @@
 namespace Rasterizer::Scripts
 {
 	/**
-	* Rotate an entity over time
+	* Display the framerate on the screen
 	*/
 	class SFPSCounter final : public IScript
 	{
 	public:
 		/**
 		* Constructor of the script
-		* @p_inputManager
+		* @p_userInterface
 		*/
 		SFPSCounter(Core::UserInterface& p_userInterface);
 

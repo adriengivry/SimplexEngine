@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-Rasterizer::Scripts::SCameraController::SCameraController(const Context::InputManager & p_inputManager, Entities::Camera & p_camera) :
+Rasterizer::Scripts::SCameraController::SCameraController(const Core::InputManager & p_inputManager, Entities::Camera & p_camera) :
 	m_inputManager(p_inputManager),
 	m_camera(p_camera)
 {

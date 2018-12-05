@@ -8,10 +8,10 @@
 #ifndef _EVENTHANDLER_H
 #define _EVENTHANDLER_H
 
-#include "Rasterizer/Context/Window.h"
+#include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Utils/Event.h"
 
-namespace Rasterizer::Context
+namespace Rasterizer::Core
 {
 	/**
 	* This class handles SDL events

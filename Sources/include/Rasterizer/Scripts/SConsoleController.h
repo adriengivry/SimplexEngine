@@ -5,7 +5,7 @@
 */
 
 #include "Rasterizer/Scripts/IScript.h"
-#include "Rasterizer/Context/InputManager.h"
+#include "Rasterizer/Core/InputManager.h"
 
 #pragma once
 #ifndef _SCONSOLECONTROLLER_H
@@ -23,7 +23,7 @@ namespace Rasterizer::Scripts
 		* Constructor of the script
 		* @p_inputManager
 		*/
-		SConsoleController(const Context::InputManager& p_inputManager);
+		SConsoleController(const Core::InputManager& p_inputManager);
 
 		/**
 		* Update the script
@@ -37,7 +37,7 @@ namespace Rasterizer::Scripts
 		void ClearConsole();
 
 	private:
-		const Context::InputManager& m_inputManager;
+		const Core::InputManager& m_inputManager;
 	};
 }
 
