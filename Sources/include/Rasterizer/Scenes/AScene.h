@@ -64,9 +64,14 @@ namespace Rasterizer::Scenes
 		);
 
 		/**
-		* Create all the scene (Cameras, models, scripts)
+		* Load scene data (Cameras, models, scripts)
 		*/
-		void Initialize();
+		void Load();
+
+		/**
+		* Unload scene data (Cameras, models, scripts)
+		*/
+		void Unload();
 
 		/**
 		* Return the main camera (As a pointer, because it is nullable)

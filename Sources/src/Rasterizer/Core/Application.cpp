@@ -14,6 +14,7 @@
 #include "Rasterizer/Scripts/SFPSCounter.h"
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
+#include "Rasterizer/Scripts/SSceneNavigator.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -26,7 +27,7 @@ Rasterizer::Core::Application::Application() :
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 
-	CreateScene();
+	CreateScenes();
 	CreateGlobalScripts();
 }
 
@@ -34,7 +35,7 @@ int Rasterizer::Core::Application::Run()
 {
 	m_clock.Tick();
 
-	m_scene->Initialize();
+	m_sceneManager.LoadScene("Default");
 
 	while (m_applicationState == EApplicationState::RUNNING)
 		Update(m_clock.GetDeltaTime());
@@ -42,9 +43,10 @@ int Rasterizer::Core::Application::Run()
 	return EXIT_SUCCESS;
 }
 
-void Rasterizer::Core::Application::CreateScene()
+void Rasterizer::Core::Application::CreateScenes()
 {
-	m_scene = std::make_unique<Scenes::TestScene>(m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
+	m_sceneManager.RegisterScene<Scenes::DefaultScene>("Default", m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
+	m_sceneManager.RegisterScene<Scenes::TestScene>("Test", m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
 }
 
 void Rasterizer::Core::Application::CreateGlobalScripts()
@@ -52,6 +54,7 @@ void Rasterizer::Core::Application::CreateGlobalScripts()
 	AddGlobalScript<Scripts::SConsoleController>(m_inputManager);
 	AddGlobalScript<Scripts::SFPSCounter>(m_userInterface);
 	AddGlobalScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
+	AddGlobalScript<Scripts::SSceneNavigator>(m_sceneManager, m_inputManager);
 }
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
@@ -85,7 +88,7 @@ void Rasterizer::Core::Application::UpdateSceneScripts(float p_deltaTime)
 {
 	PROFILER_SPY("Application::UpdateSceneScripts");
 
-	for (auto& script : m_scene->GetScripts())
+	for (auto& script : m_sceneManager.GetCurrentScene()->GetScripts())
 		script->Update(p_deltaTime);
 }
 
@@ -101,8 +104,8 @@ void Rasterizer::Core::Application::RasterizeModels()
 {
 	PROFILER_SPY("Application::RasterizeModels");
 
-	for (auto& model : m_scene->GetModels())
-		m_rasterBoy.RasterizeModel(model, m_scene->GetMainCamera() != nullptr ? *m_scene->GetMainCamera() : m_defaultCamera); /* Use the scene main camera or the default camera if there is no camera in scene */
+	for (auto& model : m_sceneManager.GetCurrentScene()->GetModels())
+		m_rasterBoy.RasterizeModel(model, m_sceneManager.GetCurrentScene()->GetMainCamera() != nullptr ? *m_sceneManager.GetCurrentScene()->GetMainCamera() : m_defaultCamera); /* Use the scene main camera or the default camera if there is no camera in scene */
 }
 
 bool Rasterizer::Core::Application::IsRunning() const

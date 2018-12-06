@@ -7,6 +7,7 @@
 #include "Rasterizer/Scenes/TestScene.h"
 #include "Rasterizer/Scripts/SCameraController.h"
 #include "Rasterizer/Scripts/SRasterizationLimiter.h"
+#include "Rasterizer/Utils/IniIndexer.h"
 
 Rasterizer::Scenes::TestScene::TestScene(SCENE_PARAMETERS) : SCENE_INITIALIZATION_LIST
 {
@@ -25,7 +26,7 @@ void Rasterizer::Scenes::TestScene::CreateModels()
 void Rasterizer::Scenes::TestScene::CreateScripts()
 {
 	AddScript<Scripts::SCameraController>(m_inputManager, m_cameras[0]);
-	AddScript<Scripts::SRasterizationLimiter>(m_rasterBoy, 1.0f);
+	AddScript<Scripts::SRasterizationLimiter>(m_rasterBoy, Utils::IniIndexer::Application->Get<float>("rasterization_limiter_speed"));
 }
 
 void Rasterizer::Scenes::TestScene::DefineParents()

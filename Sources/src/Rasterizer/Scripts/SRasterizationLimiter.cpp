@@ -17,6 +17,11 @@ Rasterizer::Scripts::SRasterizationLimiter::SRasterizationLimiter(Core::RasterBo
 	m_rasterBoy.LimitTriangleRasterization(true);
 }
 
+Rasterizer::Scripts::SRasterizationLimiter::~SRasterizationLimiter()
+{
+	m_rasterBoy.LimitTriangleRasterization(false);
+}
+
 void Rasterizer::Scripts::SRasterizationLimiter::Update(float p_deltaTime)
 {
 	float previousLimit = m_rasterizationLimit;

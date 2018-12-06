@@ -18,6 +18,11 @@ namespace Rasterizer::Scripts
 		* @parma p_deltaTime
 		*/
 		virtual void Update(float p_deltaTime) = 0;
+
+		/**
+		* Destrutor of IScript. You can create your destructor in child classes
+		*/
+		virtual ~IScript() = default;
 	};
 }
 

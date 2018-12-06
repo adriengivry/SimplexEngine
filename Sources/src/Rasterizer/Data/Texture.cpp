@@ -30,7 +30,7 @@ void Rasterizer::Data::Texture::SetPixel(uint32_t p_x, uint32_t p_y, const Data:
 
 uint32_t Rasterizer::Data::Texture::GetPixel(uint32_t p_x, uint32_t p_y)
 {
-	GetElement(p_x, p_y);
+	return GetElement(p_x, p_y);
 }
 
 SDL_Texture * Rasterizer::Data::Texture::GetSDLTexture() const

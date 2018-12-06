@@ -15,6 +15,7 @@
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Core/UserInterface.h"
 #include "Rasterizer/Core/RasterBoy.h"
+#include "Rasterizer/Core/SceneManager.h"
 #include "Rasterizer/Analytics/Profiler.h"
 #include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Resources/Managers/MeshManager.h"
@@ -46,7 +47,7 @@ namespace Rasterizer::Core
 		/**
 		* Create the current scene
 		*/
-		void CreateScene();
+		void CreateScenes();
 
 		/**
 		* Create global scripts (Independent of the current scene)
@@ -101,11 +102,10 @@ namespace Rasterizer::Core
 		Rasterizer::Core::Renderer m_renderer;
 		Rasterizer::Core::UserInterface m_userInterface;
 		Rasterizer::Core::RasterBoy m_rasterBoy;
+		Rasterizer::Core::SceneManager m_sceneManager;
 		Rasterizer::Analytics::Profiler m_profiler;
 		Rasterizer::Utils::Clock m_clock;
 		Rasterizer::Resources::Managers::MeshManager m_meshManager;
-
-		std::unique_ptr<Scenes::AScene> m_scene;
 
 		/* Default stuffs */
 		Rasterizer::Entities::Camera m_defaultCamera;

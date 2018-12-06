@@ -28,6 +28,12 @@ namespace Rasterizer::Scripts
 		SRasterizationLimiter(Core::RasterBoy& p_rasterBoy, float p_speed);
 
 		/**
+		* Destructor of the SRasterizationLimiter.
+		* It will disable rasterization limit
+		*/
+		virtual ~SRasterizationLimiter();
+
+		/**
 		* Update the script
 		* @param p_deltaTime
 		*/

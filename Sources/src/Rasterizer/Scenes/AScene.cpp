@@ -6,6 +6,8 @@
 
 #include "Rasterizer/Scenes/AScene.h"
 
+#include <iostream>
+
 Rasterizer::Scenes::AScene::AScene(Core::Window& p_window, Core::EventHandler& p_eventHandler, Core::InputManager& p_inputManager, Core::Renderer& p_renderer, Core::UserInterface& p_userInterface, Core::RasterBoy& p_rasterBoy, Analytics::Profiler& p_profiler, Utils::Clock& p_clock, Resources::Managers::MeshManager& p_meshManager) :
 	m_window(p_window),
 	m_eventHandler(p_eventHandler),
@@ -19,12 +21,19 @@ Rasterizer::Scenes::AScene::AScene(Core::Window& p_window, Core::EventHandler& p
 {
 }
 
-void Rasterizer::Scenes::AScene::Initialize()
+void Rasterizer::Scenes::AScene::Load()
 {
 	CreateCameras();
 	CreateModels();
 	CreateScripts();
 	DefineParents();
+}
+
+void Rasterizer::Scenes::AScene::Unload()
+{
+	m_cameras.clear();
+	m_models.clear();
+	m_scripts.clear();
 }
 
 std::vector<std::unique_ptr<Rasterizer::Scripts::IScript>>& Rasterizer::Scenes::AScene::GetScripts()

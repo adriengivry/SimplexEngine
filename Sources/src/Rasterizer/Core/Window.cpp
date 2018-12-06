@@ -102,5 +102,5 @@ std::pair<int32_t, int32_t> Rasterizer::Core::Window::GetSizeSigned() const
 
 bool Rasterizer::Core::Window::IsPointInWindow(const std::pair<int32_t, int32_t>& p_point) const
 {
-	return p_point.first >= 0 && p_point.second >= 0 && p_point.first < m_width && p_point.second < m_height;
+	return p_point.first >= 0 && p_point.second >= 0 && p_point.first < GetWidthSigned() && p_point.second < GetHeightSigned();
 }

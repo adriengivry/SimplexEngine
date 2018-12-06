@@ -36,7 +36,6 @@ void Rasterizer::Scenes::DefaultScene::CreateScripts()
 	AddScript<Scripts::SRotateOverTime>(m_models[0], 90.0f);
 	AddScript<Scripts::SRotateOverTime>(m_models[4], 360.0f);
 	AddScript<Scripts::SCameraController>(m_inputManager, m_cameras[0]);
-	AddScript<Scripts::SRasterizationLimiter>(m_rasterBoy, Utils::IniIndexer::Application->Get<float>("rasterization_limiter_speed"));
 }
 
 void Rasterizer::Scenes::DefaultScene::DefineParents()
