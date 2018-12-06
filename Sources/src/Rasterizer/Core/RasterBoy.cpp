@@ -79,8 +79,10 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 	Data::Triangle2D triangle(v1, v2, v3);
 
 	/* Backface culling (Clock-wise) */
+	/*
 	if (triangle.CalculateArea() >= 0.0f)
 		return;
+	*/
 
 	/* Getting bounding box from the triangle to prevent iterating over all the screen */
 	auto[xmin, ymin, xmax, ymax] = triangle.GetBoundingBox();
@@ -99,7 +101,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 			if (bary.x >= 0.0f && bary.y >= 0.0f && bary.x + bary.y <= 1.0f)
 			{
 				float depth = depth1 * bary.z + depth3 * bary.x + bary.y * depth2;
-				if (depth <= m_depthBuffer.GetElement(x, y))
+				if (depth > 0.0f && depth <= m_depthBuffer.GetElement(x, y))
 				{
 					m_rasterizationOutputBuffer.SetPixel(x, y, faceNormalColor);
 					m_depthBuffer.SetElement(x, y, depth);
@@ -122,13 +124,6 @@ std::pair<glm::vec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinat
 	result.x = std::round(((screenSpace.x + 1) * 0.5f) * m_window.GetWidth());
 	result.y = std::round(((1 - screenSpace.y) * 0.5f) * m_window.GetHeight());
 	return std::make_pair(result, screenSpace.z);
-
-	/*
-	const float widthHalf = m_window.GetWidth() / 2.0f;
-	const float heightHalf = m_window.GetHeight() / 2.0f;
-	glm::vec2 screenCoordinates(((clipped.x) + 1) * widthHalf, m_window.GetHeight() - ((clipped.y) + 1) * heightHalf);
-	return std::make_pair(screenCoordinates, clipped.z);
-	*/
 }
 
 bool Rasterizer::Core::RasterBoy::CanRasterize()
