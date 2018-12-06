@@ -23,23 +23,11 @@ Rasterizer::Core::Renderer::Renderer(const Core::Window& p_window)
 		flags |= SDL_RENDERER_ACCELERATED;
 
 	m_sdlRenderer = SDL_CreateRenderer(p_window.GetSDLWindow(), -1, flags);
-	m_finalTexture = SDL_CreateTexture(m_sdlRenderer, SDL_PIXELFORMAT_ARGB32, SDL_TEXTUREACCESS_STREAMING, static_cast<int>(windowWidth), static_cast<int>(windowHeight));
 }
 
-void Rasterizer::Core::Renderer::InitializePixelBufferSize(std::pair<uint16_t, uint16_t> p_windowSize)
+SDL_Renderer* Rasterizer::Core::Renderer::GetSDLRenderer() const
 {
-	m_bufferWidth = p_windowSize.first;
-	m_bufferHeight = p_windowSize.second;
-
-	size_t bufferSize = m_bufferWidth * m_bufferHeight;
-
-	m_pixelBufferSizeof = static_cast<uint32_t>(bufferSize * sizeof(decltype(m_pixelBuffer)::value_type));
-	m_depthBufferSizeof = static_cast<uint32_t>(bufferSize * sizeof(decltype(m_depthBuffer)::value_type));
-
-	m_pixelBufferRowSize = static_cast<int>(m_bufferWidth * sizeof(decltype(m_pixelBuffer)::value_type));
-
-	m_pixelBuffer.resize(bufferSize);
-	m_depthBuffer.resize(bufferSize);
+	return m_sdlRenderer;
 }
 
 void Rasterizer::Core::Renderer::DrawText(const std::string & p_text, TTF_Font * p_font, const std::pair<int, int>& p_position, const Data::Color & p_color, Data::ETextHorizontalAlignment p_horizontalAlign, Data::ETextVerticalAlignment p_verticalAlign) const
@@ -81,53 +69,11 @@ void Rasterizer::Core::Renderer::DrawText(const std::string & p_text, TTF_Font *
 	SDL_FreeSurface(surface);
 }
 
-void Rasterizer::Core::Renderer::ClearPixelBuffer()
+void Rasterizer::Core::Renderer::DrawTexture(const Data::Texture & p_texture)
 {
-	PROFILER_SPY("Renderer::ClearPixelBuffer");
+	PROFILER_SPY("Renderer::DrawTexture");
 
-	memset(m_pixelBuffer.data(), 0, m_pixelBufferSizeof);
-}
-
-void Rasterizer::Core::Renderer::ClearDepthBuffer()
-{
-	PROFILER_SPY("Renderer::ClearDepthBuffer");
-
-	memset(m_depthBuffer.data(), 0, m_depthBufferSizeof);
-}
-
-void Rasterizer::Core::Renderer::SetPixel(uint16_t p_x, uint16_t p_y, const Data::Color& p_color)
-{
-	m_pixelBuffer[p_y * m_bufferWidth + p_x] = p_color.Pack();
-}
-
-uint32_t Rasterizer::Core::Renderer::GetColor(uint16_t p_x, uint16_t p_y)
-{
-	return m_pixelBuffer[p_y * m_bufferWidth + p_x];
-}
-
-void Rasterizer::Core::Renderer::SetDepth(uint16_t p_x, uint16_t p_y, float p_depth)
-{
-	m_depthBuffer[p_y * m_bufferWidth + p_x] = p_depth;
-}
-
-float Rasterizer::Core::Renderer::GetDepth(uint16_t p_x, uint16_t p_y)
-{
-	float depth = m_depthBuffer[p_y * m_bufferWidth + p_x];
-	return depth == 0.0f ? std::numeric_limits<float>::max() : depth;
-}
-
-void Rasterizer::Core::Renderer::GenerateFinalTexture()
-{
-	PROFILER_SPY("Renderer::GenerateFinalTexture");
-
-	SDL_UpdateTexture(m_finalTexture, nullptr, m_pixelBuffer.data(), m_pixelBufferRowSize);
-}
-
-void Rasterizer::Core::Renderer::DrawFinalTexture()
-{
-	PROFILER_SPY("Renderer::DrawFinalTexture");
-
-	SDL_RenderCopy(m_sdlRenderer, m_finalTexture, nullptr, nullptr);
+	SDL_RenderCopy(m_sdlRenderer, p_texture.GetSDLTexture(), nullptr, nullptr);
 }
 
 void Rasterizer::Core::Renderer::Render()

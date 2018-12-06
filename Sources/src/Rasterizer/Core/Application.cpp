@@ -24,7 +24,6 @@ Rasterizer::Core::Application::Application() :
 	m_defaultCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio())
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
-	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
 	CreateScene();
 	CreateGlobalScripts();
@@ -65,14 +64,13 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	UpdateSceneScripts(p_deltaTime);
 
 	/* Rasterization process */
-	m_rasterBoy.Update(p_deltaTime);
+	m_rasterBoy.ResetRasterizedTrianglesCount();
+	m_rasterBoy.ClearBuffers();
 	RasterizeModels();
+	m_rasterBoy.SendRasterizationOutputBufferToGPU();
 
 	/* Draw order */
-	m_renderer.GenerateFinalTexture();
-	m_renderer.DrawFinalTexture();
-	m_renderer.ClearPixelBuffer();
-	m_renderer.ClearDepthBuffer();
+	m_renderer.DrawTexture(m_rasterBoy.GetRasterizationOutputBuffer());
 	m_userInterface.Draw();
 
 	/* Render on screen */

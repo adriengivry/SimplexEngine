@@ -17,13 +17,21 @@
 
 Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer) :
 	m_window(p_window),
-	m_renderer(p_renderer)
+	m_renderer(p_renderer),
+	m_depthBuffer(m_window.GetWidth(), m_window.GetHeight()),
+	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), m_window.GetWidth(), m_window.GetHeight(), SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING)
 {
 }
 
-void Rasterizer::Core::RasterBoy::Update(float p_deltaTime)
+void Rasterizer::Core::RasterBoy::ResetRasterizedTrianglesCount()
 {
 	m_rasterizedTriangles = 0;
+}
+
+void Rasterizer::Core::RasterBoy::ClearBuffers()
+{
+	m_depthBuffer.Clear();
+	m_rasterizationOutputBuffer.Clear();
 }
 
 void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, const Entities::Camera& p_camera)
@@ -87,10 +95,10 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 			if (bary.x >= 0.0f && bary.y >= 0.0f && bary.x + bary.y <= 1.0f)
 			{
 				float depth = depth1 * bary.z + depth2 * bary.x + bary.y * depth3;
-				if (depth <= m_renderer.GetDepth(x, y))
+				if (depth <= m_depthBuffer.GetElement(x, y))
 				{
-					m_renderer.SetPixel(x, y, faceNormalColor);
-					m_renderer.SetDepth(x, y, depth);
+					m_rasterizationOutputBuffer.SetPixel(x, y, faceNormalColor);
+					m_depthBuffer.SetElement(x, y, depth);
 				}
 			}
 	
@@ -125,4 +133,14 @@ void Rasterizer::Core::RasterBoy::LimitTriangleRasterization(bool p_enable)
 void Rasterizer::Core::RasterBoy::SetRasterizedTriangleLimit(uint64_t p_limit)
 {
 	m_rasterizedTrianglesLimit = p_limit;
+}
+
+const Rasterizer::Data::Texture & Rasterizer::Core::RasterBoy::GetRasterizationOutputBuffer() const
+{
+	return m_rasterizationOutputBuffer;
+}
+
+void Rasterizer::Core::RasterBoy::SendRasterizationOutputBufferToGPU()
+{
+	m_rasterizationOutputBuffer.SendDataToGPU();
 }

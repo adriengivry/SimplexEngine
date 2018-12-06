@@ -12,6 +12,8 @@
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
+#include "Rasterizer/Data/DepthBuffer.h"
+#include "Rasterizer/Data/Texture.h"
 
 namespace Rasterizer::Core
 {
@@ -29,11 +31,14 @@ namespace Rasterizer::Core
 		RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer);
 
 		/**
-		* Update rasterizer data (Nothing is rasterized here)
-		* This update is essentially used to reset rasterized triangles count
-		* @param p_deltaTime
+		* Reset the rasterized triangle count
 		*/
-		void Update(float p_deltaTime);
+		void ResetRasterizedTrianglesCount();
+
+		/**
+		* Clear depth and rasterization buffer
+		*/
+		void ClearBuffers();
 
 		/**
 		* Rasterize a model to the screen
@@ -79,10 +84,24 @@ namespace Rasterizer::Core
 		*/
 		void SetRasterizedTriangleLimit(uint64_t p_limit);
 
+		/**
+		* Return the result of the rasterization as a 2D buffer (Texture buffer)
+		*/
+		const Data::Texture& GetRasterizationOutputBuffer() const;
+
+		/**
+		* Send the rasterization output buffer to GPU to make it available
+		* for future draw (DrawTexture from renderer)
+		*/
+		void SendRasterizationOutputBufferToGPU();
+
 	private:
 		const Core::Window& m_window;
 
 		Core::Renderer& m_renderer;
+
+		Data::DepthBuffer m_depthBuffer;
+		Data::Texture m_rasterizationOutputBuffer;
 
 		bool m_limitTriangleRasterization;
 		uint64_t m_rasterizedTrianglesLimit;

@@ -221,6 +221,8 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp" />
     <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
+    <ClCompile Include="src\Rasterizer\Data\DepthBuffer.cpp" />
+    <ClCompile Include="src\Rasterizer\Data\Texture.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\AScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\DefaultScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
@@ -261,6 +263,8 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Core\Window.h" />
     <ClInclude Include="include\Rasterizer\Core\Application.h" />
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h" />
+    <ClInclude Include="include\Rasterizer\Data\Buffer2D.h" />
+    <ClInclude Include="include\Rasterizer\Data\DepthBuffer.h" />
     <ClInclude Include="include\Rasterizer\Data\EFontSize.h" />
     <ClInclude Include="include\Rasterizer\Data\ETextAlignment.h" />
     <ClInclude Include="include\Rasterizer\Core\RasterBoy.h" />
@@ -269,6 +273,7 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
     <ClInclude Include="include\Rasterizer\Data\Text.h" />
+    <ClInclude Include="include\Rasterizer\Data\Texture.h" />
     <ClInclude Include="include\Rasterizer\Scenes\AScene.h" />
     <ClInclude Include="include\Rasterizer\Scenes\DefaultScene.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
