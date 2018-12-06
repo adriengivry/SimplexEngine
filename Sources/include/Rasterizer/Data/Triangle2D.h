@@ -51,30 +51,8 @@ namespace Rasterizer::Data
 		*/
 		glm::vec3 Barycentric(const Point& p_point);
 
-		/**
-		* Calculate the area of a triangle defined by 3 points
-		* @param p_point1
-		* @param p_point2
-		* @param p_point3
-		*/
-		static float CalculateArea(const Point& p_point1, const Point& p_point2, const Point& p_point3);
-
-		/**
-		* Verify if a point is in the triangle
-		* @param p_point
-		*/
-		bool IsPointInArea(const Point& p_point);
-
-		/**
-		* Verify if a point is in the permiter of the triangle
-		* @param p_point
-		*/
-		bool IsPointInPerimeter(const Point& p_point);
-
 	private:
 		Point m_points[3];
-
-		float m_area;
 
 		/* Barycentric calculation relatives */
 		glm::vec2 m_V0;

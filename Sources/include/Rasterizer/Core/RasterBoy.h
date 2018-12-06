@@ -65,7 +65,7 @@ namespace Rasterizer::Core
 		* Project a point to the screen and calculate his depth buffer
 		* @param p_point (In camera space, aka after applying MVP)
 		*/
-		std::pair<glm::vec2, float> ProjectToPixelCoordinates(const glm::vec3& p_point);
+		std::pair<glm::vec2, float> ProjectToPixelCoordinates(const glm::vec4& p_point);
 
 		/**
 		* Verify is RasterBoy is allow to rasterize
