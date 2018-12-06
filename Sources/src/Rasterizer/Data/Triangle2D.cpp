@@ -9,7 +9,7 @@
 #include "Rasterizer/Data/Triangle2D.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 
-Rasterizer::Data::Triangle2D::Triangle2D(const Point& p_firstPoint, const Point & p_secondPoint, const Point & p_thirdPoint) :
+Rasterizer::Data::Triangle2D::Triangle2D(const glm::vec2& p_firstPoint, const glm::vec2& p_secondPoint, const glm::vec2& p_thirdPoint) :
 	m_points { p_firstPoint, p_secondPoint, p_thirdPoint }
 {
 	UpdateBarycentric();
@@ -49,7 +49,7 @@ Rasterizer::Data::Triangle2D::BoundingBox Rasterizer::Data::Triangle2D::GetBound
 	return result;
 }
 
-glm::vec3 Rasterizer::Data::Triangle2D::Barycentric(const Point& p_point)
+glm::vec3 Rasterizer::Data::Triangle2D::Barycentric(const glm::vec2& p_point)
 {
 	const float x = p_point.x - m_points[0].x;
 	const float y = p_point.y - m_points[0].y;

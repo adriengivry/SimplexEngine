@@ -52,7 +52,7 @@ void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, c
 		RasterizeTriangle(std::make_tuple(vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]]), p_mvp);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Data::Vertex, Data::Vertex> p_vertices, const glm::mat4 & p_mvp)
+void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Data::Vertex, Data::Vertex> p_vertices, const glm::mat4& p_mvp)
 {
 	if (!CanRasterize())
 		return;
@@ -98,7 +98,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 			glm::vec3 bary = triangle.Barycentric({ x, y });
 			if (bary.x >= 0.0f && bary.y >= 0.0f && bary.x + bary.y <= 1.0f)
 			{
-				float depth = depth1 * bary.z + depth2 * bary.x + bary.y * depth3;
+				float depth = depth1 * bary.z + depth3 * bary.x + bary.y * depth2;
 				if (depth <= m_depthBuffer.GetElement(x, y))
 				{
 					m_rasterizationOutputBuffer.SetPixel(x, y, faceNormalColor);
@@ -114,15 +114,14 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 
 std::pair<glm::vec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec4& p_point)
 {
-	/* Homogenize */
-	glm::vec3 clipped = p_point / p_point.w;
+	/* Homogenize and calculate screen space coordiantes */
+	glm::vec3 screenSpace = p_point / p_point.w;
 
+	/* Convert to pixel coordinates */
 	glm::vec2 result;
-
-	/* Convert to screen */
-	result.x = std::round(((clipped.x + 1) * 0.5f) * m_window.GetWidth());
-	result.y = std::round(((1 - clipped.y) * 0.5f) * m_window.GetHeight());
-	return std::make_pair(result, p_point.z);
+	result.x = std::round(((screenSpace.x + 1) * 0.5f) * m_window.GetWidth());
+	result.y = std::round(((1 - screenSpace.y) * 0.5f) * m_window.GetHeight());
+	return std::make_pair(result, screenSpace.z);
 
 	/*
 	const float widthHalf = m_window.GetWidth() / 2.0f;

@@ -15,7 +15,7 @@ Rasterizer::Scenes::TestScene::TestScene(SCENE_PARAMETERS) : SCENE_INITIALIZATIO
 
 void Rasterizer::Scenes::TestScene::CreateCameras()
 {
-	AddCamera(glm::vec3(0.0f, 0.0f, 20.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
+	AddCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
 }
 
 void Rasterizer::Scenes::TestScene::CreateModels()

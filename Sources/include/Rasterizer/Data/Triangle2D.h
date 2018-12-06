@@ -20,7 +20,6 @@ namespace Rasterizer::Data
 	class Triangle2D final
 	{
 	public:
-		using Point = glm::vec2;
 		using BoundingBox = std::tuple<int32_t, int32_t, int32_t, int32_t>;
 
 		/**
@@ -29,7 +28,7 @@ namespace Rasterizer::Data
 		* @param p_secondPoint
 		* @param p_thirdPoint
 		*/
-		Triangle2D(const Point& p_firstPoint, const Point& p_secondPoint, const Point& p_thirdPoint);
+		Triangle2D(const glm::vec2& p_firstPoint, const glm::vec2& p_secondPoint, const glm::vec2& p_thirdPoint);
 
 		/**
 		* Calculate the area of the triangle
@@ -49,10 +48,10 @@ namespace Rasterizer::Data
 		/**
 		*
 		*/
-		glm::vec3 Barycentric(const Point& p_point);
+		glm::vec3 Barycentric(const glm::vec2& p_point);
 
 	private:
-		Point m_points[3];
+		glm::vec2 m_points[3];
 
 		/* Barycentric calculation relatives */
 		glm::vec2 m_V0;
