@@ -10,6 +10,7 @@
 #include "Rasterizer/Utils/Math.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 #include "Rasterizer/Scenes/DefaultScene.h"
+#include "Rasterizer/Scenes/TestScene.h"
 #include "Rasterizer/Scripts/SFPSCounter.h"
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
@@ -43,7 +44,7 @@ int Rasterizer::Core::Application::Run()
 
 void Rasterizer::Core::Application::CreateScene()
 {
-	m_scene = std::make_unique<Scenes::DefaultScene>(m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
+	m_scene = std::make_unique<Scenes::TestScene>(m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
 }
 
 void Rasterizer::Core::Application::CreateGlobalScripts()

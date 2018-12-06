@@ -12,8 +12,7 @@
 #include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Utils/Math.h"
 
-Rasterizer::Scenes::DefaultScene::DefaultScene(Core::Window & p_window, Core::EventHandler & p_eventHandler, Core::InputManager & p_inputManager, Core::Renderer & p_renderer, Core::UserInterface & p_userInterface, Core::RasterBoy & p_rasterBoy, Analytics::Profiler & p_profiler, Utils::Clock & p_clock, Resources::Managers::MeshManager & p_meshManager) :
-	AScene(p_window, p_eventHandler, p_inputManager, p_renderer, p_userInterface, p_rasterBoy, p_profiler, p_clock, p_meshManager)
+Rasterizer::Scenes::DefaultScene::DefaultScene(SCENE_PARAMETERS) : SCENE_INITIALIZATION_LIST
 {
 }
 

@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Scenes/AScene.h"
 
-Rasterizer::Scenes::AScene::AScene(Core::Window & p_window, Core::EventHandler & p_eventHandler, Core::InputManager & p_inputManager, Core::Renderer & p_renderer, Core::UserInterface & p_userInterface, Core::RasterBoy & p_rasterBoy, Analytics::Profiler & p_profiler, Utils::Clock & p_clock, Resources::Managers::MeshManager & p_meshManager) :
+Rasterizer::Scenes::AScene::AScene(Core::Window& p_window, Core::EventHandler& p_eventHandler, Core::InputManager& p_inputManager, Core::Renderer& p_renderer, Core::UserInterface& p_userInterface, Core::RasterBoy& p_rasterBoy, Analytics::Profiler& p_profiler, Utils::Clock& p_clock, Resources::Managers::MeshManager& p_meshManager) :
 	m_window(p_window),
 	m_eventHandler(p_eventHandler),
 	m_inputManager(p_inputManager),

@@ -22,19 +22,24 @@
 #include "Rasterizer/Resources/Managers/MeshManager.h"
 #include "Rasterizer/Scripts/IScript.h"
 
+/**
+* This header contain some usefull macro to create scenes inheriting from AScene quickly
+*/
+#include "Rasterizer/Scenes/ASceneDefines.h"
+
 namespace Rasterizer::Scenes
 {
 	/**
 	* Abstract scene that is the base class for any scene of the project.
 	* A scene is basically a collection of entities and scripts.
-	* It has references about most core classes of the project to
+	* It has references about most main classes instances of the project to
 	* allow scripts to influence them (Ex: Allow a script to access InputManager)
 	*/
 	class AScene
 	{
 	public:
 		/**
-		* Constructor of the scene, require core classes to get send as references
+		* Constructor of the scene, require main classes instances to get send as references
 		* @param p_window
 		* @param p_eventHandler
 		* @param p_inputManager
@@ -62,26 +67,6 @@ namespace Rasterizer::Scenes
 		* Create all the scene (Cameras, models, scripts)
 		*/
 		void Initialize();
-
-		/**
-		* You should create your cameras here
-		*/
-		virtual void CreateCameras() {}
-
-		/**
-		* You should create your models here
-		*/
-		virtual void CreateModels() {}
-
-		/**
-		* You should create your scripts here
-		*/
-		virtual void CreateScripts() {}
-
-		/**
-		*You should define you parent/child relations here
-		*/
-		virtual void DefineParents() {}
 
 		/**
 		* Return the main camera (As a pointer, because it is nullable)
@@ -131,6 +116,27 @@ namespace Rasterizer::Scenes
 		*/
 		void SetAsMainCamera(Entities::Camera& p_camera);
 
+	private:
+		/**
+		* You should create your cameras here
+		*/
+		virtual void CreateCameras() = 0;
+
+		/**
+		* You should create your models here
+		*/
+		virtual void CreateModels() = 0;
+
+		/**
+		* You should create your scripts here
+		*/
+		virtual void CreateScripts() = 0;
+
+		/**
+		*You should define you parent/child relations here
+		*/
+		virtual void DefineParents() = 0;
+
 	protected:
 		/* Accessible data for new scenes */
 		Core::Window&						m_window;
@@ -143,7 +149,7 @@ namespace Rasterizer::Scenes
 		Utils::Clock&						m_clock;
 		Resources::Managers::MeshManager&	m_meshManager;
 
-		/* Scripts */
+		/* Scene content */
 		std::vector<Rasterizer::Entities::Camera> m_cameras;
 		std::vector<Rasterizer::Entities::Model> m_models;
 		std::vector<std::unique_ptr<Scripts::IScript>> m_scripts;

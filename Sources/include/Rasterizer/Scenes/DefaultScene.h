@@ -19,7 +19,7 @@ namespace Rasterizer::Scenes
 	{
 	public:
 		/**
-		* Constructor of the scene, require core classes to get send as references
+		* Constructor of the scene, require main classes instances to get send as references
 		* @param p_window
 		* @param p_eventHandler
 		* @param p_inputManager
@@ -30,37 +30,12 @@ namespace Rasterizer::Scenes
 		* @param p_clock
 		* @param p_meshManager
 		*/
-		DefaultScene
-		(
-			Core::Window&						p_window,
-			Core::EventHandler&					p_eventHandler,
-			Core::InputManager&					p_inputManager,
-			Core::Renderer&						p_renderer,
-			Core::UserInterface&				p_userInterface,
-			Core::RasterBoy&					p_rasterBoy,
-			Analytics::Profiler&				p_profiler,
-			Utils::Clock&						p_clock,
-			Resources::Managers::MeshManager&	p_meshManager
-		);
+		DefaultScene(SCENE_PARAMETERS);
 
-		/**
-		* You should create your cameras here
-		*/
+	private:
 		virtual void CreateCameras() override;
-
-		/**
-		* You should create your models here
-		*/
 		virtual void CreateModels() override;
-
-		/**
-		* You should create your scripts here
-		*/
 		virtual void CreateScripts() override;
-		
-		/**
-		*You should define you parent/child relations here
-		*/
 		virtual void DefineParents() override;
 	};
 }
