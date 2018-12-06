@@ -10,7 +10,7 @@
 #include "Rasterizer/Scripts/SRasterizationLimiter.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 
-Rasterizer::Scripts::SRasterizationLimiter::SRasterizationLimiter(Core::RasterBoy& p_rasterBoy) : m_rasterBoy(p_rasterBoy)
+Rasterizer::Scripts::SRasterizationLimiter::SRasterizationLimiter(Core::RasterBoy& p_rasterBoy, float p_speed) : m_rasterBoy(p_rasterBoy), m_speed(p_speed)
 {
 	m_rasterizationLimit = 0.0f;
 
@@ -19,10 +19,12 @@ Rasterizer::Scripts::SRasterizationLimiter::SRasterizationLimiter(Core::RasterBo
 
 void Rasterizer::Scripts::SRasterizationLimiter::Update(float p_deltaTime)
 {
-	m_rasterizationLimit += p_deltaTime * Utils::IniIndexer::Application->Get<float>("rasterization_limiter_speed");
+	float previousLimit = m_rasterizationLimit;
+	m_rasterizationLimit += p_deltaTime * m_speed;
 
 	/* Prevent the overflow of float */
-	m_rasterizationLimit = std::min(m_rasterizationLimit, 10000000.0f);
+	if (m_rasterizationLimit < previousLimit)
+		m_rasterizationLimit = previousLimit;
 
 	m_rasterBoy.SetRasterizedTriangleLimit(static_cast<uint64_t>(m_rasterizationLimit));
 }

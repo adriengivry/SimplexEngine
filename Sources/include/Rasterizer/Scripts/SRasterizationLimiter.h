@@ -23,8 +23,9 @@ namespace Rasterizer::Scripts
 		/**
 		* Constructor
 		* @param p_rasterBoy
+		* @param p_speed
 		*/
-		SRasterizationLimiter(Core::RasterBoy& p_rasterBoy);
+		SRasterizationLimiter(Core::RasterBoy& p_rasterBoy, float p_speed);
 
 		/**
 		* Update the script
@@ -35,6 +36,7 @@ namespace Rasterizer::Scripts
 	private:
 		Core::RasterBoy& m_rasterBoy;
 
+		float m_speed;
 		float m_rasterizationLimit;
 	};
 }

@@ -15,9 +15,8 @@
 
 #include <thread>
 
-Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer) :
+Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer) :
 	m_window(p_window),
-	m_camera(p_camera),
 	m_renderer(p_renderer)
 {
 }
@@ -27,9 +26,9 @@ void Rasterizer::Core::RasterBoy::Update(float p_deltaTime)
 	m_rasterizedTriangles = 0;
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor)
+void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, const Entities::Camera& p_camera)
 {
-	glm::mat4 mvp = m_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
+	glm::mat4 mvp = p_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
 
 	for (auto mesh : p_actor.GetMeshes())
 		RasterizeMesh(mesh.get(), mvp);

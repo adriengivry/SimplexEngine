@@ -221,6 +221,8 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp" />
     <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
+    <ClCompile Include="src\Rasterizer\Scenes\AScene.cpp" />
+    <ClCompile Include="src\Rasterizer\Scenes\DefaultScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp" />
@@ -267,6 +269,8 @@ xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platfo
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
     <ClInclude Include="include\Rasterizer\Data\Text.h" />
+    <ClInclude Include="include\Rasterizer\Scenes\AScene.h" />
+    <ClInclude Include="include\Rasterizer\Scenes\DefaultScene.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />

@@ -24,10 +24,9 @@ namespace Rasterizer::Core
 		/**
 		* Constructor of the RasterBoy
 		* @param p_window
-		* @param p_camera
 		* @param p_rendrerer
 		*/
-		RasterBoy(const Core::Window& p_window, const Entities::Camera& p_camera, Core::Renderer& p_renderer);
+		RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer);
 
 		/**
 		* Update rasterizer data (Nothing is rasterized here)
@@ -39,8 +38,9 @@ namespace Rasterizer::Core
 		/**
 		* Rasterize a model to the screen
 		* @param p_actor
+		* @param p_camera
 		*/
-		void RasterizeModel(const Entities::Model& p_actor);
+		void RasterizeModel(const Entities::Model& p_actor, const Entities::Camera& p_camera);
 
 		/**
 		* Rasterize a mesh to the screen
@@ -81,7 +81,6 @@ namespace Rasterizer::Core
 
 	private:
 		const Core::Window& m_window;
-		const Entities::Camera& m_camera;
 
 		Core::Renderer& m_renderer;
 

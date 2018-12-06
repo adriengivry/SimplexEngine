@@ -4,73 +4,54 @@
 * @version 1.0
 */
 
-#include <iostream>
-#include <SDL.h>
-
-#include <glm/gtc/matrix_transform.hpp>
-#include <glm/gtx/quaternion.hpp>
-
 #include "Rasterizer/Core/Application.h"
 #include "Rasterizer/Data/Vertex.h"
 #include "Rasterizer/Data/Triangle2D.h"
 #include "Rasterizer/Utils/Math.h"
-#include "Rasterizer/Scripts/SCameraController.h"
-#include "Rasterizer/Scripts/SRotateOverTime.h"
+#include "Rasterizer/Analytics/ProfilerSpy.h"
+#include "Rasterizer/Scenes/DefaultScene.h"
 #include "Rasterizer/Scripts/SFPSCounter.h"
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
-#include "Rasterizer/Scripts/SRasterizationLimiter.h"
-#include "Rasterizer/Analytics/ProfilerSpy.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
 	m_inputManager(m_eventHandler),
 	m_renderer(m_window),
 	m_userInterface(m_window, m_renderer),
-	m_rasterBoy(m_window, m_camera, m_renderer),
-	m_camera({ Utils::IniIndexer::Application->Get<float>("camera_position_x"), Utils::IniIndexer::Application->Get<float>("camera_position_y"), Utils::IniIndexer::Application->Get<float>("camera_position_z")},Utils::Math::CreateQuaternionFromEuler({ Utils::IniIndexer::Application->Get<float>("camera_rotation_x"), Utils::IniIndexer::Application->Get<float>("camera_rotation_y"), Utils::IniIndexer::Application->Get<float>("camera_rotation_z")}), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
-	m_applicationState(EApplicationState::RUNNING)
+	m_rasterBoy(m_window, m_renderer),
+	m_applicationState(EApplicationState::RUNNING),
+	m_defaultCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio())
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 	m_renderer.InitializePixelBufferSize(m_window.GetSize());
 
-	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 0.0f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 0.0f, 0.0f }), glm::vec3(1.0f));
-	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
-	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
-	m_models.emplace_back(*m_meshManager.RequireAndGet(Utils::IniIndexer::Application->Get<std::string>("default_mesh")), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
-	m_models.emplace_back(*m_meshManager.RequireAndGet("Monkey"), glm::vec3(3.0f, 0.0f, 0.0f), glm::quat(), glm::vec3(1.0f));
-	m_models.emplace_back(*m_meshManager.RequireAndGet("Cube"), glm::vec3(0.0f, -3.0f, 0.0f), glm::quat(), glm::vec3(1.0f, 1.0f, 1.0f));
-
-
-	m_models[1].SetParent(m_models[0]);
-	m_models[2].SetParent(m_models[1]);
-	m_models[3].SetParent(m_models[2]);
-	m_models[4].SetParent(m_models[0]);
-
-	CreateScripts();
-}
-
-void Rasterizer::Core::Application::CreateScripts()
-{
-	AddScript<Scripts::SRotateOverTime>(m_models[0], Utils::IniIndexer::Application->Get<float>("model_rotation_per_second"));
-	AddScript<Scripts::SRotateOverTime>(m_models[4], 360.0f);
-	AddScript<Scripts::SCameraController>(m_inputManager, m_camera);
-	AddScript<Scripts::SConsoleController>(m_inputManager);
-	AddScript<Scripts::SFPSCounter>(m_userInterface);
-	AddScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
-	AddScript<Scripts::SRasterizationLimiter>(m_rasterBoy);
+	CreateScene();
+	CreateGlobalScripts();
 }
 
 int Rasterizer::Core::Application::Run()
 {
 	m_clock.Tick();
 
+	m_scene->Initialize();
+
 	while (m_applicationState == EApplicationState::RUNNING)
-	{
 		Update(m_clock.GetDeltaTime());
-	}
 
 	return EXIT_SUCCESS;
+}
+
+void Rasterizer::Core::Application::CreateScene()
+{
+	m_scene = std::make_unique<Scenes::DefaultScene>(m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
+}
+
+void Rasterizer::Core::Application::CreateGlobalScripts()
+{
+	AddGlobalScript<Scripts::SConsoleController>(m_inputManager);
+	AddGlobalScript<Scripts::SFPSCounter>(m_userInterface);
+	AddGlobalScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
 }
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
@@ -80,7 +61,8 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	m_eventHandler.HandleEvents(m_window);
 
 	/* Update scripts */
-	UpdateScripts(p_deltaTime);
+	UpdateGlobalScripts(p_deltaTime);
+	UpdateSceneScripts(p_deltaTime);
 
 	/* Rasterization process */
 	m_rasterBoy.Update(p_deltaTime);
@@ -100,11 +82,19 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	m_clock.Tick();
 }
 
-void Rasterizer::Core::Application::UpdateScripts(float p_deltaTime)
+void Rasterizer::Core::Application::UpdateSceneScripts(float p_deltaTime)
 {
-	PROFILER_SPY("Application::UpdateScripts");
+	PROFILER_SPY("Application::UpdateSceneScripts");
 
-	for (auto& script : m_scripts)
+	for (auto& script : m_scene->GetScripts())
+		script->Update(p_deltaTime);
+}
+
+void Rasterizer::Core::Application::UpdateGlobalScripts(float p_deltaTime)
+{
+	PROFILER_SPY("Application::UpdateGlobalScripts");
+
+	for (auto& script : m_globalScripts)
 		script->Update(p_deltaTime);
 }
 
@@ -112,8 +102,8 @@ void Rasterizer::Core::Application::RasterizeModels()
 {
 	PROFILER_SPY("Application::RasterizeModels");
 
-	for (auto& model : m_models)
-		m_rasterBoy.RasterizeModel(model);
+	for (auto& model : m_scene->GetModels())
+		m_rasterBoy.RasterizeModel(model, m_scene->GetMainCamera() != nullptr ? *m_scene->GetMainCamera() : m_defaultCamera); /* Use the scene main camera or the default camera if there is no camera in scene */
 }
 
 bool Rasterizer::Core::Application::IsRunning() const

@@ -17,11 +17,12 @@
 #include "Rasterizer/Core/RasterBoy.h"
 #include "Rasterizer/Analytics/Profiler.h"
 #include "Rasterizer/Utils/Clock.h"
+#include "Rasterizer/Resources/Managers/MeshManager.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
-#include "Rasterizer/Resources/Managers/MeshManager.h"
 #include "Rasterizer/Scripts/IScript.h"
+#include "Rasterizer/Scenes/AScene.h"
 
 namespace Rasterizer::Core
 {
@@ -37,22 +38,27 @@ namespace Rasterizer::Core
 		Application();
 
 		/**
-		* Create scripts
-		*/
-		void CreateScripts();
-
-		/**
-		* Add a script to the application
-		* @param p_args (Arguments forwarded to the std::make_unique)
-		*/
-		template<typename T, typename... Args>
-		void AddScript(Args&&... p_args) { m_scripts.push_back(std::make_unique<T>(p_args...)); }
-
-		/**
 		* Run the actual application (Blocking method, it is a loop).
 		* Returns an exit code.
 		*/
 		int Run();
+
+		/**
+		* Create the current scene
+		*/
+		void CreateScene();
+
+		/**
+		* Create global scripts (Independent of the current scene)
+		*/
+		void CreateGlobalScripts();
+
+		/**
+		* Add a global script to the application (Independent of the current scene)
+		* @param p_args (Arguments forwarded to the std::make_unique)
+		*/
+		template<typename T, typename... Args>
+		void AddGlobalScript(Args&&... p_args) { m_globalScripts.push_back(std::make_unique<T>(p_args...)); }
 
 		/**
 		* Update the current application
@@ -61,10 +67,16 @@ namespace Rasterizer::Core
 		void Update(float p_deltaTime);
 
 		/**
-		* Update every scripts
+		* Update scene scripts
 		* @param p_deltaTime
 		*/
-		void UpdateScripts(float p_deltaTime);
+		void UpdateSceneScripts(float p_deltaTime);
+
+		/**
+		* Update global scripts
+		* @param p_deltaTime
+		*/
+		void UpdateGlobalScripts(float p_deltaTime);
 
 		/**
 		* Rasterize every model
@@ -82,35 +94,25 @@ namespace Rasterizer::Core
 		void Stop();
 
 	private:
-		/* SDL Relatives */
+		/* Core */
 		Rasterizer::Core::Window m_window;
 		Rasterizer::Core::EventHandler m_eventHandler;
 		Rasterizer::Core::InputManager m_inputManager;
-
-		/* Core */
 		Rasterizer::Core::Renderer m_renderer;
 		Rasterizer::Core::UserInterface m_userInterface;
 		Rasterizer::Core::RasterBoy m_rasterBoy;
-
-		/* Analytics */
 		Rasterizer::Analytics::Profiler m_profiler;
-
-		/* Utils */
 		Rasterizer::Utils::Clock m_clock;
-
-		/* Resource managers */
 		Rasterizer::Resources::Managers::MeshManager m_meshManager;
 
-		/* Scene relatives */
-		Rasterizer::Entities::Camera m_camera;
-		std::vector<Rasterizer::Entities::Model> m_models;
+		std::unique_ptr<Scenes::AScene> m_scene;
+
+		/* Default stuffs */
+		Rasterizer::Entities::Camera m_defaultCamera;
+		std::vector<std::unique_ptr<Scripts::IScript>> m_globalScripts;
 
 		/* Other stuffs */
 		EApplicationState m_applicationState;
-		float m_modelRotation = 0.0f;
-		float m_logFPStimer = 0.0f;
-
-		std::vector<std::unique_ptr<Scripts::IScript>> m_scripts;
 	};
 }
 
