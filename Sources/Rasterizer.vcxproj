@@ -228,6 +228,8 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
     <ClCompile Include="src\Rasterizer\Data\DepthBuffer.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Texture.cpp" />
+    <ClCompile Include="src\Rasterizer\Materials\AMaterial.cpp" />
+    <ClCompile Include="src\Rasterizer\Materials\LambertMaterial.cpp" />
     <ClCompile Include="src\Rasterizer\Shaders\AShader.cpp" />
     <ClCompile Include="src\Rasterizer\Shaders\DefaultShader.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\AScene.cpp" />
@@ -285,6 +287,9 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
     <ClInclude Include="include\Rasterizer\Data\Text.h" />
     <ClInclude Include="include\Rasterizer\Data\Texture.h" />
+    <ClInclude Include="include\Rasterizer\Materials\ABaseMaterial.h" />
+    <ClInclude Include="include\Rasterizer\Materials\AMaterial.h" />
+    <ClInclude Include="include\Rasterizer\Materials\LambertMaterial.h" />
     <ClInclude Include="include\Rasterizer\Shaders\AShader.h" />
     <ClInclude Include="include\Rasterizer\Shaders\DefaultShader.h" />
     <ClInclude Include="include\Rasterizer\Scenes\AScene.h" />

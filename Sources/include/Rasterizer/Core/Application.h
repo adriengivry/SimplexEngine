@@ -24,7 +24,7 @@
 #include "Rasterizer/Entities/Model.h"
 #include "Rasterizer/Scripts/IScript.h"
 #include "Rasterizer/Scenes/AScene.h"
-#include "Rasterizer/Shaders/AShader.h"
+#include "Rasterizer/Materials/AMaterial.h"
 
 namespace Rasterizer::Core
 {
@@ -54,11 +54,6 @@ namespace Rasterizer::Core
 		* Create global scripts (Independent of the current scene)
 		*/
 		void CreateGlobalScripts();
-
-		/**
-		* Create shaders
- 		*/
-		void CreateShaders();
 
 		/**
 		* Add a global script to the application (Independent of the current scene)
@@ -115,8 +110,8 @@ namespace Rasterizer::Core
 
 		/* Default stuffs */
 		Rasterizer::Entities::Camera m_defaultCamera;
-		std::unique_ptr<Rasterizer::Shaders::AShader> m_defaultShader;
 		std::vector<std::unique_ptr<Scripts::IScript>> m_globalScripts;
+		std::unique_ptr<Materials::AMaterial> m_defaultMaterial;
 
 		/* Other stuffs */
 		EApplicationState m_applicationState;

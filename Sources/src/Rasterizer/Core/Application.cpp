@@ -15,8 +15,7 @@
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
 #include "Rasterizer/Scripts/SSceneNavigator.h"
-#include "Rasterizer/Shaders/DefaultShader.h"
-#include "Rasterizer/Shaders/LambertShader.h"
+#include "Rasterizer/Materials/LambertMaterial.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -24,14 +23,14 @@ Rasterizer::Core::Application::Application() :
 	m_renderer(m_window),
 	m_userInterface(m_window, m_renderer),
 	m_rasterBoy(m_window, m_renderer),
-	m_applicationState(EApplicationState::RUNNING),
-	m_defaultCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio())
+	m_defaultCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
+	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
+	m_applicationState(EApplicationState::RUNNING)
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&Rasterizer::Core::Application::Stop, this));
 
 	CreateScenes();
 	CreateGlobalScripts();
-	CreateShaders();
 }
 
 int Rasterizer::Core::Application::Run()
@@ -58,11 +57,6 @@ void Rasterizer::Core::Application::CreateGlobalScripts()
 	AddGlobalScript<Scripts::SFPSCounter>(m_userInterface);
 	AddGlobalScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
 	AddGlobalScript<Scripts::SSceneNavigator>(m_sceneManager, m_inputManager);
-}
-
-void Rasterizer::Core::Application::CreateShaders()
-{
-	m_defaultShader = std::make_unique<Shaders::LambertShader>();
 }
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
@@ -112,18 +106,14 @@ void Rasterizer::Core::Application::RasterizeModels()
 {
 	PROFILER_SPY("Application::RasterizeModels");
 
-	for (auto& model : m_sceneManager.GetCurrentScene()->GetModels())
+	for (const Entities::Model& model : m_sceneManager.GetCurrentScene()->GetModels())
 	{
 		/* Use the scene main camera or the default camera if there is no camera in scene */
 		const Entities::Camera& currentCamera = m_sceneManager.GetCurrentScene()->GetMainCamera() != nullptr ? *m_sceneManager.GetCurrentScene()->GetMainCamera() : m_defaultCamera;
 
-		m_defaultShader->SetUniform("mvp", currentCamera.GetViewProjectionMatrix() * model.transform.GetWorldMatrix());
-		m_defaultShader->SetUniform("modelMatrix", model.transform.GetWorldMatrix());
-		m_defaultShader->SetUniform("viewMatrix", currentCamera.GetViewMatrix());
-		m_defaultShader->SetUniform("projectionMatrix", currentCamera.GetProjectionMatrix());
-		m_defaultShader->SetUniform("viewPosition", currentCamera.transform.GetWorldPosition());
+		m_defaultMaterial->UpdateUniforms(currentCamera, model);
 
-		m_rasterBoy.RasterizeModel(model, *m_defaultShader);
+		m_rasterBoy.RasterizeModel(model, m_defaultMaterial->GetShaderInstance());
 	}
 }
 

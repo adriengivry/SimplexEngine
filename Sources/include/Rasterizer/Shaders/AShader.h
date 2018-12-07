@@ -27,7 +27,7 @@ namespace Rasterizer::Shaders
 	{
 	public:
 		/* A simple typedef for a variant of every types that a shader can use */
-		using ShaderType = std::variant<int, float, glm::vec2, glm::vec3, glm::vec4, glm::mat2, glm::mat3, glm::mat4>;
+		using ShaderValue = std::variant<int, float, glm::vec2, glm::vec3, glm::vec4, glm::mat2, glm::mat3, glm::mat4>;
 
 		/**
 		* Process a vertex
@@ -64,7 +64,7 @@ namespace Rasterizer::Shaders
 		* @param p_name
 		* @param p_value
 		*/
-		void SetUniform(const std::string& p_name, ShaderType p_value);
+		void SetUniform(const std::string& p_name, ShaderValue p_value);
 
 		/**
 		* Clear any data stored in this shader
@@ -82,12 +82,12 @@ namespace Rasterizer::Shaders
 		/**
 		*
 		*/
-		void SetVarying(const std::string& p_name, ShaderType p_value);
+		void SetVarying(const std::string& p_name, ShaderValue p_value);
 
 		/**
 		*
 		*/
-		void SetFlat(const std::string& p_name, ShaderType p_value);
+		void SetFlat(const std::string& p_name, ShaderValue p_value);
 
 		/**
 		*
@@ -111,10 +111,10 @@ namespace Rasterizer::Shaders
 		}
 
 	private:
-		std::unordered_map<std::string, ShaderType> m_uniforms;
-		std::unordered_map<std::string, ShaderType> m_varying[3];
-		std::unordered_map<std::string, ShaderType> m_interpolatedVarying;
-		std::unordered_map<std::string, ShaderType> m_flat;
+		std::unordered_map<std::string, ShaderValue> m_uniforms;
+		std::unordered_map<std::string, ShaderValue> m_varying[3];
+		std::unordered_map<std::string, ShaderValue> m_interpolatedVarying;
+		std::unordered_map<std::string, ShaderValue> m_flat;
 
 		uint8_t m_index = 0;
 	};

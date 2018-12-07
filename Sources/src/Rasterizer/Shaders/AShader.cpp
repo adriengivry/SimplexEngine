@@ -19,7 +19,6 @@ glm::vec3 Rasterizer::Shaders::AShader::ProcessFragment()
 	return result;
 }
 
-
 void Rasterizer::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_barycentricCoords)
 {
 	m_interpolatedVarying.clear();
@@ -78,7 +77,7 @@ void Rasterizer::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_baryc
 	}
 }
 
-void Rasterizer::Shaders::AShader::SetUniform(const std::string& p_name, ShaderType p_value)
+void Rasterizer::Shaders::AShader::SetUniform(const std::string& p_name, ShaderValue p_value)
 {
 	m_uniforms[p_name] = p_value;
 }
@@ -93,12 +92,12 @@ void Rasterizer::Shaders::AShader::ClearData()
 	m_interpolatedVarying.clear();
 }
 
-void Rasterizer::Shaders::AShader::SetVarying(const std::string & p_name, ShaderType p_value)
+void Rasterizer::Shaders::AShader::SetVarying(const std::string & p_name, ShaderValue p_value)
 {
 	m_varying[m_index][p_name] = p_value;
 }
 
-void Rasterizer::Shaders::AShader::SetFlat(const std::string & p_name, ShaderType p_value)
+void Rasterizer::Shaders::AShader::SetFlat(const std::string & p_name, ShaderValue p_value)
 {
 	m_flat[p_name] = p_value;
 }

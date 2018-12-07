@@ -14,6 +14,7 @@ namespace Rasterizer::Shaders
 {
 	class LambertShader final : public AShader
 	{
+	public:
 		virtual glm::vec4 VertexModifier(const Data::Vertex & p_vertex) override;
 		virtual glm::vec3 FragmentModifier() override;
 
