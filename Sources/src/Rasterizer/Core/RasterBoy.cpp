@@ -55,7 +55,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Verte
 	if (!CanRasterize())
 		return;
 
-	std::array<glm::vec4, 3> transformedVertex = { p_shader.VertexModifier(p_vertices[0], 0), p_shader.VertexModifier(p_vertices[1], 1), p_shader.VertexModifier(p_vertices[2], 2) };
+	std::array<glm::vec4, 3> transformedVertex = { p_shader.ProcessVertex(p_vertices[0], 0), p_shader.ProcessVertex(p_vertices[1], 1), p_shader.ProcessVertex(p_vertices[2], 2) };
 
 	std::for_each(transformedVertex.begin(), transformedVertex.end(), std::bind(&RasterBoy::ConvertToRasterSpace, this, std::placeholders::_1));
 
@@ -84,7 +84,8 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Verte
 
 				if (depth <= m_depthBuffer.GetElement(x, y))
 				{
-					glm::vec3 fragment = p_shader.FragmentModifier(barycentricCoords) * 255.0f;
+					p_shader.ProcessInterpolation(barycentricCoords);
+					glm::vec3 fragment = p_shader.FragmentModifier() * 255.0f;
 					m_rasterizationOutputBuffer.SetPixel(x, y, { static_cast<uint8_t>(fragment.x), static_cast<uint8_t>(fragment.y), static_cast<uint8_t>(fragment.z) });
 					m_depthBuffer.SetElement(x, y, depth);
 				}

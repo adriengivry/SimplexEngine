@@ -6,25 +6,27 @@
 
 #include "Rasterizer/Shaders/DefaultShader.h"
 
-glm::vec4 Rasterizer::Shaders::DefaultShader::VertexModifier(const Data::Vertex& p_vertex, uint8_t p_vertexID)
+using namespace glm;
+
+glm::vec4 Rasterizer::Shaders::DefaultShader::VertexModifier(const Data::Vertex& p_vertex)
 {
-	glm::mat4 mvp = std::get<glm::mat4>(GetUniform("mvp"));
+	mat4 mvp = GetUniform<mat4>("mvp");
+	mat4 modelMatrix = GetUniform<mat4>("modelMatrix");
 
-	glm::vec4 vertexWorldPosition = mvp * glm::vec4(p_vertex.position, 1.0f);
+	vec4 vertexWorldPosition = mvp * vec4(p_vertex.position, 1.0f);
 
-	SetInternal("normals" + std::to_string(p_vertexID + 1), p_vertex.normal);
+	vec3 normal = mat3(transpose(inverse(modelMatrix))) * p_vertex.normal;
+
+	SetVarying("normal", normal);
 
 	return vertexWorldPosition;
 }
 
-glm::vec3 Rasterizer::Shaders::DefaultShader::FragmentModifier(const glm::vec3& p_barycentricCoords)
+glm::vec3 Rasterizer::Shaders::DefaultShader::FragmentModifier()
 {
-	glm::vec3 normal1 = std::get<glm::vec3>(GetInternal("normals1"));
-	glm::vec3 normal2 = std::get<glm::vec3>(GetInternal("normals2"));
-	glm::vec3 normal3 = std::get<glm::vec3>(GetInternal("normals3"));
+	vec3 normal = normalize(GetVarying<vec3>("normal"));
 
-	glm::vec3 normalAverage = p_barycentricCoords.x * normal1 + p_barycentricCoords.y * normal2 + p_barycentricCoords.z * normal3;
+	vec3 finalColor(normal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f));
 
-	glm::vec3 finalColor(normalAverage * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f));
 	return finalColor;
 }

@@ -6,32 +6,28 @@
 
 #include "Rasterizer/Shaders/LambertShader.h"
 
-glm::vec4 Rasterizer::Shaders::LambertShader::VertexModifier(const Data::Vertex & p_vertex, uint8_t p_vertexID)
+using namespace glm;
+
+glm::vec4 Rasterizer::Shaders::LambertShader::VertexModifier(const Data::Vertex & p_vertex)
 {
-	glm::mat4 mvp = std::get<glm::mat4>(GetUniform("mvp"));
-	glm::mat4 modelMatrix = std::get<glm::mat4>(GetUniform("modelMatrix"));
+	mat4 mvp = GetUniform<mat4>("mvp");
+	mat4 modelMatrix = GetUniform<mat4>("modelMatrix");
 
-	glm::vec4 vertexWorldPosition = mvp * glm::vec4(p_vertex.position, 1.0f);
-	glm::vec3 vertexNormal = modelMatrix * glm::vec4(p_vertex.normal, 1.0f);
+	vec4 vertexWorldPosition = mvp * vec4(p_vertex.position, 1.0f);
+	vec3 vertexNormal = mat3(transpose(inverse(modelMatrix))) * p_vertex.normal;
 
-	SetInternal("normals" + std::to_string(p_vertexID + 1), vertexNormal);
+	SetVarying("normal", vertexNormal);
 
 	return vertexWorldPosition;
 }
 
-glm::vec3 Rasterizer::Shaders::LambertShader::FragmentModifier(const glm::vec3 & p_barycentricCoords)
+glm::vec3 Rasterizer::Shaders::LambertShader::FragmentModifier()
 {
-	glm::vec3 normal1 = std::get<glm::vec3>(GetInternal("normals1"));
-	glm::vec3 normal2 = std::get<glm::vec3>(GetInternal("normals2"));
-	glm::vec3 normal3 = std::get<glm::vec3>(GetInternal("normals3"));
-
-	glm::vec3 normalAverage = p_barycentricCoords.x * normal1 + p_barycentricCoords.y * normal2 + p_barycentricCoords.z * normal3;
-
-	glm::vec3 ambient(0.2f, 0.2f, 0.2f);
+	glm::vec3 ambient(0.05f, 0.05f, 0.05f);
 	glm::vec3 position(5, 2, 10);
-	glm::vec3 diffuse(0.7f, 0.7f, 0.7f);
+	glm::vec3 diffuse(0.8f, 0.8f, 0.8f);
 
-	return ambient + diffuse * Lambert(normalAverage, position);
+	return ambient + diffuse * Lambert(GetVarying<vec3>("normal"), position);
 }
 
 float Rasterizer::Shaders::LambertShader::Lambert(const glm::vec3 & p_fragmentNormal, const glm::vec3 & p_lightPosition)
