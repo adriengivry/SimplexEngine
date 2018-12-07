@@ -76,15 +76,15 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Verte
 	{
 		for (int32_t y = std::max(0, ymin); y < std::min(ymax, m_window.GetHeightSigned()); ++y)
 		{
-			glm::vec3 bary = triangle.GetBarycentricCoordinates({ x, y });
+			glm::vec3 barycentricCoords = triangle.GetBarycentricCoordinates({ x, y });
 
-			if (bary.x >= 0.0f && bary.y >= 0.0f && bary.x + bary.y <= 1.0f)
+			if (barycentricCoords.x >= 0.0f && barycentricCoords.y >= 0.0f && barycentricCoords.x + barycentricCoords.y <= 1.0f)
 			{
-				float depth = transformedVertex[0].z * bary.z + transformedVertex[2].z * bary.x + bary.y * transformedVertex[1].z;
+				float depth = transformedVertex[0].z * barycentricCoords.z + transformedVertex[2].z * barycentricCoords.x + barycentricCoords.y * transformedVertex[1].z;
 
 				if (depth <= m_depthBuffer.GetElement(x, y))
 				{
-					glm::vec3 fragment = p_shader.FragmentModifier() * 255.0f;
+					glm::vec3 fragment = p_shader.FragmentModifier(barycentricCoords) * 255.0f;
 					m_rasterizationOutputBuffer.SetPixel(x, y, { static_cast<uint8_t>(fragment.x), static_cast<uint8_t>(fragment.y), static_cast<uint8_t>(fragment.z) });
 					m_depthBuffer.SetElement(x, y, depth);
 				}

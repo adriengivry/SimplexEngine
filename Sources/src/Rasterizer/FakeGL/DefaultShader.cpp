@@ -15,7 +15,7 @@ glm::vec4 Rasterizer::FakeGL::DefaultShader::VertexModifier(const Data::Vertex &
 	return vertexWorldPosition;
 }
 
-glm::vec3 Rasterizer::FakeGL::DefaultShader::FragmentModifier()
+glm::vec3 Rasterizer::FakeGL::DefaultShader::FragmentModifier(const glm::vec3& p_barycentricCoords)
 {
 	glm::vec3 normals = std::get<glm::vec3>(GetInternal("normals"));
 

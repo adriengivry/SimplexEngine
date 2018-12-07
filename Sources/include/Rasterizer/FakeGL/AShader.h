@@ -36,8 +36,9 @@ namespace Rasterizer::FakeGL
 		/**
 		* The fragment modifier is where every pixels are modified.
 		* It is called after the rasterization stage
+		* @param p_barycentricCoords (Barycentric coordinates of the current fragment)
 		*/
-		virtual glm::vec3 FragmentModifier() = 0;
+		virtual glm::vec3 FragmentModifier(const glm::vec3& p_barycentricCoords) = 0;
 
 		/**
 		* Send a value to the shader (Identified by the given name)

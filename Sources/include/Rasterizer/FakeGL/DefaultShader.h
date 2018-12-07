@@ -17,16 +17,8 @@ namespace Rasterizer::FakeGL
 	*/
 	class DefaultShader final : public AShader
 	{
-		/**
-		* DefaultShader implementation of the VertexModifier
-		* @param p_vertex
-		*/
 		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex) override;
-
-		/**
-		* DefaultShader implementation of the FragmentModifier
-		*/
-		virtual glm::vec3 FragmentModifier() override;
+		virtual glm::vec3 FragmentModifier(const glm::vec3& p_barycentricCoords) override;
 	};
 }
 
