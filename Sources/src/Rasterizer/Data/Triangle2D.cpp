@@ -7,7 +7,6 @@
 #include <glm/geometric.hpp>
 
 #include "Rasterizer/Data/Triangle2D.h"
-#include "Rasterizer/Analytics/ProfilerSpy.h"
 
 Rasterizer::Data::Triangle2D::Triangle2D(const glm::vec2& p_vertex1, const glm::vec2& p_vertex2, const glm::vec2& p_vertex3) : m_vertices{ p_vertex1, p_vertex2, p_vertex3 } {}
 

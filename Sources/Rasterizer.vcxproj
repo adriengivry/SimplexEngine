@@ -222,8 +222,12 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rasterizer\Actors\Actor.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp" />
+    <ClCompile Include="src\Rasterizer\Components\AActorComponent.cpp" />
+    <ClCompile Include="src\Rasterizer\Components\CameraComponent.cpp" />
+    <ClCompile Include="src\Rasterizer\Components\MeshComponent.cpp" />
     <ClCompile Include="src\Rasterizer\Core\SceneManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
     <ClCompile Include="src\Rasterizer\Data\DepthBuffer.cpp" />
@@ -234,7 +238,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Shaders\NormalShader.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\AScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\DefaultScene.cpp" />
-    <ClCompile Include="src\Rasterizer\Scenes\TestScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp" />
@@ -258,17 +261,19 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Data\Transform.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Triangle2D.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Vertex.cpp" />
-    <ClCompile Include="src\Rasterizer\Entities\AEntity.cpp" />
-    <ClCompile Include="src\Rasterizer\Entities\Camera.cpp" />
-    <ClCompile Include="src\Rasterizer\Entities\Model.cpp" />
+    <ClCompile Include="src\Rasterizer\Tools\SceneParser.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\IniIndexer.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Rasterizer\Actors\Actor.h" />
     <ClInclude Include="include\Rasterizer\Analytics\Profiler.h" />
     <ClInclude Include="include\Rasterizer\Analytics\ProfilerReport.h" />
     <ClInclude Include="include\Rasterizer\Analytics\ProfilerSpy.h" />
+    <ClInclude Include="include\Rasterizer\Components\AActorComponent.h" />
+    <ClInclude Include="include\Rasterizer\Components\CameraComponent.h" />
+    <ClInclude Include="include\Rasterizer\Components\MeshComponent.h" />
     <ClInclude Include="include\Rasterizer\Core\EWindowState.h" />
     <ClInclude Include="include\Rasterizer\Core\EventHandler.h" />
     <ClInclude Include="include\Rasterizer\Core\InputManager.h" />
@@ -295,7 +300,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Scenes\AScene.h" />
     <ClInclude Include="include\Rasterizer\Scenes\ASceneDefines.h" />
     <ClInclude Include="include\Rasterizer\Scenes\DefaultScene.h" />
-    <ClInclude Include="include\Rasterizer\Scenes\TestScene.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />
@@ -303,9 +307,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Data\Transform.h" />
     <ClInclude Include="include\Rasterizer\Data\Triangle2D.h" />
     <ClInclude Include="include\Rasterizer\Data\Vertex.h" />
-    <ClInclude Include="include\Rasterizer\Entities\AEntity.h" />
-    <ClInclude Include="include\Rasterizer\Entities\Camera.h" />
-    <ClInclude Include="include\Rasterizer\Entities\Model.h" />
     <ClInclude Include="include\Rasterizer\Scripts\IScript.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SConsoleController.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SFPSCounter.h" />
@@ -315,6 +316,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Scripts\SSceneNavigator.h" />
     <ClInclude Include="include\Rasterizer\Shaders\LambertShader.h" />
     <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
+    <ClInclude Include="include\Rasterizer\Tools\SceneParser.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
     <ClInclude Include="include\Rasterizer\Tools\EasyAssimp.h" />
     <ClInclude Include="include\Rasterizer\Utils\Event.h" />

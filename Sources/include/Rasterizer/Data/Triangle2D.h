@@ -8,8 +8,7 @@
 #ifndef _TRIANGLE2D_H
 #define _TRIANGLE2D_H
 
-#include "Rasterizer/Entities/Camera.h"
-#include "Rasterizer/Data/Vertex.h"
+#include <tuple>
 
 namespace Rasterizer::Data
 {

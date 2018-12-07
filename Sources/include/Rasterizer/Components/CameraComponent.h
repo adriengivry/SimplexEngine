@@ -5,25 +5,25 @@
 */
 
 #pragma once
-#ifndef _CAMERA_H
-#define _CAMERA_H
+#ifndef _CAMERACOMPONENT_H
+#define _CAMERACOMPONENT_H
 
 #include <glm/glm.hpp>
 
-#include "Rasterizer/Entities/AEntity.h"
+#include "Rasterizer/Components/AActorComponent.h"
 
-namespace Rasterizer::Entities
+namespace Rasterizer::Components
 {
 	/**
-	* The camera is used to know how to project things on the screen
+	* The camera component is a component that allow an actor to get
+	* interpreted as a scene camera
 	*/
-	class Camera final : public AEntity
+	class CameraComponent : public AActorComponent
 	{
 	public:
 		/**
 		* Camera constructor
-		* @param p_position
-		* @param p_rotation
+		* @param p_owner
 		* @param p_upVector
 		* @param p_windowWidth
 		* @param p_windowHeight
@@ -31,7 +31,12 @@ namespace Rasterizer::Entities
 		* @param p_near (Default = 0.1f)
 		* @param p_far (Default = 1000.0f)
 		*/
-		Camera(const glm::vec3& p_position, const glm::quat& p_rotation, const glm::vec3& p_upVector, float p_ratio, float p_fov = 45.0f, float p_near = 0.1f, float p_far = 1000.0f);
+		CameraComponent(Actors::Actor& p_owner, const glm::vec3& p_upVector, float p_ratio, float p_fov = 45.0f, float p_near = 0.1f, float p_far = 1000.0f);
+
+		/**
+		* Needed
+		*/
+		virtual void Test() override {}
 
 		/**
 		* Return the current projection matrix
@@ -74,4 +79,4 @@ namespace Rasterizer::Entities
 	};
 }
 
-#endif // _CAMERA_H
+#endif // _CAMERACOMPONENT_H

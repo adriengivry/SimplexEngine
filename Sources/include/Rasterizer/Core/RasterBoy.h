@@ -12,11 +12,10 @@
 
 #include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/Renderer.h"
-#include "Rasterizer/Entities/Camera.h"
-#include "Rasterizer/Entities/Model.h"
 #include "Rasterizer/Data/DepthBuffer.h"
 #include "Rasterizer/Data/Texture.h"
 #include "Rasterizer/Shaders/AShader.h"
+#include "Rasterizer/Resources/Mesh.h"
 
 namespace Rasterizer::Core
 {
@@ -42,14 +41,6 @@ namespace Rasterizer::Core
 		* Clear depth and rasterization buffer
 		*/
 		void ClearBuffers();
-
-		/**
-		* Rasterize a model to the screen
-		* @param p_actor
-		* @param p_camera
-		* @param p_shader
-		*/
-		void RasterizeModel(const Entities::Model& p_actor, Shaders::AShader& p_shader);
 
 		/**
 		* Rasterize a mesh to the screen

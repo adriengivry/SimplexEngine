@@ -4,15 +4,16 @@
 * @version 1.0
 */
 
+#include <iostream>
+
 #include "Rasterizer/Scripts/SCameraController.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Utils/Math.h"
+#include "Rasterizer/Actors/Actor.h"
 
-#include <iostream>
-
-Rasterizer::Scripts::SCameraController::SCameraController(const Core::InputManager& p_inputManager, Entities::Camera& p_camera) :
+Rasterizer::Scripts::SCameraController::SCameraController(const Core::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
 	m_inputManager(p_inputManager),
-	m_camera(p_camera)
+	m_cameraComponent(p_cameraComponent)
 {
 	m_inputManager.LockMouse();
 }
@@ -46,14 +47,14 @@ void Rasterizer::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 	if (m_pitch >= 89.0f)
 		m_pitch = 89.0f;
 
-	m_camera.transform.SetLocalRotation(Utils::Math::CreateQuaternionFromEuler({ m_pitch, m_yaw, 0.0f }));
+	m_cameraComponent.owner->transform.SetLocalRotation(Utils::Math::CreateQuaternionFromEuler({ m_pitch, m_yaw, 0.0f }));
 }
 
 void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
 {
 	glm::vec3 movement;
 
-	glm::vec3 forward = glm::normalize(m_camera.GetForward() * glm::vec3(1.0f, 0.0f, 1.0f)); /* Scale Y to 0 to keep only X and Z (Fake forward) */
+	glm::vec3 forward = glm::normalize(m_cameraComponent.GetForward() * glm::vec3(1.0f, 0.0f, 1.0f)); /* Scale Y to 0 to keep only X and Z (Fake forward) */
 	glm::vec3 up = glm::vec3(0.0f, 1.0, 0.0f);
 	glm::vec3 right = glm::cross(forward, up);
 
@@ -70,7 +71,7 @@ void Rasterizer::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
 	if (m_inputManager.IsKeyDown(SDL_SCANCODE_Q))
 		movement -= up;
 
-	m_camera.transform.TranslateLocal(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
+	m_cameraComponent.owner->transform.TranslateLocal(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
 
 	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_LALT))
 		m_inputManager.UnlockMouse();

@@ -16,12 +16,7 @@ namespace Rasterizer::Materials
 	class LambertMaterial final : public ABaseMaterial<Shaders::LambertShader>
 	{
 	public:
-		/**
-		* Update uniforms
-		* @param p_camera
-		* @param p_model
-		*/
-		virtual void UpdateUniforms(const Entities::Camera & p_camera, const Entities::Model & p_model) override;
+		virtual void UpdateUniforms(const Components::CameraComponent& p_cameraComponent, const Components::MeshComponent& p_meshComponent);
 	};
 }
 

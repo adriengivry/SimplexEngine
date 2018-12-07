@@ -9,8 +9,8 @@
 #define _AMATERIAL_H
 
 #include "Rasterizer/Shaders/AShader.h"
-#include "Rasterizer/Entities/Model.h"
-#include "Rasterizer/Entities/Camera.h"
+#include "Rasterizer/Components/CameraComponent.h"
+#include "Rasterizer/Components/MeshComponent.h"
 
 namespace Rasterizer::Materials
 {
@@ -23,10 +23,10 @@ namespace Rasterizer::Materials
 		/**
 		* Implement this function to determine the behaviour of the material
 		* when UpdateUniforms is called
-		* @param p_camera
-		* @param p_model
+		* @param p_cameraComponent
+		* @param p_meshComponent
 		*/
-		virtual void UpdateUniforms(const Entities::Camera& p_camera, const Entities::Model& p_model) = 0;
+		virtual void UpdateUniforms(const Components::CameraComponent& p_cameraComponent, const Components::MeshComponent& p_meshComponent) = 0;
 
 		/**
 		* Return the binded shader instance

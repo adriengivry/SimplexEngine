@@ -33,10 +33,8 @@ namespace Rasterizer::Scenes
 		DefaultScene(SCENE_PARAMETERS);
 
 	private:
-		virtual void CreateCameras() override;
-		virtual void CreateModels() override;
-		virtual void CreateScripts() override;
-		virtual void DefineParents() override;
+		virtual void OnLoad() override;
+		virtual void OnUnload() override;
 	};
 }
 

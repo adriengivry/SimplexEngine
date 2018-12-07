@@ -10,12 +10,12 @@
 #include "Rasterizer/Utils/Math.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 #include "Rasterizer/Scenes/DefaultScene.h"
-#include "Rasterizer/Scenes/TestScene.h"
 #include "Rasterizer/Scripts/SFPSCounter.h"
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
 #include "Rasterizer/Scripts/SSceneNavigator.h"
 #include "Rasterizer/Materials/LambertMaterial.h"
+#include "Rasterizer/Tools/SceneParser.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -23,7 +23,6 @@ Rasterizer::Core::Application::Application() :
 	m_renderer(m_window),
 	m_userInterface(m_window, m_renderer),
 	m_rasterBoy(m_window, m_renderer),
-	m_defaultCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
 	m_applicationState(EApplicationState::RUNNING)
 {
@@ -31,6 +30,10 @@ Rasterizer::Core::Application::Application() :
 
 	CreateScenes();
 	CreateGlobalScripts();
+
+	/* Initialize the default camera */
+	m_defaultCamera.AddComponent<Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
+	m_defaultCamera.transform.SetLocalPosition({0.0f, 0.0f, 10.0f});
 }
 
 int Rasterizer::Core::Application::Run()
@@ -48,7 +51,6 @@ int Rasterizer::Core::Application::Run()
 void Rasterizer::Core::Application::CreateScenes()
 {
 	m_sceneManager.RegisterScene<Scenes::DefaultScene>("Default", m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
-	m_sceneManager.RegisterScene<Scenes::TestScene>("Test", m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
 }
 
 void Rasterizer::Core::Application::CreateGlobalScripts()
@@ -72,7 +74,7 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	/* Rasterization process */
 	m_rasterBoy.ResetRasterizedTrianglesCount();
 	m_rasterBoy.ClearBuffers();
-	RasterizeModels();
+	RasterizeScene();
 	m_rasterBoy.SendRasterizationOutputBufferToGPU();
 
 	/* Draw order */
@@ -102,18 +104,25 @@ void Rasterizer::Core::Application::UpdateGlobalScripts(float p_deltaTime)
 		script->Update(p_deltaTime);
 }
 
-void Rasterizer::Core::Application::RasterizeModels()
+void Rasterizer::Core::Application::RasterizeScene()
 {
-	PROFILER_SPY("Application::RasterizeModels");
+	PROFILER_SPY("Application::RasterizeScene");
 
-	for (const Entities::Model& model : m_sceneManager.GetCurrentScene()->GetModels())
+	for (auto meshComponent : Tools::SceneParser::FindMeshes(*m_sceneManager.GetCurrentScene()))
 	{
+		/* Find camera from scene and the default camera */
+		Components::CameraComponent const* sceneMainCamera = Tools::SceneParser::GetMainCamera(*m_sceneManager.GetCurrentScene());
+		Components::CameraComponent const* defaultCamera = m_defaultCamera.GetComponent<Components::CameraComponent>().get();
+
 		/* Use the scene main camera or the default camera if there is no camera in scene */
-		const Entities::Camera& currentCamera = m_sceneManager.GetCurrentScene()->GetMainCamera() != nullptr ? *m_sceneManager.GetCurrentScene()->GetMainCamera() : m_defaultCamera;
+		auto cameraToUse = sceneMainCamera ? sceneMainCamera : (defaultCamera ? defaultCamera : nullptr);
 
-		m_defaultMaterial->UpdateUniforms(currentCamera, model);
-
-		m_rasterBoy.RasterizeModel(model, m_defaultMaterial->GetShaderInstance());
+		/* Render only if there is a camera */
+		if (cameraToUse)
+		{
+			m_defaultMaterial->UpdateUniforms(*cameraToUse, meshComponent.get());
+			m_rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), m_defaultMaterial->GetShaderInstance());
+		}
 	}
 }
 
