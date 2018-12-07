@@ -17,7 +17,7 @@ namespace Rasterizer::Shaders
 	*/
 	class DefaultShader final : public AShader
 	{
-		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex) override;
+		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex, uint8_t p_vertexID) override;
 		virtual glm::vec3 FragmentModifier(const glm::vec3& p_barycentricCoords) override;
 	};
 }

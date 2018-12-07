@@ -16,6 +16,7 @@
 #include "Rasterizer/Scripts/SConsoleController.h"
 #include "Rasterizer/Scripts/SSceneNavigator.h"
 #include "Rasterizer/Shaders/DefaultShader.h"
+#include "Rasterizer/Shaders/LambertShader.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -61,7 +62,7 @@ void Rasterizer::Core::Application::CreateGlobalScripts()
 
 void Rasterizer::Core::Application::CreateShaders()
 {
-	m_defaultShader = std::make_unique<Shaders::DefaultShader>();
+	m_defaultShader = std::make_unique<Shaders::LambertShader>();
 }
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
@@ -118,6 +119,7 @@ void Rasterizer::Core::Application::RasterizeModels()
 
 		m_defaultShader->ClearAll();
 		m_defaultShader->SetUniform("mvp", currentCamera.GetViewProjectionMatrix() * model.transform.GetWorldMatrix());
+		m_defaultShader->SetUniform("modelMatrix", model.transform.GetWorldMatrix());
 
 		m_rasterBoy.RasterizeModel(model, *m_defaultShader);
 	}

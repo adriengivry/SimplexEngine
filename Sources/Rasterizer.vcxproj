@@ -241,6 +241,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Scripts\SRasterizationLimiter.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SRotateOverTime.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SSceneNavigator.cpp" />
+    <ClCompile Include="src\Rasterizer\Shaders\LambertShader.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp" />
     <ClCompile Include="src\Rasterizer\Core\InputManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\RasterBoy.cpp" />
@@ -307,6 +308,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Scripts\SRasterizationLimiter.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SRotateOverTime.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SSceneNavigator.h" />
+    <ClInclude Include="include\Rasterizer\Shaders\LambertShader.h" />
     <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
     <ClInclude Include="include\Rasterizer\Tools\EasyAssimp.h" />

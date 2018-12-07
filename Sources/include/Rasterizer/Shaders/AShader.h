@@ -10,6 +10,8 @@
 
 #include <unordered_map>
 #include <variant>
+#include <string>
+#include <algorithm>
 
 #include "Rasterizer/Data/Vertex.h"
 
@@ -31,7 +33,7 @@ namespace Rasterizer::Shaders
 		* It is called before the rasterization stage
 		* @param p_vertex
 		*/
-		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex) = 0;
+		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex, uint8_t p_vertexID) = 0;
 
 		/**
 		* The fragment modifier is where every pixels are modified.

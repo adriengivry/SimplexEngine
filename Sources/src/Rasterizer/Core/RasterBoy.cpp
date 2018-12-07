@@ -55,7 +55,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Verte
 	if (!CanRasterize())
 		return;
 
-	std::array<glm::vec4, 3> transformedVertex = { p_shader.VertexModifier(p_vertices[0]), p_shader.VertexModifier(p_vertices[1]), p_shader.VertexModifier(p_vertices[2]) };
+	std::array<glm::vec4, 3> transformedVertex = { p_shader.VertexModifier(p_vertices[0], 0), p_shader.VertexModifier(p_vertices[1], 1), p_shader.VertexModifier(p_vertices[2], 2) };
 
 	std::for_each(transformedVertex.begin(), transformedVertex.end(), std::bind(&RasterBoy::ConvertToRasterSpace, this, std::placeholders::_1));
 
