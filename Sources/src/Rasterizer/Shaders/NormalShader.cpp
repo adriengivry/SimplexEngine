@@ -4,11 +4,11 @@
 * @version 1.0
 */
 
-#include "Rasterizer/Shaders/DefaultShader.h"
+#include "Rasterizer/Shaders/NormalShader.h"
 
 using namespace glm;
 
-glm::vec4 Rasterizer::Shaders::DefaultShader::VertexModifier(const Data::Vertex& p_vertex)
+glm::vec4 Rasterizer::Shaders::NormalShader::VertexModifier(const Data::Vertex& p_vertex)
 {
 	mat4 mvp = GetUniform<mat4>("mvp");
 	mat4 modelMatrix = GetUniform<mat4>("modelMatrix");
@@ -22,7 +22,7 @@ glm::vec4 Rasterizer::Shaders::DefaultShader::VertexModifier(const Data::Vertex&
 	return vertexWorldPosition;
 }
 
-glm::vec3 Rasterizer::Shaders::DefaultShader::FragmentModifier()
+glm::vec3 Rasterizer::Shaders::NormalShader::FragmentModifier()
 {
 	vec3 normal = normalize(GetVarying<vec3>("normal"));
 
