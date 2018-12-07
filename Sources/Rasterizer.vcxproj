@@ -222,8 +222,12 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Rasterizer\Actors\Actor.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\Profiler.cpp" />
     <ClCompile Include="src\Rasterizer\Analytics\ProfilerSpy.cpp" />
+    <ClCompile Include="src\Rasterizer\Components\AActorComponent.cpp" />
+    <ClCompile Include="src\Rasterizer\Components\CameraComponent.cpp" />
+    <ClCompile Include="src\Rasterizer\Components\MeshComponent.cpp" />
     <ClCompile Include="src\Rasterizer\Core\SceneManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
     <ClCompile Include="src\Rasterizer\Data\DepthBuffer.cpp" />
@@ -266,9 +270,13 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Rasterizer\Actors\Actor.h" />
     <ClInclude Include="include\Rasterizer\Analytics\Profiler.h" />
     <ClInclude Include="include\Rasterizer\Analytics\ProfilerReport.h" />
     <ClInclude Include="include\Rasterizer\Analytics\ProfilerSpy.h" />
+    <ClInclude Include="include\Rasterizer\Components\AActorComponent.h" />
+    <ClInclude Include="include\Rasterizer\Components\CameraComponent.h" />
+    <ClInclude Include="include\Rasterizer\Components\MeshComponent.h" />
     <ClInclude Include="include\Rasterizer\Core\EWindowState.h" />
     <ClInclude Include="include\Rasterizer\Core\EventHandler.h" />
     <ClInclude Include="include\Rasterizer\Core\InputManager.h" />
