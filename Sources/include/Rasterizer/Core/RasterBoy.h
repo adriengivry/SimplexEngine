@@ -16,7 +16,7 @@
 #include "Rasterizer/Entities/Model.h"
 #include "Rasterizer/Data/DepthBuffer.h"
 #include "Rasterizer/Data/Texture.h"
-#include "Rasterizer/FakeGL/AShader.h"
+#include "Rasterizer/Shaders/AShader.h"
 
 namespace Rasterizer::Core
 {
@@ -49,7 +49,7 @@ namespace Rasterizer::Core
 		* @param p_camera
 		* @param p_shader
 		*/
-		void RasterizeModel(const Entities::Model& p_actor, FakeGL::AShader& p_shader);
+		void RasterizeModel(const Entities::Model& p_actor, Shaders::AShader& p_shader);
 
 		/**
 		* Rasterize a mesh to the screen
@@ -57,7 +57,7 @@ namespace Rasterizer::Core
 		* @param p_mvp
 		* @param p_shader
 		*/
-		void RasterizeMesh(const Resources::Mesh& p_mesh, FakeGL::AShader& p_shader);
+		void RasterizeMesh(const Resources::Mesh& p_mesh, Shaders::AShader& p_shader);
 
 		/**
 		* Rasterize a triangle to the screen
@@ -65,7 +65,7 @@ namespace Rasterizer::Core
 		* @param p_mvp
 		* @param p_shader
 		*/
-		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, FakeGL::AShader& p_shader);
+		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
 
 		/**
 		* Convert a vertex to raster space

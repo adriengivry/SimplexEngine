@@ -15,7 +15,7 @@
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
 #include "Rasterizer/Scripts/SSceneNavigator.h"
-#include "Rasterizer/FakeGL/DefaultShader.h"
+#include "Rasterizer/Shaders/DefaultShader.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -61,7 +61,7 @@ void Rasterizer::Core::Application::CreateGlobalScripts()
 
 void Rasterizer::Core::Application::CreateShaders()
 {
-	m_defaultShader = std::make_unique<FakeGL::DefaultShader>();
+	m_defaultShader = std::make_unique<Shaders::DefaultShader>();
 }
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)

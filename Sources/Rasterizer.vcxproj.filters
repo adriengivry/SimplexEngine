@@ -126,10 +126,10 @@
     <ClCompile Include="src\Rasterizer\Scripts\SSceneNavigator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rasterizer\FakeGL\AShader.cpp">
+    <ClCompile Include="src\Rasterizer\Shaders\AShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rasterizer\FakeGL\DefaultShader.cpp">
+    <ClCompile Include="src\Rasterizer\Shaders\DefaultShader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -278,10 +278,10 @@
     <ClInclude Include="include\Rasterizer\Scripts\SSceneNavigator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rasterizer\FakeGL\AShader.h">
+    <ClInclude Include="include\Rasterizer\Shaders\AShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rasterizer\FakeGL\DefaultShader.h">
+    <ClInclude Include="include\Rasterizer\Shaders\DefaultShader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

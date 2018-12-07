@@ -13,7 +13,7 @@
 
 #include "Rasterizer/Data/Vertex.h"
 
-namespace Rasterizer::FakeGL
+namespace Rasterizer::Shaders
 {
 	/**
 	* The AShader class is the base class for any shader of this project.

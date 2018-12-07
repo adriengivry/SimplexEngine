@@ -34,13 +34,13 @@ void Rasterizer::Core::RasterBoy::ClearBuffers()
 	m_rasterizationOutputBuffer.Clear();
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, FakeGL::AShader& p_shader)
+void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, Shaders::AShader& p_shader)
 {
 	for (auto mesh : p_actor.GetMeshes())
 		RasterizeMesh(mesh.get(), p_shader);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, FakeGL::AShader& p_shader)
+void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, Shaders::AShader& p_shader)
 {
 	auto vertices = p_mesh.GetVertices();
 	auto indices = p_mesh.GetIndices();
@@ -50,7 +50,7 @@ void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, F
 		RasterizeTriangle({ vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]] }, p_shader);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, FakeGL::AShader& p_shader)
+void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader)
 {
 	if (!CanRasterize())
 		return;

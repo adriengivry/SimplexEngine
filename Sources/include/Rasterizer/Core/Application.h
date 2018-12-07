@@ -24,7 +24,7 @@
 #include "Rasterizer/Entities/Model.h"
 #include "Rasterizer/Scripts/IScript.h"
 #include "Rasterizer/Scenes/AScene.h"
-#include "Rasterizer/FakeGL/AShader.h"
+#include "Rasterizer/Shaders/AShader.h"
 
 namespace Rasterizer::Core
 {
@@ -115,7 +115,7 @@ namespace Rasterizer::Core
 
 		/* Default stuffs */
 		Rasterizer::Entities::Camera m_defaultCamera;
-		std::unique_ptr<Rasterizer::FakeGL::AShader> m_defaultShader;
+		std::unique_ptr<Rasterizer::Shaders::AShader> m_defaultShader;
 		std::vector<std::unique_ptr<Scripts::IScript>> m_globalScripts;
 
 		/* Other stuffs */

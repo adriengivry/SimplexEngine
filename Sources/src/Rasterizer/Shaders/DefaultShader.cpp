@@ -4,9 +4,9 @@
 * @version 1.0
 */
 
-#include "Rasterizer/FakeGL/DefaultShader.h"
+#include "Rasterizer/Shaders/DefaultShader.h"
 
-glm::vec4 Rasterizer::FakeGL::DefaultShader::VertexModifier(const Data::Vertex & p_vertex)
+glm::vec4 Rasterizer::Shaders::DefaultShader::VertexModifier(const Data::Vertex & p_vertex)
 {
 	glm::vec4 vertexWorldPosition = std::get<glm::mat4>(GetUniform("mvp")) * glm::vec4(p_vertex.position, 1.0f);
 
@@ -15,7 +15,7 @@ glm::vec4 Rasterizer::FakeGL::DefaultShader::VertexModifier(const Data::Vertex &
 	return vertexWorldPosition;
 }
 
-glm::vec3 Rasterizer::FakeGL::DefaultShader::FragmentModifier(const glm::vec3& p_barycentricCoords)
+glm::vec3 Rasterizer::Shaders::DefaultShader::FragmentModifier(const glm::vec3& p_barycentricCoords)
 {
 	glm::vec3 normals = std::get<glm::vec3>(GetInternal("normals"));
 

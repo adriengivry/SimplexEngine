@@ -8,9 +8,9 @@
 #ifndef _DEFAULTSHADER_H
 #define _DEFAULTSHADER_H
 
-#include "Rasterizer/FakeGL/AShader.h"
+#include "Rasterizer/Shaders/AShader.h"
 
-namespace Rasterizer::FakeGL
+namespace Rasterizer::Shaders
 {
 	/**
 	* The default shader to use in this project
