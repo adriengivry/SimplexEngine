@@ -8,12 +8,15 @@
 #ifndef _RASTERBOY_H
 #define _RASTERBOY_H
 
+#include <array>
+
 #include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/Renderer.h"
 #include "Rasterizer/Entities/Camera.h"
 #include "Rasterizer/Entities/Model.h"
 #include "Rasterizer/Data/DepthBuffer.h"
 #include "Rasterizer/Data/Texture.h"
+#include "Rasterizer/FakeGL/AShader.h"
 
 namespace Rasterizer::Core
 {
@@ -44,28 +47,31 @@ namespace Rasterizer::Core
 		* Rasterize a model to the screen
 		* @param p_actor
 		* @param p_camera
+		* @param p_shader
 		*/
-		void RasterizeModel(const Entities::Model& p_actor, const Entities::Camera& p_camera);
+		void RasterizeModel(const Entities::Model& p_actor, FakeGL::AShader& p_shader);
 
 		/**
 		* Rasterize a mesh to the screen
 		* @param p_mesh
 		* @param p_mvp
+		* @param p_shader
 		*/
-		void RasterizeMesh(const Resources::Mesh& p_mesh, const glm::mat4& p_mvp);
+		void RasterizeMesh(const Resources::Mesh& p_mesh, FakeGL::AShader& p_shader);
 
 		/**
 		* Rasterize a triangle to the screen
 		* @param p_vertices
 		* @param p_mvp
+		* @param p_shader
 		*/
-		void RasterizeTriangle(std::tuple<Data::Vertex, Data::Vertex, Data::Vertex> p_vertices, const glm::mat4& p_mvp);
+		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, FakeGL::AShader& p_shader);
 
 		/**
-		* Project a point to the screen and calculate his depth buffer
-		* @param p_point (In camera space, aka after applying MVP)
+		* Convert a vertex to raster space
+		* @param p_vertex
 		*/
-		std::pair<glm::vec2, float> ProjectToPixelCoordinates(const glm::vec4& p_point);
+		void ConvertToRasterSpace(glm::vec4& p_vertex);
 
 		/**
 		* Verify is RasterBoy is allow to rasterize

@@ -34,76 +34,58 @@ void Rasterizer::Core::RasterBoy::ClearBuffers()
 	m_rasterizationOutputBuffer.Clear();
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, const Entities::Camera& p_camera)
+void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, FakeGL::AShader& p_shader)
 {
-	glm::mat4 mvp = p_camera.GetViewProjectionMatrix() * p_actor.transform.GetWorldMatrix();
-
 	for (auto mesh : p_actor.GetMeshes())
-		RasterizeMesh(mesh.get(), mvp);
+		RasterizeMesh(mesh.get(), p_shader);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, const glm::mat4& p_mvp)
+void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, FakeGL::AShader& p_shader)
 {
 	auto vertices = p_mesh.GetVertices();
 	auto indices = p_mesh.GetIndices();
 
-	/* We add 3 in order to iterate over faces (Made of triangles) */
+	/* We add 3 in order to iterate over faces (One triangle is a set of 3 vertices) */
 	for (uint32_t i = 0; i < indices.size(); i += 3)
-		RasterizeTriangle(std::make_tuple(vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]]), p_mvp);
+		RasterizeTriangle({ vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]] }, p_shader);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Data::Vertex, Data::Vertex> p_vertices, const glm::mat4& p_mvp)
+void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, FakeGL::AShader& p_shader)
 {
 	if (!CanRasterize())
 		return;
 
-	auto[v1, depth1] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<0>(p_vertices).position, 1.0f));
-	auto[v2, depth2] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<1>(p_vertices).position, 1.0f));
-	auto[v3, depth3] = ProjectToPixelCoordinates(p_mvp * glm::vec4(std::get<2>(p_vertices).position, 1.0f));
+	std::array<glm::vec4, 3> transformedVertex = { p_shader.VertexModifier(p_vertices[0]), p_shader.VertexModifier(p_vertices[1]), p_shader.VertexModifier(p_vertices[2]) };
 
-	/* Calculate face normal by computing the average of the 3 vertices normals */
-	glm::vec3 normal1 = std::get<0>(p_vertices).normal;
-	glm::vec3 normal2 = std::get<1>(p_vertices).normal;
-	glm::vec3 normal3 = std::get<2>(p_vertices).normal;
-
-	/* Calculate average normal of the face */
-	glm::vec3 faceNormal = (normal1 + normal2 + normal3) * 0.33f;
-
-	/* Calculate face normal color as a vec3 */
-	glm::vec3 faceNormalColorVec = (faceNormal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f)) * 255.0f;
-
-	/* Converting face normal color to Data::Color */
-	Data::Color faceNormalColor(static_cast<uint8_t>(faceNormalColorVec.x), static_cast<uint8_t>(faceNormalColorVec.y), (static_cast<uint8_t>(faceNormalColorVec.z)));
+	std::for_each(transformedVertex.begin(), transformedVertex.end(), std::bind(&RasterBoy::ConvertToRasterSpace, this, std::placeholders::_1));
 
 	/* Create a 2D triangle to automate computations (Bouding box, point position check) */
-	Data::Triangle2D triangle(v1, v2, v3);
+	Data::Triangle2D triangle(transformedVertex[0], transformedVertex[1], transformedVertex[2]);
+
+	triangle.PreComputeBarycentric();
 
 	/* Backface culling (Clock-wise) */
-	/*
-	if (triangle.CalculateArea() >= 0.0f)
+	if (triangle.GetArea() >= 0.0f)
 		return;
-	*/
 
 	/* Getting bounding box from the triangle to prevent iterating over all the screen */
 	auto[xmin, ymin, xmax, ymax] = triangle.GetBoundingBox();
 
-	/* Clamp triangle bounds to window size */
-	xmin = std::max(0, xmin);
-	xmax = std::min(xmax, m_window.GetWidthSigned() - 1);
-	ymin = std::max(0, ymin);
-	ymax = std::min(ymax, m_window.GetHeightSigned() - 1);
-
-	for (int32_t x = xmin; x < xmax; ++x)
+	/* Here we iterate over the bounding box (Clamped to window size) */
+	for (int32_t x = std::max(0, xmin); x < std::min(xmax, m_window.GetWidthSigned()); ++x)
 	{
-		for (int32_t y = ymin; y < ymax; ++y)
+		for (int32_t y = std::max(0, ymin); y < std::min(ymax, m_window.GetHeightSigned()); ++y)
 		{
-			glm::vec3 bary = triangle.Barycentric({ x, y });
+			glm::vec3 bary = triangle.GetBarycentricCoordinates({ x, y });
+
 			if (bary.x >= 0.0f && bary.y >= 0.0f && bary.x + bary.y <= 1.0f)
 			{
-				float depth = depth1 * bary.z + depth3 * bary.x + bary.y * depth2;
-				if (depth > 0.0f && depth <= m_depthBuffer.GetElement(x, y))
+				float depth = transformedVertex[0].z * bary.z + transformedVertex[2].z * bary.x + bary.y * transformedVertex[1].z;
+
+				if (depth <= m_depthBuffer.GetElement(x, y))
 				{
-					m_rasterizationOutputBuffer.SetPixel(x, y, faceNormalColor);
+					glm::vec3 fragment = p_shader.FragmentModifier() * 255.0f;
+					m_rasterizationOutputBuffer.SetPixel(x, y, { static_cast<uint8_t>(fragment.x), static_cast<uint8_t>(fragment.y), static_cast<uint8_t>(fragment.z) });
 					m_depthBuffer.SetElement(x, y, depth);
 				}
 			}
@@ -114,16 +96,14 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(std::tuple<Data::Vertex, Dat
 	++m_rasterizedTriangles;
 }
 
-std::pair<glm::vec2, float> Rasterizer::Core::RasterBoy::ProjectToPixelCoordinates(const glm::vec4& p_point)
+void Rasterizer::Core::RasterBoy::ConvertToRasterSpace(glm::vec4& p_vertex)
 {
-	/* Homogenize and calculate screen space coordiantes */
-	glm::vec3 screenSpace = p_point / p_point.w;
+	/* Homogenize */
+	p_vertex /= p_vertex.w;
 
-	/* Convert to pixel coordinates */
-	glm::vec2 result;
-	result.x = std::round(((screenSpace.x + 1) * 0.5f) * m_window.GetWidth());
-	result.y = std::round(((1 - screenSpace.y) * 0.5f) * m_window.GetHeight());
-	return std::make_pair(result, screenSpace.z);
+	/* Raster Space calculation */
+	p_vertex.x = std::round(((p_vertex.x + 1) * 0.5f) * m_window.GetWidth());
+	p_vertex.y = std::round(((1 - p_vertex.y) * 0.5f) * m_window.GetHeight());
 }
 
 bool Rasterizer::Core::RasterBoy::CanRasterize()

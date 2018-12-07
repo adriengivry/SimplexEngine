@@ -15,6 +15,7 @@
 #include "Rasterizer/Scripts/SProfilerLogger.h"
 #include "Rasterizer/Scripts/SConsoleController.h"
 #include "Rasterizer/Scripts/SSceneNavigator.h"
+#include "Rasterizer/FakeGL/DefaultShader.h"
 
 Rasterizer::Core::Application::Application() :
 	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
@@ -29,6 +30,7 @@ Rasterizer::Core::Application::Application() :
 
 	CreateScenes();
 	CreateGlobalScripts();
+	CreateShaders();
 }
 
 int Rasterizer::Core::Application::Run()
@@ -55,6 +57,11 @@ void Rasterizer::Core::Application::CreateGlobalScripts()
 	AddGlobalScript<Scripts::SFPSCounter>(m_userInterface);
 	AddGlobalScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
 	AddGlobalScript<Scripts::SSceneNavigator>(m_sceneManager, m_inputManager);
+}
+
+void Rasterizer::Core::Application::CreateShaders()
+{
+	m_defaultShader = std::make_unique<FakeGL::DefaultShader>();
 }
 
 void Rasterizer::Core::Application::Update(float p_deltaTime)
@@ -105,7 +112,15 @@ void Rasterizer::Core::Application::RasterizeModels()
 	PROFILER_SPY("Application::RasterizeModels");
 
 	for (auto& model : m_sceneManager.GetCurrentScene()->GetModels())
-		m_rasterBoy.RasterizeModel(model, m_sceneManager.GetCurrentScene()->GetMainCamera() != nullptr ? *m_sceneManager.GetCurrentScene()->GetMainCamera() : m_defaultCamera); /* Use the scene main camera or the default camera if there is no camera in scene */
+	{
+		/* Use the scene main camera or the default camera if there is no camera in scene */
+		const Entities::Camera& currentCamera = m_sceneManager.GetCurrentScene()->GetMainCamera() != nullptr ? *m_sceneManager.GetCurrentScene()->GetMainCamera() : m_defaultCamera;
+
+		m_defaultShader->ClearAll();
+		m_defaultShader->SetUniform("mvp", currentCamera.GetViewProjectionMatrix() * model.transform.GetWorldMatrix());
+
+		m_rasterBoy.RasterizeModel(model, *m_defaultShader);
+	}
 }
 
 bool Rasterizer::Core::Application::IsRunning() const

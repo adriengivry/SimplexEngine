@@ -23,35 +23,37 @@ namespace Rasterizer::Data
 		using BoundingBox = std::tuple<int32_t, int32_t, int32_t, int32_t>;
 
 		/**
-		* Create a triangle with the given points
-		* @param p_firstPoint
-		* @param p_secondPoint
-		* @param p_thirdPoint
+		* Create a triangle with the given vertices
+		* @param p_vertex1
+		* @param p_vertex2
+		* @param p_vertex3
 		*/
-		Triangle2D(const glm::vec2& p_firstPoint, const glm::vec2& p_secondPoint, const glm::vec2& p_thirdPoint);
-
-		/**
-		* Calculate the area of the triangle
-		*/
-		float CalculateArea();
+		Triangle2D(const glm::vec2& p_vertex1, const glm::vec2& p_vertex2, const glm::vec2& p_vertex3);
 
 		/**
 		* Update barycentric
 		*/
-		void UpdateBarycentric();
+		void PreComputeBarycentric();
+
+		/**
+		* Calculate the area of the triangle (Calculated with cross product, can be negative)
+		*/
+		float GetArea() const;
 
 		/**
 		* Calculate a bounding box for the triangle
 		*/
-		BoundingBox GetBoundingBox();
+		BoundingBox GetBoundingBox() const;
 
 		/**
-		*
+		* Return barycentric coordinates for the given point
+		* @param p_point
 		*/
-		glm::vec3 Barycentric(const glm::vec2& p_point);
+		glm::vec3 GetBarycentricCoordinates(const glm::vec2& p_point, uint8_t p_referenceVertex = 0) const;
 
 	private:
-		glm::vec2 m_points[3];
+		/* Triangle vertices */
+		glm::vec2 m_vertices[3];
 
 		/* Barycentric calculation relatives */
 		glm::vec2 m_V0;
