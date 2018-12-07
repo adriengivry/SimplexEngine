@@ -18,6 +18,7 @@
 #include "Rasterizer/Core/RasterBoy.h"
 #include "Rasterizer/Core/SceneManager.h"
 
+/* Analytics */
 #include "Rasterizer/Analytics/Profiler.h"
 
 /* Utils */

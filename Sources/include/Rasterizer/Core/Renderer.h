@@ -14,7 +14,7 @@
 #include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Data/Color.h"
 #include "Rasterizer/Data/ETextAlignment.h"
-#include "Rasterizer/Data/Texture.h"
+#include "Rasterizer/Buffers/TextureBuffer.h"
 
 namespace Rasterizer::Core
 {
@@ -46,7 +46,7 @@ namespace Rasterizer::Core
 		/**
 		* Draw a texture on the screen
 		*/
-		void DrawTexture(const Data::Texture& p_texture);
+		void DrawTextureBufferContent(const Buffers::TextureBuffer& p_texture);
 
 		/**
 		* Actually render things on screen

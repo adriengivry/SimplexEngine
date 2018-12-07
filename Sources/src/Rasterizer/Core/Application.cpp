@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Core/Application.h"
 #include "Rasterizer/Data/Vertex.h"
-#include "Rasterizer/Data/Triangle2D.h"
+#include "Rasterizer/Maths/Triangle2D.h"
 #include "Rasterizer/Utils/Math.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 #include "Rasterizer/Scenes/DefaultScene.h"
@@ -78,7 +78,7 @@ void Rasterizer::Core::Application::Update(float p_deltaTime)
 	m_rasterBoy.SendRasterizationOutputBufferToGPU();
 
 	/* Draw order */
-	m_renderer.DrawTexture(m_rasterBoy.GetRasterizationOutputBuffer());
+	m_renderer.DrawTextureBufferContent(m_rasterBoy.GetRasterizationOutputBuffer());
 	m_userInterface.Draw();
 
 	/* Render on screen */

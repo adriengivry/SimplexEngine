@@ -10,7 +10,7 @@
 
 #include <vector>
 
-namespace Rasterizer::Data
+namespace Rasterizer::Buffers
 {
 	/**
 	* A generic base for any 2D Buffer

@@ -8,9 +8,9 @@
 #ifndef _DEPTHBUFFER_H
 #define _DEPTHBUFFER_H
 
-#include "Rasterizer/Data/Buffer2D.h"
+#include "Rasterizer/Buffers/Buffer2D.h"
 
-namespace Rasterizer::Data
+namespace Rasterizer::Buffers
 {
 	/**
 	* The depth buffer is a structure that contains informations about depth, stored in a vector.

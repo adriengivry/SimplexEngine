@@ -12,10 +12,10 @@
 
 #include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/Renderer.h"
-#include "Rasterizer/Data/DepthBuffer.h"
-#include "Rasterizer/Data/Texture.h"
-#include "Rasterizer/Shaders/AShader.h"
+#include "Rasterizer/Buffers/DepthBuffer.h"
+#include "Rasterizer/Buffers/TextureBuffer.h"
 #include "Rasterizer/Resources/Mesh.h"
+#include "Rasterizer/Shaders/AShader.h"
 
 namespace Rasterizer::Core
 {
@@ -84,7 +84,7 @@ namespace Rasterizer::Core
 		/**
 		* Return the result of the rasterization as a 2D buffer (Texture buffer)
 		*/
-		const Data::Texture& GetRasterizationOutputBuffer() const;
+		const Buffers::TextureBuffer& GetRasterizationOutputBuffer() const;
 
 		/**
 		* Send the rasterization output buffer to GPU to make it available
@@ -97,8 +97,8 @@ namespace Rasterizer::Core
 
 		Core::Renderer& m_renderer;
 
-		Data::DepthBuffer m_depthBuffer;
-		Data::Texture m_rasterizationOutputBuffer;
+		Buffers::DepthBuffer m_depthBuffer;
+		Buffers::TextureBuffer m_rasterizationOutputBuffer;
 
 		bool m_limitTriangleRasterization;
 		uint64_t m_rasterizedTrianglesLimit;

@@ -230,10 +230,11 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Components\MeshComponent.cpp" />
     <ClCompile Include="src\Rasterizer\Core\SceneManager.cpp" />
     <ClCompile Include="src\Rasterizer\Core\UserInterface.cpp" />
-    <ClCompile Include="src\Rasterizer\Data\DepthBuffer.cpp" />
-    <ClCompile Include="src\Rasterizer\Data\Texture.cpp" />
+    <ClCompile Include="src\Rasterizer\Buffers\DepthBuffer.cpp" />
+    <ClCompile Include="src\Rasterizer\Buffers\TextureBuffer.cpp" />
     <ClCompile Include="src\Rasterizer\Materials\AMaterial.cpp" />
     <ClCompile Include="src\Rasterizer\Materials\LambertMaterial.cpp" />
+    <ClCompile Include="src\Rasterizer\Maths\Triangle2D.cpp" />
     <ClCompile Include="src\Rasterizer\Shaders\AShader.cpp" />
     <ClCompile Include="src\Rasterizer\Shaders\NormalShader.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\AScene.cpp" />
@@ -259,7 +260,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Data\Color.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Mesh.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Transform.cpp" />
-    <ClCompile Include="src\Rasterizer\Data\Triangle2D.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Vertex.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\SceneParser.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp" />
@@ -281,8 +281,8 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Core\Window.h" />
     <ClInclude Include="include\Rasterizer\Core\Application.h" />
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h" />
-    <ClInclude Include="include\Rasterizer\Data\Buffer2D.h" />
-    <ClInclude Include="include\Rasterizer\Data\DepthBuffer.h" />
+    <ClInclude Include="include\Rasterizer\Buffers\Buffer2D.h" />
+    <ClInclude Include="include\Rasterizer\Buffers\DepthBuffer.h" />
     <ClInclude Include="include\Rasterizer\Data\EFontSize.h" />
     <ClInclude Include="include\Rasterizer\Data\ETextAlignment.h" />
     <ClInclude Include="include\Rasterizer\Core\RasterBoy.h" />
@@ -291,7 +291,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />
     <ClInclude Include="include\Rasterizer\Data\Text.h" />
-    <ClInclude Include="include\Rasterizer\Data\Texture.h" />
+    <ClInclude Include="include\Rasterizer\Buffers\TextureBuffer.h" />
     <ClInclude Include="include\Rasterizer\Materials\ABaseMaterial.h" />
     <ClInclude Include="include\Rasterizer\Materials\AMaterial.h" />
     <ClInclude Include="include\Rasterizer\Materials\LambertMaterial.h" />
@@ -305,7 +305,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Mesh.h" />
     <ClInclude Include="include\Rasterizer\Data\Transform.h" />
-    <ClInclude Include="include\Rasterizer\Data\Triangle2D.h" />
+    <ClInclude Include="include\Rasterizer\Maths\Triangle2D.h" />
     <ClInclude Include="include\Rasterizer\Data\Vertex.h" />
     <ClInclude Include="include\Rasterizer\Scripts\IScript.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SConsoleController.h" />

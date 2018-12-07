@@ -69,7 +69,7 @@ void Rasterizer::Core::Renderer::DrawText(const std::string & p_text, TTF_Font *
 	SDL_FreeSurface(surface);
 }
 
-void Rasterizer::Core::Renderer::DrawTexture(const Data::Texture & p_texture)
+void Rasterizer::Core::Renderer::DrawTextureBufferContent(const Buffers::TextureBuffer& p_texture)
 {
 	PROFILER_SPY("Renderer::DrawTexture");
 

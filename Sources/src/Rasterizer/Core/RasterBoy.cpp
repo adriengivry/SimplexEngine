@@ -4,16 +4,13 @@
 * @version 1.0
 */
 
-#include <iostream>
 #include <algorithm>
+#include <functional>
 
 #include <glm/gtc/matrix_inverse.hpp>
 
 #include "Rasterizer/Core/RasterBoy.h"
-#include "Rasterizer/Analytics/ProfilerSpy.h"
-#include "Rasterizer/Data/Triangle2D.h"
-
-#include <thread>
+#include "Rasterizer/Maths/Triangle2D.h"
 
 Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer) :
 	m_window(p_window),
@@ -54,7 +51,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Verte
 	std::for_each(transformedVertex.begin(), transformedVertex.end(), std::bind(&RasterBoy::ConvertToRasterSpace, this, std::placeholders::_1));
 
 	/* Create a 2D triangle to automate computations (Bouding box, point position check) */
-	Data::Triangle2D triangle(transformedVertex[0], transformedVertex[1], transformedVertex[2]);
+	Maths::Triangle2D triangle(transformedVertex[0], transformedVertex[1], transformedVertex[2]);
 
 	triangle.PreComputeBarycentric();
 
@@ -116,7 +113,7 @@ void Rasterizer::Core::RasterBoy::SetRasterizedTriangleLimit(uint64_t p_limit)
 	m_rasterizedTrianglesLimit = p_limit;
 }
 
-const Rasterizer::Data::Texture & Rasterizer::Core::RasterBoy::GetRasterizationOutputBuffer() const
+const Rasterizer::Buffers::TextureBuffer& Rasterizer::Core::RasterBoy::GetRasterizationOutputBuffer() const
 {
 	return m_rasterizationOutputBuffer;
 }

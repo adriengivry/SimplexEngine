@@ -10,7 +10,9 @@
 
 #include <tuple>
 
-namespace Rasterizer::Data
+#include <glm/glm.hpp>
+
+namespace Rasterizer::Maths
 {
 	/**
 	* The Triangle2D class is a simple class to

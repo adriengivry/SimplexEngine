@@ -5,20 +5,20 @@
 */
 
 #pragma once
-#ifndef _TEXTURE_H
-#define _TEXTURE_H
+#ifndef _TEXTUREBUFFER_H
+#define _TEXTUREBUFFER_H
 
 #include <SDL.h>
 
-#include "Rasterizer/Data/Buffer2D.h"
+#include "Rasterizer/Buffers/Buffer2D.h"
 #include "Rasterizer/Data/Color.h"
 
-namespace Rasterizer::Data
+namespace Rasterizer::Buffers
 {
 	/**
 	* The texture structure wraps the SDL_Texture and allow content modification easily
 	*/
-	struct Texture final : public Buffer2D<uint32_t>
+	struct TextureBuffer final : public Buffer2D<uint32_t>
 	{
 		/**
 		* Constructor of the texture structure
@@ -28,13 +28,13 @@ namespace Rasterizer::Data
 		* @param p_pixelFormat
 		* @param p_textureAccess
 		*/
-		Texture(SDL_Renderer* p_sdlRenderer, uint32_t p_width, uint32_t p_height, Uint32 p_pixelFormat, SDL_TextureAccess p_textureAccess);
+		TextureBuffer(SDL_Renderer* p_sdlRenderer, uint32_t p_width, uint32_t p_height, Uint32 p_pixelFormat, SDL_TextureAccess p_textureAccess);
 
 		/**
 		* Texture destructor
 		* Will free the memory reserved for SDL_Texutre
 		*/
-		virtual ~Texture();
+		virtual ~TextureBuffer();
 
 		/**
 		* Modify a pixel on the texture
@@ -68,4 +68,4 @@ namespace Rasterizer::Data
 	};
 }
 
-#endif // _TEXTURE_H
+#endif // _TEXTUREBUFFER_H

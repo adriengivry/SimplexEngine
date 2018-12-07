@@ -4,13 +4,11 @@
 * @version 1.0
 */
 
-#include <glm/geometric.hpp>
+#include "Rasterizer/Maths/Triangle2D.h"
 
-#include "Rasterizer/Data/Triangle2D.h"
+Rasterizer::Maths::Triangle2D::Triangle2D(const glm::vec2& p_vertex1, const glm::vec2& p_vertex2, const glm::vec2& p_vertex3) : m_vertices{ p_vertex1, p_vertex2, p_vertex3 } {}
 
-Rasterizer::Data::Triangle2D::Triangle2D(const glm::vec2& p_vertex1, const glm::vec2& p_vertex2, const glm::vec2& p_vertex3) : m_vertices{ p_vertex1, p_vertex2, p_vertex3 } {}
-
-void Rasterizer::Data::Triangle2D::PreComputeBarycentric()
+void Rasterizer::Maths::Triangle2D::PreComputeBarycentric()
 {
 	m_V0 = glm::vec2(m_vertices[2].x - m_vertices[0].x, m_vertices[2].y - m_vertices[0].y);
 	m_V1 = glm::vec2(m_vertices[1].x - m_vertices[0].x, m_vertices[1].y - m_vertices[0].y);
@@ -21,14 +19,14 @@ void Rasterizer::Data::Triangle2D::PreComputeBarycentric()
 	m_Denom = 1.0f / (m_d00 * m_d11 - m_d01 * m_d01);
 }
 
-float Rasterizer::Data::Triangle2D::GetArea() const
+float Rasterizer::Maths::Triangle2D::GetArea() const
 {
 	glm::vec2 v(m_vertices[1].x - m_vertices[0].x, m_vertices[1].y - m_vertices[0].y);
 	glm::vec2 w(m_vertices[2].x - m_vertices[0].x, m_vertices[2].y - m_vertices[0].y);
 	return (v.x * w.y - v.y * w.x);
 }
 
-Rasterizer::Data::Triangle2D::BoundingBox Rasterizer::Data::Triangle2D::GetBoundingBox() const
+Rasterizer::Maths::Triangle2D::BoundingBox Rasterizer::Maths::Triangle2D::GetBoundingBox() const
 {
 	BoundingBox result = std::make_tuple
 	(
@@ -44,7 +42,7 @@ Rasterizer::Data::Triangle2D::BoundingBox Rasterizer::Data::Triangle2D::GetBound
 	return result;
 }
 
-glm::vec3 Rasterizer::Data::Triangle2D::GetBarycentricCoordinates(const glm::vec2& p_point, uint8_t p_referenceVertex) const
+glm::vec3 Rasterizer::Maths::Triangle2D::GetBarycentricCoordinates(const glm::vec2& p_point, uint8_t p_referenceVertex) const
 {
 	const float x = p_point.x - m_vertices[p_referenceVertex].x;
 	const float y = p_point.y - m_vertices[p_referenceVertex].y;
