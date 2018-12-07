@@ -23,11 +23,11 @@ void Rasterizer::Scenes::DefaultScene::CreateCameras()
 
 void Rasterizer::Scenes::DefaultScene::CreateModels()
 {
-	AddModel(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(0.0f, 0.0f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 0.0f, 0.0f }), glm::vec3(1.0f));
+	AddModel(*m_meshManager.RequireAndGet("Sphere"), glm::vec3(0.0f, 0.0f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 0.0f, 0.0f }), glm::vec3(1.0f));
 	AddModel(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
 	AddModel(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
 	AddModel(*m_meshManager.RequireAndGet("Icosphere"), glm::vec3(0.0f, 1.5f, 0.0f), Utils::Math::CreateQuaternionFromEuler({ 0.0, 45.0f, 0.0f }), glm::vec3(0.5f));
-	AddModel(*m_meshManager.RequireAndGet("Mannequin"), glm::vec3(3.0f, 0.0f, 0.0f), glm::quat(), glm::vec3(0.05f));
+	AddModel(*m_meshManager.RequireAndGet("Monkey"), glm::vec3(3.0f, 0.0f, 0.0f), glm::quat(), glm::vec3(1.0f));
 	// AddModel(*m_meshManager.RequireAndGet("Plane"), glm::vec3(0.0f, -2.0f, 0.0f), glm::quat(), glm::vec3(10.0f, 1.0f, 10.0f));
 }
 

@@ -26,8 +26,9 @@ glm::vec3 Rasterizer::Shaders::LambertShader::FragmentModifier()
 	glm::vec3 ambient(0.05f, 0.05f, 0.05f);
 	glm::vec3 position(5, 2, 10);
 	glm::vec3 diffuse(0.8f, 0.8f, 0.8f);
+	glm::vec3 normal = GetVarying<vec3>("normal");
 
-	return ambient + diffuse * Lambert(GetVarying<vec3>("normal"), position);
+	return ambient + diffuse * Lambert(normal, position);
 }
 
 float Rasterizer::Shaders::LambertShader::Lambert(const glm::vec3 & p_fragmentNormal, const glm::vec3 & p_lightPosition)

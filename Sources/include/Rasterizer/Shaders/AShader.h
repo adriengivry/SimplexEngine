@@ -35,6 +35,11 @@ namespace Rasterizer::Shaders
 		glm::vec4 ProcessVertex(const Data::Vertex& p_vertex, uint8_t p_vertexID);
 
 		/**
+		* Process a fragment
+		*/
+		glm::vec3 ProcessFragment();
+
+		/**
 		* The vertex modifier is where the vertex is modified.
 		* It is called before the rasterization stage
 		* @param p_vertex
@@ -42,16 +47,16 @@ namespace Rasterizer::Shaders
 		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex) = 0;
 
 		/**
-		* Process interpolation for all varying data and output to fragmentData
-		* @param p_barycentricCoords
-		*/
-		void ProcessInterpolation(const glm::vec3& p_barycentricCoords);
-
-		/**
 		* The fragment modifier is where every pixels are modified.
 		* It is called after the rasterization stage
 		*/
 		virtual glm::vec3 FragmentModifier() = 0;
+
+		/**
+		* Process interpolation for all varying data and output to fragmentData
+		* @param p_barycentricCoords
+		*/
+		void ProcessInterpolation(const glm::vec3& p_barycentricCoords);
 
 		/**
 		* Send a value to the shader (Identified by the given name)

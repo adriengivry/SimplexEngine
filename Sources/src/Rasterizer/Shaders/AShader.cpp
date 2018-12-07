@@ -12,30 +12,13 @@ glm::vec4 Rasterizer::Shaders::AShader::ProcessVertex(const Data::Vertex & p_ver
 	return VertexModifier(p_vertex);
 }
 
-void Rasterizer::Shaders::AShader::SetUniform(const std::string& p_name, ShaderType p_value)
+glm::vec3 Rasterizer::Shaders::AShader::ProcessFragment()
 {
-	m_uniforms[p_name] = p_value;
+	glm::vec3 result = FragmentModifier();
+	ClearData();
+	return result;
 }
 
-void Rasterizer::Shaders::AShader::ClearData()
-{
-	m_uniforms.clear();
-	m_varying[0].clear();
-	m_varying[1].clear();
-	m_varying[2].clear();
-	m_flat.clear();
-	m_interpolatedVarying.clear();
-}
-
-void Rasterizer::Shaders::AShader::SetVarying(const std::string & p_name, ShaderType p_value)
-{
-	m_varying[m_index][p_name] = p_value;
-}
-
-void Rasterizer::Shaders::AShader::SetFlat(const std::string & p_name, ShaderType p_value)
-{
-	m_flat[p_name] = p_value;
-}
 
 void Rasterizer::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_barycentricCoords)
 {
@@ -54,7 +37,7 @@ void Rasterizer::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_baryc
 
 		if (isInteger)
 		{
-			std::array<int, 3> data { std::get<int>(m_varying[0][key]), std::get<int>(m_varying[1][key]), std::get<int>(m_varying[2][key]) };
+			std::array<int, 3> data{ std::get<int>(m_varying[0][key]), std::get<int>(m_varying[1][key]), std::get<int>(m_varying[2][key]) };
 			InterpolateData(key, data, p_barycentricCoords);
 		}
 		else if (isFloat)
@@ -93,4 +76,29 @@ void Rasterizer::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_baryc
 			InterpolateData(key, data, p_barycentricCoords);
 		}
 	}
+}
+
+void Rasterizer::Shaders::AShader::SetUniform(const std::string& p_name, ShaderType p_value)
+{
+	m_uniforms[p_name] = p_value;
+}
+
+void Rasterizer::Shaders::AShader::ClearData()
+{
+	m_uniforms.clear();
+	m_varying[0].clear();
+	m_varying[1].clear();
+	m_varying[2].clear();
+	m_flat.clear();
+	m_interpolatedVarying.clear();
+}
+
+void Rasterizer::Shaders::AShader::SetVarying(const std::string & p_name, ShaderType p_value)
+{
+	m_varying[m_index][p_name] = p_value;
+}
+
+void Rasterizer::Shaders::AShader::SetFlat(const std::string & p_name, ShaderType p_value)
+{
+	m_flat[p_name] = p_value;
 }

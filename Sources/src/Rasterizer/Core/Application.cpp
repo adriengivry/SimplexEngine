@@ -117,9 +117,11 @@ void Rasterizer::Core::Application::RasterizeModels()
 		/* Use the scene main camera or the default camera if there is no camera in scene */
 		const Entities::Camera& currentCamera = m_sceneManager.GetCurrentScene()->GetMainCamera() != nullptr ? *m_sceneManager.GetCurrentScene()->GetMainCamera() : m_defaultCamera;
 
-		m_defaultShader->ClearData();
 		m_defaultShader->SetUniform("mvp", currentCamera.GetViewProjectionMatrix() * model.transform.GetWorldMatrix());
 		m_defaultShader->SetUniform("modelMatrix", model.transform.GetWorldMatrix());
+		m_defaultShader->SetUniform("viewMatrix", currentCamera.GetViewMatrix());
+		m_defaultShader->SetUniform("projectionMatrix", currentCamera.GetProjectionMatrix());
+		m_defaultShader->SetUniform("viewPosition", currentCamera.transform.GetWorldPosition());
 
 		m_rasterBoy.RasterizeModel(model, *m_defaultShader);
 	}
