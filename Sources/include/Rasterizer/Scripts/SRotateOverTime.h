@@ -5,7 +5,7 @@
 */
 
 #include "Rasterizer/Scripts/IScript.h"
-#include "Rasterizer/Entities/AEntity.h"
+#include "Rasterizer/Actors/Actor.h"
 
 #pragma once
 #ifndef _SROTATEOVERTIME_H
@@ -24,7 +24,7 @@ namespace Rasterizer::Scripts
 		* @param p_target
 		* @param p_rotationSpeed
 		*/
-		SRotateOverTime(Entities::AEntity& p_target, float p_rotationSpeed);
+		SRotateOverTime(Actors::Actor& p_target, float p_rotationSpeed);
 
 		/**
 		* Update the script
@@ -33,7 +33,7 @@ namespace Rasterizer::Scripts
 		virtual void Update(float p_deltaTime) override;
 
 	private:
-		Entities::AEntity& m_target;
+		Actors::Actor& m_target;
 		float m_rotationSpeed;
 	};
 }

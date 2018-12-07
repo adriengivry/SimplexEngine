@@ -7,7 +7,7 @@
 #include "Rasterizer/Scripts/SRotateOverTime.h"
 #include "Rasterizer/Utils/Math.h"
 
-Rasterizer::Scripts::SRotateOverTime::SRotateOverTime(Entities::AEntity & p_target, float p_rotationSpeed) :
+Rasterizer::Scripts::SRotateOverTime::SRotateOverTime(Actors::Actor& p_target, float p_rotationSpeed) :
 	m_target(p_target),
 	m_rotationSpeed(p_rotationSpeed)
 {

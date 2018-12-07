@@ -8,6 +8,7 @@
 #ifndef _APPLICATION_H
 #define _APPLICATION_H
 
+/* Core */
 #include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/EventHandler.h"
 #include "Rasterizer/Core/InputManager.h"
@@ -16,12 +17,13 @@
 #include "Rasterizer/Core/UserInterface.h"
 #include "Rasterizer/Core/RasterBoy.h"
 #include "Rasterizer/Core/SceneManager.h"
+
 #include "Rasterizer/Analytics/Profiler.h"
+
+/* Utils */
 #include "Rasterizer/Utils/Clock.h"
-#include "Rasterizer/Resources/Managers/MeshManager.h"
 #include "Rasterizer/Utils/IniIndexer.h"
-#include "Rasterizer/Entities/Camera.h"
-#include "Rasterizer/Entities/Model.h"
+#include "Rasterizer/Resources/Managers/MeshManager.h"
 #include "Rasterizer/Scripts/IScript.h"
 #include "Rasterizer/Scenes/AScene.h"
 #include "Rasterizer/Materials/AMaterial.h"
@@ -109,7 +111,7 @@ namespace Rasterizer::Core
 		Rasterizer::Resources::Managers::MeshManager m_meshManager;
 
 		/* Default stuffs */
-		Rasterizer::Entities::Camera m_defaultCamera;
+		Actors::Actor m_defaultCamera;
 		std::vector<std::unique_ptr<Scripts::IScript>> m_globalScripts;
 		std::unique_ptr<Materials::AMaterial> m_defaultMaterial;
 

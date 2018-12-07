@@ -34,12 +34,6 @@ void Rasterizer::Core::RasterBoy::ClearBuffers()
 	m_rasterizationOutputBuffer.Clear();
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeModel(const Entities::Model& p_actor, Shaders::AShader& p_shader)
-{
-	for (auto mesh : p_actor.GetMeshes())
-		RasterizeMesh(mesh.get(), p_shader);
-}
-
 void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, Shaders::AShader& p_shader)
 {
 	auto vertices = p_mesh.GetVertices();

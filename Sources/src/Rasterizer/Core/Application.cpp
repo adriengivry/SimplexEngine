@@ -23,7 +23,6 @@ Rasterizer::Core::Application::Application() :
 	m_renderer(m_window),
 	m_userInterface(m_window, m_renderer),
 	m_rasterBoy(m_window, m_renderer),
-	m_defaultCamera(glm::vec3(0.0f, 0.0f, 10.0f), glm::quat(), glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio()),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
 	m_applicationState(EApplicationState::RUNNING)
 {
@@ -31,6 +30,10 @@ Rasterizer::Core::Application::Application() :
 
 	CreateScenes();
 	CreateGlobalScripts();
+
+	/* Initialize the default camera */
+	m_defaultCamera.AddComponent<Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
+	m_defaultCamera.transform.SetLocalPosition({0.0f, 0.0f, 10.0f});
 }
 
 int Rasterizer::Core::Application::Run()
@@ -107,12 +110,19 @@ void Rasterizer::Core::Application::RasterizeScene()
 
 	for (auto meshComponent : Tools::SceneParser::FindMeshes(*m_sceneManager.GetCurrentScene()))
 	{
+		/* Find camera from scene and the default camera */
+		Components::CameraComponent const* sceneMainCamera = Tools::SceneParser::GetMainCamera(*m_sceneManager.GetCurrentScene());
+		Components::CameraComponent const* defaultCamera = m_defaultCamera.GetComponent<Components::CameraComponent>().get();
+
 		/* Use the scene main camera or the default camera if there is no camera in scene */
-		auto sceneMainCamera = Tools::SceneParser::GetMainCamera(*m_sceneManager.GetCurrentScene());
+		auto cameraToUse = sceneMainCamera ? sceneMainCamera : (defaultCamera ? defaultCamera : nullptr);
 
-		m_defaultMaterial->UpdateUniforms(*sceneMainCamera, meshComponent.get());
-
-		m_rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), m_defaultMaterial->GetShaderInstance());
+		/* Render only if there is a camera */
+		if (cameraToUse)
+		{
+			m_defaultMaterial->UpdateUniforms(*cameraToUse, meshComponent.get());
+			m_rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), m_defaultMaterial->GetShaderInstance());
+		}
 	}
 }
 
