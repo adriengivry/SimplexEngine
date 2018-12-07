@@ -9,6 +9,7 @@
 #define _ASCENE_H
 
 #include <vector>
+#include <memory>
 
 #include "Rasterizer/Core/Window.h"
 #include "Rasterizer/Core/EventHandler.h"
@@ -21,6 +22,7 @@
 #include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Resources/Managers/MeshManager.h"
 #include "Rasterizer/Scripts/IScript.h"
+#include "Rasterizer/Actors/Actor.h"
 
 /**
 * This header contain some usefull macro to create scenes inheriting from AScene quickly
@@ -74,73 +76,40 @@ namespace Rasterizer::Scenes
 		void Unload();
 
 		/**
-		* Return the main camera (As a pointer, because it is nullable)
+		* Return the vector of scripts as const reference
 		*/
-		Entities::Camera* GetMainCamera();
+		const std::vector<std::unique_ptr<Scripts::IScript>>& GetScripts() const;
 
 		/**
-		* Return the vector of cameras of the scene
+		* Return the vector of actors as const reference
 		*/
-		std::vector<Rasterizer::Entities::Camera>& GetCameras();
-
-		/**
-		* Return the vector of models of the scene
-		*/
-		std::vector<Rasterizer::Entities::Model>& GetModels();
-
-		/**
-		* Return the vector of scripts of the scene
-		*/
-		std::vector<std::unique_ptr<Scripts::IScript>>& GetScripts();
+		const std::vector<std::unique_ptr<Rasterizer::Actors::Actor>>& GetActors() const;
 
 	protected:
 		/**
-		* Add a camera to the scene
-		* @param p_args (Arguments forwarded to the std::make_unique)
+		* Add an actor to the scene
+		* @param p_args (Arguments forwarded to the actor constructor)
 		*/
-		template<typename... Args>
-		void AddCamera(Args&&... p_args) { m_cameras.emplace_back(p_args...); if (!m_mainCamera) SetAsMainCamera(m_cameras.at(m_cameras.size() - 1)); }
-
-		/**
-		* Add a model to the scene
-		* @param p_args (Arguments forwarded to the std::make_unique)
-		*/
-		template<typename... Args>
-		void AddModel(Args&&... p_args) { m_models.emplace_back(p_args...); }
+		template<typename T, typename... Args>
+		T& AddActor(Args&&... p_args) 
+		{
+			m_actors.push_back(std::make_unique<T>(p_args...));
+			return *m_actors.at(m_actors.size() - 1);
+		}
 
 		/**
 		* Add a script to the scene
 		* @param p_args (Arguments forwarded to the std::make_unique)
 		*/
 		template<typename T, typename... Args>
-		void AddScript(Args&&... p_args) { m_scripts.push_back(std::make_unique<T>(p_args...)); }
-
-		/**
-		* Set the given camera as the main camera of the scene (Used for rendering)
-		* @param p_camera
-		*/
-		void SetAsMainCamera(Entities::Camera& p_camera);
+		void AddScript(Args&&... p_args)
+		{ 
+			m_scripts.push_back(std::make_unique<T>(p_args...));
+		}
 
 	private:
-		/**
-		* You should create your cameras here
-		*/
-		virtual void CreateCameras() = 0;
-
-		/**
-		* You should create your models here
-		*/
-		virtual void CreateModels() = 0;
-
-		/**
-		* You should create your scripts here
-		*/
-		virtual void CreateScripts() = 0;
-
-		/**
-		*You should define you parent/child relations here
-		*/
-		virtual void DefineParents() = 0;
+		virtual void OnLoad() = 0;
+		virtual void OnUnload() = 0;
 
 	protected:
 		/* Accessible data for new scenes */
@@ -155,12 +124,8 @@ namespace Rasterizer::Scenes
 		Resources::Managers::MeshManager&	m_meshManager;
 
 		/* Scene content */
-		std::vector<Rasterizer::Entities::Camera> m_cameras;
-		std::vector<Rasterizer::Entities::Model> m_models;
-		std::vector<std::unique_ptr<Scripts::IScript>> m_scripts;
-
-		/* References */
-		Rasterizer::Entities::Camera* m_mainCamera = nullptr;
+		std::vector<std::unique_ptr<Rasterizer::Actors::Actor>>		m_actors;
+		std::vector<std::unique_ptr<Scripts::IScript>>				m_scripts;
 	};
 }
 

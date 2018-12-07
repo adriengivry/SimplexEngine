@@ -8,7 +8,8 @@
 #ifndef _AACTORCOMPONENT_H
 #define _AACTORCOMPONENT_H
 
-#include "Rasterizer/Actors/Actor.h"
+/* Forward delecaration */
+namespace Rasterizer::Actors { class Actor; }
 
 namespace Rasterizer::Components
 {
@@ -18,11 +19,13 @@ namespace Rasterizer::Components
 	class AActorComponent
 	{
 	public:
-		AActorComponent(const Actors::Actor& p_owner) : owner(p_owner) {}
+		AActorComponent(Actors::Actor& p_owner) : owner(&p_owner) {}
+
+		virtual void Test() = 0;
 
 	public:
 		/* The owner of this component is public */
-		const Actors::Actor& owner;
+		Actors::Actor* owner;
 	};
 }
 

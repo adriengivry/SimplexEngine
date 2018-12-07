@@ -21,40 +21,22 @@ Rasterizer::Scenes::AScene::AScene(Core::Window& p_window, Core::EventHandler& p
 
 void Rasterizer::Scenes::AScene::Load()
 {
-	CreateCameras();
-	CreateModels();
-	CreateScripts();
-	DefineParents();
+	OnLoad();
 }
 
 void Rasterizer::Scenes::AScene::Unload()
 {
-	m_cameras.clear();
-	m_models.clear();
+	OnUnload();
+	m_actors.clear();
 	m_scripts.clear();
 }
 
-std::vector<std::unique_ptr<Rasterizer::Scripts::IScript>>& Rasterizer::Scenes::AScene::GetScripts()
+const std::vector<std::unique_ptr<Rasterizer::Scripts::IScript>>& Rasterizer::Scenes::AScene::GetScripts() const
 {
 	return m_scripts;
 }
 
-void Rasterizer::Scenes::AScene::SetAsMainCamera(Entities::Camera & p_camera)
+const std::vector<std::unique_ptr<Rasterizer::Actors::Actor>>& Rasterizer::Scenes::AScene::GetActors() const
 {
-	m_mainCamera = &p_camera;
-}
-
-std::vector<Rasterizer::Entities::Model>& Rasterizer::Scenes::AScene::GetModels()
-{
-	return m_models;
-}
-
-Rasterizer::Entities::Camera * Rasterizer::Scenes::AScene::GetMainCamera()
-{
-	return m_mainCamera;
-}
-
-std::vector<Rasterizer::Entities::Camera>& Rasterizer::Scenes::AScene::GetCameras()
-{
-	return m_cameras;
+	return m_actors;
 }

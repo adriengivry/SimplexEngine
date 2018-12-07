@@ -11,13 +11,8 @@
 #include <vector>
 #include <memory>
 
+#include "Rasterizer/Components/AActorComponent.h"
 #include "Rasterizer/Data/Transform.h"
-
-namespace Rasterizer::Components
-{
-	/* Forward declaration to prevent multiple inclusion */
-	class AActorComponent;
-}
 
 namespace Rasterizer::Actors
 {
@@ -28,27 +23,35 @@ namespace Rasterizer::Actors
 	{
 	public:
 		/**
-		* Return a component
+		* Try to get a component from the actor
 		*/
 		template<typename T>
-		T* GetComponent()
+		std::shared_ptr<T> GetComponent()
 		{
 			static_assert(std::is_base_of<Components::AActorComponent, T>::value, "T should derived from AActorComponent");
 
-			for (auto& component : m_components)
-				if (T* result = std::dynamic_pointer_cast<T>(&component); result)
-					return result;
+			std::shared_ptr<T> result(nullptr);
 
-			return nullptr;
+			for (auto component : m_components)
+			{
+				result = std::dynamic_pointer_cast<T>(component);
+				if (result)
+					break;
+			}
+
+			return result;
 		}
 
+		/**
+		* Add a component to the actor
+		*/
 		template<typename T, typename ... Args>
 		T& AddComponent(Args&&... p_args)
 		{
 			static_assert(std::is_base_of<Components::AActorComponent, T>::value, "T should derived from AActorComponent");
 
-			m_components.emplace_back(this, p_args...);
-			return m_components.at(m_components.size() - 1);
+			m_components.push_back(std::make_shared<T>(*this, p_args...));
+			return *dynamic_cast<T*>(m_components.at(m_components.size() - 1).get());
 		}
 
 	public:
@@ -56,7 +59,7 @@ namespace Rasterizer::Actors
 		Data::Transform transform;
 
 	private:
-		std::vector<Components::AActorComponent> m_components;
+		std::vector<std::shared_ptr<Components::AActorComponent>> m_components;
 	};
 }
 

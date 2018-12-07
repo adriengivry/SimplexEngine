@@ -5,9 +5,10 @@
 */
 
 #include "Rasterizer/Materials/LambertMaterial.h"
+#include "Rasterizer/Actors/Actor.h"
 
-void Rasterizer::Materials::LambertMaterial::UpdateUniforms(const Entities::Camera& p_camera, const Entities::Model& p_model)
+void Rasterizer::Materials::LambertMaterial::UpdateUniforms(const Components::CameraComponent& p_cameraComponent, const Components::MeshComponent& p_meshComponent)
 {
-	SetUniform("mvp", p_camera.GetViewProjectionMatrix() * p_model.transform.GetWorldMatrix());
-	SetUniform("modelMatrix", p_model.transform.GetWorldMatrix());
+	SetUniform("mvp", p_cameraComponent.GetViewProjectionMatrix() * p_meshComponent.owner->transform.GetWorldMatrix());
+	SetUniform("modelMatrix", p_meshComponent.owner->transform.GetWorldMatrix());
 }

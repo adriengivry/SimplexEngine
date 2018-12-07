@@ -117,9 +117,6 @@
     <ClCompile Include="src\Rasterizer\Data\DepthBuffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rasterizer\Scenes\TestScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rasterizer\Core\SceneManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -151,6 +148,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rasterizer\Actors\Actor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Tools\SceneParser.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -290,9 +290,6 @@
     <ClInclude Include="include\Rasterizer\Scenes\ASceneDefines.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Rasterizer\Scenes\TestScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\Rasterizer\Core\SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -327,6 +324,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Actors\Actor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Tools\SceneParser.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -238,7 +238,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Shaders\NormalShader.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\AScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scenes\DefaultScene.cpp" />
-    <ClCompile Include="src\Rasterizer\Scenes\TestScene.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SCameraController.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Managers\MeshManager.cpp" />
     <ClCompile Include="src\Rasterizer\Scripts\SConsoleController.cpp" />
@@ -265,6 +264,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Entities\AEntity.cpp" />
     <ClCompile Include="src\Rasterizer\Entities\Camera.cpp" />
     <ClCompile Include="src\Rasterizer\Entities\Model.cpp" />
+    <ClCompile Include="src\Rasterizer\Tools\SceneParser.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Clock.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\IniIndexer.cpp" />
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp" />
@@ -303,7 +303,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Scenes\AScene.h" />
     <ClInclude Include="include\Rasterizer\Scenes\ASceneDefines.h" />
     <ClInclude Include="include\Rasterizer\Scenes\DefaultScene.h" />
-    <ClInclude Include="include\Rasterizer\Scenes\TestScene.h" />
     <ClInclude Include="include\Rasterizer\Scripts\SCameraController.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\Rasterizer\Resources\Managers\MeshManager.h" />
@@ -323,6 +322,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Scripts\SSceneNavigator.h" />
     <ClInclude Include="include\Rasterizer\Shaders\LambertShader.h" />
     <ClInclude Include="include\Rasterizer\Tools\MeshCreator.h" />
+    <ClInclude Include="include\Rasterizer\Tools\SceneParser.h" />
     <ClInclude Include="include\Rasterizer\Utils\Clock.h" />
     <ClInclude Include="include\Rasterizer\Tools\EasyAssimp.h" />
     <ClInclude Include="include\Rasterizer\Utils\Event.h" />

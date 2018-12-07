@@ -83,7 +83,7 @@ namespace Rasterizer::Core
 		/**
 		* Rasterize every model
 		*/
-		void RasterizeModels();
+		void RasterizeScene();
 
 		/**
 		* Return true if the current state of the application is RUNNING

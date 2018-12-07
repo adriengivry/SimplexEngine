@@ -5,13 +5,20 @@
 */
 
 #include "Rasterizer/Components/MeshComponent.h"
+#include "Rasterizer/Actors/Actor.h"
 
-void Rasterizer::Components::MeshComponent::SetMesh(const Resources::Mesh & p_mesh)
+Rasterizer::Components::MeshComponent::MeshComponent(Actors::Actor& p_owner, Resources::Mesh& p_mesh) :
+	AActorComponent(p_owner)
+{
+	SetMesh(p_mesh);
+}
+
+void Rasterizer::Components::MeshComponent::SetMesh(Resources::Mesh& p_mesh)
 {
 	m_mesh = &p_mesh;
 }
 
-Rasterizer::Resources::Mesh const* Rasterizer::Components::MeshComponent::GetMesh()
+Rasterizer::Resources::Mesh* Rasterizer::Components::MeshComponent::GetMesh() const
 {
 	return m_mesh;
 }

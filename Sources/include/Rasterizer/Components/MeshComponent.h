@@ -17,18 +17,29 @@ namespace Rasterizer::Components
 	{
 	public:
 		/**
+		* Mesh component constructor
+		* @param p_owner
+		*/
+		MeshComponent(Actors::Actor& p_owner, Resources::Mesh& p_mesh);
+
+		/**
+		* Needed
+		*/
+		virtual void Test() override {}
+
+		/**
 		* Set a mesh for the mesh component
 		* @param p_mesh
 		*/
-		void SetMesh(const Resources::Mesh& p_mesh);
+		void SetMesh(Resources::Mesh& p_mesh);
 
 		/**
 		* Return the current mesh (Or nullptr if not set)
 		*/
-		Resources::Mesh const* GetMesh();
+		Resources::Mesh* GetMesh() const;
 
 	private:
-		Resources::Mesh const* m_mesh;
+		Resources::Mesh* m_mesh;
 	};
 }
 

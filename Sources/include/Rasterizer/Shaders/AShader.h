@@ -13,6 +13,7 @@
 #include <string>
 #include <algorithm>
 #include <array>
+#include <glm/glm.hpp>
 
 #include "Rasterizer/Data/Vertex.h"
 

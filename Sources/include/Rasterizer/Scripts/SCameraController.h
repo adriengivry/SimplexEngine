@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Scripts/IScript.h"
 #include "Rasterizer/Core/InputManager.h"
-#include "Rasterizer/Entities/Camera.h"
+#include "Rasterizer/Components/CameraComponent.h"
 
 #pragma once
 #ifndef _SCAMERACONTROLLER_H
@@ -23,9 +23,9 @@ namespace Rasterizer::Scripts
 		/**
 		* Constructor of the camera controller
 		* @param p_inputManager
-		* @param p_camera (The camera to control with this script)
+		* @param p_cameraComponent (The camera to control with this script)
 		*/
-		SCameraController(const Core::InputManager& p_inputManager, Entities::Camera& p_camera);
+		SCameraController(const Core::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent);
 
 		/**
 		* Update the script
@@ -47,7 +47,7 @@ namespace Rasterizer::Scripts
 
 	private:
 		const Core::InputManager& m_inputManager;
-		Entities::Camera& m_camera;
+		Components::CameraComponent& m_cameraComponent;
 
 		/* Internal stuffs */
 		float m_mouseSensitivity = 30.0f;
