@@ -13,9 +13,9 @@
 #include "Rasterizer/Core/EventHandler.h"
 #include "Rasterizer/Core/InputManager.h"
 #include "Rasterizer/Core/EApplicationState.h"
-#include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Rendering/Renderer.h"
 #include "Rasterizer/Core/UserInterface.h"
-#include "Rasterizer/Core/RasterBoy.h"
+#include "Rasterizer/Rendering/RasterBoy.h"
 #include "Rasterizer/Core/SceneManager.h"
 
 /* Analytics */
@@ -103,9 +103,9 @@ namespace Rasterizer::Core
 		Rasterizer::Core::Window m_window;
 		Rasterizer::Core::EventHandler m_eventHandler;
 		Rasterizer::Core::InputManager m_inputManager;
-		Rasterizer::Core::Renderer m_renderer;
+		Rasterizer::Rendering::Renderer m_renderer;
 		Rasterizer::Core::UserInterface m_userInterface;
-		Rasterizer::Core::RasterBoy m_rasterBoy;
+		Rasterizer::Rendering::RasterBoy m_rasterBoy;
 		Rasterizer::Core::SceneManager m_sceneManager;
 		Rasterizer::Analytics::Profiler m_profiler;
 		Rasterizer::Utils::Clock m_clock;

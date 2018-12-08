@@ -14,9 +14,9 @@
 #define SCENE_PARAMETERS		Rasterizer::Core::Window&						p_window,\
 								Rasterizer::Core::EventHandler&					p_eventHandler,\
 								Rasterizer::Core::InputManager&					p_inputManager,\
-								Rasterizer::Core::Renderer&						p_renderer,\
+								Rasterizer::Rendering::Renderer&						p_renderer,\
 								Rasterizer::Core::UserInterface&				p_userInterface,\
-								Rasterizer::Core::RasterBoy&					p_rasterBoy,\
+								Rasterizer::Rendering::RasterBoy&					p_rasterBoy,\
 								Rasterizer::Analytics::Profiler&				p_profiler,\
 								Rasterizer::Utils::Clock&						p_clock,\
 								Rasterizer::Resources::Managers::MeshManager&	p_meshManager\

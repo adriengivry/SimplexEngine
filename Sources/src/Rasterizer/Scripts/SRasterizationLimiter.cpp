@@ -10,7 +10,7 @@
 #include "Rasterizer/Scripts/SRasterizationLimiter.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 
-Rasterizer::Scripts::SRasterizationLimiter::SRasterizationLimiter(Core::RasterBoy& p_rasterBoy, float p_speed) : m_rasterBoy(p_rasterBoy), m_speed(p_speed)
+Rasterizer::Scripts::SRasterizationLimiter::SRasterizationLimiter(Rendering::RasterBoy& p_rasterBoy, float p_speed) : m_rasterBoy(p_rasterBoy), m_speed(p_speed)
 {
 	m_rasterizationLimit = 0.0f;
 

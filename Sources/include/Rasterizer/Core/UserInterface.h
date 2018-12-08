@@ -14,7 +14,7 @@
 #include <SDL_ttf.h>
 
 #include "Rasterizer/Core/Window.h"
-#include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Rendering/Renderer.h"
 #include "Rasterizer/Data/Text.h"
 
 namespace Rasterizer::Core
@@ -29,7 +29,7 @@ namespace Rasterizer::Core
 		* Constructor of the user interface
 		* @param p_window
 		*/
-		UserInterface(const Core::Window& p_window, const Core::Renderer& p_renderer);
+		UserInterface(const Core::Window& p_window, const Rendering::Renderer& p_renderer);
 
 		/**
 		* Add a text to queue. The text will get renderer at the end of the frame
@@ -46,7 +46,7 @@ namespace Rasterizer::Core
 		void LoadFonts();
 
 		const Core::Window& m_window;
-		const Core::Renderer& m_renderer;
+		const Rendering::Renderer& m_renderer;
 
 	public:
 		/* Usefull values that can be used to get main points of the UI canvas */

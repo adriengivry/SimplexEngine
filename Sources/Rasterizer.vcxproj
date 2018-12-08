@@ -250,13 +250,13 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\Rasterizer\Shaders\LambertShader.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\MeshCreator.cpp" />
     <ClCompile Include="src\Rasterizer\Core\InputManager.cpp" />
-    <ClCompile Include="src\Rasterizer\Core\RasterBoy.cpp" />
+    <ClCompile Include="src\Rasterizer\Rendering\RasterBoy.cpp" />
     <ClCompile Include="src\Rasterizer\Tools\EasyAssimp.cpp" />
     <ClCompile Include="src\Rasterizer\Core\EventHandler.cpp" />
     <ClCompile Include="src\Rasterizer\Core\Window.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Rasterizer\Core\Application.cpp" />
-    <ClCompile Include="src\Rasterizer\Core\Renderer.cpp" />
+    <ClCompile Include="src\Rasterizer\Rendering\Renderer.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Color.cpp" />
     <ClCompile Include="src\Rasterizer\Resources\Mesh.cpp" />
     <ClCompile Include="src\Rasterizer\Data\Transform.cpp" />
@@ -285,8 +285,8 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\Rasterizer\Buffers\DepthBuffer.h" />
     <ClInclude Include="include\Rasterizer\Data\EFontSize.h" />
     <ClInclude Include="include\Rasterizer\Data\ETextAlignment.h" />
-    <ClInclude Include="include\Rasterizer\Core\RasterBoy.h" />
-    <ClInclude Include="include\Rasterizer\Core\Renderer.h" />
+    <ClInclude Include="include\Rasterizer\Rendering\RasterBoy.h" />
+    <ClInclude Include="include\Rasterizer\Rendering\Renderer.h" />
     <ClInclude Include="include\Rasterizer\Core\UserInterface.h" />
     <ClInclude Include="include\Rasterizer\Data\Color.h" />
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h" />

@@ -9,10 +9,10 @@
 
 #include <glm/gtc/matrix_inverse.hpp>
 
-#include "Rasterizer/Core/RasterBoy.h"
+#include "Rasterizer/Rendering/RasterBoy.h"
 #include "Rasterizer/Maths/Triangle2D.h"
 
-Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer) :
+Rasterizer::Rendering::RasterBoy::RasterBoy(const Core::Window& p_window, Rendering::Renderer& p_renderer) :
 	m_window(p_window),
 	m_renderer(p_renderer),
 	m_depthBuffer(m_window.GetWidth(), m_window.GetHeight()),
@@ -20,18 +20,18 @@ Rasterizer::Core::RasterBoy::RasterBoy(const Core::Window& p_window, Core::Rende
 {
 }
 
-void Rasterizer::Core::RasterBoy::ResetRasterizedTrianglesCount()
+void Rasterizer::Rendering::RasterBoy::ResetRasterizedTrianglesCount()
 {
 	m_rasterizedTriangles = 0;
 }
 
-void Rasterizer::Core::RasterBoy::ClearBuffers()
+void Rasterizer::Rendering::RasterBoy::ClearBuffers()
 {
 	m_depthBuffer.Clear();
 	m_rasterizationOutputBuffer.Clear();
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, Shaders::AShader& p_shader)
+void Rasterizer::Rendering::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, Shaders::AShader& p_shader)
 {
 	auto vertices = p_mesh.GetVertices();
 	auto indices = p_mesh.GetIndices();
@@ -41,7 +41,7 @@ void Rasterizer::Core::RasterBoy::RasterizeMesh(const Resources::Mesh& p_mesh, S
 		RasterizeTriangle({ vertices[indices[i]], vertices[indices[i + 1]], vertices[indices[i + 2]] }, p_shader);
 }
 
-void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader)
+void Rasterizer::Rendering::RasterBoy::RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader)
 {
 	if (!CanRasterize())
 		return;
@@ -88,7 +88,7 @@ void Rasterizer::Core::RasterBoy::RasterizeTriangle(const std::array<Data::Verte
 	++m_rasterizedTriangles;
 }
 
-void Rasterizer::Core::RasterBoy::ConvertToRasterSpace(glm::vec4& p_vertex)
+void Rasterizer::Rendering::RasterBoy::ConvertToRasterSpace(glm::vec4& p_vertex)
 {
 	/* Homogenize */
 	p_vertex /= p_vertex.w;
@@ -98,27 +98,27 @@ void Rasterizer::Core::RasterBoy::ConvertToRasterSpace(glm::vec4& p_vertex)
 	p_vertex.y = std::round(((1 - p_vertex.y) * 0.5f) * m_window.GetHeight());
 }
 
-bool Rasterizer::Core::RasterBoy::CanRasterize()
+bool Rasterizer::Rendering::RasterBoy::CanRasterize()
 {
 	return !m_limitTriangleRasterization || m_rasterizedTriangles < m_rasterizedTrianglesLimit;
 }
 
-void Rasterizer::Core::RasterBoy::LimitTriangleRasterization(bool p_enable)
+void Rasterizer::Rendering::RasterBoy::LimitTriangleRasterization(bool p_enable)
 {
 	m_limitTriangleRasterization = p_enable;
 }
 
-void Rasterizer::Core::RasterBoy::SetRasterizedTriangleLimit(uint64_t p_limit)
+void Rasterizer::Rendering::RasterBoy::SetRasterizedTriangleLimit(uint64_t p_limit)
 {
 	m_rasterizedTrianglesLimit = p_limit;
 }
 
-const Rasterizer::Buffers::TextureBuffer& Rasterizer::Core::RasterBoy::GetRasterizationOutputBuffer() const
+const Rasterizer::Buffers::TextureBuffer& Rasterizer::Rendering::RasterBoy::GetRasterizationOutputBuffer() const
 {
 	return m_rasterizationOutputBuffer;
 }
 
-void Rasterizer::Core::RasterBoy::SendRasterizationOutputBufferToGPU()
+void Rasterizer::Rendering::RasterBoy::SendRasterizationOutputBufferToGPU()
 {
 	m_rasterizationOutputBuffer.SendDataToGPU();
 }

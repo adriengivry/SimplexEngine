@@ -15,9 +15,9 @@
 #include "Rasterizer/Core/EventHandler.h"
 #include "Rasterizer/Core/InputManager.h"
 #include "Rasterizer/Core/EApplicationState.h"
-#include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Rendering/Renderer.h"
 #include "Rasterizer/Core/UserInterface.h"
-#include "Rasterizer/Core/RasterBoy.h"
+#include "Rasterizer/Rendering/RasterBoy.h"
 #include "Rasterizer/Analytics/Profiler.h"
 #include "Rasterizer/Utils/Clock.h"
 #include "Rasterizer/Resources/Managers/MeshManager.h"
@@ -57,9 +57,9 @@ namespace Rasterizer::Scenes
 			Core::Window&						p_window,
 			Core::EventHandler&					p_eventHandler,
 			Core::InputManager&					p_inputManager,
-			Core::Renderer&						p_renderer,
+			Rendering::Renderer&						p_renderer,
 			Core::UserInterface&				p_userInterface,
-			Core::RasterBoy&					p_rasterBoy,
+			Rendering::RasterBoy&					p_rasterBoy,
 			Analytics::Profiler&				p_profiler,
 			Utils::Clock&						p_clock,
 			Resources::Managers::MeshManager&	p_meshManager
@@ -116,9 +116,9 @@ namespace Rasterizer::Scenes
 		Core::Window&						m_window;
 		Core::EventHandler&					m_eventHandler;
 		Core::InputManager&					m_inputManager;
-		Core::Renderer&						m_renderer;
+		Rendering::Renderer&						m_renderer;
 		Core::UserInterface&				m_userInterface;
-		Core::RasterBoy&					m_rasterBoy;
+		Rendering::RasterBoy&					m_rasterBoy;
 		Analytics::Profiler&				m_profiler;
 		Utils::Clock&						m_clock;
 		Resources::Managers::MeshManager&	m_meshManager;

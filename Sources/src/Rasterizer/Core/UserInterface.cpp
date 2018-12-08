@@ -6,7 +6,7 @@
 
 #include "Rasterizer/Core/UserInterface.h"
 
-Rasterizer::Core::UserInterface::UserInterface(const Core::Window& p_window, const Core::Renderer& p_renderer) :
+Rasterizer::Core::UserInterface::UserInterface(const Core::Window& p_window, const Rendering::Renderer& p_renderer) :
 	m_window(p_window),
 	m_renderer(p_renderer),
 	width(m_window.GetWidth()),

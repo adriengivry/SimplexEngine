@@ -16,7 +16,7 @@
 #include "Rasterizer/Data/ETextAlignment.h"
 #include "Rasterizer/Buffers/TextureBuffer.h"
 
-namespace Rasterizer::Core
+namespace Rasterizer::Rendering
 {
 	class Renderer final
 	{

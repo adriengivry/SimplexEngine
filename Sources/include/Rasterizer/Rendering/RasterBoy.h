@@ -11,13 +11,13 @@
 #include <array>
 
 #include "Rasterizer/Core/Window.h"
-#include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Rendering/Renderer.h"
 #include "Rasterizer/Buffers/DepthBuffer.h"
 #include "Rasterizer/Buffers/TextureBuffer.h"
 #include "Rasterizer/Resources/Mesh.h"
 #include "Rasterizer/Shaders/AShader.h"
 
-namespace Rasterizer::Core
+namespace Rasterizer::Rendering
 {
 	/**
 	* RasterBoy is the main thing of this project, it will compute rasterization (Conversion from world space to screen)
@@ -30,7 +30,7 @@ namespace Rasterizer::Core
 		* @param p_window
 		* @param p_rendrerer
 		*/
-		RasterBoy(const Core::Window& p_window, Core::Renderer& p_renderer);
+		RasterBoy(const Core::Window& p_window, Rendering::Renderer& p_renderer);
 
 		/**
 		* Reset the rasterized triangle count
@@ -95,7 +95,7 @@ namespace Rasterizer::Core
 	private:
 		const Core::Window& m_window;
 
-		Core::Renderer& m_renderer;
+		Rendering::Renderer& m_renderer;
 
 		Buffers::DepthBuffer m_depthBuffer;
 		Buffers::TextureBuffer m_rasterizationOutputBuffer;

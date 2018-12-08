@@ -8,7 +8,7 @@
 #ifndef _SRASTERIZATIONLIMITER_H
 #define _SRASTERIZATIONLIMITER_H
 
-#include "Rasterizer/Core/RasterBoy.h"
+#include "Rasterizer/Rendering/RasterBoy.h"
 #include "Rasterizer/Scripts/SRasterizationLimiter.h"
 #include "Rasterizer/Scripts/IScript.h"
 
@@ -25,7 +25,7 @@ namespace Rasterizer::Scripts
 		* @param p_rasterBoy
 		* @param p_speed
 		*/
-		SRasterizationLimiter(Core::RasterBoy& p_rasterBoy, float p_speed);
+		SRasterizationLimiter(Rendering::RasterBoy& p_rasterBoy, float p_speed);
 
 		/**
 		* Destructor of the SRasterizationLimiter.
@@ -40,7 +40,7 @@ namespace Rasterizer::Scripts
 		virtual void Update(float p_deltaTime) override;
 
 	private:
-		Core::RasterBoy& m_rasterBoy;
+		Rendering::RasterBoy& m_rasterBoy;
 
 		float m_speed;
 		float m_rasterizationLimit;

@@ -6,11 +6,11 @@
 
 #include <SDL.h>
 
-#include "Rasterizer/Core/Renderer.h"
+#include "Rasterizer/Rendering/Renderer.h"
 #include "Rasterizer/Utils/IniIndexer.h"
 #include "Rasterizer/Analytics/ProfilerSpy.h"
 
-Rasterizer::Core::Renderer::Renderer(const Core::Window& p_window)
+Rasterizer::Rendering::Renderer::Renderer(const Core::Window& p_window)
 {
 	auto[windowWidth, windowHeight] = p_window.GetSize();
 
@@ -25,12 +25,12 @@ Rasterizer::Core::Renderer::Renderer(const Core::Window& p_window)
 	m_sdlRenderer = SDL_CreateRenderer(p_window.GetSDLWindow(), -1, flags);
 }
 
-SDL_Renderer* Rasterizer::Core::Renderer::GetSDLRenderer() const
+SDL_Renderer* Rasterizer::Rendering::Renderer::GetSDLRenderer() const
 {
 	return m_sdlRenderer;
 }
 
-void Rasterizer::Core::Renderer::DrawText(const std::string & p_text, TTF_Font * p_font, const std::pair<int, int>& p_position, const Data::Color & p_color, Data::ETextHorizontalAlignment p_horizontalAlign, Data::ETextVerticalAlignment p_verticalAlign) const
+void Rasterizer::Rendering::Renderer::DrawText(const std::string & p_text, TTF_Font * p_font, const std::pair<int, int>& p_position, const Data::Color & p_color, Data::ETextHorizontalAlignment p_horizontalAlign, Data::ETextVerticalAlignment p_verticalAlign) const
 {
 	PROFILER_SPY("Renderer::DrawText");
 	SDL_Surface* surface = TTF_RenderText_Solid(p_font, p_text.c_str(), { p_color.r, p_color.g, p_color.b });
@@ -69,14 +69,14 @@ void Rasterizer::Core::Renderer::DrawText(const std::string & p_text, TTF_Font *
 	SDL_FreeSurface(surface);
 }
 
-void Rasterizer::Core::Renderer::DrawTextureBufferContent(const Buffers::TextureBuffer& p_texture)
+void Rasterizer::Rendering::Renderer::DrawTextureBufferContent(const Buffers::TextureBuffer& p_texture)
 {
 	PROFILER_SPY("Renderer::DrawTexture");
 
 	SDL_RenderCopy(m_sdlRenderer, p_texture.GetSDLTexture(), nullptr, nullptr);
 }
 
-void Rasterizer::Core::Renderer::Render()
+void Rasterizer::Rendering::Renderer::Render()
 {
 	PROFILER_SPY("Renderer::Render");
 

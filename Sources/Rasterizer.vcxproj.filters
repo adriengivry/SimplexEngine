@@ -21,9 +21,6 @@
     <ClCompile Include="src\Rasterizer\Core\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Rasterizer\Core\Renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Rasterizer\Data\Color.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -37,9 +34,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rasterizer\Utils\Math.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Rasterizer\Core\RasterBoy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Rasterizer\Resources\Mesh.cpp">
@@ -144,6 +138,12 @@
     <ClCompile Include="src\Rasterizer\Maths\Triangle2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Rasterizer\Rendering\RasterBoy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Rasterizer\Rendering\Renderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Rasterizer\Core\Application.h">
@@ -153,9 +153,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Core\EApplicationState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rasterizer\Core\Renderer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Data\Color.h">
@@ -174,9 +171,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Data\EPrimitive.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rasterizer\Core\RasterBoy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Resources\Mesh.h">
@@ -240,9 +234,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Core\EWindowState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Rasterizer\Core\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Core\Window.h">
@@ -309,6 +300,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Rasterizer\Maths\Triangle2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Rendering\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Rendering\RasterBoy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Rasterizer\Core\InputManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
