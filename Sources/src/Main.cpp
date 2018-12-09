@@ -1,15 +1,15 @@
 /**
-* Project Rasterizer
+* Project SimplexEngine
 * @author Adrien Givry
 * @version 1.0
 */
 
-#include "Rasterizer/Core/Application.h"
+#include "SimplexEngine/Core/Application.h"
 
 int main(int argc, char* argv[])
 {
-	Rasterizer::Utils::IniIndexer::Initialize();
-	Rasterizer::Core::Application app;
+	SimplexEngine::Utils::IniIndexer::Initialize();
+	SimplexEngine::Core::Application app;
 	app.Run();
 	return 0;
 }
