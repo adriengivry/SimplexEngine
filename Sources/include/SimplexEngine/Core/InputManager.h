@@ -12,7 +12,7 @@
 
 #include <SDL.h>
 
-#include "SimplexEngine/Core/EventHandler.h"
+#include "SimplexEngine/Eventing/EventHandler.h"
 
 namespace SimplexEngine::Core
 {
@@ -26,7 +26,7 @@ namespace SimplexEngine::Core
 		* Contructor of the InputManager
 		* @param p_eventHandler
 		*/
-		InputManager(EventHandler& p_eventHandler);
+		InputManager(Eventing::EventHandler& p_eventHandler);
 
 		/**
 		* Update the input manager

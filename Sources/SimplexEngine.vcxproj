@@ -253,7 +253,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\SimplexEngine\Core\InputManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\Rasterizer.cpp" />
     <ClCompile Include="src\SimplexEngine\Tools\EasyAssimp.cpp" />
-    <ClCompile Include="src\SimplexEngine\Core\EventHandler.cpp" />
+    <ClCompile Include="src\SimplexEngine\Eventing\EventHandler.cpp" />
     <ClCompile Include="src\SimplexEngine\Core\Window.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\SimplexEngine\Core\Application.cpp" />
@@ -275,7 +275,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Components\CameraComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
     <ClInclude Include="include\SimplexEngine\Core\EWindowState.h" />
-    <ClInclude Include="include\SimplexEngine\Core\EventHandler.h" />
+    <ClInclude Include="include\SimplexEngine\Eventing\EventHandler.h" />
     <ClInclude Include="include\SimplexEngine\Core\InputManager.h" />
     <ClInclude Include="include\SimplexEngine\Core\SceneManager.h" />
     <ClInclude Include="include\SimplexEngine\Core\Window.h" />
@@ -317,7 +317,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Tools\SceneParser.h" />
     <ClInclude Include="include\SimplexEngine\Utils\Clock.h" />
     <ClInclude Include="include\SimplexEngine\Tools\EasyAssimp.h" />
-    <ClInclude Include="include\SimplexEngine\Utils\Event.h" />
+    <ClInclude Include="include\SimplexEngine\Eventing\Event.h" />
     <ClInclude Include="include\SimplexEngine\Utils\IniIndexer.h" />
   </ItemGroup>
   <ItemGroup>

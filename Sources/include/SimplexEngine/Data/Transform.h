@@ -11,7 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
-#include "SimplexEngine/Utils/Event.h"
+#include "SimplexEngine/Eventing/Event.h"
 
 namespace SimplexEngine::Data
 {

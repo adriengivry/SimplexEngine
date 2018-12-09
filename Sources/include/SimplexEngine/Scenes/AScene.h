@@ -12,8 +12,8 @@
 #include <memory>
 
 #include "SimplexEngine/Core/Window.h"
-#include "SimplexEngine/Core/EventHandler.h"
 #include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Eventing/EventHandler.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
@@ -54,11 +54,11 @@ namespace SimplexEngine::Scenes
 		AScene
 		(
 			Core::Window&						p_window,
-			Core::EventHandler&					p_eventHandler,
+			Eventing::EventHandler&			p_eventHandler,
 			Core::InputManager&					p_inputManager,
-			Rendering::Renderer&						p_renderer,
-			Rendering::UserInterface&				p_userInterface,
-			Rendering::Rasterizer&					p_rasterBoy,
+			Rendering::Renderer&				p_renderer,
+			Rendering::UserInterface&			p_userInterface,
+			Rendering::Rasterizer&				p_rasterBoy,
 			Analytics::Profiler&				p_profiler,
 			Utils::Clock&						p_clock,
 			Resources::Managers::MeshManager&	p_meshManager
@@ -113,11 +113,11 @@ namespace SimplexEngine::Scenes
 	protected:
 		/* Accessible data for new scenes */
 		Core::Window&						m_window;
-		Core::EventHandler&					m_eventHandler;
+		Eventing::EventHandler&			m_eventHandler;
 		Core::InputManager&					m_inputManager;
-		Rendering::Renderer&						m_renderer;
-		Rendering::UserInterface&				m_userInterface;
-		Rendering::Rasterizer&					m_rasterBoy;
+		Rendering::Renderer&				m_renderer;
+		Rendering::UserInterface&			m_userInterface;
+		Rendering::Rasterizer&				m_rasterBoy;
 		Analytics::Profiler&				m_profiler;
 		Utils::Clock&						m_clock;
 		Resources::Managers::MeshManager&	m_meshManager;

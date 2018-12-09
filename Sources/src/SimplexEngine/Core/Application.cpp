@@ -23,9 +23,9 @@ SimplexEngine::Core::Application::Application() :
 	m_userInterface(m_window, m_renderer),
 	m_rasterBoy(m_window, m_renderer),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
-	m_running(false)
+	m_running(true)
 {
-	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&SimplexEngine::Core::Application::Stop, this));
+	m_eventHandler.QuitEvent.AddListener(std::bind(&SimplexEngine::Core::Application::Stop, this));
 
 	CreateScenes();
 	CreateGlobalScripts();

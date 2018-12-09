@@ -6,9 +6,9 @@
 
 #include "SimplexEngine/Core/InputManager.h"
 
-SimplexEngine::Core::InputManager::InputManager(EventHandler& p_eventHandler)
+SimplexEngine::Core::InputManager::InputManager(Eventing::EventHandler& p_eventHandler)
 {
-	p_eventHandler.SDLMouseMovedEvent.AddListener(std::bind(&InputManager::OnMouseMotion, this, std::placeholders::_1));
+	p_eventHandler.MouseMovedEvent.AddListener(std::bind(&InputManager::OnMouseMotion, this, std::placeholders::_1));
 }
 
 void SimplexEngine::Core::InputManager::Update()

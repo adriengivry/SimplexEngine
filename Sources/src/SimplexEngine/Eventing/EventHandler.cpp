@@ -8,13 +8,13 @@
 
 #include <SDL.h>
 
-#include "SimplexEngine/Core/EventHandler.h"
+#include "SimplexEngine/Eventing/EventHandler.h"
 
-void SimplexEngine::Core::EventHandler::HandleEvents(const Window& p_window)
+void SimplexEngine::Eventing::EventHandler::HandleEvents(const Core::Window& p_window)
 {
 	SDL_Event event;
 
-	SDLMouseMovedEvent.Invoke(std::make_pair(0, 0));
+	MouseMovedEvent.Invoke(std::make_pair(0, 0));
 
 	Uint32 windowFlags = SDL_GetWindowFlags(p_window.GetSDLWindow());
 
@@ -23,16 +23,16 @@ void SimplexEngine::Core::EventHandler::HandleEvents(const Window& p_window)
 		switch (event.type)
 		{
 		case SDL_QUIT:
-			SDLQuitEvent.Invoke();
+			QuitEvent.Invoke();
 			break;
 
 		case SDL_KEYDOWN:
 			if (event.key.keysym.sym == SDLK_ESCAPE)
-				SDLQuitEvent.Invoke();
+				QuitEvent.Invoke();
 			break;
 
 		case SDL_MOUSEMOTION:
-			SDLMouseMovedEvent.Invoke(std::make_pair(event.motion.xrel, event.motion.yrel));
+			MouseMovedEvent.Invoke(std::make_pair(event.motion.xrel, event.motion.yrel));
 			break;
 
 		default:

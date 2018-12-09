@@ -9,9 +9,9 @@
 #define _EVENTHANDLER_H
 
 #include "SimplexEngine/Core/Window.h"
-#include "SimplexEngine/Utils/Event.h"
+#include "SimplexEngine/Eventing/Event.h"
 
-namespace SimplexEngine::Core
+namespace SimplexEngine::Eventing
 {
 	/**
 	* This class handles SDL events
@@ -23,12 +23,12 @@ namespace SimplexEngine::Core
 		* Handle SDL events
 		* @param p_window (Window that contains the actual SDL_Window)
 		*/
-		void HandleEvents(const Window& p_window);
+		void HandleEvents(const Core::Window& p_window);
 
 	public:
 		/* Events */
-		SimplexEngine::Utils::Event<>							SDLQuitEvent;
-		SimplexEngine::Utils::Event<std::pair<int, int>>		SDLMouseMovedEvent;
+		SimplexEngine::Utils::Event<>							QuitEvent;
+		SimplexEngine::Utils::Event<std::pair<int, int>>		MouseMovedEvent;
 	};
 }
 
