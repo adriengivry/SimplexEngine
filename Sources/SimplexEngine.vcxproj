@@ -229,6 +229,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\SimplexEngine\Components\AActorComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\CameraComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\MeshComponent.cpp" />
+    <ClCompile Include="src\SimplexEngine\Materials\NormalMaterial.cpp" />
     <ClCompile Include="src\SimplexEngine\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Maths\QuaternionFactory.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\UserInterface.cpp" />
@@ -273,6 +274,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Components\CameraComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
+    <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\IGlobalScript.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\ISceneScript.h" />
     <ClInclude Include="include\SimplexEngine\Windowing\EWindowState.h" />

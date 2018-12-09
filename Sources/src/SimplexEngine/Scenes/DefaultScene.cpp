@@ -11,6 +11,7 @@
 #include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Components/MeshComponent.h"
 #include "SimplexEngine/Components/CameraComponent.h"
+#include "SimplexEngine/Materials/NormalMaterial.h"
 
 SimplexEngine::Scenes::DefaultScene::DefaultScene(SCENE_PARAMETERS) : SCENE_INITIALIZATION_LIST
 {

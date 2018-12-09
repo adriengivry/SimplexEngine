@@ -10,7 +10,8 @@
 
 #include "SimplexEngine/Shaders/AShader.h"
 #include "SimplexEngine/Components/CameraComponent.h"
-#include "SimplexEngine/Components/MeshComponent.h"
+
+namespace SimplexEngine::Components { class MeshComponent; }
 
 namespace SimplexEngine::Materials
 {

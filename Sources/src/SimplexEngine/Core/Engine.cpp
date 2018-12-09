@@ -114,11 +114,22 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 		/* Use the scene main camera or the default camera if there is no camera in scene */
 		auto cameraToUse = sceneMainCamera ? sceneMainCamera : (defaultCamera ? defaultCamera : nullptr);
 
-		/* Render only if there is a camera */
+		/* Pursue rendering only if there is a camera */
 		if (cameraToUse)
 		{
-			m_defaultMaterial->UpdateUniforms(*cameraToUse, meshComponent.get());
-			m_rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), m_defaultMaterial->GetShaderInstance());
+			/* Find material from mesh and the default material */
+			auto meshComponentMaterial = meshComponent.get().GetMaterial();
+			auto defaultMaterial = m_defaultMaterial.get();
+
+			/* Use the mesh material the default material if there is no material in the mesh */
+			auto materialToUse = meshComponentMaterial ? meshComponentMaterial : (defaultMaterial ? defaultMaterial : nullptr);
+
+			/* Render only if there is a material */
+			if (materialToUse)
+			{
+				materialToUse->UpdateUniforms(*cameraToUse, meshComponent.get());
+				m_rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), materialToUse->GetShaderInstance());
+			}
 		}
 	}
 }
