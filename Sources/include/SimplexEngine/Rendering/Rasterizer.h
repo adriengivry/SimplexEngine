@@ -28,7 +28,7 @@ namespace SimplexEngine::Rendering
 		/**
 		* Constructor of the Rasterizer
 		* @param p_window
-		* @param p_rendrerer
+		* @param p_rendrerer (Needed to create the out buffer because it uses SDL Texture)
 		*/
 		Rasterizer(const Core::Window& p_window, Rendering::Renderer& p_renderer);
 
@@ -38,7 +38,7 @@ namespace SimplexEngine::Rendering
 		void ResetRasterizedTrianglesCount();
 
 		/**
-		* Clear depth and rasterization buffer
+		* Clear rasterization output and depth buffer
 		*/
 		void ClearBuffers();
 
@@ -59,10 +59,33 @@ namespace SimplexEngine::Rendering
 		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
 
 		/**
+		* Compute a fragment by processing fragment shader calculation and
+		* updating the depth buffer
+		* @param p_pixelCoordinates
+		* @param p_depth
+		* @param p_shader
+		*/
+		void ComputeFragment(std::pair<int32_t, int32_t> p_pixelCoordinates, float p_depth, const glm::vec3& p_barycentricCoordinates, Shaders::AShader& p_shader);
+
+		/**
 		* Convert a vertex to raster space
 		* @param p_vertex
 		*/
 		void ConvertToRasterSpace(glm::vec4& p_vertex);
+
+		/**
+		* Verify if barycentric coords are valid (If the pixel expressed in barycentric coordinates is triangle bounds)
+		* @param p_barycentricCoords
+		*/
+		bool BarycentricCoordsAreValid(const glm::vec3& p_barycentricCoords);
+
+		/**
+		* Calculate the "depth" of a point in screen space using barycentric coordinates
+		* to interpolate the depth of every vertices to find the actual depth of the point
+		* @param p_vertices
+		* @param p_barycentricCoords (Of the point to test)
+		*/
+		float CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3& p_barycentricCoords);
 
 		/**
 		* Verify is Rasterizer is allow to rasterize
@@ -94,8 +117,6 @@ namespace SimplexEngine::Rendering
 
 	private:
 		const Core::Window& m_window;
-
-		Rendering::Renderer& m_renderer;
 
 		Buffers::DepthBuffer m_depthBuffer;
 		Buffers::TextureBuffer m_rasterizationOutputBuffer;
