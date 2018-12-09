@@ -210,7 +210,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
     <ClCompile Include="src\Example\Scenes\DemoScene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Sources\SimplexEngine.vcxproj">
+    <ProjectReference Include="..\SimplexEngine\SimplexEngine.vcxproj">
       <Project>{81ddec8b-0f66-4065-98f1-f96c97829062}</Project>
     </ProjectReference>
   </ItemGroup>
