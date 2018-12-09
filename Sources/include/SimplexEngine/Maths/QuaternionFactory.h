@@ -11,12 +11,14 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Maths
 {
 	/**
 	* Contains some static math tools
 	*/
-	class QuaternionFactory final
+	class API_SIMPLEXENGINE QuaternionFactory final
 	{
 	public:
 		/* Prevent this static class from being instancied */

@@ -44,22 +44,6 @@ namespace SimplexEngine::Core
 		Engine();
 
 		/**
-		* Run the actual application (Blocking method, it is a loop).
-		* Returns an exit code.
-		*/
-		int Run();
-
-		/**
-		* Create the current scene
-		*/
-		void CreateScenes();
-
-		/**
-		* Create global scripts (Independent of the current scene)
-		*/
-		void CreateGlobalScripts();
-
-		/**
 		* Add a global script to the application (Independent of the current scene)
 		* @param p_args (Arguments forwarded to the std::make_unique)
 		*/
@@ -67,11 +51,21 @@ namespace SimplexEngine::Core
 		void AddGlobalScript(Args&&... p_args) { m_globalScripts.push_back(std::make_unique<T>(p_args...)); }
 
 		/**
-		* Update the current application
-		* @param p_deltaTime
+		* Update the engine
 		*/
-		void Update(float p_deltaTime);
+		void Update();
 
+		/**
+		* Return true if the current state of the application is RUNNING
+		*/
+		bool IsRunning() const;
+
+		/**
+		* Stops the application. This method is listening to the WindowClosedEvent from the EventListener
+		*/
+		void Stop();
+
+	private:
 		/**
 		* Update scene scripts
 		* @param p_deltaTime
@@ -89,32 +83,23 @@ namespace SimplexEngine::Core
 		*/
 		void RasterizeScene();
 
-		/**
-		* Return true if the current state of the application is RUNNING
-		*/
-		bool IsRunning() const;
-
-		/**
-		* Stops the application. This method is listening to the WindowClosedEvent from the EventListener
-		*/
-		void Stop();
-
-	private:
+	public:
 		/* Ini managment (Must be initialized first) */
-		SimplexEngine::Utils::IniIndexer m_iniIndexer;
+		SimplexEngine::Utils::IniIndexer iniIndexer;
 
 		/* Core */
-		SimplexEngine::Windowing::Window				m_window;
-		SimplexEngine::Eventing::EventHandler			m_eventHandler;
-		SimplexEngine::Inputs::InputManager				m_inputManager;
-		SimplexEngine::Rendering::Renderer				m_renderer;
-		SimplexEngine::Rendering::UserInterface			m_userInterface;
-		SimplexEngine::Rendering::Rasterizer			m_rasterBoy;
-		SimplexEngine::Scenes::SceneManager				m_sceneManager;
-		SimplexEngine::Analytics::Profiler				m_profiler;
-		SimplexEngine::Utils::Clock						m_clock;
-		SimplexEngine::Resources::Managers::MeshManager m_meshManager;
+		SimplexEngine::Windowing::Window				window;
+		SimplexEngine::Eventing::EventHandler			eventHandler;
+		SimplexEngine::Inputs::InputManager				inputManager;
+		SimplexEngine::Rendering::Renderer				renderer;
+		SimplexEngine::Rendering::UserInterface			userInterface;
+		SimplexEngine::Rendering::Rasterizer			rasterBoy;
+		SimplexEngine::Analytics::Profiler				profiler;
+		SimplexEngine::Utils::Clock						clock;
+		SimplexEngine::Resources::Managers::MeshManager meshManager;
+		SimplexEngine::Scenes::SceneManager				sceneManager;
 
+	private:
 		/* Default stuffs */
 		Actors::Actor m_defaultCamera;
 		std::vector<std::unique_ptr<Scripts::GlobalScripts::IGlobalScript>> m_globalScripts;

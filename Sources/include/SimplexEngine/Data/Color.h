@@ -11,12 +11,14 @@
 #include <stdint.h>
 #include <tuple>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Data
 {
 	/**
 	* A simple struct that represent a color
 	*/
-	struct Color final
+	struct API_SIMPLEXENGINE Color final
 	{
 		static const Color Red;
 		static const Color Green;

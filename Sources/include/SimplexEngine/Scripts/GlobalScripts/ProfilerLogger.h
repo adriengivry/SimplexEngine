@@ -8,6 +8,7 @@
 #ifndef _PROFILERLOGGER_H
 #define _PROFILERLOGGER_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Inputs/InputManager.h"
@@ -18,7 +19,7 @@ namespace SimplexEngine::Scripts::GlobalScripts
 	/**
 	* Display profiling data to the screen
 	*/
-	class ProfilerLogger final : public IGlobalScript
+	class API_SIMPLEXENGINE ProfilerLogger final : public IGlobalScript
 	{
 	public:
 		/**

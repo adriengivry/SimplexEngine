@@ -8,6 +8,7 @@
 #ifndef _DEFAULTSCENE_H
 #define _DEFAULTSCENE_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Scenes/AScene.h"
 
 namespace SimplexEngine::Scenes

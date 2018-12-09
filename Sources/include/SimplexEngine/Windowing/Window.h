@@ -7,6 +7,7 @@
 
 #include <glm/glm.hpp>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/EWindowState.h"
 
 namespace SimplexEngine::Windowing
@@ -14,7 +15,7 @@ namespace SimplexEngine::Windowing
 	/**
 	* The window class is using SDL to create the window context
 	*/
-	class Window final
+	class API_SIMPLEXENGINE Window final
 	{
 	public:
 		/**

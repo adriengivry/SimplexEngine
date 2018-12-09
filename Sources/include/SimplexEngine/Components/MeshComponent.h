@@ -8,13 +8,14 @@
 #ifndef _MESHCOMPONENT_H
 #define _MESHCOMPONENT_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Components/AActorComponent.h"
 #include "SimplexEngine/Resources/Mesh.h"
 #include "SimplexEngine/Materials/AMaterial.h"
 
 namespace SimplexEngine::Components
 {
-	class MeshComponent : public AActorComponent
+	class API_SIMPLEXENGINE MeshComponent : public AActorComponent
 	{
 	public:
 		/**
@@ -30,11 +31,6 @@ namespace SimplexEngine::Components
 		*/
 		template<typename T>
 		void DefineMaterial() { m_material = std::make_unique<T>(); }
-
-		/**
-		* Needed
-		*/
-		virtual void Test() override {}
 
 		/**
 		* Set a mesh for the mesh component

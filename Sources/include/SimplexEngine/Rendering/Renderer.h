@@ -10,6 +10,7 @@
 
 #include <vector>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Data/Color.h"
 #include "SimplexEngine/Data/ETextAlignment.h"
@@ -17,7 +18,7 @@
 
 namespace SimplexEngine::Rendering
 {
-	class Renderer final
+	class API_SIMPLEXENGINE Renderer final
 	{
 	public:
 		/**

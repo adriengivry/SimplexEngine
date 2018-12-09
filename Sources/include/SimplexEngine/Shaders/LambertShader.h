@@ -8,11 +8,12 @@
 #ifndef _LAMBERTSHADER_H
 #define _LAMBERTSHADER_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Shaders/AShader.h"
 
 namespace SimplexEngine::Shaders
 {
-	class LambertShader final : public AShader
+	class API_SIMPLEXENGINE LambertShader final : public AShader
 	{
 	public:
 		virtual glm::vec4 VertexModifier(const Data::Vertex & p_vertex) override;

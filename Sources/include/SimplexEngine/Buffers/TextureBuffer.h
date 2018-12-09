@@ -8,6 +8,7 @@
 #ifndef _TEXTUREBUFFER_H
 #define _TEXTUREBUFFER_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Buffers/Buffer2D.h"
 #include "SimplexEngine/Data/Color.h"
 
@@ -16,7 +17,7 @@ namespace SimplexEngine::Buffers
 	/**
 	* The texture structure wraps the SDL_Texture and allow content modification easily
 	*/
-	struct TextureBuffer final : public Buffer2D<uint32_t>
+	struct API_SIMPLEXENGINE TextureBuffer final : public Buffer2D<uint32_t>
 	{
 		/**
 		* Constructor of the texture structure

@@ -10,6 +10,7 @@
 
 #include <string>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Data/ETextAlignment.h"
 #include "SimplexEngine/Data/EFontSize.h"
 
@@ -18,7 +19,7 @@ namespace SimplexEngine::Data
 	/**
 	* A simple data container used to render text on screen
 	*/
-	struct Text final
+	struct API_SIMPLEXENGINE Text final
 	{
 		std::string content;
 		std::pair<int16_t, int16_t> position;

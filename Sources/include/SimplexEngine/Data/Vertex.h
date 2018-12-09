@@ -10,12 +10,14 @@
 
 #include <glm/glm.hpp>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Data
 {
 	/**
 	* The vertex struct represent a point of the geometry of a triangle
 	*/
-	struct Vertex final
+	struct API_SIMPLEXENGINE Vertex final
 	{
 		/**
 		* Constructor for the vertex struct

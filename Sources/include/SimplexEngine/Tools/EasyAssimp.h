@@ -6,6 +6,7 @@
 
 #include <vector>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Data/Vertex.h"
 
 #pragma once
@@ -17,7 +18,7 @@ namespace SimplexEngine::Tools
 	/**
 	* A simple class to load assimp model data (Vertices only)
 	*/
-	class EasyAssimp final
+	class API_SIMPLEXENGINE EasyAssimp final
 	{
 	public:
 		/* Make the class static (No instanciation) */

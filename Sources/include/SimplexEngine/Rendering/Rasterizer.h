@@ -10,6 +10,7 @@
 
 #include <array>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Buffers/DepthBuffer.h"
@@ -22,7 +23,7 @@ namespace SimplexEngine::Rendering
 	/**
 	* Rasterizer is the main thing of this project, it will compute rasterization (Conversion from world space to screen)
 	*/
-	class Rasterizer final
+	class API_SIMPLEXENGINE Rasterizer final
 	{
 	public:
 		/**

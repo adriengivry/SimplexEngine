@@ -8,6 +8,7 @@
 #ifndef _EVENTHANDLER_H
 #define _EVENTHANDLER_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Eventing/Event.h"
 
@@ -16,7 +17,7 @@ namespace SimplexEngine::Eventing
 	/**
 	* This class handles SDL events
 	*/
-	class EventHandler final
+	class API_SIMPLEXENGINE EventHandler final
 	{
 	public:
 		/**

@@ -10,6 +10,7 @@
 
 #include <queue>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Data/Text.h"
@@ -19,7 +20,7 @@ namespace SimplexEngine::Rendering
 	/**
 	* A simple class using SDL_ttf to render things on screens
 	*/
-	class UserInterface final
+	class API_SIMPLEXENGINE UserInterface final
 	{
 	public:
 		/**

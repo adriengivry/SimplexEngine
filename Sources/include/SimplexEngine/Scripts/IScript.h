@@ -8,9 +8,11 @@
 #ifndef _ISCRIPT_H
 #define _ISCRIPT_H
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Scripts
 {
-	class IScript
+	class API_SIMPLEXENGINE IScript
 	{
 	public:
 		/**

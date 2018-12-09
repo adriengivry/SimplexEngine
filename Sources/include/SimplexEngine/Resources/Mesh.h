@@ -10,6 +10,7 @@
 
 #include <vector>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Data/Vertex.h"
 
 namespace SimplexEngine::Resources
@@ -17,7 +18,7 @@ namespace SimplexEngine::Resources
 	/**
 	* The mesh class is a set of vertices
 	*/
-	class Mesh final
+	class API_SIMPLEXENGINE Mesh final
 	{
 	public:
 		/**

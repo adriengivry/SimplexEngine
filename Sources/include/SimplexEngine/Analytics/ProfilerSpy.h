@@ -8,11 +8,12 @@
 #ifndef _PROFILERSPY_H
 #define _PROFILERSPY_H
 
-#include "SimplexEngine/Analytics/Profiler.h"
-#include "SimplexEngine/Analytics/ProfilerSpy.h"
-
 #include <string>
 #include <chrono>
+
+#include "SimplexEngine/API/Export.h"
+#include "SimplexEngine/Analytics/Profiler.h"
+#include "SimplexEngine/Analytics/ProfilerSpy.h"
 
 /**
 * This macro allow the creation of profiler spies
@@ -30,7 +31,7 @@ namespace SimplexEngine::Analytics
 	* It helps collecting informations about methods durations for debugging
 	* event in release
 	*/
-	struct ProfilerSpy final
+	struct API_SIMPLEXENGINE ProfilerSpy final
 	{
 		/**
 		* Create the profiler spy with the given name.

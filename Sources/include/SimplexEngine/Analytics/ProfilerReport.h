@@ -10,12 +10,14 @@
 
 #include <vector>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Analytics
 {
 	/**
 	* Contains profiling data about a running period
 	*/
-	struct ProfilerReport final
+	struct API_SIMPLEXENGINE ProfilerReport final
 	{
 		/**
 		* Data about an action (Called method)

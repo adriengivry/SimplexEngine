@@ -267,14 +267,12 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\FPSCounter.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\ProfilerLogger.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\SceneScripts\RotateOverTime.cpp" />
-    <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\SceneNavigator.cpp" />
     <ClCompile Include="src\SimplexEngine\Shaders\LambertShader.cpp" />
     <ClCompile Include="src\SimplexEngine\Inputs\InputManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\Rasterizer.cpp" />
     <ClCompile Include="src\SimplexEngine\Tools\EasyAssimp.cpp" />
     <ClCompile Include="src\SimplexEngine\Eventing\EventHandler.cpp" />
     <ClCompile Include="src\SimplexEngine\Windowing\Window.cpp" />
-    <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\SimplexEngine\Core\Engine.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\Renderer.cpp" />
     <ClCompile Include="src\SimplexEngine\Data\Color.cpp" />
@@ -298,6 +296,7 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\IGlobalScript.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\ISceneScript.h" />
+    <ClInclude Include="include\SimplexEngine\SimplexEngine.h" />
     <ClInclude Include="include\SimplexEngine\Windowing\EWindowState.h" />
     <ClInclude Include="include\SimplexEngine\Eventing\EventHandler.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\InputManager.h" />
@@ -334,7 +333,6 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\FPSCounter.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\ProfilerLogger.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\RotateOverTime.h" />
-    <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\SceneNavigator.h" />
     <ClInclude Include="include\SimplexEngine\Shaders\LambertShader.h" />
     <ClInclude Include="include\SimplexEngine\Tools\SceneParser.h" />
     <ClInclude Include="include\SimplexEngine\Utils\Clock.h" />

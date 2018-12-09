@@ -16,6 +16,7 @@
 
 #include <glm/glm.hpp>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Data/Vertex.h"
 
 namespace SimplexEngine::Shaders
@@ -25,7 +26,7 @@ namespace SimplexEngine::Shaders
 	* A shader is a simple set of methods that can modify vertices and pixels
 	* of the rendering pipeline
 	*/
-	class AShader
+	class API_SIMPLEXENGINE AShader
 	{
 	public:
 		/* A simple typedef for a variant of every types that a shader can use */

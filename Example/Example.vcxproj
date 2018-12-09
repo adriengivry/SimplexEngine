@@ -170,7 +170,16 @@ xcopy "$(ProjectDir)..\Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dl
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Example\Main.cpp" />
+    <ClCompile Include="src\Example\Scenes\DemoScene.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Sources\SimplexEngine.vcxproj">
+      <Project>{81ddec8b-0f66-4065-98f1-f96c97829062}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\Example\Scenes\DemoScene.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
