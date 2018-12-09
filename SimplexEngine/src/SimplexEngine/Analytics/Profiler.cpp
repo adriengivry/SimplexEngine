@@ -12,9 +12,10 @@
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 
+bool SimplexEngine::Analytics::Profiler::__ENABLED;
+std::mutex SimplexEngine::Analytics::Profiler::__SAVE_MUTEX;
 std::unordered_map<std::string, double> SimplexEngine::Analytics::Profiler::__ELPASED_HISTORY;
 std::unordered_map<std::string, uint64_t> SimplexEngine::Analytics::Profiler::__CALLS_COUNTER;
-bool SimplexEngine::Analytics::Profiler::__ENABLED;
 
 SimplexEngine::Analytics::Profiler::Profiler()
 {
@@ -84,6 +85,8 @@ void SimplexEngine::Analytics::Profiler::ClearHistory()
 
 void SimplexEngine::Analytics::Profiler::Save(SimplexEngine::Analytics::ProfilerSpy& p_spy)
 {
+	__SAVE_MUTEX.lock();
+
 	if (__ELPASED_HISTORY.find(p_spy.name) != __ELPASED_HISTORY.end())
 	{
 		__ELPASED_HISTORY[p_spy.name] += std::chrono::duration<double>(p_spy.end - p_spy.start).count();
@@ -101,6 +104,8 @@ void SimplexEngine::Analytics::Profiler::Save(SimplexEngine::Analytics::Profiler
 	{
 		__CALLS_COUNTER[p_spy.name] = 1;
 	}
+
+	__SAVE_MUTEX.unlock();
 }
 
 bool SimplexEngine::Analytics::Profiler::IsEnabled()

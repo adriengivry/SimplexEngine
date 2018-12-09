@@ -10,6 +10,7 @@
 
 #include <unordered_map>
 #include <chrono>
+#include <mutex>
 
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Analytics/ProfilerReport.h"
@@ -79,6 +80,7 @@ namespace SimplexEngine::Analytics
 		static bool __ENABLED;
 
 		/* Collected data */
+		static std::mutex __SAVE_MUTEX;
 		static std::unordered_map<std::string, double>		__ELPASED_HISTORY;
 		static std::unordered_map<std::string, uint64_t>	__CALLS_COUNTER;
 	};

@@ -59,7 +59,7 @@ namespace SimplexEngine::Buffers
 
 	protected:
 		const uint32_t m_bufferSize;
-		const uint32_t m_bufferSizeInBytes; 
+		const uint32_t m_bufferSizeInBytes;
 	};
 }
 
