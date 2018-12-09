@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <thread>
+
 #include <SimplexEngine/SimplexEngine.h>
 
 #include "Example/Scenes/DemoScene.h"

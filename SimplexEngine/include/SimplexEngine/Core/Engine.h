@@ -79,9 +79,14 @@ namespace SimplexEngine::Core
 		void UpdateGlobalScripts(float p_deltaTime);
 
 		/**
-		* Rasterize every model
+		* Rasterize every meshes of the scene
 		*/
 		void RasterizeScene();
+
+		/**
+		* Rasterize a specific region of the scene (Should be called by a thread).
+		*/
+		void RasterizeRegion(const Components::CameraComponent& p_cameraToUse, uint32_t p_regionID, uint32_t p_totalRegions);
 
 	public:
 		/* Ini managment (Must be initialized first) */

@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <thread>
+
 #include <GyvrIni/GyvrIni.h>
 
 #include "SimplexEngine/Core/Engine.h"
@@ -98,31 +100,45 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 {
 	PROFILER_SPY("Engine::RasterizeScene");
 
-	for (auto meshComponent : Tools::SceneParser::FindMeshes(*sceneManager.GetCurrentScene()))
+	/* Determine which camera to use (Scene camera, default camera or no camera) */
+	const Components::CameraComponent* sceneMainCamera = Tools::SceneParser::GetMainCamera(*sceneManager.GetCurrentScene());
+	const Components::CameraComponent* defaultCamera = m_defaultCamera.GetComponent<Components::CameraComponent>().get();
+	const Components::CameraComponent* cameraToUse = sceneMainCamera ? sceneMainCamera : (defaultCamera ? defaultCamera : nullptr);
+
+	/* Do not render scene if there is no found camera (Scene or default) */
+	if (cameraToUse)
 	{
-		/* Find camera from scene and the default camera */
-		Components::CameraComponent const* sceneMainCamera = Tools::SceneParser::GetMainCamera(*sceneManager.GetCurrentScene());
-		Components::CameraComponent const* defaultCamera = m_defaultCamera.GetComponent<Components::CameraComponent>().get();
+		/* Use as much threads as possible */
+		uint8_t threadsToUse = std::thread::hardware_concurrency();
 
-		/* Use the scene main camera or the default camera if there is no camera in scene */
-		auto cameraToUse = sceneMainCamera ? sceneMainCamera : (defaultCamera ? defaultCamera : nullptr);
+		std::vector<std::thread> regionThreads;
 
-		/* Pursue rendering only if there is a camera */
-		if (cameraToUse)
+		for (uint8_t threadID = 0; threadID < threadsToUse; ++threadID)
+			regionThreads.emplace_back(&Engine::RasterizeRegion, this, *cameraToUse, threadID, threadsToUse);
+
+		for (std::thread& thread : regionThreads)
+			thread.join();
+	}
+}
+
+void SimplexEngine::Core::Engine::RasterizeRegion(const Components::CameraComponent& p_cameraToUse, uint32_t p_regionID, uint32_t p_totalRegions)
+{
+	const std::vector<std::reference_wrapper<const SimplexEngine::Components::MeshComponent>>& meshes = Tools::SceneParser::FindMeshes(*sceneManager.GetCurrentScene());
+
+	for (uint32_t i = p_regionID; i < meshes.size(); i += p_totalRegions)
+	{
+		std::reference_wrapper<const SimplexEngine::Components::MeshComponent> currentMesh = meshes.at(i);
+
+		/* Determine which material to use (Mesh material, default material or no material) */
+		Materials::AMaterial* meshComponentMaterial = currentMesh.get().GetMaterial();
+		Materials::AMaterial* defaultMaterial = m_defaultMaterial.get();
+		Materials::AMaterial* materialToUse = meshComponentMaterial ? meshComponentMaterial : (defaultMaterial ? defaultMaterial : nullptr);
+
+		/* Render only if there is a material */
+		if (materialToUse)
 		{
-			/* Find material from mesh and the default material */
-			auto meshComponentMaterial = meshComponent.get().GetMaterial();
-			auto defaultMaterial = m_defaultMaterial.get();
-
-			/* Use the mesh material the default material if there is no material in the mesh */
-			auto materialToUse = meshComponentMaterial ? meshComponentMaterial : (defaultMaterial ? defaultMaterial : nullptr);
-
-			/* Render only if there is a material */
-			if (materialToUse)
-			{
-				materialToUse->UpdateUniforms(*cameraToUse, meshComponent.get());
-				rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), materialToUse->GetShaderInstance());
-			}
+			materialToUse->UpdateUniforms(p_cameraToUse, currentMesh.get());
+			rasterBoy.RasterizeMesh(*currentMesh.get().GetMesh(), materialToUse->GetShaderInstance());
 		}
 	}
 }

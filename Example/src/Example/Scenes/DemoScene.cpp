@@ -23,6 +23,22 @@ void Example::Scenes::DemoScene::OnLoad()
 	secondIcoSphere.transform.SetLocalScale(glm::vec3(0.5f));
 	secondIcoSphere.transform.SetLocalPosition({ 2.0f, 0.0f, 0.0f });
 
+	SimplexEngine::Actors::Actor* previousActor = nullptr;
+
+	for (uint8_t i = 0; i < 10; ++i)
+	{
+		auto& newActor = AddActor<SimplexEngine::Actors::Actor>();
+		auto& newMesh = newActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cone"));
+		newMesh.DefineMaterial<SimplexEngine::Materials::NormalMaterial>();
+		newActor.transform.SetLocalPosition({ 0.0f, 1.0f + (previousActor ? 0.0f : 1.0f), 0.0f });
+		newActor.transform.SetLocalScale(glm::vec3(0.75));
+
+		if (previousActor)
+			newActor.transform.SetParent(previousActor->transform);
+
+		previousActor = &newActor;
+	}
+
 	/* Define parent/child relations */
 	secondIcoSphere.transform.SetParent(icoSphere.transform);
 
