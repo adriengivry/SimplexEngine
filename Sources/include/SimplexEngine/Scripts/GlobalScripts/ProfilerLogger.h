@@ -4,28 +4,28 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 
 #pragma once
-#ifndef _SPROFILERLOGGER_H
-#define _SPROFILERLOGGER_H
+#ifndef _PROFILERLOGGER_H
+#define _PROFILERLOGGER_H
 
-namespace SimplexEngine::Scripts
+namespace SimplexEngine::Scripts::GlobalScripts
 {
 	/**
 	* Display profiling data to the screen
 	*/
-	class SProfilerLogger final : public IScript
+	class ProfilerLogger final : public IGlobalScript
 	{
 	public:
 		/**
 		* Constructor of the script
 		* @param p_profiler
 		*/
-		SProfilerLogger(Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface);
+		ProfilerLogger(Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface);
 
 		/**
 		* Update the script
@@ -52,4 +52,4 @@ namespace SimplexEngine::Scripts
 	};
 }
 
-#endif // _SFPSCOUNTER_H
+#endif // _PROFILERLOGGER

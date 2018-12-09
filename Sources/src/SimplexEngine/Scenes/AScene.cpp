@@ -6,15 +6,11 @@
 
 #include "SimplexEngine/Scenes/AScene.h"
 
-SimplexEngine::Scenes::AScene::AScene(Windowing::Window& p_window, Eventing::EventHandler& p_eventHandler, Inputs::InputManager& p_inputManager, Rendering::Renderer& p_renderer, Rendering::UserInterface& p_userInterface, Rendering::Rasterizer& p_rasterBoy, Analytics::Profiler& p_profiler, Utils::Clock& p_clock, Resources::Managers::MeshManager& p_meshManager) :
+SimplexEngine::Scenes::AScene::AScene(SCENE_PARAMETERS) :
 	m_window(p_window),
 	m_eventHandler(p_eventHandler),
-	m_inputManager(p_inputManager),
-	m_renderer(p_renderer),
 	m_userInterface(p_userInterface),
-	m_rasterBoy(p_rasterBoy),
-	m_profiler(p_profiler),
-	m_clock(p_clock),
+	m_inputManager(p_inputManager),
 	m_meshManager(p_meshManager)
 {
 }

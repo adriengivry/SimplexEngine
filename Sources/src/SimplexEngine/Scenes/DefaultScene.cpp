@@ -6,9 +6,8 @@
 
 #include "SimplexEngine/Scenes/DefaultScene.h"
 
-#include "SimplexEngine/Scripts/SCameraController.h"
-#include "SimplexEngine/Scripts/SRotateOverTime.h"
-#include "SimplexEngine/Scripts/SRasterizationLimiter.h"
+#include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
+#include "SimplexEngine/Scripts/SceneScripts/RotateOverTime.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Components/MeshComponent.h"
 #include "SimplexEngine/Components/CameraComponent.h"
@@ -29,8 +28,8 @@ void SimplexEngine::Scenes::DefaultScene::OnLoad()
 
 	/* Creating scripts */
 	Components::CameraComponent& cameraComponent = *mainCamera.GetComponent<Components::CameraComponent>();
-	auto test = std::make_unique<Scripts::SCameraController>(m_inputManager, cameraComponent);
-	AddScript<Scripts::SCameraController>(m_inputManager, cameraComponent);
+	auto test = std::make_unique<Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent);
+	AddScript<Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent);
 
 	/* Moving actors */
 	mainCamera.transform.SetLocalPosition(glm::vec3(0.0f, 0.0f, 20.0f));

@@ -4,19 +4,19 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
 #include "SimplexEngine/Actors/Actor.h"
 
 #pragma once
-#ifndef _SROTATEOVERTIME_H
-#define _SROTATEOVERTIME_H
+#ifndef _ROTATEOVERTIME_H
+#define _ROTATEOVERTIME_H
 
-namespace SimplexEngine::Scripts
+namespace SimplexEngine::Scripts::SceneScripts
 {
 	/**
 	* Rotate an entity over time
 	*/
-	class SRotateOverTime final : public IScript
+	class RotateOverTime final : public ISceneScript
 	{
 	public:
 		/**
@@ -24,7 +24,7 @@ namespace SimplexEngine::Scripts
 		* @param p_target
 		* @param p_rotationSpeed
 		*/
-		SRotateOverTime(Actors::Actor& p_target, float p_rotationSpeed);
+		RotateOverTime(Actors::Actor& p_target, float p_rotationSpeed);
 
 		/**
 		* Update the script
@@ -38,4 +38,4 @@ namespace SimplexEngine::Scripts
 	};
 }
 
-#endif // _SROTATEOVERTIME_H
+#endif // _ROTATEOVERTIME_H

@@ -6,19 +6,19 @@
 
 #include <iostream>
 
-#include "SimplexEngine/Scripts/SCameraController.h"
+#include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Maths/QuaternionFactory.h"
 #include "SimplexEngine/Actors/Actor.h"
 
-SimplexEngine::Scripts::SCameraController::SCameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
+SimplexEngine::Scripts::SceneScripts::CameraController::CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
 	m_inputManager(p_inputManager),
 	m_cameraComponent(p_cameraComponent)
 {
 	m_inputManager.LockMouse();
 }
 
-void SimplexEngine::Scripts::SCameraController::Update(float p_deltaTime)
+void SimplexEngine::Scripts::SceneScripts::CameraController::Update(float p_deltaTime)
 {
 	if (m_inputManager.IsMouseLocked())
 		HandleMouse(p_deltaTime);
@@ -26,7 +26,7 @@ void SimplexEngine::Scripts::SCameraController::Update(float p_deltaTime)
 	HandleKeyboard(p_deltaTime);
 }
 
-void SimplexEngine::Scripts::SCameraController::HandleMouse(float p_deltaTime)
+void SimplexEngine::Scripts::SceneScripts::CameraController::HandleMouse(float p_deltaTime)
 {
 	auto [motionX, motionY] = m_inputManager.GetMouseMotion();
 
@@ -50,7 +50,7 @@ void SimplexEngine::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 	m_cameraComponent.owner->transform.SetLocalRotation(Maths::QuaternionFactory::CreateFromEuler({ m_pitch, m_yaw, 0.0f }));
 }
 
-void SimplexEngine::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)
+void SimplexEngine::Scripts::SceneScripts::CameraController::HandleKeyboard(float p_deltaTime)
 {
 	glm::vec3 movement;
 

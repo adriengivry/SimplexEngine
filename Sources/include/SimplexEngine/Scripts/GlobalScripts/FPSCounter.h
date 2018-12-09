@@ -4,26 +4,26 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 
 #pragma once
-#ifndef _SFPSCOUNTER_H
-#define _SFPSCOUNTER_H
+#ifndef _FPSCOUNTER_H
+#define _FPSCOUNTER_H
 
-namespace SimplexEngine::Scripts
+namespace SimplexEngine::Scripts::GlobalScripts
 {
 	/**
 	* Display the framerate on the screen
 	*/
-	class SFPSCounter final : public IScript
+	class FPSCounter final : public IGlobalScript
 	{
 	public:
 		/**
 		* Constructor of the script
 		* @p_userInterface
 		*/
-		SFPSCounter(Rendering::UserInterface& p_userInterface);
+		FPSCounter(Rendering::UserInterface& p_userInterface);
 
 		/**
 		* Update the script
@@ -45,4 +45,4 @@ namespace SimplexEngine::Scripts
 	};
 }
 
-#endif // _SFPSCOUNTER_H
+#endif // _FPSCOUNTER_H

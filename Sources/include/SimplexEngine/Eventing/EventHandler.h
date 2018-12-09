@@ -27,7 +27,7 @@ namespace SimplexEngine::Eventing
 
 	public:
 		/* Events */
-		SimplexEngine::Eventing::Event<>							QuitEvent;
+		SimplexEngine::Eventing::Event<>						QuitEvent;
 		SimplexEngine::Eventing::Event<std::pair<int, int>>		MouseMovedEvent;
 	};
 }

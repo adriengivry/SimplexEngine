@@ -6,10 +6,10 @@
 
 #include <iostream>
 
-#include "SimplexEngine/Scripts/SFPSCounter.h"
+#include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::SFPSCounter::SFPSCounter(Rendering::UserInterface& p_userInterface) :
+SimplexEngine::Scripts::GlobalScripts::FPSCounter::FPSCounter(Rendering::UserInterface& p_userInterface) :
 	m_userInterface(p_userInterface),
 	m_logTimer(Utils::IniIndexer::Application->Get<float>("fps_log_frequency")),
 	m_logFrequency(Utils::IniIndexer::Application->Get<float>("fps_log_frequency")),
@@ -17,7 +17,7 @@ SimplexEngine::Scripts::SFPSCounter::SFPSCounter(Rendering::UserInterface& p_use
 {
 }
 
-void SimplexEngine::Scripts::SFPSCounter::Update(float p_deltaTime)
+void SimplexEngine::Scripts::GlobalScripts::FPSCounter::Update(float p_deltaTime)
 {
 	m_logTimer += p_deltaTime;
 
@@ -30,7 +30,7 @@ void SimplexEngine::Scripts::SFPSCounter::Update(float p_deltaTime)
 	ShowFPS();
 }
 
-void SimplexEngine::Scripts::SFPSCounter::ShowFPS()
+void SimplexEngine::Scripts::GlobalScripts::FPSCounter::ShowFPS()
 {
 	std::string textContent = std::to_string(m_fps) + " FPS";
 

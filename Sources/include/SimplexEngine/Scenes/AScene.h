@@ -44,25 +44,10 @@ namespace SimplexEngine::Scenes
 		* @param p_window
 		* @param p_eventHandler
 		* @param p_inputManager
-		* @param p_renderer
 		* @param p_userInterface
-		* @param p_rasterBoy
-		* @param p_profiler
-		* @param p_clock
 		* @param p_meshManager
 		*/
-		AScene
-		(
-			Windowing::Window&						p_window,
-			Eventing::EventHandler&			p_eventHandler,
-			Inputs::InputManager&					p_inputManager,
-			Rendering::Renderer&				p_renderer,
-			Rendering::UserInterface&			p_userInterface,
-			Rendering::Rasterizer&				p_rasterBoy,
-			Analytics::Profiler&				p_profiler,
-			Utils::Clock&						p_clock,
-			Resources::Managers::MeshManager&	p_meshManager
-		);
+		AScene(SCENE_PARAMETERS);
 
 		/**
 		* Load scene data (Cameras, models, scripts)
@@ -112,14 +97,10 @@ namespace SimplexEngine::Scenes
 
 	protected:
 		/* Accessible data for new scenes */
-		Windowing::Window&						m_window;
-		Eventing::EventHandler&			m_eventHandler;
-		Inputs::InputManager&					m_inputManager;
-		Rendering::Renderer&				m_renderer;
+		const Windowing::Window&			m_window;
+		const Inputs::InputManager&			m_inputManager;
 		Rendering::UserInterface&			m_userInterface;
-		Rendering::Rasterizer&				m_rasterBoy;
-		Analytics::Profiler&				m_profiler;
-		Utils::Clock&						m_clock;
+		Eventing::EventHandler&				m_eventHandler;
 		Resources::Managers::MeshManager&	m_meshManager;
 
 		/* Scene content */

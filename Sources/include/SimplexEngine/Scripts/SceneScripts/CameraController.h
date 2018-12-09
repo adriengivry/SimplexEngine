@@ -4,20 +4,20 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
 #include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Components/CameraComponent.h"
 
 #pragma once
-#ifndef _SCAMERACONTROLLER_H
-#define _SCAMERACONTROLLER_H
+#ifndef _CAMERACONTROLLER_H
+#define _CAMERACONTROLLER_H
 
-namespace SimplexEngine::Scripts
+namespace SimplexEngine::Scripts::SceneScripts
 {
 	/**
 	* A simple script to control a camera
 	*/
-	class SCameraController final : public IScript
+	class CameraController final : public ISceneScript
 	{
 	public:
 		/**
@@ -25,7 +25,7 @@ namespace SimplexEngine::Scripts
 		* @param p_inputManager
 		* @param p_cameraComponent (The camera to control with this script)
 		*/
-		SCameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent);
+		CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent);
 
 		/**
 		* Update the script
@@ -56,4 +56,4 @@ namespace SimplexEngine::Scripts
 	};
 }
 
-#endif // _SCAMERACONTROLLER_H
+#endif // _CAMERACONTROLLER_H

@@ -9,10 +9,9 @@
 #include "SimplexEngine/Maths/Triangle2D.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 #include "SimplexEngine/Scenes/DefaultScene.h"
-#include "SimplexEngine/Scripts/SFPSCounter.h"
-#include "SimplexEngine/Scripts/SProfilerLogger.h"
-#include "SimplexEngine/Scripts/SConsoleController.h"
-#include "SimplexEngine/Scripts/SSceneNavigator.h"
+#include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
+#include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
+#include "SimplexEngine/Scripts/GlobalScripts/SceneNavigator.h"
 #include "SimplexEngine/Materials/LambertMaterial.h"
 #include "SimplexEngine/Tools/SceneParser.h"
 
@@ -49,15 +48,14 @@ int SimplexEngine::Core::Application::Run()
 
 void SimplexEngine::Core::Application::CreateScenes()
 {
-	m_sceneManager.RegisterScene<Scenes::DefaultScene>("Default", m_window, m_eventHandler, m_inputManager, m_renderer, m_userInterface, m_rasterBoy, m_profiler, m_clock, m_meshManager);
+	m_sceneManager.RegisterScene<Scenes::DefaultScene>("Default", m_window, m_inputManager, m_userInterface, m_eventHandler, m_meshManager);
 }
 
 void SimplexEngine::Core::Application::CreateGlobalScripts()
 {
-	AddGlobalScript<Scripts::SConsoleController>(m_inputManager);
-	AddGlobalScript<Scripts::SFPSCounter>(m_userInterface);
-	AddGlobalScript<Scripts::SProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
-	AddGlobalScript<Scripts::SSceneNavigator>(m_sceneManager, m_inputManager);
+	AddGlobalScript<Scripts::GlobalScripts::FPSCounter>(m_userInterface);
+	AddGlobalScript<Scripts::GlobalScripts::ProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
+	AddGlobalScript<Scripts::GlobalScripts::SceneNavigator>(m_sceneManager, m_inputManager);
 }
 
 void SimplexEngine::Core::Application::Update(float p_deltaTime)

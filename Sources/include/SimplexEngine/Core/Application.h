@@ -24,7 +24,7 @@
 #include "SimplexEngine/Utils/Clock.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Resources/Managers/MeshManager.h"
-#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Scenes/AScene.h"
 #include "SimplexEngine/Materials/AMaterial.h"
 
@@ -99,8 +99,8 @@ namespace SimplexEngine::Core
 
 	private:
 		/* Core */
-		SimplexEngine::Windowing::Window						m_window;
-		SimplexEngine::Eventing::EventHandler		m_eventHandler;
+		SimplexEngine::Windowing::Window				m_window;
+		SimplexEngine::Eventing::EventHandler			m_eventHandler;
 		SimplexEngine::Inputs::InputManager				m_inputManager;
 		SimplexEngine::Rendering::Renderer				m_renderer;
 		SimplexEngine::Rendering::UserInterface			m_userInterface;
@@ -112,7 +112,7 @@ namespace SimplexEngine::Core
 
 		/* Default stuffs */
 		Actors::Actor m_defaultCamera;
-		std::vector<std::unique_ptr<Scripts::IScript>> m_globalScripts;
+		std::vector<std::unique_ptr<Scripts::GlobalScripts::IGlobalScript>> m_globalScripts;
 		std::unique_ptr<Materials::AMaterial> m_defaultMaterial;
 
 		/* Other stuffs */

@@ -7,10 +7,10 @@
 #include <iostream>
 
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
-#include "SimplexEngine/Scripts/SProfilerLogger.h"
+#include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::SProfilerLogger::SProfilerLogger(SimplexEngine::Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface) :
+SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ProfilerLogger(SimplexEngine::Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface) :
 	m_inputManager(p_inputManager),
 	m_profiler(p_profiler),
 	m_userInterface(p_userInterface),
@@ -19,7 +19,7 @@ SimplexEngine::Scripts::SProfilerLogger::SProfilerLogger(SimplexEngine::Analytic
 {
 }
 
-void SimplexEngine::Scripts::SProfilerLogger::Update(float p_deltaTime)
+void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_deltaTime)
 {
 	PROFILER_SPY("SProfilerLogger::Update");
 
@@ -71,7 +71,7 @@ void SimplexEngine::Scripts::SProfilerLogger::Update(float p_deltaTime)
 	}
 }
 
-void SimplexEngine::Scripts::SProfilerLogger::ShowAction(const Analytics::ProfilerReport::Action & p_action, int16_t yOffset)
+void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ShowAction(const Analytics::ProfilerReport::Action & p_action, int16_t yOffset)
 {
 	std::string textContent1 = "[" + p_action.name + "]";
 	std::string textContent2 = std::to_string(p_action.duration) + "s (total) | " + std::to_string(p_action.duration / p_action.calls) + "s (average) | " + std::to_string(p_action.percentage) + "% | " + std::to_string(p_action.calls) + " calls";

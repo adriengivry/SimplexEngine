@@ -5,25 +5,25 @@
 */
 
 #pragma once
-#ifndef _SSCENENAVIGATOR_H
-#define _SSCENENAVIGATOR_H
+#ifndef _SCENENAVIGATOR_H
+#define _SCENENAVIGATOR_H
 
-#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Scenes/SceneManager.h"
 
-namespace SimplexEngine::Scripts
+namespace SimplexEngine::Scripts::GlobalScripts
 {
 	/**
 	* The scene navigator is reponsible for scene switching at runtime
 	*/
-	class SSceneNavigator : public IScript
+	class SceneNavigator : public IGlobalScript
 	{
 	public:
 		/**
 		* Constructor of the script
 		* @param p_sceneManager
 		*/
-		SSceneNavigator(Scenes::SceneManager& p_sceneManager, const Inputs::InputManager& p_inputManager);
+		SceneNavigator(Scenes::SceneManager& p_sceneManager, const Inputs::InputManager& p_inputManager);
 
 		/**
 		* Update the script
@@ -37,4 +37,4 @@ namespace SimplexEngine::Scripts
 	};
 }
 
-#endif // _SSCENENAVIGATOR_H
+#endif // _SCENENAVIGATOR_H
