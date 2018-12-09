@@ -67,11 +67,18 @@ namespace SimplexEngine::Rendering
 		*/
 		std::array<glm::vec4, 3> ComputeVertices(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
 
+		/**
+		* Compute fragments by processing fragment shader on every fragment and
+		* updating the depth and pixel buffer
+		* @param p_pixelCoordinates
+		* @param p_depth
+		* @param p_shader
+		*/
 		void ComputeFragments(Shaders::AShader& p_shader, const std::array<glm::vec4, 3>& p_transformedVertices, Maths::Triangle2D& p_triangle);
 
 		/**
 		* Compute a fragment by processing fragment shader calculation and
-		* updating the depth buffer
+		* updating the depth and pixel buffer
 		* @param p_pixelCoordinates
 		* @param p_depth
 		* @param p_shader

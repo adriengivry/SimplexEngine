@@ -112,14 +112,16 @@ namespace SimplexEngine::Shaders
 
 		/**
 		* Interpolate an array of data with the given barycentric coordinates
-		* @param p_key
-		* @param p_data
+		* @param p_key (Identifier of where to store the result)
+		* @param p_data1
+		* @param p_data2
+		* @param p_data3
 		* @param p_barycentricCoords
 		*/
 		template<typename T>
-		void InterpolateData(const std::string& p_key, const std::array<T, 3>& p_data, const glm::vec3& p_barycentricCoords)
+		void InterpolateData(const std::string& p_key, const T& p_data1, const T& p_data2, const T& p_data3, const glm::vec3& p_barycentricCoords)
 		{
-			m_interpolatedVarying[p_key] = p_barycentricCoords.x * p_data[0] + p_barycentricCoords.y * p_data[1] + p_barycentricCoords.z * p_data[2];
+			m_interpolatedVarying[p_key] = p_barycentricCoords.x * p_data1 + p_barycentricCoords.y * p_data2 + p_barycentricCoords.z * p_data3;
 		}
 
 	private:
