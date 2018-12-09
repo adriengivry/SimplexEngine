@@ -129,7 +129,7 @@ namespace SimplexEngine::Data
 		const glm::mat4& GetWorldMatrix() const;
 
 	public:
-		Utils::Event<> TransformChangedEvent;
+		Eventing::Event<> TransformChangedEvent;
 
 	private:
 		void PreDecomposeWorldMatrix();

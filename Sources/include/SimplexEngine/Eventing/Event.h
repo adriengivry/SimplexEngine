@@ -10,7 +10,7 @@
 
 #include <functional>
 
-namespace SimplexEngine::Utils
+namespace SimplexEngine::Eventing
 {
 	/**
 	* A simple event that contains a vector of function callbacks. These functions will be called on invoke
