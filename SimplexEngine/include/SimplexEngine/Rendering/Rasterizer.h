@@ -17,6 +17,7 @@
 #include "SimplexEngine/Buffers/TextureBuffer.h"
 #include "SimplexEngine/Resources/Mesh.h"
 #include "SimplexEngine/Shaders/AShader.h"
+#include "SimplexEngine/Maths/Triangle2D.h"
 
 namespace SimplexEngine::Rendering
 {
@@ -58,6 +59,15 @@ namespace SimplexEngine::Rendering
 		* @param p_shader
 		*/
 		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
+
+		/**
+		* Compute a set of vertices by processing vertex shader on them
+		* @param p_vertices
+		* @param p_shader
+		*/
+		std::array<glm::vec4, 3> ComputeVertices(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
+
+		void ComputeFragments(Shaders::AShader& p_shader, const std::array<glm::vec4, 3>& p_transformedVertices, Maths::Triangle2D& p_triangle);
 
 		/**
 		* Compute a fragment by processing fragment shader calculation and
