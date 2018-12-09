@@ -5,7 +5,7 @@
 */
 
 #include "SimplexEngine/Scripts/IScript.h"
-#include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Components/CameraComponent.h"
 
 #pragma once
@@ -25,7 +25,7 @@ namespace SimplexEngine::Scripts
 		* @param p_inputManager
 		* @param p_cameraComponent (The camera to control with this script)
 		*/
-		SCameraController(const Core::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent);
+		SCameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent);
 
 		/**
 		* Update the script
@@ -46,7 +46,7 @@ namespace SimplexEngine::Scripts
 		void HandleKeyboard(float p_deltaTime);
 
 	private:
-		const Core::InputManager& m_inputManager;
+		const Inputs::InputManager& m_inputManager;
 		Components::CameraComponent& m_cameraComponent;
 
 		/* Internal stuffs */

@@ -6,7 +6,7 @@
 
 #include "SimplexEngine/Scripts/SSceneNavigator.h"
 
-SimplexEngine::Scripts::SSceneNavigator::SSceneNavigator(Core::SceneManager & p_sceneManager, const Core::InputManager& p_inputManager) :
+SimplexEngine::Scripts::SSceneNavigator::SSceneNavigator(Scenes::SceneManager & p_sceneManager, const Inputs::InputManager& p_inputManager) :
 	m_sceneManager(p_sceneManager),
 	m_inputManager(p_inputManager)
 {

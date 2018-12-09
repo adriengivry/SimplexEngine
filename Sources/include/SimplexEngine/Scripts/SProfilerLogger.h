@@ -6,7 +6,7 @@
 
 #include "SimplexEngine/Scripts/IScript.h"
 #include "SimplexEngine/Analytics/Profiler.h"
-#include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 
 #pragma once
@@ -25,7 +25,7 @@ namespace SimplexEngine::Scripts
 		* Constructor of the script
 		* @param p_profiler
 		*/
-		SProfilerLogger(Analytics::Profiler& p_profiler, const Core::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface);
+		SProfilerLogger(Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface);
 
 		/**
 		* Update the script
@@ -41,7 +41,7 @@ namespace SimplexEngine::Scripts
 		void ShowAction(const Analytics::ProfilerReport::Action& p_action, int16_t yOffset);
 
 	private:
-		const Core::InputManager& m_inputManager;
+		const Inputs::InputManager& m_inputManager;
 		Analytics::Profiler& m_profiler;
 		Rendering::UserInterface& m_userInterface;
 

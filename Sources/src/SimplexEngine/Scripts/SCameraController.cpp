@@ -11,7 +11,7 @@
 #include "SimplexEngine/Maths/QuaternionFactory.h"
 #include "SimplexEngine/Actors/Actor.h"
 
-SimplexEngine::Scripts::SCameraController::SCameraController(const Core::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
+SimplexEngine::Scripts::SCameraController::SCameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
 	m_inputManager(p_inputManager),
 	m_cameraComponent(p_cameraComponent)
 {

@@ -11,8 +11,8 @@
 #include <vector>
 #include <memory>
 
-#include "SimplexEngine/Core/Window.h"
-#include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Windowing/Window.h"
+#include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
@@ -53,9 +53,9 @@ namespace SimplexEngine::Scenes
 		*/
 		AScene
 		(
-			Core::Window&						p_window,
+			Windowing::Window&						p_window,
 			Eventing::EventHandler&			p_eventHandler,
-			Core::InputManager&					p_inputManager,
+			Inputs::InputManager&					p_inputManager,
 			Rendering::Renderer&				p_renderer,
 			Rendering::UserInterface&			p_userInterface,
 			Rendering::Rasterizer&				p_rasterBoy,
@@ -112,9 +112,9 @@ namespace SimplexEngine::Scenes
 
 	protected:
 		/* Accessible data for new scenes */
-		Core::Window&						m_window;
+		Windowing::Window&						m_window;
 		Eventing::EventHandler&			m_eventHandler;
-		Core::InputManager&					m_inputManager;
+		Inputs::InputManager&					m_inputManager;
 		Rendering::Renderer&				m_renderer;
 		Rendering::UserInterface&			m_userInterface;
 		Rendering::Rasterizer&				m_rasterBoy;

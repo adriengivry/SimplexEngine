@@ -7,7 +7,7 @@
 #include "SimplexEngine/Scripts/SConsoleController.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::SConsoleController::SConsoleController(const Core::InputManager & p_inputManager) :
+SimplexEngine::Scripts::SConsoleController::SConsoleController(const Inputs::InputManager & p_inputManager) :
 	m_inputManager(p_inputManager)
 {
 }

@@ -11,7 +11,7 @@
 #include <vector>
 #include <SDL_ttf.h>
 
-#include "SimplexEngine/Core/Window.h"
+#include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Data/Color.h"
 #include "SimplexEngine/Data/ETextAlignment.h"
 #include "SimplexEngine/Buffers/TextureBuffer.h"
@@ -25,7 +25,7 @@ namespace SimplexEngine::Rendering
 		* Create the renderer
 		* @param p_window
 		*/
-		Renderer(const Core::Window& p_window);
+		Renderer(const Windowing::Window& p_window);
 
 		/**
 		* Return the SDL renderer wrapped by this instance

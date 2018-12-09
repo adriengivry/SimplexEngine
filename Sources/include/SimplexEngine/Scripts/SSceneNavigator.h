@@ -9,7 +9,7 @@
 #define _SSCENENAVIGATOR_H
 
 #include "SimplexEngine/Scripts/IScript.h"
-#include "SimplexEngine/Core/SceneManager.h"
+#include "SimplexEngine/Scenes/SceneManager.h"
 
 namespace SimplexEngine::Scripts
 {
@@ -23,7 +23,7 @@ namespace SimplexEngine::Scripts
 		* Constructor of the script
 		* @param p_sceneManager
 		*/
-		SSceneNavigator(Core::SceneManager& p_sceneManager, const Core::InputManager& p_inputManager);
+		SSceneNavigator(Scenes::SceneManager& p_sceneManager, const Inputs::InputManager& p_inputManager);
 
 		/**
 		* Update the script
@@ -32,8 +32,8 @@ namespace SimplexEngine::Scripts
 		virtual void Update(float p_deltaTime) override;
 
 	private:
-		Core::SceneManager& m_sceneManager;
-		const Core::InputManager& m_inputManager;
+		Scenes::SceneManager& m_sceneManager;
+		const Inputs::InputManager& m_inputManager;
 	};
 }
 

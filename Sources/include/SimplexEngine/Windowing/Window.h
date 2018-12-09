@@ -9,9 +9,9 @@
 
 #include <SDL.h>
 
-#include "SimplexEngine/Core/EWindowState.h"
+#include "SimplexEngine/Windowing/EWindowState.h"
 
-namespace SimplexEngine::Core
+namespace SimplexEngine::Windowing
 {
 	/**
 	* The window class is using SDL to create the window context

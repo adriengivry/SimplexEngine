@@ -10,7 +10,7 @@
 #include "SimplexEngine/Scripts/SProfilerLogger.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::SProfilerLogger::SProfilerLogger(SimplexEngine::Analytics::Profiler& p_profiler, const Core::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface) :
+SimplexEngine::Scripts::SProfilerLogger::SProfilerLogger(SimplexEngine::Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface) :
 	m_inputManager(p_inputManager),
 	m_profiler(p_profiler),
 	m_userInterface(p_userInterface),

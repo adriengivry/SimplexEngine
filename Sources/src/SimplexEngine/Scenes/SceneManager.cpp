@@ -4,14 +4,14 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Core/SceneManager.h"
+#include "SimplexEngine/Scenes/SceneManager.h"
 
-SimplexEngine::Scenes::AScene & SimplexEngine::Core::SceneManager::GetSceneByName(const std::string & p_sceneName)
+SimplexEngine::Scenes::AScene & SimplexEngine::Scenes::SceneManager::GetSceneByName(const std::string & p_sceneName)
 {
 	return *m_scenes.at(p_sceneName);
 }
 
-void SimplexEngine::Core::SceneManager::LoadScene(const std::string& p_sceneName)
+void SimplexEngine::Scenes::SceneManager::LoadScene(const std::string& p_sceneName)
 {
 	/* Unload the current scene if any */
 	if (m_currentScene)
@@ -22,7 +22,7 @@ void SimplexEngine::Core::SceneManager::LoadScene(const std::string& p_sceneName
 	newScene.Load();
 }
 
-SimplexEngine::Scenes::AScene* SimplexEngine::Core::SceneManager::GetCurrentScene()
+SimplexEngine::Scenes::AScene* SimplexEngine::Scenes::SceneManager::GetCurrentScene()
 {
 	return m_currentScene;
 }

@@ -4,14 +4,14 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Inputs/InputManager.h"
 
-SimplexEngine::Core::InputManager::InputManager(Eventing::EventHandler& p_eventHandler)
+SimplexEngine::Inputs::InputManager::InputManager(Eventing::EventHandler& p_eventHandler)
 {
 	p_eventHandler.MouseMovedEvent.AddListener(std::bind(&InputManager::OnMouseMotion, this, std::placeholders::_1));
 }
 
-void SimplexEngine::Core::InputManager::Update()
+void SimplexEngine::Inputs::InputManager::Update()
 {
 	m_keyPressedEvents.clear();
 	m_keyReleasedEvents.clear();
@@ -35,54 +35,54 @@ void SimplexEngine::Core::InputManager::Update()
 	SDL_GetMouseState(&m_cursorPosition.first, &m_cursorPosition.second);
 }
 
-void SimplexEngine::Core::InputManager::LockMouse() const
+void SimplexEngine::Inputs::InputManager::LockMouse() const
 {
 	if (!IsMouseLocked())
 		SDL_SetRelativeMouseMode(SDL_TRUE);
 }
 
-void SimplexEngine::Core::InputManager::UnlockMouse() const
+void SimplexEngine::Inputs::InputManager::UnlockMouse() const
 {
 	if (IsMouseLocked())
 		SDL_SetRelativeMouseMode(SDL_FALSE);
 }
 
-bool SimplexEngine::Core::InputManager::IsMouseLocked() const
+bool SimplexEngine::Inputs::InputManager::IsMouseLocked() const
 {
 	return SDL_GetRelativeMouseMode() == SDL_TRUE;
 }
 
-bool SimplexEngine::Core::InputManager::IsKeyDown(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::IsKeyDown(int p_keyCode) const
 {
 	return m_keyStates.at(p_keyCode);
 }
 
-bool SimplexEngine::Core::InputManager::IsKeyUp(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::IsKeyUp(int p_keyCode) const
 {
 	return !m_keyStates.at(p_keyCode);
 }
 
-bool SimplexEngine::Core::InputManager::HasKeyBeenPressed(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::HasKeyBeenPressed(int p_keyCode) const
 {
 	return m_keyPressedEvents.at(p_keyCode);
 }
 
-bool SimplexEngine::Core::InputManager::HasKeyBeenReleased(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::HasKeyBeenReleased(int p_keyCode) const
 {
 	return m_keyReleasedEvents.at(p_keyCode);
 }
 
-const std::pair<int, int>& SimplexEngine::Core::InputManager::GetCursorPosition() const
+const std::pair<int, int>& SimplexEngine::Inputs::InputManager::GetCursorPosition() const
 {
 	return m_cursorPosition;
 }
 
-void SimplexEngine::Core::InputManager::OnMouseMotion(std::pair<int, int> p_motion)
+void SimplexEngine::Inputs::InputManager::OnMouseMotion(std::pair<int, int> p_motion)
 {
 	m_mouseMotion = p_motion;
 }
 
-std::pair<int, int> SimplexEngine::Core::InputManager::GetMouseMotion() const
+std::pair<int, int> SimplexEngine::Inputs::InputManager::GetMouseMotion() const
 {
 	return m_mouseMotion;
 }

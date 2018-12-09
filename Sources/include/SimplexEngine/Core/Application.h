@@ -9,13 +9,13 @@
 #define _APPLICATION_H
 
 /* Core */
-#include "SimplexEngine/Core/Window.h"
+#include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
-#include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
-#include "SimplexEngine/Core/SceneManager.h"
+#include "SimplexEngine/Scenes/SceneManager.h"
 
 /* Analytics */
 #include "SimplexEngine/Analytics/Profiler.h"
@@ -99,13 +99,13 @@ namespace SimplexEngine::Core
 
 	private:
 		/* Core */
-		SimplexEngine::Core::Window						m_window;
+		SimplexEngine::Windowing::Window						m_window;
 		SimplexEngine::Eventing::EventHandler		m_eventHandler;
-		SimplexEngine::Core::InputManager				m_inputManager;
+		SimplexEngine::Inputs::InputManager				m_inputManager;
 		SimplexEngine::Rendering::Renderer				m_renderer;
 		SimplexEngine::Rendering::UserInterface			m_userInterface;
 		SimplexEngine::Rendering::Rasterizer			m_rasterBoy;
-		SimplexEngine::Core::SceneManager				m_sceneManager;
+		SimplexEngine::Scenes::SceneManager				m_sceneManager;
 		SimplexEngine::Analytics::Profiler				m_profiler;
 		SimplexEngine::Utils::Clock						m_clock;
 		SimplexEngine::Resources::Managers::MeshManager m_meshManager;

@@ -5,7 +5,7 @@
 */
 
 #include "SimplexEngine/Scripts/IScript.h"
-#include "SimplexEngine/Core/InputManager.h"
+#include "SimplexEngine/Inputs/InputManager.h"
 
 #pragma once
 #ifndef _SCONSOLECONTROLLER_H
@@ -23,7 +23,7 @@ namespace SimplexEngine::Scripts
 		* Constructor of the script
 		* @p_inputManager
 		*/
-		SConsoleController(const Core::InputManager& p_inputManager);
+		SConsoleController(const Inputs::InputManager& p_inputManager);
 
 		/**
 		* Update the script
@@ -37,7 +37,7 @@ namespace SimplexEngine::Scripts
 		void ClearConsole();
 
 	private:
-		const Core::InputManager& m_inputManager;
+		const Inputs::InputManager& m_inputManager;
 	};
 }
 

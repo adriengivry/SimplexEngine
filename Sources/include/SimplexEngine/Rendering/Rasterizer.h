@@ -10,7 +10,7 @@
 
 #include <array>
 
-#include "SimplexEngine/Core/Window.h"
+#include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Buffers/DepthBuffer.h"
 #include "SimplexEngine/Buffers/TextureBuffer.h"
@@ -30,7 +30,7 @@ namespace SimplexEngine::Rendering
 		* @param p_window
 		* @param p_rendrerer (Needed to create the out buffer because it uses SDL Texture)
 		*/
-		Rasterizer(const Core::Window& p_window, Rendering::Renderer& p_renderer);
+		Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer);
 
 		/**
 		* Reset the rasterized triangle count
@@ -116,7 +116,7 @@ namespace SimplexEngine::Rendering
 		void SendRasterizationOutputBufferToGPU();
 
 	private:
-		const Core::Window& m_window;
+		const Windowing::Window& m_window;
 
 		Buffers::DepthBuffer m_depthBuffer;
 		Buffers::TextureBuffer m_rasterizationOutputBuffer;

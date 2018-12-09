@@ -6,7 +6,7 @@
 
 #include "SimplexEngine/Rendering/UserInterface.h"
 
-SimplexEngine::Rendering::UserInterface::UserInterface(const Core::Window& p_window, const Rendering::Renderer& p_renderer) :
+SimplexEngine::Rendering::UserInterface::UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer) :
 	m_window(p_window),
 	m_renderer(p_renderer),
 	width(m_window.GetWidth()),

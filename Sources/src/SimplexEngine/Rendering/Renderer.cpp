@@ -10,7 +10,7 @@
 #include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 
-SimplexEngine::Rendering::Renderer::Renderer(const Core::Window& p_window)
+SimplexEngine::Rendering::Renderer::Renderer(const Windowing::Window& p_window)
 {
 	auto[windowWidth, windowHeight] = p_window.GetSize();
 

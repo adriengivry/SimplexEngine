@@ -12,7 +12,7 @@
 
 #include "SimplexEngine/Scenes/AScene.h"
 
-namespace SimplexEngine::Core
+namespace SimplexEngine::Scenes
 {
 	/**
 	* This class make the scene managing pretty easy by associating strings and scenes

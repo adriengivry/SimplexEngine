@@ -13,7 +13,7 @@
 #include <SDL.h>
 #include <SDL_ttf.h>
 
-#include "SimplexEngine/Core/Window.h"
+#include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Data/Text.h"
 
@@ -29,7 +29,7 @@ namespace SimplexEngine::Rendering
 		* Constructor of the user interface
 		* @param p_window
 		*/
-		UserInterface(const Core::Window& p_window, const Rendering::Renderer& p_renderer);
+		UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer);
 
 		/**
 		* Add a text to queue. The text will get renderer at the end of the frame
@@ -45,7 +45,7 @@ namespace SimplexEngine::Rendering
 	private:
 		void LoadFonts();
 
-		const Core::Window& m_window;
+		const Windowing::Window& m_window;
 		const Rendering::Renderer& m_renderer;
 
 	public:

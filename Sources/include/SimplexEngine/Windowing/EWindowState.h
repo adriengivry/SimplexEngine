@@ -8,7 +8,7 @@
 #ifndef _WINDOWSTATE_H
 #define _WINDOWSTATE_H
 
-namespace SimplexEngine::Core
+namespace SimplexEngine::Windowing
 {
 	enum class EWindowState
 	{

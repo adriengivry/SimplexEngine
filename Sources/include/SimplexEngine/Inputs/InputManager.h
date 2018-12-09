@@ -14,7 +14,7 @@
 
 #include "SimplexEngine/Eventing/EventHandler.h"
 
-namespace SimplexEngine::Core
+namespace SimplexEngine::Inputs
 {
 	/**
 	* The input manager is an easy way to check inputs

@@ -8,7 +8,7 @@
 #ifndef _EVENTHANDLER_H
 #define _EVENTHANDLER_H
 
-#include "SimplexEngine/Core/Window.h"
+#include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Eventing/Event.h"
 
 namespace SimplexEngine::Eventing
@@ -23,7 +23,7 @@ namespace SimplexEngine::Eventing
 		* Handle SDL events
 		* @param p_window (Window that contains the actual SDL_Window)
 		*/
-		void HandleEvents(const Core::Window& p_window);
+		void HandleEvents(const Windowing::Window& p_window);
 
 	public:
 		/* Events */

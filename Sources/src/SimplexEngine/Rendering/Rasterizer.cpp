@@ -12,7 +12,7 @@
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Maths/Triangle2D.h"
 
-SimplexEngine::Rendering::Rasterizer::Rasterizer(const Core::Window& p_window, Rendering::Renderer& p_renderer) :
+SimplexEngine::Rendering::Rasterizer::Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer) :
 	m_window(p_window),
 	m_depthBuffer(m_window.GetWidth(), m_window.GetHeight()),
 	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), m_window.GetWidth(), m_window.GetHeight(), SDL_PIXELFORMAT_ABGR32, SDL_TEXTUREACCESS_STREAMING)

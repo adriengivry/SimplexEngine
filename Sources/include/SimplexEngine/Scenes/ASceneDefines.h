@@ -11,9 +11,9 @@
 /**
 * This macro simplify child scenes constructors by providing an alias for the default constructor parameters
 */
-#define SCENE_PARAMETERS		SimplexEngine::Core::Window&						p_window,\
+#define SCENE_PARAMETERS		SimplexEngine::Windowing::Window&						p_window,\
 								SimplexEngine::Eventing::EventHandler&			p_eventHandler,\
-								SimplexEngine::Core::InputManager&					p_inputManager,\
+								SimplexEngine::Inputs::InputManager&					p_inputManager,\
 								SimplexEngine::Rendering::Renderer&					p_renderer,\
 								SimplexEngine::Rendering::UserInterface&			p_userInterface,\
 								SimplexEngine::Rendering::Rasterizer&				p_rasterBoy,\

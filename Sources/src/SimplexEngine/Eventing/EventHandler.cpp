@@ -10,7 +10,7 @@
 
 #include "SimplexEngine/Eventing/EventHandler.h"
 
-void SimplexEngine::Eventing::EventHandler::HandleEvents(const Core::Window& p_window)
+void SimplexEngine::Eventing::EventHandler::HandleEvents(const Windowing::Window& p_window)
 {
 	SDL_Event event;
 
