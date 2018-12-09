@@ -8,6 +8,8 @@
 #ifndef _APPLICATION_H
 #define _APPLICATION_H
 
+#include "SimplexEngine/API/Export.h"
+
 /* Core */
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
@@ -33,7 +35,7 @@ namespace SimplexEngine::Core
 	/**
 	* The Engine class contains the main logic of this application (Including main loop)
 	*/
-	class Engine final
+	class API_SIMPLEXENGINE Engine final
 	{
 	public:
 		/**

@@ -27,26 +27,26 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v141</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -105,7 +105,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -118,11 +118,13 @@ xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)"
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-:: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+</Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -134,7 +136,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -147,11 +149,13 @@ xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)"
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-:: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+</Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -165,7 +169,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -180,11 +184,13 @@ xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)"
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-:: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+</Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -198,7 +204,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <PreprocessorDefinitions>SDL_MAIN_HANDLED;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -213,11 +219,13 @@ xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)"
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-:: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(SolutionDir)config\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+</Command>
       <Message>
       </Message>
     </PostBuildEvent>
@@ -270,6 +278,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Analytics\Profiler.h" />
     <ClInclude Include="include\SimplexEngine\Analytics\ProfilerReport.h" />
     <ClInclude Include="include\SimplexEngine\Analytics\ProfilerSpy.h" />
+    <ClInclude Include="include\SimplexEngine\API\Export.h" />
     <ClInclude Include="include\SimplexEngine\Components\AActorComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\CameraComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
