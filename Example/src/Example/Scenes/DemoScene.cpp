@@ -28,7 +28,7 @@ void Example::Scenes::DemoScene::OnLoad()
 	for (uint8_t i = 0; i < 10; ++i)
 	{
 		auto& newActor = AddActor<SimplexEngine::Actors::Actor>();
-		auto& newMesh = newActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cone"));
+		auto& newMesh = newActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere"));
 		newMesh.DefineMaterial<SimplexEngine::Materials::NormalMaterial>();
 		newActor.transform.SetLocalPosition({ 0.0f, 1.0f + (previousActor ? 0.0f : 1.0f), 0.0f });
 		newActor.transform.SetLocalScale(glm::vec3(0.75));
