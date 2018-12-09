@@ -230,6 +230,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\SimplexEngine\Components\CameraComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\MeshComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Core\SceneManager.cpp" />
+    <ClCompile Include="src\SimplexEngine\Maths\QuaternionFactory.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\UserInterface.cpp" />
     <ClCompile Include="src\SimplexEngine\Buffers\DepthBuffer.cpp" />
     <ClCompile Include="src\SimplexEngine\Buffers\TextureBuffer.cpp" />
@@ -264,7 +265,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClCompile Include="src\SimplexEngine\Tools\SceneParser.cpp" />
     <ClCompile Include="src\SimplexEngine\Utils\Clock.cpp" />
     <ClCompile Include="src\SimplexEngine\Utils\IniIndexer.cpp" />
-    <ClCompile Include="src\SimplexEngine\Utils\Math.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SimplexEngine\Actors\Actor.h" />
@@ -284,6 +284,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Buffers\DepthBuffer.h" />
     <ClInclude Include="include\SimplexEngine\Data\EFontSize.h" />
     <ClInclude Include="include\SimplexEngine\Data\ETextAlignment.h" />
+    <ClInclude Include="include\SimplexEngine\Maths\QuaternionFactory.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\Rasterizer.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\Renderer.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\UserInterface.h" />
@@ -318,7 +319,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Tools\EasyAssimp.h" />
     <ClInclude Include="include\SimplexEngine\Utils\Event.h" />
     <ClInclude Include="include\SimplexEngine\Utils\IniIndexer.h" />
-    <ClInclude Include="include\SimplexEngine\Utils\Math.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\application.ini" />

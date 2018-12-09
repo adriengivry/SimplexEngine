@@ -4,14 +4,14 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Utils/Math.h"
+#include "SimplexEngine/Maths/QuaternionFactory.h"
 
-glm::quat SimplexEngine::Utils::Math::CreateQuaternionFromEuler(const glm::vec3 & p_euler, bool p_degrees)
+glm::quat SimplexEngine::Maths::QuaternionFactory::CreateFromEuler(const glm::vec3 & p_euler, bool p_degrees)
 {
 	float yaw = p_euler.z;
 	float pitch = p_euler.y;
 	float roll = p_euler.x;
-	
+
 	if (p_degrees)
 	{
 		yaw = glm::radians(yaw);

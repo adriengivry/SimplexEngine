@@ -8,7 +8,7 @@
 
 #include "SimplexEngine/Scripts/SCameraController.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
-#include "SimplexEngine/Utils/Math.h"
+#include "SimplexEngine/Maths/QuaternionFactory.h"
 #include "SimplexEngine/Actors/Actor.h"
 
 SimplexEngine::Scripts::SCameraController::SCameraController(const Core::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
@@ -47,7 +47,7 @@ void SimplexEngine::Scripts::SCameraController::HandleMouse(float p_deltaTime)
 	if (m_pitch >= 89.0f)
 		m_pitch = 89.0f;
 
-	m_cameraComponent.owner->transform.SetLocalRotation(Utils::Math::CreateQuaternionFromEuler({ m_pitch, m_yaw, 0.0f }));
+	m_cameraComponent.owner->transform.SetLocalRotation(Maths::QuaternionFactory::CreateFromEuler({ m_pitch, m_yaw, 0.0f }));
 }
 
 void SimplexEngine::Scripts::SCameraController::HandleKeyboard(float p_deltaTime)

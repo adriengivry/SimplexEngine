@@ -7,7 +7,6 @@
 #include "SimplexEngine/Core/Application.h"
 #include "SimplexEngine/Data/Vertex.h"
 #include "SimplexEngine/Maths/Triangle2D.h"
-#include "SimplexEngine/Utils/Math.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 #include "SimplexEngine/Scenes/DefaultScene.h"
 #include "SimplexEngine/Scripts/SFPSCounter.h"

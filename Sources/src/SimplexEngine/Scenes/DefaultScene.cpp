@@ -10,7 +10,6 @@
 #include "SimplexEngine/Scripts/SRotateOverTime.h"
 #include "SimplexEngine/Scripts/SRasterizationLimiter.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
-#include "SimplexEngine/Utils/Math.h"
 #include "SimplexEngine/Components/MeshComponent.h"
 #include "SimplexEngine/Components/CameraComponent.h"
 
