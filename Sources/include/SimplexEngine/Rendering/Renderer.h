@@ -9,7 +9,6 @@
 #define _RENDERER_H
 
 #include <vector>
-#include <SDL_ttf.h>
 
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Data/Color.h"
@@ -41,7 +40,7 @@ namespace SimplexEngine::Rendering
 		* @param p_horizontalAlign
 		* @param p_verticalAlign
 		*/
-		void DrawText(const std::string& p_text, TTF_Font* p_font, const std::pair<int, int>& p_position, const Data::Color& p_color = Data::Color::White, Data::ETextHorizontalAlignment = Data::ETextHorizontalAlignment::ALIGN_LEFT, Data::ETextVerticalAlignment p_verticalAlign = Data::ETextVerticalAlignment::ALIGN_TOP) const;
+		void DrawText(const std::string& p_text, struct _TTF_Font* p_font, const std::pair<int, int>& p_position, const Data::Color& p_color = Data::Color::White, Data::ETextHorizontalAlignment = Data::ETextHorizontalAlignment::ALIGN_LEFT, Data::ETextVerticalAlignment p_verticalAlign = Data::ETextVerticalAlignment::ALIGN_TOP) const;
 
 		/**
 		* Draw a texture on the screen

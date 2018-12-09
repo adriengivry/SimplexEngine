@@ -112,7 +112,6 @@
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-del "$(OutDir)*.dll"
 xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
@@ -122,12 +121,16 @@ RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
 xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
 xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
 xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
 </Command>
       <Message>
       </Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -143,7 +146,6 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-del "$(OutDir)*.dll"
 xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
@@ -153,12 +155,16 @@ RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
 xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
 xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
 xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
 </Command>
       <Message>
       </Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -178,7 +184,6 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-del "$(OutDir)*.dll"
 xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
@@ -188,12 +193,16 @@ RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
 xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
 xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
 xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
 </Command>
       <Message>
       </Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -213,7 +222,6 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-del "$(OutDir)*.dll"
 xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
 xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
@@ -223,12 +231,16 @@ RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
 RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
 xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
 xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
 xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
 </Command>
       <Message>
       </Message>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\SimplexEngine\Actors\Actor.cpp" />

@@ -8,8 +8,6 @@
 #ifndef _TEXTUREBUFFER_H
 #define _TEXTUREBUFFER_H
 
-#include <SDL.h>
-
 #include "SimplexEngine/Buffers/Buffer2D.h"
 #include "SimplexEngine/Data/Color.h"
 
@@ -28,7 +26,7 @@ namespace SimplexEngine::Buffers
 		* @param p_pixelFormat
 		* @param p_textureAccess
 		*/
-		TextureBuffer(SDL_Renderer* p_sdlRenderer, uint32_t p_width, uint32_t p_height, Uint32 p_pixelFormat, SDL_TextureAccess p_textureAccess);
+		TextureBuffer(struct SDL_Renderer* p_sdlRenderer, uint32_t p_width, uint32_t p_height, uint32_t p_pixelFormat, uint32_t p_textureAccess);
 
 		/**
 		* Texture destructor
@@ -54,7 +52,7 @@ namespace SimplexEngine::Buffers
 		/**
 		* Return the wrapped SDL_Texture*
 		*/
-		SDL_Texture* GetSDLTexture() const;
+		struct SDL_Texture* GetSDLTexture() const;
 
 		/**
 		* Update texture data on the GPU. This must be called at most one per frame.
@@ -63,7 +61,7 @@ namespace SimplexEngine::Buffers
 		void SendDataToGPU();
 
 	private:
-		SDL_Texture* m_sdlTexture;
+		struct SDL_Texture* m_sdlTexture;
 		const uint32_t m_pixelBufferRowSize;
 	};
 }

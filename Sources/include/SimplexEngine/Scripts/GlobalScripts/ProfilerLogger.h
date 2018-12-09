@@ -4,14 +4,14 @@
 * @version 1.0
 */
 
+#pragma once
+#ifndef _PROFILERLOGGER_H
+#define _PROFILERLOGGER_H
+
 #include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
-
-#pragma once
-#ifndef _PROFILERLOGGER_H
-#define _PROFILERLOGGER_H
 
 namespace SimplexEngine::Scripts::GlobalScripts
 {

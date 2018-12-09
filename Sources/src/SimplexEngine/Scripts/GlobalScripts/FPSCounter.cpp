@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <GyvrIni/GyvrIni.h>
+
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 

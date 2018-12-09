@@ -6,10 +6,6 @@
 
 #include <vector>
 
-#include <assimp/Importer.hpp>
-#include <assimp/scene.h>
-#include <assimp/postprocess.h>
-
 #include "SimplexEngine/Data/Vertex.h"
 
 #pragma once
@@ -36,8 +32,8 @@ namespace SimplexEngine::Tools
 		static bool LoadVertices(const std::string& p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices);
 
 	private:
-		static void ProcessNode(aiNode* p_node, const aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices);
-		static void ProcessMesh(aiMesh* p_mesh, const aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices);
+		static void ProcessNode(struct aiNode* p_node, const struct aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices);
+		static void ProcessMesh(struct aiMesh* p_mesh, const struct aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices);
 	};
 }
 

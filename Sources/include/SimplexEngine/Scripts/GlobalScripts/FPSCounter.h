@@ -4,12 +4,12 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
-#include "SimplexEngine/Rendering/UserInterface.h"
-
 #pragma once
 #ifndef _FPSCOUNTER_H
 #define _FPSCOUNTER_H
+
+#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 
 namespace SimplexEngine::Scripts::GlobalScripts
 {

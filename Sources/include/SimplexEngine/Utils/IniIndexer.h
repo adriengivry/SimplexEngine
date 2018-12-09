@@ -10,7 +10,7 @@
 
 #include <memory>
 
-#include <GyvrIni/GyvrIni.h>
+namespace GyvrIni::Core { class IniFile; }
 
 namespace SimplexEngine::Utils
 {

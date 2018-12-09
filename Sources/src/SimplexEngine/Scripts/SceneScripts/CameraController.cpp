@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <GyvrIni/GyvrIni.h>
+
 #include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Maths/QuaternionFactory.h"

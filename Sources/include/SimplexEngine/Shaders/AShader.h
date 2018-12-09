@@ -13,6 +13,7 @@
 #include <string>
 #include <algorithm>
 #include <array>
+
 #include <glm/glm.hpp>
 
 #include "SimplexEngine/Data/Vertex.h"

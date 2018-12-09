@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <GyvrIni/GyvrIni.h>
+
 #include "SimplexEngine/Core/Engine.h"
 #include "SimplexEngine/Data/Vertex.h"
 #include "SimplexEngine/Maths/Triangle2D.h"

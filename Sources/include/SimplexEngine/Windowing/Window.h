@@ -7,8 +7,6 @@
 
 #include <glm/glm.hpp>
 
-#include <SDL.h>
-
 #include "SimplexEngine/Windowing/EWindowState.h"
 
 namespace SimplexEngine::Windowing
@@ -45,12 +43,12 @@ namespace SimplexEngine::Windowing
 		/**
 		* Return the SDL_Window* instance
 		*/
-		SDL_Window* GetSDLWindow() const;
+		struct SDL_Window* GetSDLWindow() const;
 
 		/**
 		* Return the SDL_GLContext instance
 		*/
-		SDL_GLContext GetGLContext() const;
+		void* GetGLContext() const;
 
 		/**
 		* Return the window width
@@ -118,8 +116,8 @@ namespace SimplexEngine::Windowing
 		EWindowState m_windowState;
 
 		/* SDL relatives */
-		SDL_Window* m_sdlWindow;
-		SDL_GLContext m_glContext;
+		struct SDL_Window* m_sdlWindow;
+		void* m_glContext;
 	};
 }
 

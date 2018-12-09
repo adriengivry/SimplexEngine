@@ -4,12 +4,12 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Resources/Managers/AResourceManager.h"
-#include "SimplexEngine/Resources/Mesh.h"
-
 #pragma once
 #ifndef _MESHMANAGER_H
 #define _MESHMANAGER_H
+
+#include "SimplexEngine/Resources/Managers/AResourceManager.h"
+#include "SimplexEngine/Resources/Mesh.h"
 
 namespace SimplexEngine::Resources::Managers
 {

@@ -4,9 +4,11 @@
 * @version 1.0
 */
 
+#include <SDL.h>
+
 #include "SimplexEngine/Buffers/TextureBuffer.h"
 
-SimplexEngine::Buffers::TextureBuffer::TextureBuffer(SDL_Renderer * p_sdlRenderer, uint32_t p_width, uint32_t p_height, Uint32 p_pixelFormat, SDL_TextureAccess p_textureAccess) :
+SimplexEngine::Buffers::TextureBuffer::TextureBuffer(SDL_Renderer * p_sdlRenderer, uint32_t p_width, uint32_t p_height, Uint32 p_pixelFormat, uint32_t p_textureAccess) :
 	Buffer2D(p_width, p_height),
 	m_pixelBufferRowSize(p_width * sizeof(uint32_t))
 {

@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <GyvrIni/GyvrIni.h>
+
 #include "SimplexEngine/Utils/IniIndexer.h"
 
 std::unique_ptr<GyvrIni::Core::IniFile> SimplexEngine::Utils::IniIndexer::Engine;

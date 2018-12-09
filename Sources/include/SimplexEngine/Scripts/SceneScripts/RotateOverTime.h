@@ -4,12 +4,12 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
-#include "SimplexEngine/Actors/Actor.h"
-
 #pragma once
 #ifndef _ROTATEOVERTIME_H
 #define _ROTATEOVERTIME_H
+
+#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
+#include "SimplexEngine/Actors/Actor.h"
 
 namespace SimplexEngine::Scripts::SceneScripts
 {

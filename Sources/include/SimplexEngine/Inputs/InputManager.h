@@ -10,8 +10,6 @@
 
 #include <unordered_map>
 
-#include <SDL.h>
-
 #include "SimplexEngine/Inputs/EKey.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
 
