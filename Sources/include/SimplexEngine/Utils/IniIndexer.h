@@ -10,14 +10,16 @@
 
 #include <memory>
 
-#include <GyvrIni/GyvrIni.h>
+#include "SimplexEngine/API/Export.h"
+
+namespace GyvrIni::Core { class IniFile; }
 
 namespace SimplexEngine::Utils
 {
 	/**
 	* This struct regroup every ini files for static usage
 	*/
-	struct IniIndexer final
+	struct API_SIMPLEXENGINE IniIndexer final
 	{
 		/**
 		* Constructor of IniIndexer.

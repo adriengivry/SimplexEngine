@@ -10,12 +10,14 @@
 
 #include <chrono>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Utils
 {
 	/**
 	* The Clock class is responsible for the delta time calculation
 	*/
-	class Clock final
+	class API_SIMPLEXENGINE Clock final
 	{
 	public: 
 		/**

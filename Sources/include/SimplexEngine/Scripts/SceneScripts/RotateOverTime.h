@@ -4,19 +4,20 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
-#include "SimplexEngine/Actors/Actor.h"
-
 #pragma once
 #ifndef _ROTATEOVERTIME_H
 #define _ROTATEOVERTIME_H
+
+#include "SimplexEngine/API/Export.h"
+#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
+#include "SimplexEngine/Actors/Actor.h"
 
 namespace SimplexEngine::Scripts::SceneScripts
 {
 	/**
 	* Rotate an entity over time
 	*/
-	class RotateOverTime final : public ISceneScript
+	class API_SIMPLEXENGINE RotateOverTime final : public ISceneScript
 	{
 	public:
 		/**

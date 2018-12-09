@@ -8,6 +8,7 @@
 #ifndef _SCENEPARSER_H
 #define _SCENEPARSER_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Components/CameraComponent.h"
 #include "SimplexEngine/Components/MeshComponent.h"
 #include "SimplexEngine/Scenes/AScene.h"
@@ -17,7 +18,7 @@ namespace SimplexEngine::Tools
 	/**
 	* A tool to collect data from scene
 	*/
-	class SceneParser final
+	class API_SIMPLEXENGINE SceneParser final
 	{
 	public:
 		/* Static class */

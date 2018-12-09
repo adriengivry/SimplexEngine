@@ -10,8 +10,7 @@
 
 #include <unordered_map>
 
-#include <SDL.h>
-
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Inputs/EKey.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
 
@@ -20,7 +19,7 @@ namespace SimplexEngine::Inputs
 	/**
 	* The input manager is an easy way to check inputs
 	*/
-	class InputManager final
+	class API_SIMPLEXENGINE InputManager final
 	{
 	public:
 		/**

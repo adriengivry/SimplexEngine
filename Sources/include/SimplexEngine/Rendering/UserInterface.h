@@ -10,9 +10,7 @@
 
 #include <queue>
 
-#include <SDL.h>
-#include <SDL_ttf.h>
-
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Data/Text.h"
@@ -22,7 +20,7 @@ namespace SimplexEngine::Rendering
 	/**
 	* A simple class using SDL_ttf to render things on screens
 	*/
-	class UserInterface final
+	class API_SIMPLEXENGINE UserInterface final
 	{
 	public:
 		/**
@@ -59,9 +57,9 @@ namespace SimplexEngine::Rendering
 		const std::pair<int16_t, int16_t> centerAnchor;
 
 	private:
-		TTF_Font* m_smallFont;
-		TTF_Font* m_normalFont;
-		TTF_Font* m_bigFont;
+		struct _TTF_Font* m_smallFont;
+		struct _TTF_Font* m_normalFont;
+		struct _TTF_Font* m_bigFont;
 
 		std::queue<Data::Text> m_texts;
 	};

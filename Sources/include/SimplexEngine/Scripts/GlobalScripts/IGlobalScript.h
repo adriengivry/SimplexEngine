@@ -8,11 +8,12 @@
 #ifndef _IGLOBALSCRIPT_H
 #define _IGLOBALSCRIPT_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Scripts/IScript.h"
 
 namespace SimplexEngine::Scripts::GlobalScripts
 {
-	class IGlobalScript : public IScript
+	class API_SIMPLEXENGINE IGlobalScript : public IScript
 	{
 	public:
 		/**

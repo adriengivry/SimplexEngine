@@ -11,6 +11,8 @@
 #include <unordered_map>
 #include <string>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Resources::Managers
 {
 	/**

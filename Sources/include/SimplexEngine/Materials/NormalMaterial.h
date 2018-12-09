@@ -8,12 +8,13 @@
 #ifndef _NORMALMATERIAL_H
 #define _NORMALMATERIAL_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Shaders/NormalShader.h"
 #include "SimplexEngine/Materials/ABaseMaterial.h"
 
 namespace SimplexEngine::Materials
 {
-	class NormalMaterial final : public ABaseMaterial<Shaders::NormalShader>
+	class API_SIMPLEXENGINE NormalMaterial final : public ABaseMaterial<Shaders::NormalShader>
 	{
 	public:
 		virtual void UpdateUniforms(const Components::CameraComponent& p_cameraComponent, const Components::MeshComponent& p_meshComponent);

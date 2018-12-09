@@ -11,6 +11,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Eventing/Event.h"
 
 namespace SimplexEngine::Data
@@ -18,7 +19,7 @@ namespace SimplexEngine::Data
 	/**
 	* Represent a local or world transformation (Position and rotation)
 	*/
-	struct Transform final
+	struct API_SIMPLEXENGINE Transform final
 	{
 		/**
 		* Create a transform without setting a parent

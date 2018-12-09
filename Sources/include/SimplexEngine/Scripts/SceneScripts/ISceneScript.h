@@ -8,11 +8,12 @@
 #ifndef _ISCENESCRIPT_H
 #define _ISCENESCRIPT_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Scripts/IScript.h"
 
 namespace SimplexEngine::Scripts::SceneScripts
 {
-	class ISceneScript : public IScript
+	class API_SIMPLEXENGINE ISceneScript : public IScript
 	{
 	public:
 		/**

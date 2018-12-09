@@ -10,13 +10,15 @@
 
 #include <functional>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Eventing
 {
 	/**
 	* A simple event that contains a vector of function callbacks. These functions will be called on invoke
 	*/
 	template<class... ArgTypes>
-	class Event final
+	class API_SIMPLEXENGINE Event final
 	{
 	public:
 		/**

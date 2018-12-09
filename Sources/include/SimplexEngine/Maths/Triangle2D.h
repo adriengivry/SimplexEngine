@@ -12,13 +12,15 @@
 
 #include <glm/glm.hpp>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Maths
 {
 	/**
 	* The Triangle2D class is a simple class to
 	* create a triangle and effectuate some calculations with
 	*/
-	class Triangle2D final
+	class API_SIMPLEXENGINE Triangle2D final
 	{
 	public:
 		using BoundingBox = std::tuple<int32_t, int32_t, int32_t, int32_t>;

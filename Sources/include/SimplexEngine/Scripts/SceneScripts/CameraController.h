@@ -4,20 +4,21 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
-#include "SimplexEngine/Inputs/InputManager.h"
-#include "SimplexEngine/Components/CameraComponent.h"
-
 #pragma once
 #ifndef _CAMERACONTROLLER_H
 #define _CAMERACONTROLLER_H
+
+#include "SimplexEngine/API/Export.h"
+#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
+#include "SimplexEngine/Inputs/InputManager.h"
+#include "SimplexEngine/Components/CameraComponent.h"
 
 namespace SimplexEngine::Scripts::SceneScripts
 {
 	/**
 	* A simple script to control a camera
 	*/
-	class CameraController final : public ISceneScript
+	class API_SIMPLEXENGINE CameraController final : public ISceneScript
 	{
 	public:
 		/**

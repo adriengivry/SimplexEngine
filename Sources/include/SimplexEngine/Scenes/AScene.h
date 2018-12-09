@@ -11,6 +11,7 @@
 #include <vector>
 #include <memory>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Inputs/InputManager.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
@@ -36,7 +37,7 @@ namespace SimplexEngine::Scenes
 	* It has references about most main classes instances of the project to
 	* allow scripts to influence them (Ex: Allow a script to access InputManager)
 	*/
-	class AScene
+	class API_SIMPLEXENGINE AScene
 	{
 	public:
 		/**
@@ -62,12 +63,12 @@ namespace SimplexEngine::Scenes
 		/**
 		* Return the vector of scripts as const reference
 		*/
-		const std::vector<std::unique_ptr<Scripts::IScript>>& GetScripts() const;
+		const std::vector<std::shared_ptr<Scripts::IScript>>& GetScripts() const;
 
 		/**
 		* Return the vector of actors as const reference
 		*/
-		const std::vector<std::unique_ptr<SimplexEngine::Actors::Actor>>& GetActors() const;
+		const std::vector<std::shared_ptr<SimplexEngine::Actors::Actor>>& GetActors() const;
 
 	protected:
 		/**
@@ -77,7 +78,7 @@ namespace SimplexEngine::Scenes
 		template<typename T, typename... Args>
 		T& AddActor(Args&&... p_args) 
 		{
-			m_actors.push_back(std::make_unique<T>(p_args...));
+			m_actors.push_back(std::make_shared<T>(p_args...));
 			return *m_actors.at(m_actors.size() - 1);
 		}
 
@@ -88,7 +89,7 @@ namespace SimplexEngine::Scenes
 		template<typename T, typename... Args>
 		void AddScript(Args&&... p_args)
 		{ 
-			m_scripts.push_back(std::make_unique<T>(p_args...));
+			m_scripts.push_back(std::make_shared<T>(p_args...));
 		}
 
 	private:
@@ -104,8 +105,8 @@ namespace SimplexEngine::Scenes
 		Resources::Managers::MeshManager&	m_meshManager;
 
 		/* Scene content */
-		std::vector<std::unique_ptr<SimplexEngine::Actors::Actor>>		m_actors;
-		std::vector<std::unique_ptr<Scripts::IScript>>				m_scripts;
+		std::vector<std::shared_ptr<SimplexEngine::Actors::Actor>>		m_actors;
+		std::vector<std::shared_ptr<Scripts::IScript>>					m_scripts;
 	};
 }
 

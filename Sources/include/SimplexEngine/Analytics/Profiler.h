@@ -11,6 +11,7 @@
 #include <unordered_map>
 #include <chrono>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Analytics/ProfilerReport.h"
 
 namespace SimplexEngine::Analytics
@@ -21,7 +22,7 @@ namespace SimplexEngine::Analytics
 	/**
 	* The profiler collect data about the running program
 	*/
-	class Profiler final
+	class API_SIMPLEXENGINE Profiler final
 	{
 	public:
 		/**

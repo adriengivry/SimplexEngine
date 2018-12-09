@@ -6,6 +6,8 @@
 
 #include <iostream>
 
+#include <GyvrIni/GyvrIni.h>
+
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
 #include "SimplexEngine/Utils/IniIndexer.h"

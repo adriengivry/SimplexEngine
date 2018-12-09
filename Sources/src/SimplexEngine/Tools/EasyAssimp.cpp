@@ -6,6 +6,10 @@
 
 #include <iostream>
 
+#include <assimp/Importer.hpp>
+#include <assimp/scene.h>
+#include <assimp/postprocess.h>
+
 #include "SimplexEngine/Tools/EasyAssimp.h"
 
 bool SimplexEngine::Tools::EasyAssimp::LoadVertices(const std::string & p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)

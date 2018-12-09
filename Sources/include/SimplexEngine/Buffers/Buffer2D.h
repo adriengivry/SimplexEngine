@@ -10,13 +10,15 @@
 
 #include <vector>
 
+#include "SimplexEngine/API/Export.h"
+
 namespace SimplexEngine::Buffers
 {
 	/**
 	* A generic base for any 2D Buffer
 	*/
 	template <typename T>
-	struct Buffer2D
+	struct API_SIMPLEXENGINE Buffer2D
 	{
 		/**
 		* Constructor of the buffer structure

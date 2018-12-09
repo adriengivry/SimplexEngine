@@ -8,6 +8,7 @@
 #ifndef _AMATERIAL_H
 #define _AMATERIAL_H
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Shaders/AShader.h"
 #include "SimplexEngine/Components/CameraComponent.h"
 
@@ -18,7 +19,7 @@ namespace SimplexEngine::Materials
 	/**
 	* Material abstract class
 	*/
-	class AMaterial
+	class API_SIMPLEXENGINE AMaterial
 	{
 	public:
 		/**

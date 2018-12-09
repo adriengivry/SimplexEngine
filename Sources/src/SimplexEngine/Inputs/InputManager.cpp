@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <SDL.h>
+
 #include "SimplexEngine/Inputs/InputManager.h"
 
 SimplexEngine::Inputs::InputManager::InputManager(Eventing::EventHandler& p_eventHandler)

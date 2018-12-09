@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <GyvrIni/GyvrIni.h>
+
 #include "SimplexEngine/Core/Engine.h"
 #include "SimplexEngine/Data/Vertex.h"
 #include "SimplexEngine/Maths/Triangle2D.h"
@@ -11,85 +13,76 @@
 #include "SimplexEngine/Scenes/DefaultScene.h"
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
-#include "SimplexEngine/Scripts/GlobalScripts/SceneNavigator.h"
 #include "SimplexEngine/Materials/LambertMaterial.h"
 #include "SimplexEngine/Tools/SceneParser.h"
 
 SimplexEngine::Core::Engine::Engine() :
-	m_window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
-	m_inputManager(m_eventHandler),
-	m_renderer(m_window),
-	m_userInterface(m_window, m_renderer),
-	m_rasterBoy(m_window, m_renderer),
+	window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
+	inputManager(eventHandler),
+	renderer(window),
+	userInterface(window, renderer),
+	rasterBoy(window, renderer),
+	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
 	m_running(true)
 {
-	m_eventHandler.QuitEvent.AddListener(std::bind(&SimplexEngine::Core::Engine::Stop, this));
-
-	CreateScenes();
-	CreateGlobalScripts();
+	eventHandler.QuitEvent.AddListener(std::bind(&SimplexEngine::Core::Engine::Stop, this));
 
 	/* Initialize the default camera */
-	m_defaultCamera.AddComponent<Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
+	m_defaultCamera.AddComponent<Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), window.GetAspectRatio());
 	m_defaultCamera.transform.SetLocalPosition({0.0f, 0.0f, 10.0f});
 }
 
-int SimplexEngine::Core::Engine::Run()
+void SimplexEngine::Core::Engine::Update()
 {
-	m_clock.Tick();
+	/* Calculate elapsed time and delta time */
+	clock.Tick();
 
-	m_sceneManager.LoadScene("Default");
+	/* Handle events and inputs */
+	inputManager.Update();
+	eventHandler.HandleEvents(window);
 
-	while (m_running)
-		Update(m_clock.GetDeltaTime());
+	/* Update global scripts (Scene-independant) */
+	UpdateGlobalScripts(clock.GetDeltaTime());
 
-	return EXIT_SUCCESS;
+	/* Scene dependent logic */
+	if (sceneManager.HasCurrentScene())
+	{
+		/* Update scene scripts (Scene-dependant) */
+		UpdateSceneScripts(clock.GetDeltaTime());
+
+		/* Rasterization process */
+		rasterBoy.ResetRasterizedTrianglesCount();
+		rasterBoy.ClearBuffers();
+		RasterizeScene();
+		rasterBoy.SendRasterizationOutputBufferToGPU();
+
+		/* Draw the result of the rasterization process to the SDL buffer */
+		renderer.DrawTextureBufferContent(rasterBoy.GetRasterizationOutputBuffer());
+	}
+
+	/* Draw the UI to the SDL buffer */
+	userInterface.Draw();
+
+	/* Display SDL buffer content to the screen */
+	renderer.Render();
 }
 
-void SimplexEngine::Core::Engine::CreateScenes()
+bool SimplexEngine::Core::Engine::IsRunning() const
 {
-	m_sceneManager.RegisterScene<Scenes::DefaultScene>("Default", m_window, m_inputManager, m_userInterface, m_eventHandler, m_meshManager);
+	return m_running;
 }
 
-void SimplexEngine::Core::Engine::CreateGlobalScripts()
+void SimplexEngine::Core::Engine::Stop()
 {
-	AddGlobalScript<Scripts::GlobalScripts::FPSCounter>(m_userInterface);
-	AddGlobalScript<Scripts::GlobalScripts::ProfilerLogger>(m_profiler, m_inputManager, m_userInterface);
-	AddGlobalScript<Scripts::GlobalScripts::SceneNavigator>(m_sceneManager, m_inputManager);
-}
-
-void SimplexEngine::Core::Engine::Update(float p_deltaTime)
-{
-	/* Events/Inputs */
-	m_inputManager.Update();
-	m_eventHandler.HandleEvents(m_window);
-
-	/* Update scripts */
-	UpdateGlobalScripts(p_deltaTime);
-	UpdateSceneScripts(p_deltaTime);
-
-	/* Rasterization process */
-	m_rasterBoy.ResetRasterizedTrianglesCount();
-	m_rasterBoy.ClearBuffers();
-	RasterizeScene();
-	m_rasterBoy.SendRasterizationOutputBufferToGPU();
-
-	/* Draw order */
-	m_renderer.DrawTextureBufferContent(m_rasterBoy.GetRasterizationOutputBuffer());
-	m_userInterface.Draw();
-
-	/* Render on screen */
-	m_renderer.Render();
-
-	/* Time managment */
-	m_clock.Tick();
+	m_running = false;
 }
 
 void SimplexEngine::Core::Engine::UpdateSceneScripts(float p_deltaTime)
 {
 	PROFILER_SPY("Engine::UpdateSceneScripts");
 
-	for (auto& script : m_sceneManager.GetCurrentScene()->GetScripts())
+	for (auto& script : sceneManager.GetCurrentScene()->GetScripts())
 		script->Update(p_deltaTime);
 }
 
@@ -105,10 +98,10 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 {
 	PROFILER_SPY("Engine::RasterizeScene");
 
-	for (auto meshComponent : Tools::SceneParser::FindMeshes(*m_sceneManager.GetCurrentScene()))
+	for (auto meshComponent : Tools::SceneParser::FindMeshes(*sceneManager.GetCurrentScene()))
 	{
 		/* Find camera from scene and the default camera */
-		Components::CameraComponent const* sceneMainCamera = Tools::SceneParser::GetMainCamera(*m_sceneManager.GetCurrentScene());
+		Components::CameraComponent const* sceneMainCamera = Tools::SceneParser::GetMainCamera(*sceneManager.GetCurrentScene());
 		Components::CameraComponent const* defaultCamera = m_defaultCamera.GetComponent<Components::CameraComponent>().get();
 
 		/* Use the scene main camera or the default camera if there is no camera in scene */
@@ -128,18 +121,8 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 			if (materialToUse)
 			{
 				materialToUse->UpdateUniforms(*cameraToUse, meshComponent.get());
-				m_rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), materialToUse->GetShaderInstance());
+				rasterBoy.RasterizeMesh(*meshComponent.get().GetMesh(), materialToUse->GetShaderInstance());
 			}
 		}
 	}
-}
-
-bool SimplexEngine::Core::Engine::IsRunning() const
-{
-	return m_running;
-}
-
-void SimplexEngine::Core::Engine::Stop()
-{
-	m_running = false;
 }

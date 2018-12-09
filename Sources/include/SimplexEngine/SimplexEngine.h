@@ -1,0 +1,102 @@
+/**
+* Project SimplexEngine
+* @author Adrien Givry
+* @version 1.0
+*/
+
+#pragma once
+#ifndef _SIMPLEXENGINE_H
+#define _SIMPLEXENGINE_H
+
+/* Actors */
+#include "SimplexEngine/Actors/Actor.h"
+
+/* Analytics */
+#include "SimplexEngine/Analytics/Profiler.h"
+#include "SimplexEngine/Analytics/ProfilerReport.h"
+#include "SimplexEngine/Analytics/ProfilerSpy.h"
+
+/* API */
+#include "SimplexEngine/API/Export.h"
+
+/* Buffers */
+#include "SimplexEngine/Buffers/Buffer2D.h"
+#include "SimplexEngine/Buffers/DepthBuffer.h"
+#include "SimplexEngine/Buffers/TextureBuffer.h"
+
+/* Components */
+#include "SimplexEngine/Components/AActorComponent.h"
+#include "SimplexEngine/Components/CameraComponent.h"
+#include "SimplexEngine/Components/MeshComponent.h"
+
+/* Core */
+#include "SimplexEngine/Core/Engine.h"
+
+/* Data */
+#include "SimplexEngine/Data/Color.h"
+#include "SimplexEngine/Data/EFontSize.h"
+#include "SimplexEngine/Data/ETextAlignment.h"
+#include "SimplexEngine/Data/Text.h"
+#include "SimplexEngine/Data/Transform.h"
+#include "SimplexEngine/Data/Vertex.h"
+
+/* Eventing */
+#include "SimplexEngine/Eventing/Event.h"
+#include "SimplexEngine/Eventing/EventHandler.h"
+
+/* Inputs */
+#include "SimplexEngine/Inputs/EKey.h"
+#include "SimplexEngine/Inputs/InputManager.h"
+
+/* Materials */
+#include "SimplexEngine/Materials/ABaseMaterial.h"
+#include "SimplexEngine/Materials/AMaterial.h"
+#include "SimplexEngine/Materials/LambertMaterial.h"
+#include "SimplexEngine/Materials/NormalMaterial.h"
+
+/* Maths */
+#include "SimplexEngine/Maths/QuaternionFactory.h"
+#include "SimplexEngine/Maths/Triangle2D.h"
+
+/* Rendering */
+#include "SimplexEngine/Rendering/Rasterizer.h"
+#include "SimplexEngine/Rendering/Renderer.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
+
+/* Resources */
+#include "SimplexEngine/Resources/Managers/AResourceManager.h"
+#include "SimplexEngine/Resources/Managers/MeshManager.h"
+#include "SimplexEngine/Resources/Mesh.h"
+
+/* Scenes */
+#include "SimplexEngine/Scenes/AScene.h"
+#include "SimplexEngine/Scenes/DefaultScene.h"
+#include "SimplexEngine/Scenes/SceneManager.h"
+
+/* Scripts */
+#include "SimplexEngine/Scripts/IScript.h"
+#include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
+#include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
+#include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
+#include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
+#include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
+#include "SimplexEngine/Scripts/SceneScripts/RotateOverTime.h"
+
+/* Shaders */
+#include "SimplexEngine/Shaders/AShader.h"
+#include "SimplexEngine/Shaders/LambertShader.h"
+#include "SimplexEngine/Shaders/NormalShader.h"
+
+/* Tools */
+#include "SimplexEngine/Tools/EasyAssimp.h"
+#include "SimplexEngine/Tools/SceneParser.h"
+
+/* Utils */
+#include "SimplexEngine/Utils/Clock.h"
+#include "SimplexEngine/Utils/IniIndexer.h"
+
+/* Windowing */
+#include "SimplexEngine/Windowing/EWindowState.h"
+#include "SimplexEngine/Windowing/Window.h"
+
+#endif // _SIMPLEXENGINE_H

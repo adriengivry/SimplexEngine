@@ -4,6 +4,8 @@
 * @version 1.0
 */
 
+#include <SDL.h>
+
 #include "SimplexEngine/Windowing/Window.h"
 
 SimplexEngine::Windowing::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :

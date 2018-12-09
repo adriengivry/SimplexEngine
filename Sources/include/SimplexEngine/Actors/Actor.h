@@ -11,6 +11,7 @@
 #include <vector>
 #include <memory>
 
+#include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Components/AActorComponent.h"
 #include "SimplexEngine/Data/Transform.h"
 
@@ -19,7 +20,7 @@ namespace SimplexEngine::Actors
 	/**
 	* The actor is an entity that can get spawned in the scene
 	*/
-	class Actor
+	class API_SIMPLEXENGINE Actor
 	{
 	public:
 		/**

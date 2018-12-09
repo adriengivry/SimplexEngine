@@ -4,6 +4,9 @@
 * @version 1.0
 */
 
+#include <SDL.h>
+#include <SDL_ttf.h>
+
 #include "SimplexEngine/Rendering/UserInterface.h"
 
 SimplexEngine::Rendering::UserInterface::UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer) :
