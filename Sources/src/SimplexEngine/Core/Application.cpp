@@ -24,7 +24,7 @@ SimplexEngine::Core::Application::Application() :
 	m_userInterface(m_window, m_renderer),
 	m_rasterBoy(m_window, m_renderer),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
-	m_applicationState(EApplicationState::RUNNING)
+	m_running(false)
 {
 	m_eventHandler.SDLQuitEvent.AddListener(std::bind(&SimplexEngine::Core::Application::Stop, this));
 
@@ -42,7 +42,7 @@ int SimplexEngine::Core::Application::Run()
 
 	m_sceneManager.LoadScene("Default");
 
-	while (m_applicationState == EApplicationState::RUNNING)
+	while (m_running)
 		Update(m_clock.GetDeltaTime());
 
 	return EXIT_SUCCESS;
@@ -128,10 +128,10 @@ void SimplexEngine::Core::Application::RasterizeScene()
 
 bool SimplexEngine::Core::Application::IsRunning() const
 {
-	return m_applicationState == EApplicationState::RUNNING;
+	return m_running;
 }
 
 void SimplexEngine::Core::Application::Stop()
 {
-	m_applicationState = EApplicationState::STOPPED;
+	m_running = false;
 }

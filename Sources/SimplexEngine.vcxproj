@@ -280,7 +280,6 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Core\SceneManager.h" />
     <ClInclude Include="include\SimplexEngine\Core\Window.h" />
     <ClInclude Include="include\SimplexEngine\Core\Application.h" />
-    <ClInclude Include="include\SimplexEngine\Core\EApplicationState.h" />
     <ClInclude Include="include\SimplexEngine\Buffers\Buffer2D.h" />
     <ClInclude Include="include\SimplexEngine\Buffers\DepthBuffer.h" />
     <ClInclude Include="include\SimplexEngine\Data\EFontSize.h" />

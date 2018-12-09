@@ -12,7 +12,6 @@
 #include "SimplexEngine/Core/Window.h"
 #include "SimplexEngine/Core/EventHandler.h"
 #include "SimplexEngine/Core/InputManager.h"
-#include "SimplexEngine/Core/EApplicationState.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
@@ -117,7 +116,7 @@ namespace SimplexEngine::Core
 		std::unique_ptr<Materials::AMaterial> m_defaultMaterial;
 
 		/* Other stuffs */
-		EApplicationState m_applicationState;
+		bool m_running;
 	};
 }
 

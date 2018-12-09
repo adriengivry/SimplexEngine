@@ -13,7 +13,8 @@ SimplexEngine::Core::Window::Window(const std::string& p_title, uint16_t p_width
 	m_halfHeight(p_height / 2),
 	m_title(p_title),
 	m_aspectRatio(static_cast<float>(p_width) / static_cast<float>(p_height)),
-	m_windowState(EWindowState::NONE), m_sdlWindow(nullptr)
+	m_windowState(EWindowState::NONE),
+	m_sdlWindow(nullptr)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 	{

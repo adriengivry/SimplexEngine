@@ -14,7 +14,6 @@
 #include "SimplexEngine/Core/Window.h"
 #include "SimplexEngine/Core/EventHandler.h"
 #include "SimplexEngine/Core/InputManager.h"
-#include "SimplexEngine/Core/EApplicationState.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
