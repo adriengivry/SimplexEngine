@@ -71,29 +71,29 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\Bin\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\Bin\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\Bin\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\Bin\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\</IntDir>
+    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
     <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
     <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
