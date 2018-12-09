@@ -83,29 +83,38 @@ namespace SimplexEngine::Shaders
 		T GetUniform(const std::string& p_name) { return std::get<T>(m_uniforms[p_name]); }
 
 		/**
-		*
+		* Set the varying value identified by the given name to p_value
+		* @param p_name
+		* @param p_value
 		*/
 		void SetVarying(const std::string& p_name, ShaderValue p_value);
 
 		/**
-		*
+		* Set the flat value identified by the given name to p_value
+		* @param p_name
+		* @param p_value
 		*/
 		void SetFlat(const std::string& p_name, ShaderValue p_value);
 
 		/**
-		*
+		* Return the varying value identified by the given name
+		* @param p_name
 		*/
 		template<typename T>
 		T GetVarying(const std::string& p_name) { return std::get<T>(m_interpolatedVarying[p_name]); }
 
 		/**
-		*
+		* Return the flat value identified by the given name
+		* @param p_name
 		*/
 		template<typename T>
 		T GetFlat(const std::string& p_name) { return std::get<T>(m_flat[p_name]); }
 
 		/**
 		* Interpolate an array of data with the given barycentric coordinates
+		* @param p_key
+		* @param p_data
+		* @param p_barycentricCoords
 		*/
 		template<typename T>
 		void InterpolateData(const std::string& p_key, const std::array<T, 3>& p_data, const glm::vec3& p_barycentricCoords)
