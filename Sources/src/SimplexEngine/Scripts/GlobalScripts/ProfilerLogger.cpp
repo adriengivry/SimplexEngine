@@ -27,7 +27,7 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 	{
 		m_logTimer += p_deltaTime;
 
-		if (!m_reportGenerationPaused && m_logTimer >= Utils::IniIndexer::Application->Get<float>("profiler_log_frequency"))
+		if (!m_reportGenerationPaused && m_logTimer >= Utils::IniIndexer::Engine->Get<float>("profiler_log_frequency"))
 		{
 			m_report = m_profiler.GenerateReport();
 			m_profiler.ClearHistory();

@@ -31,15 +31,15 @@
 namespace SimplexEngine::Core
 {
 	/**
-	* The Application class contains the main logic of this application (Including main loop)
+	* The Engine class contains the main logic of this application (Including main loop)
 	*/
-	class Application final
+	class Engine final
 	{
 	public:
 		/**
 		* Constructor of the application
  		*/
-		Application();
+		Engine();
 
 		/**
 		* Run the actual application (Blocking method, it is a loop).
@@ -98,6 +98,9 @@ namespace SimplexEngine::Core
 		void Stop();
 
 	private:
+		/* Ini managment (Must be initialized first) */
+		SimplexEngine::Utils::IniIndexer m_iniIndexer;
+
 		/* Core */
 		SimplexEngine::Windowing::Window				m_window;
 		SimplexEngine::Eventing::EventHandler			m_eventHandler;

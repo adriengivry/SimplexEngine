@@ -11,8 +11,8 @@
 
 SimplexEngine::Scripts::GlobalScripts::FPSCounter::FPSCounter(Rendering::UserInterface& p_userInterface) :
 	m_userInterface(p_userInterface),
-	m_logTimer(Utils::IniIndexer::Application->Get<float>("fps_log_frequency")),
-	m_logFrequency(Utils::IniIndexer::Application->Get<float>("fps_log_frequency")),
+	m_logTimer(Utils::IniIndexer::Engine->Get<float>("fps_log_frequency")),
+	m_logFrequency(Utils::IniIndexer::Engine->Get<float>("fps_log_frequency")),
 	m_fps(0)
 {
 }
@@ -21,7 +21,7 @@ void SimplexEngine::Scripts::GlobalScripts::FPSCounter::Update(float p_deltaTime
 {
 	m_logTimer += p_deltaTime;
 
-	if (m_logTimer >= Utils::IniIndexer::Application->Get<float>("fps_update_frequency"))
+	if (m_logTimer >= Utils::IniIndexer::Engine->Get<float>("fps_update_frequency"))
 	{
 		m_fps = static_cast<uint16_t>(1.0f / p_deltaTime);
 		m_logTimer = 0.0f;

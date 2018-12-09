@@ -19,15 +19,13 @@ namespace SimplexEngine::Utils
 	*/
 	struct IniIndexer final
 	{
-		/* Prevent this static class from being instancied */
-		IniIndexer() = delete;
-
 		/**
-		* Load every ini data into the memory. This must be called before trying to access any ini file
+		* Constructor of IniIndexer.
+		* Will initialize every ini files
 		*/
-		static void Initialize();
+		IniIndexer();
 
-		static std::unique_ptr<GyvrIni::Core::IniFile> Application;
+		static std::unique_ptr<GyvrIni::Core::IniFile> Engine;
 		static std::unique_ptr<GyvrIni::Core::IniFile> Window;
 		static std::unique_ptr<GyvrIni::Core::IniFile> Rendering;
 		static std::unique_ptr<GyvrIni::Core::IniFile> Controls;

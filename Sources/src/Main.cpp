@@ -4,12 +4,11 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Core/Application.h"
+#include "SimplexEngine/Core/Engine.h"
 
 int main(int argc, char* argv[])
 {
-	SimplexEngine::Utils::IniIndexer::Initialize();
-	SimplexEngine::Core::Application app;
+	SimplexEngine::Core::Engine app;
 	app.Run();
 	return 0;
 }
