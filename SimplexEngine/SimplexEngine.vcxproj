@@ -71,32 +71,32 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
-    <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
-    <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
-    <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <OutDir>$(SolutionDir)..\Bin\$(ProjectName)\</OutDir>
-    <IntDir>$(SolutionDir)..\Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(SolutionDir);$(SolutionDir)include;$(SolutionDir)..\Dependencies\SDL2\include\;$(SolutionDir)..\Dependencies\SDL2_ttf\include\;$(SolutionDir)..\Dependencies\assimp\include\;$(SolutionDir)..\Dependencies\GyvrIni\include\;$(SolutionDir)..\Dependencies\glm\;$(IncludePath)</IncludePath>
-    <SourcePath>$(SolutionDir);$(SolutionDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)..\Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)..\Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)..\Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)..\Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
+    <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -112,18 +112,23 @@
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
-xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
-xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+:: Delete the previous build (bin, include, lib) ::
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+
+:: Create the new build (bin, include, lib) ::
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+
+:: Add GLM headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -146,18 +151,23 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
-xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
-xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+:: Delete the previous build (bin, include, lib) ::
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+
+:: Create the new build (bin, include, lib) ::
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+
+:: Add GLM headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -184,18 +194,23 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
-xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
-xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+:: Delete the previous build (bin, include, lib) ::
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+
+:: Create the new build (bin, include, lib) ::
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+
+:: Add GLM headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -222,18 +237,23 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
-xcopy "$(SolutionDir)..\Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\SDL2_ttf\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\assimp\bin\$(Platform)\*.dll" "$(Outdir)" /e /y /i /r
+xcopy "$(SolutionDir)Dependencies\GyvrIni\bin\$(Platform)\$(Configuration)\*.dll" "$(Outdir)" /e /y /i /r
 
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\include"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
-RD /S /Q "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
-xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)..\Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
-xcopy "$(SolutionDir)..\Dependencies\glm\glm\*" "$(SolutionDir)..\Build\$(ProjectName)\include\glm\" /e /y /i /r
-xcopy "$(OutDir)*.lib" "$(SolutionDir)..\Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+:: Delete the previous build (bin, include, lib) ::
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\include"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)"
+RD /S /Q "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)"
+
+:: Create the new build (bin, include, lib) ::
+xcopy "$(ProjectDir)include\$(ProjectName)" "$(SolutionDir)Build\$(ProjectName)\include\$(ProjectName)" /e /y /i /r
+xcopy "$(OutDir)*.lib" "$(SolutionDir)Build\$(ProjectName)\lib\$(Platform)\$(Configuration)" /y /i
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Configuration)" /y /i
+
+:: Add GLM headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
 </Command>
       <Message>
       </Message>

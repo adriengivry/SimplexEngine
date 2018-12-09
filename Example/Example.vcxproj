@@ -70,29 +70,29 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include\;$(ProjectDir)..\Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include\;$(ProjectDir)..\Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)include\;$(ProjectDir)..\Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)include\;$(ProjectDir)..\Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(ProjectDir)..\Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
@@ -113,15 +113,18 @@
       <AdditionalDependencies>SimplexEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>del "$(OutDir)*.dll"
-xcopy "$(ProjectDir)..\Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
+      <Command>:: Copy dependencies DLL to the output directory ::
+xcopy "$(SolutionDir)Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
 
 :: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(ProjectDir)config\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+xcopy "$(OutDir)*.exe" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(ProjectDir)config\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
+xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -135,15 +138,18 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Config
       <AdditionalDependencies>SimplexEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>del "$(OutDir)*.dll"
-xcopy "$(ProjectDir)..\Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
+      <Command>:: Copy dependencies DLL to the output directory ::
+xcopy "$(SolutionDir)Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
 
 :: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(ProjectDir)config\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+xcopy "$(OutDir)*.exe" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(ProjectDir)config\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
+xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -157,15 +163,18 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Config
       <AdditionalDependencies>SimplexEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>del "$(OutDir)*.dll"
-xcopy "$(ProjectDir)..\Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
+      <Command>:: Copy dependencies DLL to the output directory ::
+xcopy "$(SolutionDir)Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
 
 :: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(ProjectDir)config\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+xcopy "$(OutDir)*.exe" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(ProjectDir)config\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
+xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -183,15 +192,18 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Config
       <AdditionalDependencies>SimplexEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>del "$(OutDir)*.dll"
-xcopy "$(ProjectDir)..\Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
+      <Command>:: Copy dependencies DLL to the output directory ::
+xcopy "$(SolutionDir)Build\SimplexEngine\bin\$(Platform)\$(Configuration)\*.dll" "$(OutDir)" /e /y /i /r
 
 :: Create a ready-to-use build ::
-xcopy "$(OutDir)*.exe" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(OutDir)*.dll" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
-xcopy "$(ProjectDir)config\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
-xcopy "$(ProjectDir)resources\*" "$(SolutionDir)..\Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
+xcopy "$(OutDir)*.exe" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\" /e /y /i /r
+xcopy "$(ProjectDir)config\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\config\" /e /y /i /r
+xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configuration)-$(Platform)\resources\" /e /y /i /r</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(OutDir)*.dll"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Example\Main.cpp" />
