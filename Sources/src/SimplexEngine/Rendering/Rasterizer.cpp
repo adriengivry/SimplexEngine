@@ -80,7 +80,7 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragment(std::pair<int32_t, in
 	m_depthBuffer.SetElement(p_pixelCoordinates.first, p_pixelCoordinates.second, p_depth);
 }
 
-void SimplexEngine::Rendering::Rasterizer::ConvertToRasterSpace(glm::vec4& p_vertex)
+void SimplexEngine::Rendering::Rasterizer::ConvertToRasterSpace(glm::vec4& p_vertex) const
 {
 	/* Homogenize */
 	p_vertex /= p_vertex.w;
@@ -90,17 +90,17 @@ void SimplexEngine::Rendering::Rasterizer::ConvertToRasterSpace(glm::vec4& p_ver
 	p_vertex.y = std::round(((1 - p_vertex.y) * 0.5f) * m_window.GetHeight());
 }
 
-bool SimplexEngine::Rendering::Rasterizer::BarycentricCoordsAreValid(const glm::vec3& p_barycentricCoords)
+bool SimplexEngine::Rendering::Rasterizer::BarycentricCoordsAreValid(const glm::vec3& p_barycentricCoords) const
 {
 	return p_barycentricCoords.x >= 0.0f && p_barycentricCoords.y >= 0.0f && p_barycentricCoords.x + p_barycentricCoords.y <= 1.0f;
 }
 
-float SimplexEngine::Rendering::Rasterizer::CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3 & p_barycentricCoords)
+float SimplexEngine::Rendering::Rasterizer::CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3 & p_barycentricCoords) const
 {
 	return p_vertices[0].z * p_barycentricCoords.z + p_vertices[2].z * p_barycentricCoords.x + p_barycentricCoords.y * p_vertices[1].z;
 }
 
-bool SimplexEngine::Rendering::Rasterizer::CanRasterize()
+bool SimplexEngine::Rendering::Rasterizer::CanRasterize() const
 {
 	return !m_limitTriangleRasterization || m_rasterizedTriangles < m_rasterizedTrianglesLimit;
 }

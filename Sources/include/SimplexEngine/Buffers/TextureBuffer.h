@@ -49,7 +49,7 @@ namespace SimplexEngine::Buffers
 		* @param p_x
 		* @param p_y
 		*/
-		uint32_t GetPixel(uint32_t p_x, uint32_t p_y);
+		uint32_t GetPixel(uint32_t p_x, uint32_t p_y) const;
 
 		/**
 		* Return the wrapped SDL_Texture*

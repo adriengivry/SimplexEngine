@@ -40,7 +40,7 @@ namespace SimplexEngine::Buffers
 		* @param p_x
 		* @param p_y
 		*/
-		T& GetElement(uint32_t p_x, uint32_t p_y) { return data[p_y * width + p_x]; }
+		T& GetElement(uint32_t p_x, uint32_t p_y) const { return data[p_y * width + p_x]; }
 
 		/**
 		* Set an element value of the buffer

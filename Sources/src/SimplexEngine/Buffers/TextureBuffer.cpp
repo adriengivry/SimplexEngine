@@ -28,7 +28,7 @@ void SimplexEngine::Buffers::TextureBuffer::SetPixel(uint32_t p_x, uint32_t p_y,
 	SetElement(p_x, p_y, p_color.Pack());
 }
 
-uint32_t SimplexEngine::Buffers::TextureBuffer::GetPixel(uint32_t p_x, uint32_t p_y)
+uint32_t SimplexEngine::Buffers::TextureBuffer::GetPixel(uint32_t p_x, uint32_t p_y) const
 {
 	return GetElement(p_x, p_y);
 }

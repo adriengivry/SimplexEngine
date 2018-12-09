@@ -71,13 +71,13 @@ namespace SimplexEngine::Rendering
 		* Convert a vertex to raster space
 		* @param p_vertex
 		*/
-		void ConvertToRasterSpace(glm::vec4& p_vertex);
+		void ConvertToRasterSpace(glm::vec4& p_vertex) const;
 
 		/**
 		* Verify if barycentric coords are valid (If the pixel expressed in barycentric coordinates is triangle bounds)
 		* @param p_barycentricCoords
 		*/
-		bool BarycentricCoordsAreValid(const glm::vec3& p_barycentricCoords);
+		bool BarycentricCoordsAreValid(const glm::vec3& p_barycentricCoords) const;
 
 		/**
 		* Calculate the "depth" of a point in screen space using barycentric coordinates
@@ -85,12 +85,12 @@ namespace SimplexEngine::Rendering
 		* @param p_vertices
 		* @param p_barycentricCoords (Of the point to test)
 		*/
-		float CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3& p_barycentricCoords);
+		float CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3& p_barycentricCoords) const;
 
 		/**
 		* Verify is Rasterizer is allow to rasterize
 		*/
-		bool CanRasterize();
+		bool CanRasterize() const;
 
 		/**
 		* Use this method to limit/unlimit the triangle rasterization process
