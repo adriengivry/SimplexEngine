@@ -53,13 +53,13 @@ void SimplexEngine::Scripts::SProfilerLogger::Update(float p_deltaTime)
 		}
 	}
 
-	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_F1))
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_F1))
 	{
 		m_profiler.ToggleEnable();
 		m_reportGenerationPaused = false;
 	}
 
-	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_P) && m_profiler.IsEnabled())
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_P) && m_profiler.IsEnabled())
 	{
 		if (m_reportGenerationPaused)
 		{

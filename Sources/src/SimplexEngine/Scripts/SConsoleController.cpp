@@ -14,7 +14,7 @@ SimplexEngine::Scripts::SConsoleController::SConsoleController(const Inputs::Inp
 
 void SimplexEngine::Scripts::SConsoleController::Update(float p_deltaTime)
 {
-	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_C))
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_C))
 		ClearConsole();
 }
 

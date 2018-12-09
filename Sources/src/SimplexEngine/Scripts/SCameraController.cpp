@@ -58,24 +58,24 @@ void SimplexEngine::Scripts::SCameraController::HandleKeyboard(float p_deltaTime
 	glm::vec3 up = glm::vec3(0.0f, 1.0, 0.0f);
 	glm::vec3 right = glm::cross(forward, up);
 
-	if (m_inputManager.IsKeyDown(SDL_SCANCODE_A))
+	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_A))
 		movement -= right;
-	if (m_inputManager.IsKeyDown(SDL_SCANCODE_D))
+	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_D))
 		movement += right;
-	if (m_inputManager.IsKeyDown(SDL_SCANCODE_S))
+	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_S))
 		movement -= forward;
-	if (m_inputManager.IsKeyDown(SDL_SCANCODE_W))
+	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_W))
 		movement += forward;
-	if (m_inputManager.IsKeyDown(SDL_SCANCODE_E))
+	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_E))
 		movement += up;
-	if (m_inputManager.IsKeyDown(SDL_SCANCODE_Q))
+	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_Q))
 		movement -= up;
 
 	m_cameraComponent.owner->transform.TranslateLocal(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
 
-	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_LALT))
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_LALT))
 		m_inputManager.UnlockMouse();
 
-	if (m_inputManager.HasKeyBeenReleased(SDL_SCANCODE_LALT))
+	if (m_inputManager.HasKeyBeenReleased(Inputs::EKey::KEY_LALT))
 		m_inputManager.LockMouse();
 }

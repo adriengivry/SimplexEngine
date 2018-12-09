@@ -12,6 +12,7 @@
 
 #include <SDL.h>
 
+#include "SimplexEngine/Inputs/EKey.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
 
 namespace SimplexEngine::Inputs
@@ -50,27 +51,27 @@ namespace SimplexEngine::Inputs
 
 		/**
 		* Check if the given key is currently down
-		* @param p_keyCode (SDL Key Code)
+		* @param p_key
 		*/
-		bool IsKeyDown(int p_keyCode) const;
+		bool IsKeyDown(EKey p_key) const;
 
 		/**
 		* Check if the given key is currently up
-		* @param p_keyCode (SDL Key Code)
+		* @param p_key
 		*/
-		bool IsKeyUp(int p_keyCode) const;
+		bool IsKeyUp(EKey p_key) const;
 
 		/**
 		* Check if the given key has been pressed during this frame
-		* @param p_keyCode (SDL Key Code)
+		* @param p_key
 		*/
-		bool HasKeyBeenPressed(int p_keyCode) const;
+		bool HasKeyBeenPressed(EKey p_key) const;
 
 		/**
 		* Check if the given key has been released during this frame
-		* @param p_keyCode (SDL Key Code)
+		* @param p_keyCode
 		*/
-		bool HasKeyBeenReleased(int p_keyCode) const;
+		bool HasKeyBeenReleased(EKey p_key) const;
 
 		/**
 		* Return the current cursor position
@@ -89,9 +90,9 @@ namespace SimplexEngine::Inputs
 		std::pair<int, int> GetMouseMotion() const;
 
 	private:
-		std::unordered_map<int, bool> m_keyPressedEvents;
-		std::unordered_map<int, bool> m_keyReleasedEvents;
-		std::unordered_map<int, bool> m_keyStates;
+		std::unordered_map<EKey, bool> m_keyPressedEvents;
+		std::unordered_map<EKey, bool> m_keyReleasedEvents;
+		std::unordered_map<EKey, bool> m_keyStates;
 
 		std::pair<int, int> m_cursorPosition;
 		std::pair<int, int> m_mouseMotion;

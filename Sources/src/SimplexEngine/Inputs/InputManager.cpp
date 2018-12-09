@@ -26,10 +26,12 @@ void SimplexEngine::Inputs::InputManager::Update()
 
 	for (int i = 0; i < keyCount; ++i)
 	{
+		EKey key = static_cast<EKey>(i);
+
 		bool keyState = keyboardState[i];
-		m_keyPressedEvents[i] = keyState && !m_keyStates[i];	/* The key wasn't pressed and is now pressed */
-		m_keyReleasedEvents[i] = !keyState && m_keyStates[i];	/* The key was pressed and is now not pressed */
-		m_keyStates[i] = keyState;								/* Save the current state of the key (True for pressed, false for realeased) */
+		m_keyPressedEvents[key] = keyState && !m_keyStates[key];	/* The key wasn't pressed and is now pressed */
+		m_keyReleasedEvents[key] = !keyState && m_keyStates[key];	/* The key was pressed and is now not pressed */
+		m_keyStates[key] = keyState;								/* Save the current state of the key (True for pressed, false for realeased) */
 	}
 
 	SDL_GetMouseState(&m_cursorPosition.first, &m_cursorPosition.second);
@@ -52,24 +54,24 @@ bool SimplexEngine::Inputs::InputManager::IsMouseLocked() const
 	return SDL_GetRelativeMouseMode() == SDL_TRUE;
 }
 
-bool SimplexEngine::Inputs::InputManager::IsKeyDown(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::IsKeyDown(EKey p_key) const
 {
-	return m_keyStates.at(p_keyCode);
+	return m_keyStates.at(p_key);
 }
 
-bool SimplexEngine::Inputs::InputManager::IsKeyUp(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::IsKeyUp(EKey p_key) const
 {
-	return !m_keyStates.at(p_keyCode);
+	return !m_keyStates.at(p_key);
 }
 
-bool SimplexEngine::Inputs::InputManager::HasKeyBeenPressed(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::HasKeyBeenPressed(EKey p_key) const
 {
-	return m_keyPressedEvents.at(p_keyCode);
+	return m_keyPressedEvents.at(p_key);
 }
 
-bool SimplexEngine::Inputs::InputManager::HasKeyBeenReleased(int p_keyCode) const
+bool SimplexEngine::Inputs::InputManager::HasKeyBeenReleased(EKey p_key) const
 {
-	return m_keyReleasedEvents.at(p_keyCode);
+	return m_keyReleasedEvents.at(p_key);
 }
 
 const std::pair<int, int>& SimplexEngine::Inputs::InputManager::GetCursorPosition() const

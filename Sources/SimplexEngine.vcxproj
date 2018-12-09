@@ -274,6 +274,7 @@ xcopy "$(SolutionDir)resources\*" "$(SolutionDir)..\Build\$(Configuration)-$(Pla
     <ClInclude Include="include\SimplexEngine\Components\AActorComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\CameraComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
+    <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
     <ClInclude Include="include\SimplexEngine\Windowing\EWindowState.h" />
     <ClInclude Include="include\SimplexEngine\Eventing\EventHandler.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\InputManager.h" />

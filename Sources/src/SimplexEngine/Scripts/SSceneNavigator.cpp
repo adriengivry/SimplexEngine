@@ -14,9 +14,9 @@ SimplexEngine::Scripts::SSceneNavigator::SSceneNavigator(Scenes::SceneManager & 
 
 void SimplexEngine::Scripts::SSceneNavigator::Update(float p_deltaTime)
 {
-	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_1))
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_1))
 		m_sceneManager.LoadScene("Default");
 
-	if (m_inputManager.HasKeyBeenPressed(SDL_SCANCODE_2))
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_1))
 		m_sceneManager.LoadScene("Test");
 }
