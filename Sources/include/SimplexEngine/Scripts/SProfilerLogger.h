@@ -7,7 +7,7 @@
 #include "SimplexEngine/Scripts/IScript.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Core/InputManager.h"
-#include "SimplexEngine/Core/UserInterface.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 
 #pragma once
 #ifndef _SPROFILERLOGGER_H
@@ -25,7 +25,7 @@ namespace SimplexEngine::Scripts
 		* Constructor of the script
 		* @param p_profiler
 		*/
-		SProfilerLogger(Analytics::Profiler& p_profiler, const Core::InputManager& p_inputManager, Core::UserInterface& p_userInterface);
+		SProfilerLogger(Analytics::Profiler& p_profiler, const Core::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface);
 
 		/**
 		* Update the script
@@ -43,7 +43,7 @@ namespace SimplexEngine::Scripts
 	private:
 		const Core::InputManager& m_inputManager;
 		Analytics::Profiler& m_profiler;
-		Core::UserInterface& m_userInterface;
+		Rendering::UserInterface& m_userInterface;
 
 		Analytics::ProfilerReport m_report;
 

@@ -11,7 +11,6 @@
 #include <vector>
 
 #include "SimplexEngine/Data/Vertex.h"
-#include "SimplexEngine/Data/EPrimitive.h"
 
 namespace SimplexEngine::Resources
 {

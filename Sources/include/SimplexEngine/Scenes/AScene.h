@@ -16,7 +16,7 @@
 #include "SimplexEngine/Core/InputManager.h"
 #include "SimplexEngine/Core/EApplicationState.h"
 #include "SimplexEngine/Rendering/Renderer.h"
-#include "SimplexEngine/Core/UserInterface.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Utils/Clock.h"
@@ -58,7 +58,7 @@ namespace SimplexEngine::Scenes
 			Core::EventHandler&					p_eventHandler,
 			Core::InputManager&					p_inputManager,
 			Rendering::Renderer&						p_renderer,
-			Core::UserInterface&				p_userInterface,
+			Rendering::UserInterface&				p_userInterface,
 			Rendering::Rasterizer&					p_rasterBoy,
 			Analytics::Profiler&				p_profiler,
 			Utils::Clock&						p_clock,
@@ -117,7 +117,7 @@ namespace SimplexEngine::Scenes
 		Core::EventHandler&					m_eventHandler;
 		Core::InputManager&					m_inputManager;
 		Rendering::Renderer&						m_renderer;
-		Core::UserInterface&				m_userInterface;
+		Rendering::UserInterface&				m_userInterface;
 		Rendering::Rasterizer&					m_rasterBoy;
 		Analytics::Profiler&				m_profiler;
 		Utils::Clock&						m_clock;

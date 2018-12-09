@@ -15,7 +15,7 @@
 								SimplexEngine::Core::EventHandler&					p_eventHandler,\
 								SimplexEngine::Core::InputManager&					p_inputManager,\
 								SimplexEngine::Rendering::Renderer&						p_renderer,\
-								SimplexEngine::Core::UserInterface&				p_userInterface,\
+								SimplexEngine::Rendering::UserInterface&				p_userInterface,\
 								SimplexEngine::Rendering::Rasterizer&					p_rasterBoy,\
 								SimplexEngine::Analytics::Profiler&				p_profiler,\
 								SimplexEngine::Utils::Clock&						p_clock,\

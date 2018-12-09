@@ -5,7 +5,7 @@
 */
 
 #include "SimplexEngine/Scripts/IScript.h"
-#include "SimplexEngine/Core/UserInterface.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 
 #pragma once
 #ifndef _SFPSCOUNTER_H
@@ -23,7 +23,7 @@ namespace SimplexEngine::Scripts
 		* Constructor of the script
 		* @p_userInterface
 		*/
-		SFPSCounter(Core::UserInterface& p_userInterface);
+		SFPSCounter(Rendering::UserInterface& p_userInterface);
 
 		/**
 		* Update the script
@@ -37,7 +37,7 @@ namespace SimplexEngine::Scripts
 		void ShowFPS();
 
 	private:
-		Core::UserInterface& m_userInterface;
+		Rendering::UserInterface& m_userInterface;
 
 		float m_logTimer;
 		float m_logFrequency;

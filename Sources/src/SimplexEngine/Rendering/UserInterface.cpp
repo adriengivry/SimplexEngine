@@ -4,9 +4,9 @@
 * @version 1.0
 */
 
-#include "SimplexEngine/Core/UserInterface.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 
-SimplexEngine::Core::UserInterface::UserInterface(const Core::Window& p_window, const Rendering::Renderer& p_renderer) :
+SimplexEngine::Rendering::UserInterface::UserInterface(const Core::Window& p_window, const Rendering::Renderer& p_renderer) :
 	m_window(p_window),
 	m_renderer(p_renderer),
 	width(m_window.GetWidth()),
@@ -21,12 +21,12 @@ SimplexEngine::Core::UserInterface::UserInterface(const Core::Window& p_window, 
 	LoadFonts();
 }
 
-void SimplexEngine::Core::UserInterface::AddText(const Data::Text & p_text)
+void SimplexEngine::Rendering::UserInterface::AddText(const Data::Text & p_text)
 {
 	m_texts.push(p_text);
 }
 
-void SimplexEngine::Core::UserInterface::Draw()
+void SimplexEngine::Rendering::UserInterface::Draw()
 {
 	while (!m_texts.empty())
 	{
@@ -37,7 +37,7 @@ void SimplexEngine::Core::UserInterface::Draw()
 	}
 }
 
-void SimplexEngine::Core::UserInterface::LoadFonts()
+void SimplexEngine::Rendering::UserInterface::LoadFonts()
 {
 	const char* fontPath = "resources/fonts/arial.ttf";
 	m_smallFont = TTF_OpenFont(fontPath, 12);

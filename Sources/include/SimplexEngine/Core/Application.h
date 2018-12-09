@@ -14,7 +14,7 @@
 #include "SimplexEngine/Core/InputManager.h"
 #include "SimplexEngine/Core/EApplicationState.h"
 #include "SimplexEngine/Rendering/Renderer.h"
-#include "SimplexEngine/Core/UserInterface.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Core/SceneManager.h"
 
@@ -104,7 +104,7 @@ namespace SimplexEngine::Core
 		SimplexEngine::Core::EventHandler m_eventHandler;
 		SimplexEngine::Core::InputManager m_inputManager;
 		SimplexEngine::Rendering::Renderer m_renderer;
-		SimplexEngine::Core::UserInterface m_userInterface;
+		SimplexEngine::Rendering::UserInterface m_userInterface;
 		SimplexEngine::Rendering::Rasterizer m_rasterBoy;
 		SimplexEngine::Core::SceneManager m_sceneManager;
 		SimplexEngine::Analytics::Profiler m_profiler;

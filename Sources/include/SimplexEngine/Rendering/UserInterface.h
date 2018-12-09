@@ -17,7 +17,7 @@
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Data/Text.h"
 
-namespace SimplexEngine::Core
+namespace SimplexEngine::Rendering
 {
 	/**
 	* A simple class using SDL_ttf to render things on screens

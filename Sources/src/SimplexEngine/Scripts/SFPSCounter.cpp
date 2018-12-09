@@ -9,7 +9,7 @@
 #include "SimplexEngine/Scripts/SFPSCounter.h"
 #include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::SFPSCounter::SFPSCounter(Core::UserInterface& p_userInterface) :
+SimplexEngine::Scripts::SFPSCounter::SFPSCounter(Rendering::UserInterface& p_userInterface) :
 	m_userInterface(p_userInterface),
 	m_logTimer(Utils::IniIndexer::Application->Get<float>("fps_log_frequency")),
 	m_logFrequency(Utils::IniIndexer::Application->Get<float>("fps_log_frequency")),
