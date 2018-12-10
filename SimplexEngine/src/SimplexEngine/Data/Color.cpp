@@ -17,6 +17,27 @@ const SimplexEngine::Data::Color SimplexEngine::Data::Color::Magenta = Color{ 25
 
 SimplexEngine::Data::Color::Color(uint8_t p_r, uint8_t p_g, uint8_t p_b, uint8_t p_a) : r(p_r), g(p_g), b(p_b), a(p_a) {}
 
+SimplexEngine::Data::Color::Color(const glm::vec4 & p_normalizedColor) :
+	Color
+	(
+		static_cast<uint8_t>(p_normalizedColor.x * 255.0f),
+		static_cast<uint8_t>(p_normalizedColor.y * 255.0f),
+		static_cast<uint8_t>(p_normalizedColor.z * 255.0f),
+		static_cast<uint8_t>(p_normalizedColor.w * 255.0f)
+	)
+{
+}
+
+SimplexEngine::Data::Color::Color(const glm::vec3 & p_normalizedColor) :
+	Color
+	(
+		static_cast<uint8_t>(p_normalizedColor.x * 255.0f),
+		static_cast<uint8_t>(p_normalizedColor.y * 255.0f),
+		static_cast<uint8_t>(p_normalizedColor.z * 255.0f)
+	)
+{
+}
+
 std::tuple<float, float, float, float> SimplexEngine::Data::Color::GetNormalized() const
 {
 	return std::make_tuple(r / 255.f, g / 255.f, b / 255.f, a / 255.f);

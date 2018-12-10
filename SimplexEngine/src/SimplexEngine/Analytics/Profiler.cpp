@@ -23,37 +23,6 @@ SimplexEngine::Analytics::Profiler::Profiler()
 	__ENABLED = false;
 }
 
-void SimplexEngine::Analytics::Profiler::Log()
-{
-	std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - m_lastTime;
-
-	std::multimap<double, std::string> sortedHistory;
-
-	std::cout << "---- [Profiler Stats] ----" << std::endl;
-
-	std::cout << "TOTAL ELAPSED TIME: " << elapsed.count() << "s" << std::endl;
-
-	/* Fill the sorted history with the current history (Auto sort) */
-	for (auto& data : __ELPASED_HISTORY)
-		sortedHistory.insert(std::pair<double, std::string>(data.second, data.first));
-
-	/* Log the history the console */
-	for (auto& data : sortedHistory)
-	{
-		std::string action = data.second;
-		std::string duration = std::to_string(data.first) + "s";
-		std::string percentage = std::to_string((data.first / elapsed.count()) * 100.0) + "%";
-		std::string calls = std::to_string(__CALLS_COUNTER[data.second]);
-
-		std::cout << "METHOD:"			+ action		<< std::endl;
-		std::cout << "    DURATION:"	+ duration		<< std::endl;
-		std::cout << "    PERCENTAGE:"	+ percentage	<< std::endl;
-		std::cout << "    CALLS:"		+ calls			<< std::endl;
-
-		std::cout << std::endl;
-	}	
-}
-
 SimplexEngine::Analytics::ProfilerReport SimplexEngine::Analytics::Profiler::GenerateReport()
 {
 	ProfilerReport report;

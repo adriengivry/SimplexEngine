@@ -18,6 +18,7 @@
 
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Data/Vertex.h"
+#include "SimplexEngine/Data/Color.h"
 
 namespace SimplexEngine::Shaders
 {
@@ -40,7 +41,7 @@ namespace SimplexEngine::Shaders
 		/**
 		* Process a fragment
 		*/
-		glm::vec3 ProcessFragment();
+		Data::Color ProcessFragment();
 
 		/**
 		* The vertex modifier is where the vertex is modified.

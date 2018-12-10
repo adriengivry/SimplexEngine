@@ -109,7 +109,7 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 	if (cameraToUse)
 	{
 		/* Use as much threads as possible */
-		uint8_t threadsToUse = std::thread::hardware_concurrency();
+		uint8_t threadsToUse = 1;
 
 		std::vector<std::thread> regionThreads;
 

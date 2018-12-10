@@ -32,11 +32,6 @@ namespace SimplexEngine::Analytics
 		Profiler();
 
 		/**
-		* Print collected data to the console
-		*/
-		void Log();
-
-		/**
 		* Generate a report containing data about the last profiling session
 		*/
 		ProfilerReport GenerateReport();

@@ -88,9 +88,10 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragments(Shaders::AShader& p_
 
 void SimplexEngine::Rendering::Rasterizer::ComputeFragment(std::pair<int32_t, int32_t> p_pixelCoordinates, float p_depth, const glm::vec3& p_barycentricCoordinates, Shaders::AShader & p_shader)
 {
+	PROFILER_SPY("Rasterizer::ComputeFragment");
+
 	p_shader.ProcessInterpolation(p_barycentricCoordinates);
-	glm::vec3 fragment = p_shader.FragmentModifier() * 255.0f;
-	m_rasterizationOutputBuffer.SetPixel(p_pixelCoordinates.first, p_pixelCoordinates.second, { static_cast<uint8_t>(fragment.x), static_cast<uint8_t>(fragment.y), static_cast<uint8_t>(fragment.z) });
+	m_rasterizationOutputBuffer.SetPixel(p_pixelCoordinates.first, p_pixelCoordinates.second, p_shader.ProcessFragment());
 	m_depthBuffer.SetElement(p_pixelCoordinates.first, p_pixelCoordinates.second, p_depth);
 }
 

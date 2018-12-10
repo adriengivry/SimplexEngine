@@ -11,6 +11,8 @@
 #include <stdint.h>
 #include <tuple>
 
+#include <glm/glm.hpp>
+
 #include "SimplexEngine/API/Export.h"
 
 namespace SimplexEngine::Data
@@ -37,6 +39,18 @@ namespace SimplexEngine::Data
 		* @param p_a (Alpha value [0 to 255])
 		*/
 		Color(uint8_t p_r = 0, uint8_t p_g = 0, uint8_t p_b = 0, uint8_t p_a = 255);
+
+		/**
+		* Create a color from normalized color
+		* @param p_normalizedColor
+		*/
+		Color(const glm::vec4& p_normalizedColor);
+
+		/**
+		* Create a color from normalized color (Alpha set to 255)
+		* @param p_normalizedColor
+		*/
+		Color(const glm::vec3& p_normalizedColor);
 
 		uint8_t r;
 		uint8_t g;

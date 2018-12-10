@@ -76,7 +76,7 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ShowAction(const Analytics::ProfilerReport::Action & p_action, int16_t yOffset)
 {
 	std::string textContent1 = "[" + p_action.name + "]";
-	std::string textContent2 = std::to_string(p_action.duration) + "s (total) | " + std::to_string(p_action.duration / p_action.calls) + "s (average) | " + std::to_string(p_action.percentage) + "% | " + std::to_string(p_action.calls) + " calls";
+	std::string textContent2 = std::to_string(p_action.duration) + "s (total) | " + std::to_string(p_action.duration / p_action.calls) + "s (per call) | " + std::to_string(p_action.percentage) + "% | " + std::to_string(p_action.calls) + " calls";
 	std::pair<int16_t, int16_t> position = m_userInterface.topLeftAnchor;
 
 	Data::Color textColor;
