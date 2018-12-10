@@ -28,37 +28,37 @@ void SimplexEngine::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_ba
 
 	for (const auto&[key, value] : m_varying[0])
 	{
-		if (std::get_if<glm::vec3>(&m_varying[0][key]))
+		if (auto data = std::get_if<glm::vec3>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<glm::vec3>(m_varying[0][key]), std::get<glm::vec3>(m_varying[0][key]), std::get<glm::vec3>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<glm::vec3>(m_varying[1].at(key)), std::get<glm::vec3>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<glm::vec4>(&m_varying[0][key]))
+		else if (auto data = std::get_if<glm::vec4>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<glm::vec4>(m_varying[0][key]), std::get<glm::vec4>(m_varying[0][key]), std::get<glm::vec4>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<glm::vec4>(m_varying[1].at(key)), std::get<glm::vec4>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<float>(&m_varying[0][key]))
+		else if (auto data = std::get_if<float>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<float>(m_varying[0][key]), std::get<float>(m_varying[0][key]), std::get<float>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<float>(m_varying[1].at(key)), std::get<float>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<glm::vec2>(&m_varying[0][key]))
+		else if (auto data = std::get_if<glm::vec2>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<glm::vec2>(m_varying[0][key]), std::get<glm::vec2>(m_varying[0][key]), std::get<glm::vec2>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<glm::vec2>(m_varying[1].at(key)), std::get<glm::vec2>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<int>(&m_varying[0][key]))
+		else if (auto data = std::get_if<int>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<int>(m_varying[0][key]), std::get<int>(m_varying[0][key]), std::get<int>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<int>(m_varying[1].at(key)), std::get<int>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<glm::mat3>(&m_varying[0][key]))
+		else if (auto data = std::get_if<glm::mat3>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<glm::mat3>(m_varying[0][key]), std::get<glm::mat3>(m_varying[0][key]), std::get<glm::mat3>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<glm::mat3>(m_varying[1].at(key)), std::get<glm::mat3>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<glm::mat4>(&m_varying[0][key]))
+		else if (auto data = std::get_if<glm::mat4>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<glm::mat4>(m_varying[0][key]), std::get<glm::mat4>(m_varying[0][key]), std::get<glm::mat4>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<glm::mat4>(m_varying[1].at(key)), std::get<glm::mat4>(m_varying[2].at(key)), p_barycentricCoords);
 		}
-		else if (std::get_if<glm::mat2>(&m_varying[0][key]))
+		else if (auto data = std::get_if<glm::mat2>(&m_varying[0].at(key)); data)
 		{
-			InterpolateData(key, std::get<glm::mat2>(m_varying[0][key]), std::get<glm::mat2>(m_varying[0][key]), std::get<glm::mat2>(m_varying[0][key]), p_barycentricCoords);
+			InterpolateData(key, *data, std::get<glm::mat2>(m_varying[1].at(key)), std::get<glm::mat2>(m_varying[2].at(key)), p_barycentricCoords);
 		}
 	}
 }

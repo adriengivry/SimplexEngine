@@ -45,5 +45,5 @@ std::tuple<float, float, float, float> SimplexEngine::Data::Color::GetNormalized
 
 uint32_t SimplexEngine::Data::Color::Pack() const
 {
-	return (b << 24) | (g << 16) | (r << 8) | a;
+	return (r << 24) | (g << 16) | (b << 8) | a;
 }

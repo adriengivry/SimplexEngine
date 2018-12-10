@@ -106,8 +106,10 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragment(const std::pair<int32
 
 	p_shader.ProcessInterpolation(p_barycentricCoordinates);
 
-	m_rasterizationOutputBuffer.SetPixel(p_pixelCoordinates.first, p_pixelCoordinates.second, p_shader.ProcessFragment());
-	m_depthBuffer.SetElement(p_pixelCoordinates.first, p_pixelCoordinates.second, p_depth);
+	uint32_t index = p_pixelCoordinates.second * m_rasterizationOutputBuffer.width + p_pixelCoordinates.first;
+
+	m_rasterizationOutputBuffer.data[index] = p_shader.ProcessFragment().Pack();
+	m_depthBuffer.data[index] = p_depth;
 }
 
 void SimplexEngine::Rendering::Rasterizer::ConvertToRasterSpace(glm::vec4& p_vertex) const
