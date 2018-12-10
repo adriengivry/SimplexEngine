@@ -217,6 +217,13 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
   <ItemGroup>
     <ClInclude Include="include\Example\Scenes\DemoScene.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="config\controls.ini" />
+    <None Include="config\engine.ini" />
+    <None Include="config\rendering.ini" />
+    <None Include="config\resources\meshes.cfg" />
+    <None Include="config\window.ini" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
