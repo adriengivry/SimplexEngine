@@ -9,6 +9,7 @@
 #define _RASTERBOY_H
 
 #include <array>
+#include <mutex>
 
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"

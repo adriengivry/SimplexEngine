@@ -78,10 +78,18 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragments(Shaders::AShader& p_
 
 	/* Here we iterate over the bounding box (Clamped to window size) */
 	for (int32_t x = std::max(0, xmin); x < std::min(xmax, m_window.GetWidthSigned()); ++x)
+	{
 		for (int32_t y = std::max(0, ymin); y < std::min(ymax, m_window.GetHeightSigned()); ++y)
-			if (glm::vec3 barycentricCoords = p_triangle.GetBarycentricCoordinates({ x, y }); BarycentricCoordsAreValid(barycentricCoords))	/* Is the point in triangle bounds? */
-				if (float depth = CalculatePixelDepth(p_transformedVertices, barycentricCoords); depth <= m_depthBuffer.GetElement(x, y))		/* Is the depth of the point small enough? */
-					ComputeFragment({ x, y }, depth, barycentricCoords, p_shader);
+		{
+			if (glm::vec3 barycentricCoords = p_triangle.GetBarycentricCoordinates({ x, y }); BarycentricCoordsAreValid(barycentricCoords))
+			{
+				float depth = CalculatePixelDepth(p_transformedVertices, barycentricCoords);
+
+				if (depth <= m_depthBuffer.GetElement(x, y))
+					ComputeFragment({ x, y }, depth, barycentricCoords, p_shader);				
+			}
+		}
+	}
 
 	++m_rasterizedTriangles;
 }
@@ -91,6 +99,7 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragment(std::pair<int32_t, in
 	PROFILER_SPY("Rasterizer::ComputeFragment");
 
 	p_shader.ProcessInterpolation(p_barycentricCoordinates);
+
 	m_rasterizationOutputBuffer.SetPixel(p_pixelCoordinates.first, p_pixelCoordinates.second, p_shader.ProcessFragment());
 	m_depthBuffer.SetElement(p_pixelCoordinates.first, p_pixelCoordinates.second, p_depth);
 }
