@@ -8,6 +8,11 @@
 
 SimplexEngine::Maths::Triangle2D::Triangle2D(const glm::vec2& p_vertex1, const glm::vec2& p_vertex2, const glm::vec2& p_vertex3) : m_vertices{ p_vertex1, p_vertex2, p_vertex3 } {}
 
+const glm::vec2 & SimplexEngine::Maths::Triangle2D::operator[](uint32_t p_index) const
+{
+	return m_vertices[p_index];
+}
+
 void SimplexEngine::Maths::Triangle2D::PreComputeBarycentric()
 {
 	m_V0 = glm::vec2(m_vertices[2].x - m_vertices[0].x, m_vertices[2].y - m_vertices[0].y);

@@ -34,6 +34,12 @@ namespace SimplexEngine::Maths
 		Triangle2D(const glm::vec2& p_vertex1, const glm::vec2& p_vertex2, const glm::vec2& p_vertex3);
 
 		/**
+		* Access a vertex of the triangle
+		* @param p_index
+		*/
+		const glm::vec2& operator[](uint32_t p_index) const;
+
+		/**
 		* Update barycentric
 		*/
 		void PreComputeBarycentric();

@@ -5,15 +5,16 @@
 */
 
 #pragma once
-#ifndef _ERASTERIZATIONMODE_H
-#define _ERASTERIZATIONMODE_H
+#ifndef _ERASTERIZATIONCULLINGMODE_H
+#define _ERASTERIZATIONCULLINGMODE_H
 
 namespace SimplexEngine::Rendering
 {
-	enum class ERasterizationMode
+	enum class ERasterizationCullingMode
 	{
-		DEFAULT,
-		WIREFRAME
+		DISABLED,
+		BACKFACE,
+		FRONTFACE
 	};
 }
 

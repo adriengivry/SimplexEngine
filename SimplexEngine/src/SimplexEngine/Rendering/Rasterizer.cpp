@@ -6,6 +6,7 @@
 
 #include <algorithm>
 #include <functional>
+#include <iostream>
 
 #include <glm/gtc/matrix_inverse.hpp>
 
@@ -18,18 +19,30 @@ SimplexEngine::Rendering::Rasterizer::Rasterizer(const Windowing::Window& p_wind
 	m_window(p_window),
 	m_depthBuffer(m_window.GetWidth(), m_window.GetHeight()),
 	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), m_window.GetWidth(), m_window.GetHeight(), SDL_PIXELFORMAT_ABGR32, 1),
-	m_rasterizationMode(ERasterizationMode::DEFAULT)
+	m_rasterizationDrawMode(ERasterizationDrawMode::DEFAULT),
+	m_rasterizationCullingMode(ERasterizationCullingMode::BACKFACE),
+	m_limitTriangleRasterization(false)
 {
 }
 
-void SimplexEngine::Rendering::Rasterizer::SetRasterizationMode(ERasterizationMode p_newMode)
+void SimplexEngine::Rendering::Rasterizer::SetRasterizationDrawMode(ERasterizationDrawMode p_drawMode)
 {
-	m_rasterizationMode = p_newMode;
+	m_rasterizationDrawMode = p_drawMode;
 }
 
-SimplexEngine::Rendering::ERasterizationMode SimplexEngine::Rendering::Rasterizer::GetRasterizationMode()
+SimplexEngine::Rendering::ERasterizationDrawMode SimplexEngine::Rendering::Rasterizer::GetRasterizationDrawMode()
 {
-	return m_rasterizationMode;
+	return m_rasterizationDrawMode;
+}
+
+void SimplexEngine::Rendering::Rasterizer::SetRasterizationCullingwMode(ERasterizationCullingMode p_cullingMode)
+{
+	m_rasterizationCullingMode = p_cullingMode;
+}
+
+SimplexEngine::Rendering::ERasterizationCullingMode SimplexEngine::Rendering::Rasterizer::GetRasterizationCullingMode()
+{
+	return m_rasterizationCullingMode;
 }
 
 void SimplexEngine::Rendering::Rasterizer::ResetRasterizedTrianglesCount()
@@ -62,22 +75,28 @@ void SimplexEngine::Rendering::Rasterizer::RasterizeTriangle(const std::array<Da
 	/* Convert vertices to raster space (Pixel coordinates) */
 	std::for_each(transformedVertices.begin(), transformedVertices.end(), std::bind(&Rasterizer::ConvertToRasterSpace, this, std::placeholders::_1));
 
-	if (m_rasterizationMode == ERasterizationMode::WIREFRAME)
-	{
-		/* Draw the triangle in wireframe mode (No shader computation) */
-		RasterizeLine(transformedVertices[0], transformedVertices[1], Data::Color::Red);
-		RasterizeLine(transformedVertices[1], transformedVertices[2], Data::Color::Red);
-		RasterizeLine(transformedVertices[2], transformedVertices[0], Data::Color::Red);
-	}
-	else
-	{
-		/* Create a 2D triangle to automate computations (Bouding box, point position check) */
-		Maths::Triangle2D triangle(transformedVertices[0], transformedVertices[1], transformedVertices[2]);
+	/* Create a 2D triangle to automate computations (Bouding box, point position check) */
+	Maths::Triangle2D triangle(transformedVertices[0], transformedVertices[1], transformedVertices[2]);
 
-		/* Backface culling (Clock-wise) */
-		if (triangle.GetArea() < 0.0f)
+	if (IsCullingModeSatisfied(triangle))
+	{
+		switch (m_rasterizationDrawMode)
+		{
+		case SimplexEngine::Rendering::ERasterizationDrawMode::DEFAULT:
 			ComputeFragments(p_shader, transformedVertices, triangle);
+			break;
+		case SimplexEngine::Rendering::ERasterizationDrawMode::WIREFRAME:
+			RasterizeTriangleWireframe(triangle, Data::Color::White);
+			break;
+		}
 	}
+}
+
+void SimplexEngine::Rendering::Rasterizer::RasterizeTriangleWireframe(const Maths::Triangle2D & p_triangle, const Data::Color & p_color)
+{
+	RasterizeLine(p_triangle[0], p_triangle[1], p_color);
+	RasterizeLine(p_triangle[1], p_triangle[2], p_color);
+	RasterizeLine(p_triangle[2], p_triangle[0], p_color);
 }
 
 void SimplexEngine::Rendering::Rasterizer::RasterizeLine(const glm::vec2& p_start, const glm::vec2& p_end, const Data::Color& p_color)
@@ -178,6 +197,20 @@ bool SimplexEngine::Rendering::Rasterizer::BarycentricCoordsAreValid(const glm::
 float SimplexEngine::Rendering::Rasterizer::CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3 & p_barycentricCoords) const
 {
 	return p_vertices[0].z * p_barycentricCoords.z + p_vertices[2].z * p_barycentricCoords.x + p_barycentricCoords.y * p_vertices[1].z;
+}
+
+bool SimplexEngine::Rendering::Rasterizer::IsCullingModeSatisfied(const Maths::Triangle2D & p_triangle)
+{
+	/* Backface culling (Clock-wise) */
+
+	switch (m_rasterizationCullingMode)
+	{
+	case ERasterizationCullingMode::DISABLED:	return true;
+	case ERasterizationCullingMode::BACKFACE:	return p_triangle.GetArea() < 0.0f;
+	case ERasterizationCullingMode::FRONTFACE:	return p_triangle.GetArea() >= 0.0f;
+	}
+
+	return true;
 }
 
 bool SimplexEngine::Rendering::Rasterizer::CanRasterize() const

@@ -35,9 +35,14 @@ namespace SimplexEngine::Scripts::GlobalScripts
 		void Update(float p_deltaTime);
 
 		/**
-		* Determine the rasterization mode following the current one
+		* Determine the rasterization draw mode following the current one
 		*/
-		Rendering::ERasterizationMode FindNextMode();
+		Rendering::ERasterizationDrawMode FindNextDrawMode();
+
+		/**
+		* Determine the rasterization culling mode following the current one
+		*/
+		Rendering::ERasterizationCullingMode FindNextCullingMode();
 
 	private:
 		Rendering::Rasterizer& m_rasterizer;

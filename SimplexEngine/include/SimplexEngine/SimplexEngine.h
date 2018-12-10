@@ -59,7 +59,8 @@
 #include "SimplexEngine/Maths/Triangle2D.h"
 
 /* Rendering */
-#include "SimplexEngine/Rendering/ERasterizationMode.h"
+#include "SimplexEngine/Rendering/ERasterizationDrawMode.h"
+#include "SimplexEngine/Rendering/ERasterizationCullingMode.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"

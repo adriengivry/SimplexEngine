@@ -14,7 +14,8 @@
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
-#include "SimplexEngine/Rendering/ERasterizationMode.h"
+#include "SimplexEngine/Rendering/ERasterizationDrawMode.h"
+#include "SimplexEngine/Rendering/ERasterizationCullingMode.h"
 #include "SimplexEngine/Buffers/DepthBuffer.h"
 #include "SimplexEngine/Buffers/TextureBuffer.h"
 #include "SimplexEngine/Resources/Mesh.h"
@@ -37,15 +38,26 @@ namespace SimplexEngine::Rendering
 		Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer);
 
 		/**
-		* Modify the current rasterization mode
-		* @param p_newMode
+		* Modify the current rasterization draw mode
+		* @param p_drawMode
 		*/
-		void SetRasterizationMode(ERasterizationMode p_newMode);
+		void SetRasterizationDrawMode(ERasterizationDrawMode p_drawMode);
+
+		/**
+		* Return the current rasterization draw mode
+		*/
+		ERasterizationDrawMode GetRasterizationDrawMode();
+
+		/**
+		* Modify the current rasterization culling mode
+		* @param p_cullingMode
+		*/
+		void SetRasterizationCullingwMode(ERasterizationCullingMode p_cullingMode);
 
 		/**
 		* Return the current rasterization mode
 		*/
-		ERasterizationMode GetRasterizationMode();
+		ERasterizationCullingMode GetRasterizationCullingMode();
 
 		/**
 		* Reset the rasterized triangle count
@@ -72,6 +84,12 @@ namespace SimplexEngine::Rendering
 		* @param p_shader
 		*/
 		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
+
+		/**
+		* Rasterize a triangle in wireframe mode (Only line)
+		* @param p_triangle
+		*/
+		void RasterizeTriangleWireframe(const Maths::Triangle2D& p_triangle, const Data::Color& p_color);
 
 		/**
 		* Draw a line between the two given points
@@ -127,6 +145,12 @@ namespace SimplexEngine::Rendering
 		float CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3& p_barycentricCoords) const;
 
 		/**
+		* Return true if the current culling mode is satisfied
+		* @param p_triange
+		*/
+		bool IsCullingModeSatisfied(const Maths::Triangle2D& p_triangle);
+
+		/**
 		* Verify is Rasterizer is allow to rasterize
 		*/
 		bool CanRasterize() const;
@@ -160,7 +184,9 @@ namespace SimplexEngine::Rendering
 		Buffers::DepthBuffer m_depthBuffer;
 		Buffers::TextureBuffer m_rasterizationOutputBuffer;
 
-		ERasterizationMode m_rasterizationMode;
+		ERasterizationDrawMode m_rasterizationDrawMode;
+		ERasterizationCullingMode m_rasterizationCullingMode;
+
 		bool m_limitTriangleRasterization;
 		uint64_t m_rasterizedTrianglesLimit;
 		uint64_t m_rasterizedTriangles;

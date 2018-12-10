@@ -16,7 +16,7 @@ int main()
 	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::ProfilerLogger>(engine.profiler, engine.inputManager, engine.userInterface);
 	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::ThreadCap>(engine.threadManager, engine.inputManager);
 	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::HardwareInfo>(engine.userInterface, engine.threadManager);
-	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector>(engine.rasterBoy, engine.inputManager);
+	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector>(engine.rasterizer, engine.inputManager);
 
 	engine.sceneManager.RegisterScene<Example::Scenes::DemoScene>("Demo");
 	engine.sceneManager.LoadScene("Demo");

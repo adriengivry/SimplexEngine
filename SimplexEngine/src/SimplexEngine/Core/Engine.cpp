@@ -23,7 +23,7 @@ SimplexEngine::Core::Engine::Engine() :
 	inputManager(eventHandler),
 	renderer(window),
 	userInterface(window, renderer),
-	rasterBoy(window, renderer),
+	rasterizer(window, renderer),
 	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
 	m_running(true)
@@ -54,13 +54,13 @@ void SimplexEngine::Core::Engine::Update()
 		UpdateSceneScripts(clock.GetDeltaTime());
 
 		/* Rasterization process */
-		rasterBoy.ResetRasterizedTrianglesCount();
-		rasterBoy.ClearBuffers();
+		rasterizer.ResetRasterizedTrianglesCount();
+		rasterizer.ClearBuffers();
 		RasterizeScene();
-		rasterBoy.SendRasterizationOutputBufferToGPU();
+		rasterizer.SendRasterizationOutputBufferToGPU();
 
 		/* Draw the result of the rasterization process to the SDL buffer */
-		renderer.DrawTextureBufferContent(rasterBoy.GetRasterizationOutputBuffer());
+		renderer.DrawTextureBufferContent(rasterizer.GetRasterizationOutputBuffer());
 	}
 
 	/* Draw the UI to the SDL buffer */
@@ -141,7 +141,7 @@ void SimplexEngine::Core::Engine::RasterizeRegion(const Components::CameraCompon
 		if (materialToUse)
 		{
 			materialToUse->UpdateUniforms(p_cameraToUse, currentMesh.get());
-			rasterBoy.RasterizeMesh(*currentMesh.get().GetMesh(), materialToUse->GetShaderInstance());
+			rasterizer.RasterizeMesh(*currentMesh.get().GetMesh(), materialToUse->GetShaderInstance());
 		}
 	}
 }

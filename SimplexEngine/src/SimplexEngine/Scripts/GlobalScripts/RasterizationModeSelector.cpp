@@ -15,10 +15,18 @@ SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector::RasterizationM
 void SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector::Update(float p_deltaTime)
 {
 	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_M))
-		m_rasterizer.SetRasterizationMode(FindNextMode());
+		m_rasterizer.SetRasterizationDrawMode(FindNextDrawMode());
+
+	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_B))
+		m_rasterizer.SetRasterizationCullingwMode(FindNextCullingMode());
 }
 
-SimplexEngine::Rendering::ERasterizationMode SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector::FindNextMode()
+SimplexEngine::Rendering::ERasterizationDrawMode SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector::FindNextDrawMode()
 {
-	return static_cast<Rendering::ERasterizationMode>((static_cast<int>(m_rasterizer.GetRasterizationMode()) + 1) % (static_cast<int>(Rendering::ERasterizationMode::WIREFRAME) + 1));
+	return static_cast<Rendering::ERasterizationDrawMode>((static_cast<int>(m_rasterizer.GetRasterizationDrawMode()) + 1) % (static_cast<int>(Rendering::ERasterizationDrawMode::WIREFRAME) + 1));
+}
+
+SimplexEngine::Rendering::ERasterizationCullingMode SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector::FindNextCullingMode()
+{
+	return static_cast<Rendering::ERasterizationCullingMode>((static_cast<int>(m_rasterizer.GetRasterizationCullingMode()) + 1) % (static_cast<int>(Rendering::ERasterizationCullingMode::FRONTFACE) + 1));
 }

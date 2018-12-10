@@ -318,7 +318,8 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
     <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
-    <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationMode.h" />
+    <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationCullingMode.h" />
+    <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationDrawMode.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\IGlobalScript.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\RasterizationModeSelector.h" />

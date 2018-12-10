@@ -99,7 +99,7 @@ namespace SimplexEngine::Core
 		SimplexEngine::Inputs::InputManager				inputManager;
 		SimplexEngine::Rendering::Renderer				renderer;
 		SimplexEngine::Rendering::UserInterface			userInterface;
-		SimplexEngine::Rendering::Rasterizer			rasterBoy;
+		SimplexEngine::Rendering::Rasterizer			rasterizer;
 		SimplexEngine::Analytics::Profiler				profiler;
 		SimplexEngine::Utils::Clock						clock;
 		SimplexEngine::Threading::ThreadManager			threadManager;

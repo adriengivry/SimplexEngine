@@ -26,7 +26,7 @@ namespace SimplexEngine::Scenes
 		* @param p_inputManager
 		* @param p_renderer
 		* @param p_userInterface
-		* @param p_rasterBoy
+		* @param p_rasterizer
 		* @param p_profiler
 		* @param p_clock
 		* @param p_meshManager
