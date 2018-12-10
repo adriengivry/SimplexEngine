@@ -42,7 +42,7 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 		}
 		else
 		{
-			m_userInterface.AddText({ "Report period duration: " + std::to_string(m_report.elaspedTime) + "s", m_userInterface.topLeftAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White });
+			m_userInterface.AddText({ "Report period duration: " + std::to_string(m_report.elaspedTime) + "s (" + std::to_string(m_report.workingThreads) + " logging threads | " + std::to_string(m_report.elapsedFrames) + " frames)", m_userInterface.topLeftAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White });
 			int16_t yOffset = 15;
 			for (const auto& action : m_report.actions)
 			{
@@ -53,6 +53,10 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 				yOffset += 15;
 			}
 		}
+	}
+	else
+	{
+		m_userInterface.AddText({ "Press [F1] to start profiling", m_userInterface.topLeftAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White });
 	}
 
 	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_F1))

@@ -278,6 +278,8 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Materials\AMaterial.cpp" />
     <ClCompile Include="src\SimplexEngine\Materials\LambertMaterial.cpp" />
     <ClCompile Include="src\SimplexEngine\Maths\Triangle2D.cpp" />
+    <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.cpp" />
+    <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\ThreadCap.cpp" />
     <ClCompile Include="src\SimplexEngine\Shaders\AShader.cpp" />
     <ClCompile Include="src\SimplexEngine\Shaders\NormalShader.cpp" />
     <ClCompile Include="src\SimplexEngine\Scenes\AScene.cpp" />
@@ -290,6 +292,7 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Shaders\LambertShader.cpp" />
     <ClCompile Include="src\SimplexEngine\Inputs\InputManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\Rasterizer.cpp" />
+    <ClCompile Include="src\SimplexEngine\Threading\ThreadManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Tools\EasyAssimp.cpp" />
     <ClCompile Include="src\SimplexEngine\Eventing\EventHandler.cpp" />
     <ClCompile Include="src\SimplexEngine\Windowing\Window.cpp" />
@@ -314,9 +317,12 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
     <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
+    <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\IGlobalScript.h" />
+    <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\ThreadCap.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\ISceneScript.h" />
     <ClInclude Include="include\SimplexEngine\SimplexEngine.h" />
+    <ClInclude Include="include\SimplexEngine\Threading\ThreadManager.h" />
     <ClInclude Include="include\SimplexEngine\Windowing\EWindowState.h" />
     <ClInclude Include="include\SimplexEngine\Eventing\EventHandler.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\InputManager.h" />

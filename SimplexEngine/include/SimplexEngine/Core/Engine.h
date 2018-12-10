@@ -18,6 +18,7 @@
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Scenes/SceneManager.h"
+#include "SimplexEngine/Threading/ThreadManager.h"
 
 /* Analytics */
 #include "SimplexEngine/Analytics/Profiler.h"
@@ -101,6 +102,7 @@ namespace SimplexEngine::Core
 		SimplexEngine::Rendering::Rasterizer			rasterBoy;
 		SimplexEngine::Analytics::Profiler				profiler;
 		SimplexEngine::Utils::Clock						clock;
+		SimplexEngine::Threading::ThreadManager			threadManager;
 		SimplexEngine::Resources::Managers::MeshManager meshManager;
 		SimplexEngine::Scenes::SceneManager				sceneManager;
 

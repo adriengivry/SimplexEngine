@@ -31,6 +31,8 @@ namespace SimplexEngine::Analytics
 		};
 
 		double elaspedTime;
+		uint16_t workingThreads;
+		uint32_t elapsedFrames;
 		std::vector<Action> actions;
 	};
 }

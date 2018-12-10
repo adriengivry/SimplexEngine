@@ -42,6 +42,12 @@ namespace SimplexEngine::Analytics
 		void ClearHistory();
 
 		/**
+		* Update the profiler
+		* @param p_deltaTime
+		*/
+		void Update(float p_deltaTime);
+
+		/**
 		* Save the given spy collected data to the profiler history
 		* @param p_spy (Spy to collect data from)
 		*/
@@ -75,9 +81,11 @@ namespace SimplexEngine::Analytics
 		static bool __ENABLED;
 
 		/* Collected data */
-		static std::mutex __SAVE_MUTEX;
+		static std::mutex									__SAVE_MUTEX;
 		static std::unordered_map<std::string, double>		__ELPASED_HISTORY;
 		static std::unordered_map<std::string, uint64_t>	__CALLS_COUNTER;
+		static std::vector<std::thread::id>					__WORKING_THREADS;
+		static uint32_t										__ELAPSED_FRAMES;
 	};
 }
 

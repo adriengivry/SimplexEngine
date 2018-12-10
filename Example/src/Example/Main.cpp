@@ -4,8 +4,6 @@
 * @version 1.0
 */
 
-#include <thread>
-
 #include <SimplexEngine/SimplexEngine.h>
 
 #include "Example/Scenes/DemoScene.h"
@@ -16,6 +14,8 @@ int main()
 
 	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::FPSCounter>(engine.userInterface);
 	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::ProfilerLogger>(engine.profiler, engine.inputManager, engine.userInterface);
+	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::ThreadCap>(engine.threadManager, engine.inputManager);
+	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::HardwareInfo>(engine.userInterface, engine.threadManager);
 
 	engine.sceneManager.RegisterScene<Example::Scenes::DemoScene>("Demo");
 	engine.sceneManager.LoadScene("Demo");

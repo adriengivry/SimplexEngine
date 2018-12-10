@@ -58,7 +58,7 @@ void SimplexEngine::Rendering::Renderer::DrawText(const std::string & p_text, _T
 	switch (p_verticalAlign)
 	{
 	case Data::ETextVerticalAlignment::ALIGN_BOTTOM:
-		bounds.y += bounds.h;
+		bounds.y -= bounds.h;
 		break;
 
 	case Data::ETextVerticalAlignment::ALIGN_CENTER:

@@ -68,6 +68,9 @@ void SimplexEngine::Core::Engine::Update()
 
 	/* Display SDL buffer content to the screen */
 	renderer.Render();
+
+	/* Analytics */
+	profiler.Update(clock.GetDeltaTime());
 }
 
 bool SimplexEngine::Core::Engine::IsRunning() const
@@ -109,7 +112,7 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 	if (cameraToUse)
 	{
 		/* Use as much threads as possible */
-		uint8_t threadsToUse = 1;
+		uint8_t threadsToUse = threadManager.GetMaximumThread();
 
 		std::vector<std::thread> regionThreads;
 

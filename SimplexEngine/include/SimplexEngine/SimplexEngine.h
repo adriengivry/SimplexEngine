@@ -78,6 +78,8 @@
 #include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
+#include "SimplexEngine/Scripts/GlobalScripts/ThreadCap.h"
+#include "SimplexEngine/Scripts/GlobalScripts/HardwareInfo.h"
 #include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
 #include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
 #include "SimplexEngine/Scripts/SceneScripts/RotateOverTime.h"
@@ -86,6 +88,9 @@
 #include "SimplexEngine/Shaders/AShader.h"
 #include "SimplexEngine/Shaders/LambertShader.h"
 #include "SimplexEngine/Shaders/NormalShader.h"
+
+/* Threading */
+#include "SimplexEngine/Threading/ThreadManager.h"
 
 /* Tools */
 #include "SimplexEngine/Tools/EasyAssimp.h"

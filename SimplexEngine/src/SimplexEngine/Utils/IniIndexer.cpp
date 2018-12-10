@@ -15,7 +15,7 @@ std::unique_ptr<GyvrIni::Core::IniFile> SimplexEngine::Utils::IniIndexer::Contro
 
 SimplexEngine::Utils::IniIndexer::IniIndexer()
 {
-	Engine = std::make_unique<GyvrIni::Core::IniFile>("config/application.ini");
+	Engine = std::make_unique<GyvrIni::Core::IniFile>("config/engine.ini");
 	Window = std::make_unique<GyvrIni::Core::IniFile>("config/window.ini");
 	Rendering = std::make_unique<GyvrIni::Core::IniFile>("config/rendering.ini");
 	Controls = std::make_unique<GyvrIni::Core::IniFile>("config/controls.ini");
