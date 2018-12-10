@@ -76,17 +76,23 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragments(Shaders::AShader& p_
 	/* Getting bounding box from the triangle to prevent iterating over all the screen */
 	auto[xmin, ymin, xmax, ymax] = p_triangle.GetBoundingBox();
 
+	/* Clamp bounding box to window */
+	xmin = std::max(0, xmin);
+	xmax = std::min(xmax, m_window.GetWidthSigned());
+	ymin = std::max(0, ymin);
+	ymax = std::min(ymax, m_window.GetHeightSigned());
+
 	/* Here we iterate over the bounding box (Clamped to window size) */
-	for (int32_t x = std::max(0, xmin); x < std::min(xmax, m_window.GetWidthSigned()); ++x)
+	for (int32_t x = xmin; x < xmax; ++x)
 	{
-		for (int32_t y = std::max(0, ymin); y < std::min(ymax, m_window.GetHeightSigned()); ++y)
+		for (int32_t y = ymin; y < ymax; ++y)
 		{
 			if (glm::vec3 barycentricCoords = p_triangle.GetBarycentricCoordinates({ x, y }); BarycentricCoordsAreValid(barycentricCoords))
 			{
 				float depth = CalculatePixelDepth(p_transformedVertices, barycentricCoords);
 
 				if (depth <= m_depthBuffer.GetElement(x, y))
-					ComputeFragment({ x, y }, depth, barycentricCoords, p_shader);				
+					ComputeFragment({ x, y }, depth, barycentricCoords, p_shader);
 			}
 		}
 	}

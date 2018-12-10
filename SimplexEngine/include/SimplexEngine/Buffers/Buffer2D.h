@@ -50,7 +50,7 @@ namespace SimplexEngine::Buffers
 		* @param p_y
 		* @param p_value
 		*/
-		void SetElement(uint32_t p_x, uint32_t p_y, const T& p_value) { data[p_y * width + p_x] = p_value; }
+		void SetElement(uint32_t p_x, uint32_t p_y, T p_value) { data[p_y * width + p_x] = p_value; }
 
 		/**
 		* Clear the buffer (Fill with 0)
