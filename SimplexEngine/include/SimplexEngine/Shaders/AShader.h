@@ -54,7 +54,7 @@ namespace SimplexEngine::Shaders
 		* The fragment modifier is where every pixels are modified.
 		* It is called after the rasterization stage
 		*/
-		virtual glm::vec3 FragmentModifier() = 0;
+		virtual glm::vec3 FragmentModifier() const = 0;
 
 		/**
 		* Process interpolation for all varying data and output to fragmentData
@@ -81,7 +81,7 @@ namespace SimplexEngine::Shaders
 		* @param p_name
 		*/
 		template<typename T>
-		T GetUniform(const std::string& p_name) { return std::get<T>(m_uniforms[p_name]); }
+		T GetUniform(const std::string& p_name) const { return std::get<T>(m_uniforms.at(p_name)); }
 
 		/**
 		* Set the varying value identified by the given name to p_value
@@ -102,14 +102,14 @@ namespace SimplexEngine::Shaders
 		* @param p_name
 		*/
 		template<typename T>
-		T GetVarying(const std::string& p_name) { return std::get<T>(m_interpolatedVarying[p_name]); }
+		T GetVarying(const std::string& p_name) const { return std::get<T>(m_interpolatedVarying.at(p_name)); }
 
 		/**
 		* Return the flat value identified by the given name
 		* @param p_name
 		*/
 		template<typename T>
-		T GetFlat(const std::string& p_name) { return std::get<T>(m_flat[p_name]); }
+		T GetFlat(const std::string& p_name) const { return std::get<T>(m_flat.at(p_name)); }
 
 		/**
 		* Interpolate an array of data with the given barycentric coordinates

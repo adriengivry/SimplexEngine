@@ -21,7 +21,7 @@ glm::vec4 SimplexEngine::Shaders::LambertShader::VertexModifier(const Data::Vert
 	return vertexWorldPosition;
 }
 
-glm::vec3 SimplexEngine::Shaders::LambertShader::FragmentModifier()
+glm::vec3 SimplexEngine::Shaders::LambertShader::FragmentModifier() const
 {
 	glm::vec3 ambient(0.05f, 0.05f, 0.05f);
 	glm::vec3 position(5, 2, 10);
@@ -31,7 +31,7 @@ glm::vec3 SimplexEngine::Shaders::LambertShader::FragmentModifier()
 	return ambient + diffuse * Lambert(normal, position);
 }
 
-float SimplexEngine::Shaders::LambertShader::Lambert(const glm::vec3 & p_fragmentNormal, const glm::vec3 & p_lightPosition)
+float SimplexEngine::Shaders::LambertShader::Lambert(const glm::vec3 & p_fragmentNormal, const glm::vec3 & p_lightPosition) const
 {
 	glm::vec3 nrmN = glm::normalize(p_fragmentNormal);
 	glm::vec3 nrmL = glm::normalize(p_lightPosition);

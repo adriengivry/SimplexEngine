@@ -84,7 +84,7 @@ namespace SimplexEngine::Rendering
 		* @param p_depth
 		* @param p_shader
 		*/
-		void ComputeFragment(std::pair<int32_t, int32_t> p_pixelCoordinates, float p_depth, const glm::vec3& p_barycentricCoordinates, Shaders::AShader& p_shader);
+		void ComputeFragment(const std::pair<int32_t, int32_t>& p_pixelCoordinates, float p_depth, const glm::vec3& p_barycentricCoordinates, Shaders::AShader& p_shader);
 
 		/**
 		* Convert a vertex to raster space

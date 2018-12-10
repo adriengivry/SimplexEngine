@@ -100,7 +100,7 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragments(Shaders::AShader& p_
 	++m_rasterizedTriangles;
 }
 
-void SimplexEngine::Rendering::Rasterizer::ComputeFragment(std::pair<int32_t, int32_t> p_pixelCoordinates, float p_depth, const glm::vec3& p_barycentricCoordinates, Shaders::AShader & p_shader)
+void SimplexEngine::Rendering::Rasterizer::ComputeFragment(const std::pair<int32_t, int32_t>& p_pixelCoordinates, float p_depth, const glm::vec3& p_barycentricCoordinates, Shaders::AShader & p_shader)
 {
 	PROFILER_SPY("Rasterizer::ComputeFragment");
 
