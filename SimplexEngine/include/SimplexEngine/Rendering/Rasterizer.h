@@ -14,6 +14,7 @@
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
+#include "SimplexEngine/Rendering/ERasterizationMode.h"
 #include "SimplexEngine/Buffers/DepthBuffer.h"
 #include "SimplexEngine/Buffers/TextureBuffer.h"
 #include "SimplexEngine/Resources/Mesh.h"
@@ -34,6 +35,17 @@ namespace SimplexEngine::Rendering
 		* @param p_rendrerer (Needed to create the out buffer because it uses SDL Texture)
 		*/
 		Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer);
+
+		/**
+		* Modify the current rasterization mode
+		* @param p_newMode
+		*/
+		void SetRasterizationMode(ERasterizationMode p_newMode);
+
+		/**
+		* Return the current rasterization mode
+		*/
+		ERasterizationMode GetRasterizationMode();
 
 		/**
 		* Reset the rasterized triangle count
@@ -60,6 +72,14 @@ namespace SimplexEngine::Rendering
 		* @param p_shader
 		*/
 		void RasterizeTriangle(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader);
+
+		/**
+		* Draw a line between the two given points
+		* @param p_start
+		* @param p_end
+		* @param p_color
+		*/
+		void RasterizeLine(const glm::vec2& p_start, const glm::vec2& p_end, const Data::Color& p_color);
 
 		/**
 		* Compute a set of vertices by processing vertex shader on them
@@ -140,6 +160,7 @@ namespace SimplexEngine::Rendering
 		Buffers::DepthBuffer m_depthBuffer;
 		Buffers::TextureBuffer m_rasterizationOutputBuffer;
 
+		ERasterizationMode m_rasterizationMode;
 		bool m_limitTriangleRasterization;
 		uint64_t m_rasterizedTrianglesLimit;
 		uint64_t m_rasterizedTriangles;

@@ -17,8 +17,19 @@
 SimplexEngine::Rendering::Rasterizer::Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer) :
 	m_window(p_window),
 	m_depthBuffer(m_window.GetWidth(), m_window.GetHeight()),
-	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), m_window.GetWidth(), m_window.GetHeight(), SDL_PIXELFORMAT_ABGR32, 1)
+	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), m_window.GetWidth(), m_window.GetHeight(), SDL_PIXELFORMAT_ABGR32, 1),
+	m_rasterizationMode(ERasterizationMode::DEFAULT)
 {
+}
+
+void SimplexEngine::Rendering::Rasterizer::SetRasterizationMode(ERasterizationMode p_newMode)
+{
+	m_rasterizationMode = p_newMode;
+}
+
+SimplexEngine::Rendering::ERasterizationMode SimplexEngine::Rendering::Rasterizer::GetRasterizationMode()
+{
+	return m_rasterizationMode;
 }
 
 void SimplexEngine::Rendering::Rasterizer::ResetRasterizedTrianglesCount()
@@ -51,12 +62,49 @@ void SimplexEngine::Rendering::Rasterizer::RasterizeTriangle(const std::array<Da
 	/* Convert vertices to raster space (Pixel coordinates) */
 	std::for_each(transformedVertices.begin(), transformedVertices.end(), std::bind(&Rasterizer::ConvertToRasterSpace, this, std::placeholders::_1));
 
-	/* Create a 2D triangle to automate computations (Bouding box, point position check) */
-	Maths::Triangle2D triangle(transformedVertices[0], transformedVertices[1], transformedVertices[2]);
+	if (m_rasterizationMode == ERasterizationMode::WIREFRAME)
+	{
+		/* Draw the triangle in wireframe mode (No shader computation) */
+		RasterizeLine(transformedVertices[0], transformedVertices[1], Data::Color::Red);
+		RasterizeLine(transformedVertices[1], transformedVertices[2], Data::Color::Red);
+		RasterizeLine(transformedVertices[2], transformedVertices[0], Data::Color::Red);
+	}
+	else
+	{
+		/* Create a 2D triangle to automate computations (Bouding box, point position check) */
+		Maths::Triangle2D triangle(transformedVertices[0], transformedVertices[1], transformedVertices[2]);
 
-	/* Backface culling (Clock-wise) */
-	if (triangle.GetArea() < 0.0f)
-		ComputeFragments(p_shader, transformedVertices, triangle);
+		/* Backface culling (Clock-wise) */
+		if (triangle.GetArea() < 0.0f)
+			ComputeFragments(p_shader, transformedVertices, triangle);
+	}
+}
+
+void SimplexEngine::Rendering::Rasterizer::RasterizeLine(const glm::vec2& p_start, const glm::vec2& p_end, const Data::Color& p_color)
+{
+	int x0 = (int)p_start.x, y0 = (int)p_start.y, x1 = (int)p_end.x, y1 = (int)p_end.y;
+	int dx = abs(x1 - x0), dy = abs(y1 - y0);
+	int sx = (x0 < x1) ? 1 : -1, sy = (y0 < y1) ? 1 : -1;
+	int err = dx - dy;
+
+	while (true)
+	{
+		if (x0 >= 0 && x0 < (int)m_rasterizationOutputBuffer.width && y0 >= 0 && y0 < (int)m_rasterizationOutputBuffer.height)
+			m_rasterizationOutputBuffer.data[y0 * m_rasterizationOutputBuffer.width + x0] = p_color.Pack();
+
+		if (x0 == x1 && y0 == y1) return;
+		int e2 = (err << 1);
+		if (e2 > -dy)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dx)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
 }
 
 std::array<glm::vec4, 3> SimplexEngine::Rendering::Rasterizer::ComputeVertices(const std::array<Data::Vertex, 3>& p_vertices, Shaders::AShader& p_shader)

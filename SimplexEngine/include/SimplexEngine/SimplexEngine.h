@@ -59,6 +59,7 @@
 #include "SimplexEngine/Maths/Triangle2D.h"
 
 /* Rendering */
+#include "SimplexEngine/Rendering/ERasterizationMode.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
@@ -80,6 +81,7 @@
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ThreadCap.h"
 #include "SimplexEngine/Scripts/GlobalScripts/HardwareInfo.h"
+#include "SimplexEngine/Scripts/GlobalScripts/RasterizationModeSelector.h"
 #include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
 #include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
 #include "SimplexEngine/Scripts/SceneScripts/RotateOverTime.h"
