@@ -22,9 +22,10 @@ namespace SimplexEngine::Scripts::GlobalScripts
 	public:
 		/**
 		* Constructor of the script
-		* @p_userInterface
+		* @param p_userInterface
+		* @param p_updateFrequency
 		*/
-		FPSCounter(Rendering::UserInterface& p_userInterface);
+		FPSCounter(Rendering::UserInterface& p_userInterface, float p_updateFrequency);
 
 		/**
 		* Update the script
@@ -40,8 +41,8 @@ namespace SimplexEngine::Scripts::GlobalScripts
 	private:
 		Rendering::UserInterface& m_userInterface;
 
-		float m_logTimer;
-		float m_logFrequency;
+		float m_updateFrequency;
+		float m_updateTimer;
 		uint16_t m_fps;
 	};
 }

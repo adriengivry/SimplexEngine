@@ -11,6 +11,7 @@
 #include <vector>
 
 #include "SimplexEngine/API/Export.h"
+#include "SimplexEngine/Settings/VideoSettings.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Data/Color.h"
 #include "SimplexEngine/Data/ETextAlignment.h"
@@ -24,8 +25,9 @@ namespace SimplexEngine::Rendering
 		/**
 		* Create the renderer
 		* @param p_window
+		* @param p_videoSettings
 		*/
-		Renderer(const Windowing::Window& p_window);
+		Renderer(const Windowing::Window& p_window, const Settings::VideoSettings& p_videoSettings);
 
 		/**
 		* Return the SDL renderer wrapped by this instance

@@ -11,6 +11,7 @@
 #include <queue>
 
 #include "SimplexEngine/API/Export.h"
+#include "SimplexEngine/Settings/UserInterfaceSettings.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Data/Text.h"
@@ -26,8 +27,10 @@ namespace SimplexEngine::Rendering
 		/**
 		* Constructor of the user interface
 		* @param p_window
+		* @param p_renderer
+		* @param p_userInterfaceSettings
 		*/
-		UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer);
+		UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer, const Settings::UserInterfaceSettings& p_userInterfaceSettings);
 
 		/**
 		* Add a text to queue. The text will get renderer at the end of the frame
@@ -41,7 +44,7 @@ namespace SimplexEngine::Rendering
 		void Draw();
 
 	private:
-		void LoadFonts();
+		void LoadFonts(const std::string& p_fontPath, uint32_t p_defaultFontSize, bool p_scaleWithScreenWidth);
 
 		const Windowing::Window& m_window;
 		const Rendering::Renderer& m_renderer;

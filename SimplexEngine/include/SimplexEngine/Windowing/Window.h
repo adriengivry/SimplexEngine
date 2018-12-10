@@ -8,6 +8,7 @@
 #include <glm/glm.hpp>
 
 #include "SimplexEngine/API/Export.h"
+#include "SimplexEngine/Settings/WindowSettings.h"
 #include "SimplexEngine/Windowing/EWindowState.h"
 
 namespace SimplexEngine::Windowing
@@ -20,11 +21,9 @@ namespace SimplexEngine::Windowing
 	public:
 		/**
 		* Create the window
-		* @param p_title
-		* @param p_width
-		* @param p_heigt
+		* @param p_windowSettings
 		*/
-		Window(const std::string& p_title, uint16_t p_width, uint16_t p_height);
+		Window(const Settings::WindowSettings& p_windowSettings);
 
 		/**
 		* Destructor of the window, responsible of the SDL_Window memory free

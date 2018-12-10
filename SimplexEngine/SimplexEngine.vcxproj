@@ -284,7 +284,6 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Shaders\AShader.cpp" />
     <ClCompile Include="src\SimplexEngine\Shaders\NormalShader.cpp" />
     <ClCompile Include="src\SimplexEngine\Scenes\AScene.cpp" />
-    <ClCompile Include="src\SimplexEngine\Scenes\DefaultScene.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\SceneScripts\CameraController.cpp" />
     <ClCompile Include="src\SimplexEngine\Resources\Managers\MeshManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\FPSCounter.cpp" />
@@ -305,7 +304,6 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Data\Vertex.cpp" />
     <ClCompile Include="src\SimplexEngine\Tools\SceneParser.cpp" />
     <ClCompile Include="src\SimplexEngine\Utils\Clock.cpp" />
-    <ClCompile Include="src\SimplexEngine\Utils\IniIndexer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\SimplexEngine\Actors\Actor.h" />
@@ -325,6 +323,11 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\RasterizationModeSelector.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\ThreadCap.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\ISceneScript.h" />
+    <ClInclude Include="include\SimplexEngine\Settings\EngineSettings.h" />
+    <ClInclude Include="include\SimplexEngine\Settings\ResourcesSettings.h" />
+    <ClInclude Include="include\SimplexEngine\Settings\UserInterfaceSettings.h" />
+    <ClInclude Include="include\SimplexEngine\Settings\VideoSettings.h" />
+    <ClInclude Include="include\SimplexEngine\Settings\WindowSettings.h" />
     <ClInclude Include="include\SimplexEngine\SimplexEngine.h" />
     <ClInclude Include="include\SimplexEngine\Threading\ThreadManager.h" />
     <ClInclude Include="include\SimplexEngine\Windowing\EWindowState.h" />
@@ -351,7 +354,6 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Shaders\NormalShader.h" />
     <ClInclude Include="include\SimplexEngine\Scenes\AScene.h" />
     <ClInclude Include="include\SimplexEngine\Scenes\ASceneDefines.h" />
-    <ClInclude Include="include\SimplexEngine\Scenes\DefaultScene.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\CameraController.h" />
     <ClInclude Include="include\SimplexEngine\Resources\Managers\AResourceManager.h" />
     <ClInclude Include="include\SimplexEngine\Resources\Managers\MeshManager.h" />
@@ -368,7 +370,6 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Utils\Clock.h" />
     <ClInclude Include="include\SimplexEngine\Tools\EasyAssimp.h" />
     <ClInclude Include="include\SimplexEngine\Eventing\Event.h" />
-    <ClInclude Include="include\SimplexEngine\Utils\IniIndexer.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\application.ini" />

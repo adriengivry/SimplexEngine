@@ -8,12 +8,11 @@
 
 #include <GyvrIni/GyvrIni.h>
 
-#include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Threading/ThreadManager.h"
 
 SimplexEngine::Threading::ThreadManager::ThreadManager() :
 	m_hardwareThreadCap(std::thread::hardware_concurrency()),
-	m_threadCap(Utils::IniIndexer::Engine->Get<uint32_t>("default_thread_cap"))
+	m_threadCap(m_hardwareThreadCap / 2)
 {
 }
 

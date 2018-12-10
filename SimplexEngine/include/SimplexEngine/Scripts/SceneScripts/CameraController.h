@@ -25,8 +25,10 @@ namespace SimplexEngine::Scripts::SceneScripts
 		* Constructor of the camera controller
 		* @param p_inputManager
 		* @param p_cameraComponent (The camera to control with this script)
+		* @param p_movementSpeed
+		* @param p_mouseSensitivity
 		*/
-		CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent);
+		CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent, float p_movementSpeed, float p_mouseSensitivity = 1.0f);
 
 		/**
 		* Update the script
@@ -51,7 +53,8 @@ namespace SimplexEngine::Scripts::SceneScripts
 		Components::CameraComponent& m_cameraComponent;
 
 		/* Internal stuffs */
-		float m_mouseSensitivity = 30.0f;
+		float m_mouseSensitivity;
+		float m_movementSpeed;
 		float m_yaw = 0.0f;
 		float m_pitch = 0.0f;
 	};

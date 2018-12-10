@@ -28,11 +28,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="config\resources\meshes.cfg" />
-    <None Include="config\controls.ini" />
-    <None Include="config\engine.ini" />
-    <None Include="config\rendering.ini" />
-    <None Include="config\window.ini" />
     <None Include="resources\meshes\cone.fbx" />
     <None Include="resources\meshes\cube.fbx" />
     <None Include="resources\meshes\cylinder.fbx" />

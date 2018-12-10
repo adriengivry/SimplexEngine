@@ -9,24 +9,23 @@
 #include <GyvrIni/GyvrIni.h>
 
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
-#include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::GlobalScripts::FPSCounter::FPSCounter(Rendering::UserInterface& p_userInterface) :
+SimplexEngine::Scripts::GlobalScripts::FPSCounter::FPSCounter(Rendering::UserInterface& p_userInterface, float p_updateFrequency) :
 	m_userInterface(p_userInterface),
-	m_logTimer(Utils::IniIndexer::Engine->Get<float>("fps_log_frequency")),
-	m_logFrequency(Utils::IniIndexer::Engine->Get<float>("fps_log_frequency")),
+	m_updateFrequency(p_updateFrequency),
+	m_updateTimer(p_updateFrequency),
 	m_fps(0)
 {
 }
 
 void SimplexEngine::Scripts::GlobalScripts::FPSCounter::Update(float p_deltaTime)
 {
-	m_logTimer += p_deltaTime;
+	m_updateTimer += p_deltaTime;
 
-	if (m_logTimer >= Utils::IniIndexer::Engine->Get<float>("fps_update_frequency"))
+	if (m_updateTimer >= m_updateFrequency)
 	{
 		m_fps = static_cast<uint16_t>(1.0f / p_deltaTime);
-		m_logTimer = 0.0f;
+		m_updateTimer = 0.0f;
 	}
 
 	ShowFPS();

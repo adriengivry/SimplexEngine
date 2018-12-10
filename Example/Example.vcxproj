@@ -70,28 +70,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)Build\SimplexEngine\include\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
@@ -218,11 +218,6 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
     <ClInclude Include="include\Example\Scenes\DemoScene.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="config\controls.ini" />
-    <None Include="config\engine.ini" />
-    <None Include="config\rendering.ini" />
-    <None Include="config\resources\meshes.cfg" />
-    <None Include="config\window.ini" />
     <None Include="resources\meshes\cone.fbx" />
     <None Include="resources\meshes\cube.fbx" />
     <None Include="resources\meshes\cylinder.fbx" />

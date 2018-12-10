@@ -8,13 +8,13 @@
 
 #include "SimplexEngine/Windowing/Window.h"
 
-SimplexEngine::Windowing::Window::Window(const std::string& p_title, uint16_t p_width, uint16_t p_height) :
-	m_width(p_width),
-	m_height(p_height),
-	m_halfWidth(p_width / 2),
-	m_halfHeight(p_height / 2),
-	m_title(p_title),
-	m_aspectRatio(static_cast<float>(p_width) / static_cast<float>(p_height)),
+SimplexEngine::Windowing::Window::Window(const Settings::WindowSettings& p_windowSettings) :
+	m_width(p_windowSettings.width),
+	m_height(p_windowSettings.height),
+	m_halfWidth(m_width / 2),
+	m_halfHeight(m_height / 2),
+	m_title(p_windowSettings.title),
+	m_aspectRatio(static_cast<float>(m_width) / static_cast<float>(m_height)),
 	m_windowState(EWindowState::NONE),
 	m_sdlWindow(nullptr)
 {
@@ -26,7 +26,7 @@ SimplexEngine::Windowing::Window::Window(const std::string& p_title, uint16_t p_
 	else
 	{
 		/* SDL Initiailization succeed*/
-		m_sdlWindow = SDL_CreateWindow(p_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, static_cast<int>(m_width), static_cast<int>(m_height), 0);
+		m_sdlWindow = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, static_cast<int>(m_width), static_cast<int>(m_height), 0);
 		m_glContext = SDL_GL_CreateContext(m_sdlWindow);
 		m_windowState = EWindowState::OK;
 	}

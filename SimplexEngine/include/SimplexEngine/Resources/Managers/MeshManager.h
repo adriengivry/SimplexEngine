@@ -20,9 +20,17 @@ namespace SimplexEngine::Resources::Managers
 	class API_SIMPLEXENGINE MeshManager final : public AResourceManager<Resources::Mesh>
 	{
 	public:
-		MeshManager() : AResourceManager("config/resources/meshes.cfg") {}
+		/**
+		* Constructor of the mesh manager
+		* @param p_meshesIndexerPath
+		*/
+		MeshManager(const std::string& p_meshesIndexerPath);
 
 	protected:
+		/**
+		* Indicates how to load a mesh
+		* @param p_path
+		*/
 		virtual Resources::Mesh* Load(const std::string & p_path) override;
 	};
 }

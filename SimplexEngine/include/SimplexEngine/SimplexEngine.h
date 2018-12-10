@@ -72,7 +72,6 @@
 
 /* Scenes */
 #include "SimplexEngine/Scenes/AScene.h"
-#include "SimplexEngine/Scenes/DefaultScene.h"
 #include "SimplexEngine/Scenes/SceneManager.h"
 
 /* Scripts */
@@ -86,6 +85,13 @@
 #include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
 #include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
 #include "SimplexEngine/Scripts/SceneScripts/RotateOverTime.h"
+
+/* Settings */
+#include "SimplexEngine/Settings/EngineSettings.h"
+#include "SimplexEngine/Settings/WindowSettings.h"
+#include "SimplexEngine/Settings/VideoSettings.h"
+#include "SimplexEngine/Settings/UserInterfaceSettings.h"
+#include "SimplexEngine/Settings/ResourcesSettings.h"
 
 /* Shaders */
 #include "SimplexEngine/Shaders/AShader.h"
@@ -101,7 +107,6 @@
 
 /* Utils */
 #include "SimplexEngine/Utils/Clock.h"
-#include "SimplexEngine/Utils/IniIndexer.h"
 
 /* Windowing */
 #include "SimplexEngine/Windowing/EWindowState.h"

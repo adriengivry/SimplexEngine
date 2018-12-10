@@ -25,8 +25,11 @@ namespace SimplexEngine::Scripts::GlobalScripts
 		/**
 		* Constructor of the script
 		* @param p_profiler
+		* @param p_inputManager
+		* @param p_userInterface
+		* @param p_updateFrequency
 		*/
-		ProfilerLogger(Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface);
+		ProfilerLogger(Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface, float p_updateFrequency);
 
 		/**
 		* Update the script
@@ -49,7 +52,9 @@ namespace SimplexEngine::Scripts::GlobalScripts
 		Analytics::ProfilerReport m_report;
 
 		bool m_reportGenerationPaused;
-		float m_logTimer;
+
+		float m_updateFrequency;
+		float m_updateTimer;
 	};
 }
 

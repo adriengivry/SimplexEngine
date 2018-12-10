@@ -9,7 +9,7 @@
 
 #include "SimplexEngine/Rendering/UserInterface.h"
 
-SimplexEngine::Rendering::UserInterface::UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer) :
+SimplexEngine::Rendering::UserInterface::UserInterface(const Windowing::Window& p_window, const Rendering::Renderer& p_renderer, const Settings::UserInterfaceSettings& p_userInterfaceSettings) :
 	m_window(p_window),
 	m_renderer(p_renderer),
 	width(m_window.GetWidth()),
@@ -21,7 +21,7 @@ SimplexEngine::Rendering::UserInterface::UserInterface(const Windowing::Window& 
 	centerAnchor(width / 2, height / 2)
 {
 	TTF_Init();
-	LoadFonts();
+	LoadFonts(p_userInterfaceSettings.defaultFontPath, p_userInterfaceSettings.defaultFontSize, p_userInterfaceSettings.scaleWithScreenWidth);
 }
 
 void SimplexEngine::Rendering::UserInterface::AddText(const Data::Text & p_text)
@@ -40,10 +40,11 @@ void SimplexEngine::Rendering::UserInterface::Draw()
 	}
 }
 
-void SimplexEngine::Rendering::UserInterface::LoadFonts()
+void SimplexEngine::Rendering::UserInterface::LoadFonts(const std::string& p_fontPath, uint32_t p_defaultFontSize, bool p_scaleWithScreenWidth)
 {
-	const char* fontPath = "resources/fonts/arial.ttf";
-	m_smallFont = TTF_OpenFont(fontPath, 12);
-	m_normalFont = TTF_OpenFont(fontPath, 18);
-	m_bigFont = TTF_OpenFont(fontPath, 24);
+	float fontSizeRatio = p_scaleWithScreenWidth ? m_window.GetWidth() / 1280.0f : 1.0f;
+
+	m_smallFont = TTF_OpenFont(p_fontPath.c_str(), static_cast<int>(p_defaultFontSize * fontSizeRatio * 0.75f));
+	m_normalFont = TTF_OpenFont(p_fontPath.c_str(), static_cast<int>(p_defaultFontSize * fontSizeRatio));
+	m_bigFont = TTF_OpenFont(p_fontPath.c_str(), static_cast<int>(p_defaultFontSize * fontSizeRatio * 1.25f));
 }

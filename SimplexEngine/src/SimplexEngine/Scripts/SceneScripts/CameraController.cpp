@@ -9,13 +9,14 @@
 #include <GyvrIni/GyvrIni.h>
 
 #include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
-#include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Maths/QuaternionFactory.h"
 #include "SimplexEngine/Actors/Actor.h"
 
-SimplexEngine::Scripts::SceneScripts::CameraController::CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent) :
+SimplexEngine::Scripts::SceneScripts::CameraController::CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent, float p_movementSpeed, float p_mouseSensitivity) :
 	m_inputManager(p_inputManager),
-	m_cameraComponent(p_cameraComponent)
+	m_cameraComponent(p_cameraComponent),
+	m_mouseSensitivity(10.0f * p_mouseSensitivity),
+	m_movementSpeed(p_movementSpeed)
 {
 	m_inputManager.LockMouse();
 }
@@ -73,7 +74,7 @@ void SimplexEngine::Scripts::SceneScripts::CameraController::HandleKeyboard(floa
 	if (m_inputManager.IsKeyDown(Inputs::EKey::KEY_Q))
 		movement -= up;
 
-	m_cameraComponent.owner->transform.TranslateLocal(movement * Utils::IniIndexer::Controls->Get<float>("movement_speed") * p_deltaTime);
+	m_cameraComponent.owner->transform.TranslateLocal(movement * m_movementSpeed * p_deltaTime);
 
 	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_LALT))
 		m_inputManager.UnlockMouse();

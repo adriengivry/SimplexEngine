@@ -12,18 +12,18 @@
 #include "SimplexEngine/Data/Vertex.h"
 #include "SimplexEngine/Maths/Triangle2D.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
-#include "SimplexEngine/Scenes/DefaultScene.h"
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
 #include "SimplexEngine/Materials/LambertMaterial.h"
 #include "SimplexEngine/Tools/SceneParser.h"
 
-SimplexEngine::Core::Engine::Engine() :
-	window(Utils::IniIndexer::Window->Get<std::string>("title"), Utils::IniIndexer::Window->Get<uint16_t>("width"), Utils::IniIndexer::Window->Get<uint16_t>("height")),
+SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSettings) :
+	window(p_engineSettings.window),
 	inputManager(eventHandler),
-	renderer(window),
-	userInterface(window, renderer),
+	renderer(window, p_engineSettings.video),
+	userInterface(window, renderer, p_engineSettings.userInterface),
 	rasterizer(window, renderer),
+	meshManager(p_engineSettings.resources.meshIndexerPath),
 	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
 	m_running(true)

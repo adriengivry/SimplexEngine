@@ -10,19 +10,18 @@
 #include <GyvrIni/GyvrIni.h>
 
 #include "SimplexEngine/Rendering/Renderer.h"
-#include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 
-SimplexEngine::Rendering::Renderer::Renderer(const Windowing::Window& p_window)
+SimplexEngine::Rendering::Renderer::Renderer(const Windowing::Window& p_window, const Settings::VideoSettings& p_videoSettings)
 {
 	auto[windowWidth, windowHeight] = p_window.GetSize();
 
 	int flags = 0;
 
-	if (Utils::IniIndexer::Rendering->Get<bool>("vertical_sync"))
+	if (p_videoSettings.verticalSync)
 		flags |= SDL_RENDERER_PRESENTVSYNC;
 
-	if (Utils::IniIndexer::Rendering->Get<bool>("hardware_acceleration"))
+	if (p_videoSettings.hardwareAcceleration)
 		flags |= SDL_RENDERER_ACCELERATED;
 
 	m_sdlRenderer = SDL_CreateRenderer(p_window.GetSDLWindow(), -1, flags);

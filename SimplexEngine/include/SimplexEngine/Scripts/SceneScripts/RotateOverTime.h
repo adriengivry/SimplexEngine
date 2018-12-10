@@ -24,8 +24,9 @@ namespace SimplexEngine::Scripts::SceneScripts
 		* Constructor of the script
 		* @param p_target
 		* @param p_rotationSpeed
+		* @param p_rotationAxis
 		*/
-		RotateOverTime(Actors::Actor& p_target, float p_rotationSpeed);
+		RotateOverTime(Actors::Actor& p_target, float p_rotationSpeed, const glm::vec3& p_rotationAxis = {0.0f, 1.0f, 0.0f});
 
 		/**
 		* Update the script
@@ -36,6 +37,7 @@ namespace SimplexEngine::Scripts::SceneScripts
 	private:
 		Actors::Actor& m_target;
 		float m_rotationSpeed;
+		glm::vec3 m_rotationAxis;
 	};
 }
 

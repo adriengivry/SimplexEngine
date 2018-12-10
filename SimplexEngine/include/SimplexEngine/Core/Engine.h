@@ -10,7 +10,7 @@
 
 #include "SimplexEngine/API/Export.h"
 
-/* Core */
+#include "SimplexEngine/Settings/EngineSettings.h"
 #include "SimplexEngine/Windowing/Window.h"
 #include "SimplexEngine/Eventing/EventHandler.h"
 #include "SimplexEngine/Inputs/InputManager.h"
@@ -19,13 +19,8 @@
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Scenes/SceneManager.h"
 #include "SimplexEngine/Threading/ThreadManager.h"
-
-/* Analytics */
 #include "SimplexEngine/Analytics/Profiler.h"
-
-/* Utils */
 #include "SimplexEngine/Utils/Clock.h"
-#include "SimplexEngine/Utils/IniIndexer.h"
 #include "SimplexEngine/Resources/Managers/MeshManager.h"
 #include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Scenes/AScene.h"
@@ -40,9 +35,10 @@ namespace SimplexEngine::Core
 	{
 	public:
 		/**
-		* Constructor of the application
+		* Constructor of the engine with the given settings
+		* @param p_engineSettings
  		*/
-		Engine();
+		Engine(const Settings::EngineSettings& p_engineSettings);
 
 		/**
 		* Add a global script to the application (Independent of the current scene)
@@ -90,9 +86,6 @@ namespace SimplexEngine::Core
 		void RasterizeRegion(const Components::CameraComponent& p_cameraToUse, uint32_t p_regionID, uint32_t p_totalRegions);
 
 	public:
-		/* Ini managment (Must be initialized first) */
-		SimplexEngine::Utils::IniIndexer iniIndexer;
-
 		/* Core */
 		SimplexEngine::Windowing::Window				window;
 		SimplexEngine::Eventing::EventHandler			eventHandler;

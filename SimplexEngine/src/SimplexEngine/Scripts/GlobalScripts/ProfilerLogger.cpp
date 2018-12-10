@@ -10,14 +10,14 @@
 
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
-#include "SimplexEngine/Utils/IniIndexer.h"
 
-SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ProfilerLogger(SimplexEngine::Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface) :
+SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ProfilerLogger(SimplexEngine::Analytics::Profiler& p_profiler, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface, float p_updateFrequency) :
 	m_inputManager(p_inputManager),
 	m_profiler(p_profiler),
 	m_userInterface(p_userInterface),
 	m_reportGenerationPaused(false),
-	m_logTimer(0.0f)
+	m_updateFrequency(p_updateFrequency),
+	m_updateTimer(0.0f)
 {
 }
 
@@ -27,13 +27,13 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 
 	if (m_profiler.IsEnabled())
 	{
-		m_logTimer += p_deltaTime;
+		m_updateTimer += p_deltaTime;
 
-		if (!m_reportGenerationPaused && m_logTimer >= Utils::IniIndexer::Engine->Get<float>("profiler_log_frequency"))
+		if (!m_reportGenerationPaused && m_updateTimer >= m_updateFrequency)
 		{
 			m_report = m_profiler.GenerateReport();
 			m_profiler.ClearHistory();
-			m_logTimer = 0.0f;
+			m_updateTimer = 0.0f;
 		}		
 
 		if (m_report.actions.empty())
@@ -70,7 +70,7 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 		if (m_reportGenerationPaused)
 		{
 			m_profiler.ClearHistory();
-			m_logTimer = 0.0f;
+			m_updateTimer = 0.0f;
 		}
 
 		m_reportGenerationPaused = !m_reportGenerationPaused;
@@ -98,7 +98,7 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ShowAction(const Ana
 
 	m_userInterface.AddText({ textContent1, position, Data::EFontSize::SMALL_FONT, textColor });
 
-	position.first += 200;
+	position.first += 250;
 
 	m_userInterface.AddText({ textContent2, position, Data::EFontSize::SMALL_FONT, textColor });
 }
