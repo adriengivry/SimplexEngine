@@ -11,6 +11,7 @@
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
+#include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Inputs/InputManager.h"
 
 namespace SimplexEngine::Scripts::GlobalScripts
@@ -25,8 +26,9 @@ namespace SimplexEngine::Scripts::GlobalScripts
 		* Script constructor
 		* @param p_rasterizer
 		* @param p_inputManager
+		* @param p_displaySettings (True to show current rasterization settings on the bottom right of the screen)
 		*/
-		RasterizationModeSelector(Rendering::Rasterizer& p_rasterizer, const Inputs::InputManager& p_inputManager);
+		RasterizationModeSelector(Rendering::Rasterizer& p_rasterizer, const Inputs::InputManager& p_inputManager, Rendering::UserInterface& p_userInterface, bool p_displaySettings);
 
 		/**
 		* Update the script
@@ -44,9 +46,26 @@ namespace SimplexEngine::Scripts::GlobalScripts
 		*/
 		Rendering::ERasterizationCullingMode FindNextCullingMode();
 
+		/**
+		* Return the current draw mode as a string
+		*/
+		std::string GetDrawModeAsString();
+
+		/**
+		* Return the current culling mode as a string
+		*/
+		std::string GetCullingwModeAsString();
+
+		/**
+		* Display current rasterization settings on the screen
+		*/
+		void DisplayCurrentSettings();
+
 	private:
 		Rendering::Rasterizer& m_rasterizer;
 		const Inputs::InputManager& m_inputManager;
+		Rendering::UserInterface& m_userInterface;
+		bool m_displaySettings;
 	};
 }
 
