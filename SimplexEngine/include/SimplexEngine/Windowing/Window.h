@@ -31,6 +31,11 @@ namespace SimplexEngine::Windowing
 		~Window();
 
 		/**
+		* Ask the SDL for the current window size and update width, height, ratio...
+		*/
+		void UpdateWindowSizeFromSDL();
+
+		/**
 		* Check if the window is opened
 		*/
 		bool IsOpened() const;
@@ -46,9 +51,14 @@ namespace SimplexEngine::Windowing
 		struct SDL_Window* GetSDLWindow() const;
 
 		/**
-		* Return the SDL_GLContext instance
+		* Return the initial window width (Before any modification by the SDL)
 		*/
-		void* GetGLContext() const;
+		uint32_t GetInitialWidth() const;
+
+		/**
+		* Return the initial window height (Before any modification by the SDL)
+		*/
+		uint32_t GetInitialHeight() const;
 
 		/**
 		* Return the window width
@@ -103,6 +113,9 @@ namespace SimplexEngine::Windowing
 
 	private:
 		/* Window settings */
+		const uint32_t m_initialWidth;
+		const uint32_t m_initialHeight;
+
 		uint32_t m_width;
 		uint32_t m_height;
 		uint32_t m_halfWidth;
@@ -117,7 +130,6 @@ namespace SimplexEngine::Windowing
 
 		/* SDL relatives */
 		struct SDL_Window* m_sdlWindow;
-		void* m_glContext;
 	};
 }
 

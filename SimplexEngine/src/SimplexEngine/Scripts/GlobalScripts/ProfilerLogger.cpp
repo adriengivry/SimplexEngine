@@ -95,7 +95,7 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::ShowAction(const Ana
 
 	m_userInterface.AddText({ textContent1, position, Data::EFontSize::SMALL_FONT, textColor });
 
-	position.first += 250;
+	position.first += static_cast<int16_t>(20 * m_userInterface.vw);
 
 	m_userInterface.AddText({ textContent2, position, Data::EFontSize::SMALL_FONT, textColor });
 }

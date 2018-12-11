@@ -9,31 +9,36 @@
 #include "SimplexEngine/Windowing/Window.h"
 
 SimplexEngine::Windowing::Window::Window(const Settings::WindowSettings& p_windowSettings) :
-	m_width(p_windowSettings.width),
-	m_height(p_windowSettings.height),
+	m_initialWidth(p_windowSettings.width),
+	m_initialHeight(p_windowSettings.height),
+	m_width(m_initialWidth),
+	m_height(m_initialHeight),
 	m_halfWidth(m_width / 2),
-	m_halfHeight(m_height / 2),
-	m_title(p_windowSettings.title),
+	m_halfHeight(m_halfHeight / 2),
 	m_aspectRatio(static_cast<float>(m_width) / static_cast<float>(m_height)),
+	m_title(p_windowSettings.title),
 	m_windowState(EWindowState::NONE),
 	m_sdlWindow(nullptr)
 {
 	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) != 0)
 	{
-		/* SDL Initialization failed */
 		m_windowState = EWindowState::INIT_FAILED;
 	}
 	else
 	{
-		Uint32 flags = 0;
+		int width = static_cast<int>(m_width);
+		int height = static_cast<int>(m_height);
 
-		if (p_windowSettings.fullScreen)
-			flags |= SDL_WINDOW_FULLSCREEN;
+		m_sdlWindow = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, width, height, p_windowSettings.fullScreen ? SDL_WINDOW_FULLSCREEN : 0);
 
-		/* SDL Initiailization succeed*/
-		m_sdlWindow = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, static_cast<int>(m_width), static_cast<int>(m_height), flags);
-		m_glContext = SDL_GL_CreateContext(m_sdlWindow);
-		m_windowState = EWindowState::OK;
+		if (m_sdlWindow)
+		{
+			m_windowState = EWindowState::OK;
+
+			/* Fullscreen can alter window final size, so we update the size if we are in fullscreen mode */
+			if (p_windowSettings.fullScreen)
+				UpdateWindowSizeFromSDL();
+		}
 	}
 }
 
@@ -41,6 +46,23 @@ SimplexEngine::Windowing::Window::~Window()
 {
 	SDL_DestroyWindow(m_sdlWindow);
 	SDL_Quit();
+}
+
+void SimplexEngine::Windowing::Window::UpdateWindowSizeFromSDL()
+{
+	/* Find the real window size (Fullscreen can alter window size) */
+	int realWidth;
+	int realHeight;
+	SDL_GetWindowSize(m_sdlWindow, &realWidth, &realHeight);
+
+	/* Update width, height, halfWidth, halfHeight with real window size */
+	m_width = static_cast<uint32_t>(realWidth);
+	m_height = static_cast<uint32_t>(realHeight);
+	m_halfWidth = m_width / 2;
+	m_halfHeight = m_height / 2;
+
+	/* Update the aspect ratio with new width and height */
+	m_aspectRatio = static_cast<float>(m_width) / static_cast<float>(m_height);
 }
 
 bool SimplexEngine::Windowing::Window::IsOpened() const
@@ -58,9 +80,14 @@ SDL_Window * SimplexEngine::Windowing::Window::GetSDLWindow() const
 	return m_sdlWindow;
 }
 
-SDL_GLContext SimplexEngine::Windowing::Window::GetGLContext() const
+uint32_t SimplexEngine::Windowing::Window::GetInitialWidth() const
 {
-	return m_glContext;
+	return m_initialWidth;
+}
+
+uint32_t SimplexEngine::Windowing::Window::GetInitialHeight() const
+{
+	return m_initialHeight;
 }
 
 uint32_t SimplexEngine::Windowing::Window::GetWidth() const

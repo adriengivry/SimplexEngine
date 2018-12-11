@@ -67,7 +67,7 @@ void SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector::DisplayCu
 	drawModeText.horizontalAlign = Data::ETextHorizontalAlignment::ALIGN_RIGHT;
 	drawModeText.fontSize = Data::EFontSize::SMALL_FONT;
 	drawModeText.position = m_userInterface.bottomRightAnchor;
-	drawModeText.position.second -= 2 * m_userInterface.vh;
+	drawModeText.position.second -= static_cast<int16_t>(2 * m_userInterface.vh);
 	drawModeText.content = "Draw mode: " + GetDrawModeAsString();
 
 	Data::Text cullingModeText;

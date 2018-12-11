@@ -22,7 +22,7 @@ SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSett
 	inputManager(eventHandler),
 	renderer(window, p_engineSettings.video),
 	userInterface(window, renderer, p_engineSettings.userInterface),
-	rasterizer(renderer, p_engineSettings.video.rasterizationBufferWidth == 0 ? window.GetWidth() : p_engineSettings.video.rasterizationBufferWidth, p_engineSettings.video.rasterizationBufferHeight == 0 ? window.GetHeight() : p_engineSettings.video.rasterizationBufferHeight),
+	rasterizer(renderer, p_engineSettings.video.rasterizationBufferWidth == 0 ? window.GetInitialWidth() : p_engineSettings.video.rasterizationBufferWidth, p_engineSettings.video.rasterizationBufferHeight == 0 ? window.GetInitialHeight() : p_engineSettings.video.rasterizationBufferHeight),
 	meshManager(p_engineSettings.resources.meshIndexerPath),
 	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
