@@ -13,6 +13,12 @@ void Example::Scenes::DemoScene::OnLoad()
 	auto& cameraComponent = cameraActor.AddComponent<SimplexEngine::Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
 	cameraActor.transform.SetLocalPosition({ 0.0f, 0.0f, 10.0f });
 
+	/* Floor */
+	auto& floor = AddActor<SimplexEngine::Actors::Actor>();
+	floor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Plane")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+	floor.transform.SetLocalPosition({ 0.0f, -2.0f, 0.0f });
+	floor.transform.SetLocalScale({ 3.0f, 1.0f, 3.0f });
+
 	/* Lambert ico sphere */
 	auto& icoSphere = AddActor<SimplexEngine::Actors::Actor>();
 	icoSphere.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
