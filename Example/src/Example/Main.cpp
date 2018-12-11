@@ -10,24 +10,7 @@
 
 int main()
 {
-	SimplexEngine::Settings::EngineSettings settings;
-
-	/* Resources */
-	settings.resources.meshIndexerPath = "meshes.index";
-
-	/* User Interface */
-	settings.userInterface.defaultFontPath = "resources/fonts/arial.ttf";
-	settings.userInterface.defaultFontSize = 20;
-	settings.userInterface.scaleWithScreenWidth = true;
-
-	/* Video */
-	settings.video.verticalSync = false;
-	settings.video.hardwareAcceleration = false;
-
-	/* Window */
-	settings.window.title = "Demo";
-	settings.window.width = 1280;
-	settings.window.height = 720;
+	SimplexEngine::Settings::EngineSettings settings = SimplexEngine::Utils::SettingsLoader::LoadEngineSettings("settings.ini");
 
 	SimplexEngine::Core::Engine engine(settings);
 

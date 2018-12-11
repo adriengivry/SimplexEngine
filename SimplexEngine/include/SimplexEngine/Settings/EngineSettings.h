@@ -19,7 +19,7 @@ namespace SimplexEngine::Settings
 	/**
 	* Contains engine settings to use for this project
 	*/
-	struct API_SIMPLEXENGINE EngineSettings
+	struct API_SIMPLEXENGINE EngineSettings final
 	{
 		Settings::VideoSettings			video;
 		Settings::WindowSettings		window;

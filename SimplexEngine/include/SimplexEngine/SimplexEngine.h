@@ -107,6 +107,7 @@
 
 /* Utils */
 #include "SimplexEngine/Utils/Clock.h"
+#include "SimplexEngine/Utils/SettingsLoader.h"
 
 /* Windowing */
 #include "SimplexEngine/Windowing/EWindowState.h"

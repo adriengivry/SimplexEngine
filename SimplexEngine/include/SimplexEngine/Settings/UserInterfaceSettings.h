@@ -17,7 +17,7 @@ namespace SimplexEngine::Settings
 	/**
 	* Contains resources settings to use for this project
 	*/
-	struct API_SIMPLEXENGINE UserInterfaceSettings
+	struct API_SIMPLEXENGINE UserInterfaceSettings final
 	{
 		/**
 		* The default font path to use in this project

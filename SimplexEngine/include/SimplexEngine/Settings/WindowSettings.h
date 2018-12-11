@@ -17,7 +17,7 @@ namespace SimplexEngine::Settings
 	/**
 	* Contains window settings to use for this project
 	*/
-	struct API_SIMPLEXENGINE WindowSettings
+	struct API_SIMPLEXENGINE WindowSettings final
 	{
 		std::string title;
 		uint16_t width;

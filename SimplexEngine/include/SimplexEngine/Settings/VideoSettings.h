@@ -15,7 +15,7 @@ namespace SimplexEngine::Settings
 	/**
 	* Contains video settings to use for this project
 	*/
-	struct API_SIMPLEXENGINE VideoSettings
+	struct API_SIMPLEXENGINE VideoSettings final
 	{
 		bool verticalSync			= false;
 		bool hardwareAcceleration	= false;

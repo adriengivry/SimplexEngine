@@ -17,7 +17,7 @@ namespace SimplexEngine::Settings
 	/**
 	* Contains resources settings to use for this project
 	*/
-	struct API_SIMPLEXENGINE ResourcesSettings
+	struct API_SIMPLEXENGINE ResourcesSettings final
 	{
 		/**
 		* Location of the meshes indexer file. This file contain a list of every meshes
