@@ -17,8 +17,14 @@ namespace SimplexEngine::Settings
 	*/
 	struct API_SIMPLEXENGINE VideoSettings final
 	{
-		bool verticalSync			= false;
-		bool hardwareAcceleration	= false;
+		bool verticalSync					= false;
+		bool hardwareAcceleration			= false;
+
+		/* 0 to use the current window width */
+		uint16_t rasterizationBufferWidth	= 0;
+
+		/* 0 to use the current window height */
+		uint16_t rasterizationBufferHeight	= 0;
 	};
 }
 

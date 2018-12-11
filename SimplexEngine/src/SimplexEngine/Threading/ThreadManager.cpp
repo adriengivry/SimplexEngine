@@ -12,7 +12,7 @@
 
 SimplexEngine::Threading::ThreadManager::ThreadManager() :
 	m_hardwareThreadCap(std::thread::hardware_concurrency()),
-	m_threadCap(m_hardwareThreadCap / 2)
+	m_threadCap(1)
 {
 }
 

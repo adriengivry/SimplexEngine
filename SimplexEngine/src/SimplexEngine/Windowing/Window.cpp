@@ -25,8 +25,13 @@ SimplexEngine::Windowing::Window::Window(const Settings::WindowSettings& p_windo
 	}
 	else
 	{
+		Uint32 flags = 0;
+
+		if (p_windowSettings.fullScreen)
+			flags |= SDL_WINDOW_FULLSCREEN;
+
 		/* SDL Initiailization succeed*/
-		m_sdlWindow = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, static_cast<int>(m_width), static_cast<int>(m_height), 0);
+		m_sdlWindow = SDL_CreateWindow(m_title.c_str(), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, static_cast<int>(m_width), static_cast<int>(m_height), flags);
 		m_glContext = SDL_GL_CreateContext(m_sdlWindow);
 		m_windowState = EWindowState::OK;
 	}

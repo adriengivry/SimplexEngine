@@ -12,7 +12,7 @@
 #include <mutex>
 
 #include "SimplexEngine/API/Export.h"
-#include "SimplexEngine/Windowing/Window.h"
+#include "SimplexEngine/Settings/VideoSettings.h"
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/ERasterizationDrawMode.h"
 #include "SimplexEngine/Rendering/ERasterizationCullingMode.h"
@@ -32,10 +32,11 @@ namespace SimplexEngine::Rendering
 	public:
 		/**
 		* Constructor of the Rasterizer
-		* @param p_window
 		* @param p_rendrerer (Needed to create the out buffer because it uses SDL Texture)
+		* @param p_rasterizationBufferWidth
+		* @param p_rasterizationBufferHeight
 		*/
-		Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer);
+		Rasterizer(const Rendering::Renderer& p_renderer, uint16_t p_rasterizationBufferWidth, uint16_t p_rasterizationBufferHeight);
 
 		/**
 		* Modify the current rasterization draw mode
@@ -179,8 +180,6 @@ namespace SimplexEngine::Rendering
 		void SendRasterizationOutputBufferToGPU();
 
 	private:
-		const Windowing::Window& m_window;
-
 		Buffers::DepthBuffer m_depthBuffer;
 		Buffers::TextureBuffer m_rasterizationOutputBuffer;
 

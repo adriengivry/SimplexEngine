@@ -18,7 +18,9 @@ SimplexEngine::Rendering::UserInterface::UserInterface(const Windowing::Window& 
 	topRightAnchor(width, 0),
 	bottomLeftAnchor(0, height),
 	bottomRightAnchor(width, height),
-	centerAnchor(width / 2, height / 2)
+	centerAnchor(width / 2, height / 2),
+	vw(1.0f / 100.0f * width),
+	vh(1.0f / 100.0f * height)
 {
 	TTF_Init();
 	LoadFonts(p_userInterfaceSettings.defaultFontPath, p_userInterfaceSettings.defaultFontSize, p_userInterfaceSettings.scaleWithScreenWidth);

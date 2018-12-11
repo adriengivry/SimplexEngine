@@ -59,6 +59,12 @@ namespace SimplexEngine::Rendering
 		const std::pair<int16_t, int16_t> bottomRightAnchor;
 		const std::pair<int16_t, int16_t> centerAnchor;
 
+		/* 1 vw = 1% of the viewport width */
+		const float vw;
+
+		/* 1 vh = 1% of the viewport height */
+		const float vh;
+
 	private:
 		struct _TTF_Font* m_smallFont;
 		struct _TTF_Font* m_normalFont;

@@ -15,10 +15,9 @@
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 
-SimplexEngine::Rendering::Rasterizer::Rasterizer(const Windowing::Window& p_window, Rendering::Renderer& p_renderer) :
-	m_window(p_window),
-	m_depthBuffer(m_window.GetWidth(), m_window.GetHeight()),
-	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), m_window.GetWidth(), m_window.GetHeight(), SDL_PIXELFORMAT_ABGR32, 1),
+SimplexEngine::Rendering::Rasterizer::Rasterizer(const Rendering::Renderer& p_renderer, uint16_t p_rasterizationBufferWidth, uint16_t p_rasterizationBufferHeight) :
+	m_depthBuffer(p_rasterizationBufferWidth, p_rasterizationBufferHeight),
+	m_rasterizationOutputBuffer(p_renderer.GetSDLRenderer(), p_rasterizationBufferWidth, p_rasterizationBufferHeight, SDL_PIXELFORMAT_ABGR32, 1),
 	m_rasterizationDrawMode(ERasterizationDrawMode::DEFAULT),
 	m_rasterizationCullingMode(ERasterizationCullingMode::BACKFACE),
 	m_limitTriangleRasterization(false)
@@ -145,9 +144,9 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragments(Shaders::AShader& p_
 
 	/* Clamp bounding box to window */
 	xmin = std::max(0, xmin);
-	xmax = std::min(xmax, m_window.GetWidthSigned());
+	xmax = std::min(xmax, static_cast<int32_t>(m_rasterizationOutputBuffer.width));
 	ymin = std::max(0, ymin);
-	ymax = std::min(ymax, m_window.GetHeightSigned());
+	ymax = std::min(ymax, static_cast<int32_t>(m_rasterizationOutputBuffer.height));
 
 	/* Here we iterate over the bounding box (Clamped to window size) */
 	for (int32_t x = xmin; x < xmax; ++x)
@@ -185,8 +184,8 @@ void SimplexEngine::Rendering::Rasterizer::ConvertToRasterSpace(glm::vec4& p_ver
 	p_vertex /= p_vertex.w;
 
 	/* Raster Space calculation */
-	p_vertex.x = std::round(((p_vertex.x + 1) * 0.5f) * m_window.GetWidth());
-	p_vertex.y = std::round(((1 - p_vertex.y) * 0.5f) * m_window.GetHeight());
+	p_vertex.x = std::round(((p_vertex.x + 1) * 0.5f) * m_rasterizationOutputBuffer.width);
+	p_vertex.y = std::round(((1 - p_vertex.y) * 0.5f) * m_rasterizationOutputBuffer.height);
 }
 
 bool SimplexEngine::Rendering::Rasterizer::BarycentricCoordsAreValid(const glm::vec3& p_barycentricCoords) const

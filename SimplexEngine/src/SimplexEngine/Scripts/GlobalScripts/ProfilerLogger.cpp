@@ -43,14 +43,11 @@ void SimplexEngine::Scripts::GlobalScripts::ProfilerLogger::Update(float p_delta
 		else
 		{
 			m_userInterface.AddText({ "Report period duration: " + std::to_string(m_report.elaspedTime) + "s (" + std::to_string(m_report.workingThreads) + " logging threads | " + std::to_string(m_report.elapsedFrames) + " frames)", m_userInterface.topLeftAnchor, Data::EFontSize::SMALL_FONT, Data::Color::White });
-			int16_t yOffset = 15;
+			float yOffset = 2 * m_userInterface.vh;
 			for (const auto& action : m_report.actions)
 			{
-				if (yOffset > m_userInterface.height)
-					break;
-
-				ShowAction(action, yOffset);
-				yOffset += 15;
+				ShowAction(action, static_cast<int16_t>(yOffset));
+				yOffset += 2 * m_userInterface.vh;
 			}
 		}
 	}
