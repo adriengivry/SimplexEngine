@@ -5,11 +5,11 @@
 */
 
 #include "SimplexEngine/Resources/Mesh.h"
-#include "SimplexEngine/Tools/EasyAssimp.h"
+#include "SimplexEngine/Utils/EasyAssimp.h"
 
 SimplexEngine::Resources::Mesh::Mesh(const std::string & p_filename)
 {
-	Tools::EasyAssimp::LoadVertices(p_filename, m_vertices, m_indices);
+	Utils::EasyAssimp::LoadVertices(p_filename, m_vertices, m_indices);
 }
 
 void SimplexEngine::Resources::Mesh::AddVertex(const Data::Vertex& p_vertex, bool p_autoIndex)

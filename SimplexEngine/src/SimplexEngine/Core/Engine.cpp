@@ -15,7 +15,7 @@
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
 #include "SimplexEngine/Materials/LambertMaterial.h"
-#include "SimplexEngine/Tools/SceneParser.h"
+#include "SimplexEngine/Utils/SceneParser.h"
 
 SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSettings) :
 	window(p_engineSettings.window),
@@ -104,7 +104,7 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 	PROFILER_SPY("Engine::RasterizeScene");
 
 	/* Determine which camera to use (Scene camera, default camera or no camera) */
-	const Components::CameraComponent* sceneMainCamera = Tools::SceneParser::GetMainCamera(*sceneManager.GetCurrentScene());
+	const Components::CameraComponent* sceneMainCamera = Utils::SceneParser::GetMainCamera(*sceneManager.GetCurrentScene());
 	const Components::CameraComponent* defaultCamera = m_defaultCamera.GetComponent<Components::CameraComponent>().get();
 	const Components::CameraComponent* cameraToUse = sceneMainCamera ? sceneMainCamera : (defaultCamera ? defaultCamera : nullptr);
 
@@ -126,7 +126,7 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 
 void SimplexEngine::Core::Engine::RasterizeRegion(const Components::CameraComponent& p_cameraToUse, uint32_t p_regionID, uint32_t p_totalRegions)
 {
-	const std::vector<std::reference_wrapper<const SimplexEngine::Components::MeshComponent>>& meshes = Tools::SceneParser::FindMeshes(*sceneManager.GetCurrentScene());
+	const std::vector<std::reference_wrapper<const SimplexEngine::Components::MeshComponent>>& meshes = Utils::SceneParser::FindMeshes(*sceneManager.GetCurrentScene());
 
 	for (uint32_t i = p_regionID; i < meshes.size(); i += p_totalRegions)
 	{

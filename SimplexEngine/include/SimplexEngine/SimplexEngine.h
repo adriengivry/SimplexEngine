@@ -102,8 +102,8 @@
 #include "SimplexEngine/Threading/ThreadManager.h"
 
 /* Tools */
-#include "SimplexEngine/Tools/EasyAssimp.h"
-#include "SimplexEngine/Tools/SceneParser.h"
+#include "SimplexEngine/Utils/EasyAssimp.h"
+#include "SimplexEngine/Utils/SceneParser.h"
 
 /* Utils */
 #include "SimplexEngine/Utils/Clock.h"

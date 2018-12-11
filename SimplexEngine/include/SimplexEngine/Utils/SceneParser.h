@@ -13,7 +13,7 @@
 #include "SimplexEngine/Components/MeshComponent.h"
 #include "SimplexEngine/Scenes/AScene.h"
 
-namespace SimplexEngine::Tools
+namespace SimplexEngine::Utils
 {
 	/**
 	* A tool to collect data from scene

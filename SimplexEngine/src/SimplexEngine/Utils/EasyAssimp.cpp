@@ -10,9 +10,9 @@
 #include <assimp/scene.h>
 #include <assimp/postprocess.h>
 
-#include "SimplexEngine/Tools/EasyAssimp.h"
+#include "SimplexEngine/Utils/EasyAssimp.h"
 
-bool SimplexEngine::Tools::EasyAssimp::LoadVertices(const std::string & p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+bool SimplexEngine::Utils::EasyAssimp::LoadVertices(const std::string & p_fileName, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	p_outBuffer.clear();
 
@@ -30,7 +30,7 @@ bool SimplexEngine::Tools::EasyAssimp::LoadVertices(const std::string & p_fileNa
 	return true;
 }
 
-void SimplexEngine::Tools::EasyAssimp::ProcessNode(aiNode* p_node, const aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+void SimplexEngine::Utils::EasyAssimp::ProcessNode(aiNode* p_node, const aiScene* p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	// process all the node's meshes (if any)
 	for (unsigned int i = 0; i < p_node->mNumMeshes; ++i)
@@ -45,7 +45,7 @@ void SimplexEngine::Tools::EasyAssimp::ProcessNode(aiNode* p_node, const aiScene
 	}
 }
 
-void SimplexEngine::Tools::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
+void SimplexEngine::Utils::EasyAssimp::ProcessMesh(aiMesh * p_mesh, const aiScene * p_scene, std::vector<Data::Vertex>& p_outBuffer, std::vector<uint32_t>& p_indices)
 {
 	for (unsigned int i = 0; i < p_mesh->mNumVertices; ++i)
 	{

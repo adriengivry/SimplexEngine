@@ -293,7 +293,7 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Inputs\InputManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\Rasterizer.cpp" />
     <ClCompile Include="src\SimplexEngine\Threading\ThreadManager.cpp" />
-    <ClCompile Include="src\SimplexEngine\Tools\EasyAssimp.cpp" />
+    <ClCompile Include="src\SimplexEngine\Utils\EasyAssimp.cpp" />
     <ClCompile Include="src\SimplexEngine\Eventing\EventHandler.cpp" />
     <ClCompile Include="src\SimplexEngine\Utils\SettingsLoader.cpp" />
     <ClCompile Include="src\SimplexEngine\Windowing\Window.cpp" />
@@ -303,7 +303,7 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Resources\Mesh.cpp" />
     <ClCompile Include="src\SimplexEngine\Data\Transform.cpp" />
     <ClCompile Include="src\SimplexEngine\Data\Vertex.cpp" />
-    <ClCompile Include="src\SimplexEngine\Tools\SceneParser.cpp" />
+    <ClCompile Include="src\SimplexEngine\Utils\SceneParser.cpp" />
     <ClCompile Include="src\SimplexEngine\Utils\Clock.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -368,9 +368,9 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\ProfilerLogger.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\SceneScripts\RotateOverTime.h" />
     <ClInclude Include="include\SimplexEngine\Shaders\LambertShader.h" />
-    <ClInclude Include="include\SimplexEngine\Tools\SceneParser.h" />
+    <ClInclude Include="include\SimplexEngine\Utils\SceneParser.h" />
     <ClInclude Include="include\SimplexEngine\Utils\Clock.h" />
-    <ClInclude Include="include\SimplexEngine\Tools\EasyAssimp.h" />
+    <ClInclude Include="include\SimplexEngine\Utils\EasyAssimp.h" />
     <ClInclude Include="include\SimplexEngine\Eventing\Event.h" />
   </ItemGroup>
   <ItemGroup>

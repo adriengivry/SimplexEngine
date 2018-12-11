@@ -13,7 +13,7 @@
 #ifndef _EASYASSIMP_H
 #define _EASYASSIMP_H
 
-namespace SimplexEngine::Tools
+namespace SimplexEngine::Utils
 {
 	/**
 	* A simple class to load assimp model data (Vertices only)
