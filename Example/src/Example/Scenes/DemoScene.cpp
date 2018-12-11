@@ -17,7 +17,7 @@ void Example::Scenes::DemoScene::OnLoad()
 	auto& floor = AddActor<SimplexEngine::Actors::Actor>();
 	floor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Plane")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
 	floor.transform.SetLocalPosition({ 0.0f, -2.0f, 0.0f });
-	floor.transform.SetLocalScale({ 3.0f, 1.0f, 3.0f });
+	floor.transform.SetLocalScale({ 5.0f, 1.0f, 5.0f });
 
 	/* Lambert ico sphere */
 	auto& icoSphere = AddActor<SimplexEngine::Actors::Actor>();
