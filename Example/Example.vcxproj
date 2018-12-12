@@ -208,6 +208,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
   <ItemGroup>
     <ClCompile Include="src\Example\Main.cpp" />
     <ClCompile Include="src\Example\Scenes\DemoScene.cpp" />
+    <ClCompile Include="src\Example\Scenes\SandboxScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimplexEngine\SimplexEngine.vcxproj">
@@ -216,6 +217,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Example\Scenes\DemoScene.h" />
+    <ClInclude Include="include\Example\Scenes\SandboxScene.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\meshes\cone.fbx" />
@@ -226,6 +228,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
     <None Include="resources\meshes\monkey.fbx" />
     <None Include="resources\meshes\plane.fbx" />
     <None Include="resources\meshes\sphere.fbx" />
+    <None Include="settings.ini" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\fonts\arial.ttf" />

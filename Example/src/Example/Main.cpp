@@ -7,6 +7,7 @@
 #include <SimplexEngine/SimplexEngine.h>
 
 #include "Example/Scenes/DemoScene.h"
+#include "Example/Scenes/SandboxScene.h"
 
 int main()
 {
@@ -21,7 +22,9 @@ int main()
 	engine.AddGlobalScript<SimplexEngine::Scripts::GlobalScripts::RasterizationModeSelector>(engine.rasterizer, engine.inputManager, engine.userInterface, true);
 
 	engine.sceneManager.RegisterScene<Example::Scenes::DemoScene>("Demo");
-	engine.sceneManager.LoadScene("Demo");
+	engine.sceneManager.RegisterScene<Example::Scenes::SandboxScene>("Sandbox");
+
+	engine.sceneManager.LoadScene("Sandbox");
 
 	while (engine.IsRunning())
 	{
