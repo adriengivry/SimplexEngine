@@ -122,7 +122,10 @@ namespace SimplexEngine::Shaders
 		template<typename T>
 		void InterpolateData(const std::string& p_key, const T& p_data1, const T& p_data2, const T& p_data3, const glm::vec3& p_barycentricCoords)
 		{
-			m_interpolatedVarying[p_key] = p_barycentricCoords.x * p_data1 + p_barycentricCoords.y * p_data2 + p_barycentricCoords.z * p_data3;
+			m_interpolatedVarying[p_key] = 
+				p_data1 * p_barycentricCoords.z +
+				p_data2 * p_barycentricCoords.y +
+				p_data3 * p_barycentricCoords.x;
 		}
 
 	private:

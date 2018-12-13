@@ -195,7 +195,10 @@ bool SimplexEngine::Rendering::Rasterizer::BarycentricCoordsAreValid(const glm::
 
 float SimplexEngine::Rendering::Rasterizer::CalculatePixelDepth(const std::array<glm::vec4, 3>& p_vertices, const glm::vec3 & p_barycentricCoords) const
 {
-	return p_vertices[0].z * p_barycentricCoords.z + p_vertices[2].z * p_barycentricCoords.x + p_barycentricCoords.y * p_vertices[1].z;
+	return 
+		p_vertices[0].z * p_barycentricCoords.z +
+		p_vertices[1].z * p_barycentricCoords.y +
+		p_vertices[2].z * p_barycentricCoords.x;
 }
 
 bool SimplexEngine::Rendering::Rasterizer::IsCullingModeSatisfied(const Maths::Triangle2D & p_triangle)
