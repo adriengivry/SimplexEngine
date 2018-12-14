@@ -71,6 +71,16 @@ void SimplexEngine::Rendering::Rasterizer::RasterizeTriangle(const std::array<Da
 	/* Apply the vertex shader to vertices */
 	std::array<glm::vec4, 3> transformedVertices = ComputeVertices(p_vertices, p_shader);
 
+	/* Simple Z clipping */
+	for (uint8_t i = 0; i < 3; ++i)
+	{
+		float z = transformedVertices[i].z;
+		float w = transformedVertices[i].w;
+
+		if (!((z >= -w && z <= w) && w > 0))
+			return;
+	}
+
 	/* Convert vertices to raster space (Pixel coordinates) */
 	std::for_each(transformedVertices.begin(), transformedVertices.end(), std::bind(&Rasterizer::ConvertToRasterSpace, this, std::placeholders::_1));
 
@@ -180,8 +190,8 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragment(const std::pair<int32
 
 void SimplexEngine::Rendering::Rasterizer::ConvertToRasterSpace(glm::vec4& p_vertex) const
 {
-	/* Homogenize */
-	p_vertex /= p_vertex.w;
+	p_vertex.x /= p_vertex.w;
+	p_vertex.y /= p_vertex.w;
 
 	/* Raster Space calculation */
 	p_vertex.x = std::round(((p_vertex.x + 1) * 0.5f) * m_rasterizationOutputBuffer.width);
