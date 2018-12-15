@@ -36,5 +36,5 @@ There are 2 projects in this repository, the actual game engine and an example p
 ### Unreal Engine 4 mannequin with lambert shader
 ![Screenshot 2](Screenshots/Mannequin.PNG)
 
-### Statue with lambert shader
+### Dynamic rasterization buffer size for pixelized style
 ![Screenshot 3](Screenshots/pixelized.png)
