@@ -1,6 +1,7 @@
 # SimplexEngine
-
 Rendering engine with a custom made software renderer (OpenGL-like rendering pipeline)
+
+![Statue rendered with SimplexEngine](Screenshots/Lights.PNG)
 
 ## What is this project about ?
 This project is a personnal project. My goals for this project are:
@@ -28,5 +29,12 @@ The code source of this project is cross-platform, thanks to the SDL. But the ac
 The build isn't included in this repository. To build this project, the best and easiest way is to use Visual Studio 2017. All you have to do is to build in any configuration you want (Debug/Release) for any platform (x86/x64).
 There are 2 projects in this repository, the actual game engine and an example project (Demo scene). You should build the engine first.
 
-## Documentation
-Coming soon...
+## Screenshots
+### Simple scene with parent/child relations
+![Screenshot 1](Screenshots/Demo_Scene.PNG)
+
+### Unreal Engine 4 mannequin with lambert shader
+![Screenshot 2](Screenshots/Mannequin.PNG)
+
+### Dynamic rasterization buffer size for pixelized style
+![Screenshot 3](Screenshots/pixelized.png)
