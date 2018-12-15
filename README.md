@@ -37,4 +37,4 @@ There are 2 projects in this repository, the actual game engine and an example p
 ![Screenshot 2](Screenshots/Mannequin.PNG)
 
 ### Statue with lambert shader
-![Screenshot 3](Screenshots/pixelized.PNG)
+![Screenshot 3](Screenshots/pixelized.png)
