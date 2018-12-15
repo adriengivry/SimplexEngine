@@ -24,7 +24,7 @@ int main()
 	engine.sceneManager.RegisterScene<Example::Scenes::DemoScene>("Demo");
 	engine.sceneManager.RegisterScene<Example::Scenes::SandboxScene>("Sandbox");
 
-	engine.sceneManager.LoadScene("Demo");
+	engine.sceneManager.LoadScene("Sandbox");
 
 	while (engine.IsRunning())
 	{

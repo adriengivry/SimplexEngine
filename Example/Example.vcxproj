@@ -220,6 +220,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
     <ClInclude Include="include\Example\Scenes\SandboxScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="resources\meshes\.index" />
     <None Include="resources\meshes\cone.fbx" />
     <None Include="resources\meshes\cube.fbx" />
     <None Include="resources\meshes\cylinder.fbx" />
