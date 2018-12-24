@@ -114,13 +114,20 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 		/* Use as much threads as possible */
 		uint8_t threadsToUse = threadManager.GetMaximumThread();
 
-		std::vector<std::thread> regionThreads;
+		if (threadsToUse == 1)
+		{
+			RasterizeRegion(*cameraToUse, 0, 1);
+		}
+		else
+		{
+			std::vector<std::thread> regionThreads;
 
-		for (uint8_t threadID = 0; threadID < threadsToUse; ++threadID)
-			regionThreads.emplace_back(&Engine::RasterizeRegion, this, *cameraToUse, threadID, threadsToUse);
+			for (uint8_t threadID = 0; threadID < threadsToUse; ++threadID)
+				regionThreads.emplace_back(&Engine::RasterizeRegion, this, *cameraToUse, threadID, threadsToUse);
 
-		for (std::thread& thread : regionThreads)
-			thread.join();
+			for (std::thread& thread : regionThreads)
+				thread.join();
+		}
 	}
 }
 
