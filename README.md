@@ -32,7 +32,7 @@ There are 2 projects in this repository, the actual game engine and an example p
 ## Screenshots
 ### Bullet integration example (Not included in the repository)
 ![Screenshot 1](Screenshots/Bullet_Physics_Lambert.gif)
-![Screenshot 1](Screenshots/Bullet_Physics_Wireframe.gif)
+![Screenshot 2](Screenshots/Bullet_Physics_Wireframe.gif)
 
 ### Simple scene with parent/child relations
 ![Screenshot 3](Screenshots/Demo_Scene.PNG)
