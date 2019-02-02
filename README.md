@@ -30,11 +30,15 @@ The build isn't included in this repository. To build this project, the best and
 There are 2 projects in this repository, the actual game engine and an example project (Demo scene). You should build the engine first.
 
 ## Screenshots
+### Bullet integration example (Not included in the repository)
+![Screenshot 1](Screenshots/Bullet_Physics_Lambert.gif)
+![Screenshot 1](Screenshots/Bullet_Physics_Wireframe.gif)
+
 ### Simple scene with parent/child relations
-![Screenshot 1](Screenshots/Demo_Scene.PNG)
+![Screenshot 3](Screenshots/Demo_Scene.PNG)
 
 ### Unreal Engine 4 mannequin with lambert shader
-![Screenshot 2](Screenshots/Mannequin.PNG)
+![Screenshot 4](Screenshots/Mannequin.PNG)
 
 ### Dynamic rasterization buffer size for pixelized style
-![Screenshot 3](Screenshots/pixelized.png)
+![Screenshot 5](Screenshots/pixelized.png)
