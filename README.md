@@ -1,5 +1,5 @@
 # SimplexEngine
-Rendering engine with a custom made software renderer (OpenGL-like rendering pipeline)
+Game engine with a custom made software renderer (OpenGL-like rendering pipeline)
 
 ![Statue rendered with SimplexEngine](Screenshots/Lights.PNG)
 
