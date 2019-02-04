@@ -85,6 +85,16 @@ namespace SimplexEngine::Actors
 			return false;
 		}
 
+		/**
+		* Mark the actor as "dead" and wait the scene cleaner to delete it from the memory
+		*/
+		void Destroy();
+
+		/**
+		* Return true if the actor is marked as "dead"
+		*/
+		bool IsDestroyed() const;
+
 	public:
 		/* Actor transform is public */
 		Data::Transform transform;
@@ -93,6 +103,7 @@ namespace SimplexEngine::Actors
 
 	private:
 		std::vector<std::shared_ptr<Components::AActorComponent>> m_components;
+		bool m_destroyed = false;
 	};
 }
 

@@ -55,6 +55,9 @@ void SimplexEngine::Core::Engine::Update()
 		/* Update scene scripts (Scene-dependant) */
 		UpdateSceneScripts(clock.GetDeltaTime());
 
+		/* Remove "destroyed" marked actors from the memory */
+		sceneManager.GetCurrentScene()->CollectGarbages();
+
 		/* Rasterization process */
 		rasterizer.ResetRasterizedTrianglesCount();
 		rasterizer.ClearBuffers();

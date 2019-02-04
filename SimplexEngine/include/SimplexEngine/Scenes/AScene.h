@@ -62,6 +62,11 @@ namespace SimplexEngine::Scenes
 		void Unload();
 
 		/**
+		* Remove every "destroyed" marked actors from the memory
+		*/
+		void CollectGarbages();
+
+		/**
 		* Return the vector of scripts as const reference
 		*/
 		const std::vector<std::shared_ptr<Scripts::IScript>>& GetScripts() const;

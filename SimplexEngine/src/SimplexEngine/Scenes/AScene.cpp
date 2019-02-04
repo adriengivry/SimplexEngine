@@ -27,6 +27,11 @@ void SimplexEngine::Scenes::AScene::Unload()
 	m_scripts.clear();
 }
 
+void SimplexEngine::Scenes::AScene::CollectGarbages()
+{
+	m_actors.erase(std::remove_if(m_actors.begin(), m_actors.end(), [](std::shared_ptr<Actors::Actor> p_actor) { return p_actor->IsDestroyed(); }), m_actors.end());
+}
+
 const std::vector<std::shared_ptr<SimplexEngine::Scripts::IScript>>& SimplexEngine::Scenes::AScene::GetScripts() const
 {
 	return m_scripts;
