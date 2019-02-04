@@ -339,6 +339,7 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClInclude Include="include\SimplexEngine\Components\RigidbodyComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\SphereColliderComponent.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
+    <ClInclude Include="include\SimplexEngine\Materials\DefaultMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Materials\MaterialData.h" />
     <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Physics\PhysicsManager.h" />

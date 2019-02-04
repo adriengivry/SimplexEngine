@@ -58,6 +58,7 @@
 #include "SimplexEngine/Materials/AMaterial.h"
 #include "SimplexEngine/Materials/LambertMaterial.h"
 #include "SimplexEngine/Materials/NormalMaterial.h"
+#include "SimplexEngine/Materials/DefaultMaterial.h"
 
 /* Maths */
 #include "SimplexEngine/Maths/QuaternionFactory.h"

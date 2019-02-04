@@ -15,7 +15,7 @@ void Example::Scenes::PhysicsScene::OnLoad()
 
 	/* Floor */
 	auto& floorActor = AddActor<SimplexEngine::Actors::Actor>();
-	floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+	floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).DefineMaterial<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::LambertShader>>();
 	floorActor.transform.SetLocalPosition({ 0.0f, -2.0f, 0.0f });
 	floorActor.transform.SetLocalScale({ 10.0f, 1.0f, 10.0f });
 	floorActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(10.0f, 1.0f, 10.0f));
