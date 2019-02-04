@@ -36,7 +36,7 @@ namespace SimplexEngine::Shaders
 		/**
 		* Process a vertex
 		*/
-		glm::vec4 ProcessVertex(const Data::Vertex& p_vertex, uint8_t p_vertexID);
+		glm::vec4 ProcessVertex(const SimplexEngine::Data::Vertex& p_vertex, uint8_t p_vertexID);
 
 		/**
 		* Process a fragment
@@ -48,7 +48,7 @@ namespace SimplexEngine::Shaders
 		* It is called before the rasterization stage
 		* @param p_vertex
 		*/
-		virtual glm::vec4 VertexModifier(const Data::Vertex& p_vertex) = 0;
+		virtual glm::vec4 VertexModifier(const SimplexEngine::Data::Vertex& p_vertex) = 0;
 
 		/**
 		* The fragment modifier is where every pixels are modified.
