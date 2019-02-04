@@ -29,8 +29,8 @@ namespace SimplexEngine::Components
 		* No arguments are needed, only the type of material
 		* is requiered (Template parameter)
 		*/
-		template<typename T>
-		void DefineMaterial() { m_material = std::make_unique<T>(); }
+		template<typename T, typename ...Args>
+		void DefineMaterial(Args&&... p_args) { m_material = std::make_unique<T>(p_args...); }
 
 		/**
 		* Set a mesh for the mesh component
