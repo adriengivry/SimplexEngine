@@ -20,6 +20,7 @@ This project is a personnal project. My goals for this project are:
 - GyvrIni (My personal ini library)
 - Assimp (3D model loader)
 - GLM (Math library)
+- Bullet (Physics library)
 
 ## Target platforms and configurations
 The code source of this project is cross-platform, thanks to the SDL. But the actual project is made and configured with Visual Studio 2017 and target Windows.
@@ -30,7 +31,7 @@ The build isn't included in this repository. To build this project, the best and
 There are 2 projects in this repository, the actual game engine and an example project (Demo scene). You should build the engine first.
 
 ## Screenshots
-### Bullet integration example (Not included in the repository)
+### Bullet integration example
 ![Screenshot 1](Screenshots/Bullet_Physics_Lambert.gif)
 ![Screenshot 2](Screenshots/Bullet_Physics_Wireframe.gif)
 
