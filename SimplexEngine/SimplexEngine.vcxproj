@@ -75,28 +75,28 @@
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\$(Configuration)\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\$(Configuration)\;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\$(Configuration)\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
     <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\$(Configuration)\;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -106,7 +106,6 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -149,7 +148,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -194,7 +192,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -241,7 +238,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
