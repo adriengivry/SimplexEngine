@@ -25,7 +25,8 @@
 #include "SimplexEngine/Resources/Managers/MeshManager.h"
 #include "SimplexEngine/Scripts/GlobalScripts/IGlobalScript.h"
 #include "SimplexEngine/Scenes/AScene.h"
-#include "SimplexEngine/Materials/AMaterial.h"
+#include "SimplexEngine/Materials/DefaultMaterial.h"
+#include "SimplexEngine/Shaders/NormalShader.h"
 
 namespace SimplexEngine::Core
 {
@@ -105,7 +106,7 @@ namespace SimplexEngine::Core
 		/* Default stuffs */
 		Actors::Actor m_defaultCamera;
 		std::vector<std::unique_ptr<Scripts::GlobalScripts::IGlobalScript>> m_globalScripts;
-		std::unique_ptr<Materials::AMaterial> m_defaultMaterial;
+		std::unique_ptr<Materials::DefaultMaterial<Shaders::NormalShader>> m_defaultMaterial;
 
 		/* Other stuffs */
 		bool m_running;

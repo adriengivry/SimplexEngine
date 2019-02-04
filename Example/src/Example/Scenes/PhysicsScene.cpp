@@ -15,7 +15,7 @@ void Example::Scenes::PhysicsScene::OnLoad()
 
 	/* Floor */
 	auto& floorActor = AddActor<SimplexEngine::Actors::Actor>();
-	floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).DefineMaterial<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::LambertShader>>();
+	floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
 	floorActor.transform.SetLocalPosition({ 0.0f, -2.0f, 0.0f });
 	floorActor.transform.SetLocalScale({ 10.0f, 1.0f, 10.0f });
 	floorActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(10.0f, 1.0f, 10.0f));
@@ -25,7 +25,7 @@ void Example::Scenes::PhysicsScene::OnLoad()
 	for (auto i = 0; i < 10; ++i)
 	{
 		auto& cubeActor = AddActor<SimplexEngine::Actors::Actor>();
-		cubeActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+		cubeActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
 		cubeActor.transform.SetLocalPosition({ 0.0f, 20.0f + static_cast<float>(i), 0.0f });
 		cubeActor.transform.SetLocalScale({ 1.0f, 1.0f, 1.0f });
 		cubeActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(1.0f, 1.0f, 1.0f));

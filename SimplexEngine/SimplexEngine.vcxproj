@@ -286,7 +286,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClCompile Include="src\SimplexEngine\Components\MeshComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\RigidbodyComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\SphereColliderComponent.cpp" />
-    <ClCompile Include="src\SimplexEngine\Materials\NormalMaterial.cpp" />
     <ClCompile Include="src\SimplexEngine\Physics\PhysicsManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Maths\QuaternionFactory.cpp" />
@@ -294,7 +293,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClCompile Include="src\SimplexEngine\Buffers\DepthBuffer.cpp" />
     <ClCompile Include="src\SimplexEngine\Buffers\TextureBuffer.cpp" />
     <ClCompile Include="src\SimplexEngine\Materials\AMaterial.cpp" />
-    <ClCompile Include="src\SimplexEngine\Materials\LambertMaterial.cpp" />
     <ClCompile Include="src\SimplexEngine\Maths\Triangle2D.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\RasterizationModeSelector.cpp" />
@@ -341,7 +339,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
     <ClInclude Include="include\SimplexEngine\Materials\DefaultMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Materials\MaterialData.h" />
-    <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationCullingMode.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationDrawMode.h" />
@@ -377,7 +374,6 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClInclude Include="include\SimplexEngine\Buffers\TextureBuffer.h" />
     <ClInclude Include="include\SimplexEngine\Materials\ABaseMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Materials\AMaterial.h" />
-    <ClInclude Include="include\SimplexEngine\Materials\LambertMaterial.h" />
     <ClInclude Include="include\SimplexEngine\Shaders\AShader.h" />
     <ClInclude Include="include\SimplexEngine\Shaders\NormalShader.h" />
     <ClInclude Include="include\SimplexEngine\Scenes\AScene.h" />

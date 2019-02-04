@@ -12,6 +12,8 @@
 #include "SimplexEngine/Materials/AMaterial.h"
 #include "SimplexEngine/Materials/MaterialData.h"
 #include "SimplexEngine/Shaders/AShader.h"
+#include "SimplexEngine/Components/CameraComponent.h"
+#include "SimplexEngine/Components/MeshComponent.h"
 
 namespace SimplexEngine::Materials
 {

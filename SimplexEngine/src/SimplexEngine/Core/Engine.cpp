@@ -14,7 +14,6 @@
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 #include "SimplexEngine/Scripts/GlobalScripts/FPSCounter.h"
 #include "SimplexEngine/Scripts/GlobalScripts/ProfilerLogger.h"
-#include "SimplexEngine/Materials/LambertMaterial.h"
 #include "SimplexEngine/Utils/SceneParser.h"
 
 SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSettings) :
@@ -26,7 +25,7 @@ SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSett
 	meshManager(p_engineSettings.resources.meshIndexerPath),
 	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
 	physicsManager(sceneManager),
-	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
+	m_defaultMaterial(std::make_unique<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::NormalShader>>()),
 	m_running(true)
 {
 	eventHandler.QuitEvent.AddListener(std::bind(&SimplexEngine::Core::Engine::Stop, this));

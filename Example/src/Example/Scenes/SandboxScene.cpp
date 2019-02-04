@@ -15,14 +15,14 @@ void Example::Scenes::SandboxScene::OnLoad()
 	AddScript<SimplexEngine::Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent, 20.0f, 1.0f);
 
 	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
-	gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+	gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
 	gun.transform.SetLocalPosition({ 1.0f, -0.9f, -3.0f });
 	gun.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
 	gun.transform.SetLocalScale(glm::vec3(0.1f));
 	gun.transform.SetParent(cameraActor.transform);
 
 	auto& model = AddActor<SimplexEngine::Actors::Actor>();
-	model.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Statue")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+	model.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Statue")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
 	model.transform.SetLocalScale(glm::vec3(0.05f));
 	model.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
 }

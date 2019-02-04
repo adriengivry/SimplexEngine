@@ -11,6 +11,12 @@
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Materials/ABaseMaterial.h"
 
+/**
+* This utility macro replace the DefineMaterial method call by USE_SHADER(ShaderClass)
+* @param ShaderClass (Must be a Shader type)
+*/
+#define USE_SHADER(ShaderClass) DefineMaterial<SimplexEngine::Materials::DefaultMaterial<ShaderClass>>()
+
 namespace SimplexEngine::Materials
 {
 	/**

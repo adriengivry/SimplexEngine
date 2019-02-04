@@ -15,17 +15,17 @@ void Example::Scenes::DemoScene::OnLoad()
 
 	/* Floor */
 	auto& floor = AddActor<SimplexEngine::Actors::Actor>();
-	floor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Plane")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+	floor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Plane")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
 	floor.transform.SetLocalPosition({ 0.0f, -2.0f, 0.0f });
 	floor.transform.SetLocalScale({ 5.0f, 1.0f, 5.0f });
 
 	/* Lambert ico sphere */
 	auto& icoSphere = AddActor<SimplexEngine::Actors::Actor>();
-	icoSphere.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere")).DefineMaterial<SimplexEngine::Materials::LambertMaterial>();
+	icoSphere.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
 
 	/* Normals ico sphere */
 	auto& secondIcoSphere = AddActor<SimplexEngine::Actors::Actor>();
-	secondIcoSphere.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere")).DefineMaterial<SimplexEngine::Materials::NormalMaterial>();
+	secondIcoSphere.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere")).USE_SHADER(SimplexEngine::Shaders::NormalShader);
 	secondIcoSphere.transform.SetLocalScale(glm::vec3(0.5f));
 	secondIcoSphere.transform.SetLocalPosition({ 2.0f, 0.0f, 0.0f });
 
@@ -35,7 +35,7 @@ void Example::Scenes::DemoScene::OnLoad()
 	{
 		auto& newActor = AddActor<SimplexEngine::Actors::Actor>();
 		auto& newMesh = newActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Icosphere"));
-		newMesh.DefineMaterial<SimplexEngine::Materials::NormalMaterial>();
+		newMesh.USE_SHADER(SimplexEngine::Shaders::NormalShader);
 		newActor.transform.SetLocalPosition({ 0.0f, 1.0f + (previousActor ? 0.0f : 1.0f), 0.0f });
 		newActor.transform.SetLocalScale(glm::vec3(0.75));
 
