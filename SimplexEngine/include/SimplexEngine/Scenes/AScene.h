@@ -62,6 +62,14 @@ namespace SimplexEngine::Scenes
 		void Unload();
 
 		/**
+		* This method is overridable by dervied classes
+		* It provides a simple way to make the scene change every frames
+		* @param p_deltaTime
+		* @note Prefer using scripts
+		*/
+		virtual void Update(float p_deltaTime) {};
+
+		/**
 		* Remove every "destroyed" marked actors from the memory
 		*/
 		void CollectGarbages();

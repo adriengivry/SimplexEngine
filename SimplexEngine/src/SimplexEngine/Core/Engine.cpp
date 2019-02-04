@@ -52,6 +52,9 @@ void SimplexEngine::Core::Engine::Update()
 	{
 		physicsManager.Update(clock.GetDeltaTime());
 
+		/* Call the update method of the current scene */
+		sceneManager.GetCurrentScene()->Update(clock.GetDeltaTime());
+
 		/* Update scene scripts (Scene-dependant) */
 		UpdateSceneScripts(clock.GetDeltaTime());
 
