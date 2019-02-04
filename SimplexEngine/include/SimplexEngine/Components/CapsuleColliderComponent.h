@@ -17,6 +17,7 @@ namespace SimplexEngine::Components
 	*/
 	class API_SIMPLEXENGINE CapsuleColliderComponent : public AColliderComponent
 	{
+	public:
 		/**
 		* Constructor of the CapsuleColliderComponent
 		* @param p_owner

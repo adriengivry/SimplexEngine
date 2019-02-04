@@ -17,6 +17,7 @@ namespace SimplexEngine::Components
 	*/
 	class API_SIMPLEXENGINE SphereColliderComponent : public AColliderComponent
 	{
+	public:
 		/**
 		* Constructor of the SphereColliderComponent
 		* @param p_owner
