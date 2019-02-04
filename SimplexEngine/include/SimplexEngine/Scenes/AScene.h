@@ -23,6 +23,7 @@
 #include "SimplexEngine/Resources/Managers/MeshManager.h"
 #include "SimplexEngine/Scripts/IScript.h"
 #include "SimplexEngine/Actors/Actor.h"
+#include "SimplexEngine/Components/RigidbodyComponent.h"
 
 /**
 * This header contain some usefull macro to create scenes inheriting from AScene quickly
@@ -70,7 +71,6 @@ namespace SimplexEngine::Scenes
 		*/
 		const std::vector<std::shared_ptr<SimplexEngine::Actors::Actor>>& GetActors() const;
 
-	protected:
 		/**
 		* Add an actor to the scene
 		* @param p_args (Arguments forwarded to the actor constructor)
@@ -78,8 +78,13 @@ namespace SimplexEngine::Scenes
 		template<typename T, typename... Args>
 		T& AddActor(Args&&... p_args) 
 		{
+			static_assert(std::is_base_of<Actors::Actor, T>::value, "T should derive from Actor");
+
 			m_actors.push_back(std::make_shared<T>(p_args...));
-			return *m_actors.at(m_actors.size() - 1);
+			std::shared_ptr<T> instance = std::dynamic_pointer_cast<T>(m_actors.at(m_actors.size() - 1));
+			instance->ComponentAddedEvent.AddListener(std::bind(&AScene::OnComponentAdded, this, std::placeholders::_1));
+			instance->ComponentRemovedEvent.AddListener(std::bind(&AScene::OnComponentRemoved, this, std::placeholders::_1));
+			return *instance;
 		}
 
 		/**
@@ -87,14 +92,37 @@ namespace SimplexEngine::Scenes
 		* @param p_args (Arguments forwarded to the std::make_unique)
 		*/
 		template<typename T, typename... Args>
-		void AddScript(Args&&... p_args)
-		{ 
+		T& AddScript(Args&&... p_args)
+		{
+			static_assert(std::is_base_of<Scripts::IScript, T>::value, "T should derive from IScript");
+
 			m_scripts.push_back(std::make_shared<T>(p_args...));
+			std::shared_ptr<T> instance = std::dynamic_pointer_cast<T>(m_scripts.at(m_scripts.size() - 1));
+			return *instance;
 		}
 
+		/**
+		* Remove an actor from the scene
+		* @param p_toRemove
+		*/
+		bool RemoveActor(Actors::Actor& p_toRemove);
+
+		/**
+		* Remove a script from the scene
+		* @param p_toRemove
+		*/
+		bool RemoveScript(Scripts::IScript& p_toRemove);
+
 	private:
+		void OnComponentAdded(Components::AActorComponent& p_component);
+		void OnComponentRemoved(Components::AActorComponent& p_component);
+
 		virtual void OnLoad() = 0;
 		virtual void OnUnload() = 0;
+		
+	public:
+		Eventing::Event<Components::AActorComponent&> ComponentAddedEvent;
+		Eventing::Event<Components::AActorComponent&> ComponentRemovedEvent;
 
 	protected:
 		/* Accessible data for new scenes */
@@ -105,8 +133,8 @@ namespace SimplexEngine::Scenes
 		Resources::Managers::MeshManager&	m_meshManager;
 
 		/* Scene content */
-		std::vector<std::shared_ptr<SimplexEngine::Actors::Actor>>		m_actors;
-		std::vector<std::shared_ptr<Scripts::IScript>>					m_scripts;
+		std::vector<std::shared_ptr<Actors::Actor>>		m_actors;
+		std::vector<std::shared_ptr<Scripts::IScript>>	m_scripts;
 	};
 }
 

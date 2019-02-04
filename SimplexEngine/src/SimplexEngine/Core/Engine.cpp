@@ -25,6 +25,7 @@ SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSett
 	rasterizer(renderer, p_engineSettings.video.rasterizationBufferWidth == 0 ? window.GetInitialWidth() : p_engineSettings.video.rasterizationBufferWidth, p_engineSettings.video.rasterizationBufferHeight == 0 ? window.GetInitialHeight() : p_engineSettings.video.rasterizationBufferHeight),
 	meshManager(p_engineSettings.resources.meshIndexerPath),
 	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
+	physicsManager(sceneManager),
 	m_defaultMaterial(std::make_unique<Materials::LambertMaterial>()),
 	m_running(true)
 {
@@ -50,6 +51,8 @@ void SimplexEngine::Core::Engine::Update()
 	/* Scene dependent logic */
 	if (sceneManager.HasCurrentScene())
 	{
+		physicsManager.Update(clock.GetDeltaTime());
+
 		/* Update scene scripts (Scene-dependant) */
 		UpdateSceneScripts(clock.GetDeltaTime());
 

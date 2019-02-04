@@ -73,30 +73,30 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)Bin\$(ProjectName)\</OutDir>
     <IntDir>$(SolutionDir)Bin-Int\$(ProjectName)\</IntDir>
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)Dependencies\SDL2\include\;$(SolutionDir)Dependencies\SDL2_ttf\include\;$(SolutionDir)Dependencies\assimp\include\;$(SolutionDir)Dependencies\GyvrIni\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <SourcePath>$(ProjectDir);$(ProjectDir)src\;$(SourcePath)</SourcePath>
-    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(SolutionDir)Dependencies\SDL2\lib\$(Platform)\;$(SolutionDir)Dependencies\SDL2_ttf\lib\$(Platform)\;$(SolutionDir)Dependencies\assimp\lib\$(Platform)\;$(SolutionDir)Dependencies\GyvrIni\lib\$(Platform)\$(Configuration)\;$(SolutionDir)Dependencies\bullet3\lib\$(Platform)\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -106,9 +106,10 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
@@ -129,6 +130,9 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Con
 
 :: Add GLM headers to the new build for the end-user ::
 xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
+
+:: Add bullet headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(ProjectName)\include\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -145,9 +149,10 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
@@ -168,6 +173,9 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Con
 
 :: Add GLM headers to the new build for the end-user ::
 xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
+
+:: Add bullet headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(ProjectName)\include\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -186,11 +194,12 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
@@ -211,6 +220,9 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Con
 
 :: Add GLM headers to the new build for the end-user ::
 xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
+
+:: Add bullet headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(ProjectName)\include\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -229,11 +241,12 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <PreprocessorDefinitions>SDL_MAIN_HANDLED;SIMPLEXENGINE_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2test.lib;SDL2_ttf.lib;assimp.lib;GyvrIni.lib;Bullet3Collision.lib;Bullet3Common.lib;Bullet3Dynamics.lib;Bullet3Geometry.lib;BulletCollision.lib;BulletDynamics.lib;BulletSoftBody.lib;LinearMath.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
       <Command>:: Copy DLL to the Output Directory ::
@@ -254,6 +267,9 @@ xcopy "$(OutDir)*.dll" "$(SolutionDir)Build\$(ProjectName)\bin\$(Platform)\$(Con
 
 :: Add GLM headers to the new build for the end-user ::
 xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)\include\glm\" /e /y /i /r
+
+:: Add bullet headers to the new build for the end-user ::
+xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(ProjectName)\include\" /e /y /i /r
 </Command>
       <Message>
       </Message>
@@ -267,9 +283,15 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClCompile Include="src\SimplexEngine\Analytics\Profiler.cpp" />
     <ClCompile Include="src\SimplexEngine\Analytics\ProfilerSpy.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\AActorComponent.cpp" />
+    <ClCompile Include="src\SimplexEngine\Components\AColliderComponent.cpp" />
+    <ClCompile Include="src\SimplexEngine\Components\BoxColliderComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\CameraComponent.cpp" />
+    <ClCompile Include="src\SimplexEngine\Components\CapsuleColliderComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Components\MeshComponent.cpp" />
+    <ClCompile Include="src\SimplexEngine\Components\RigidbodyComponent.cpp" />
+    <ClCompile Include="src\SimplexEngine\Components\SphereColliderComponent.cpp" />
     <ClCompile Include="src\SimplexEngine\Materials\NormalMaterial.cpp" />
+    <ClCompile Include="src\SimplexEngine\Physics\PhysicsManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Scenes\SceneManager.cpp" />
     <ClCompile Include="src\SimplexEngine\Maths\QuaternionFactory.cpp" />
     <ClCompile Include="src\SimplexEngine\Rendering\UserInterface.cpp" />
@@ -313,10 +335,16 @@ xcopy "$(SolutionDir)Dependencies\glm\glm\*" "$(SolutionDir)Build\$(ProjectName)
     <ClInclude Include="include\SimplexEngine\Analytics\ProfilerSpy.h" />
     <ClInclude Include="include\SimplexEngine\API\Export.h" />
     <ClInclude Include="include\SimplexEngine\Components\AActorComponent.h" />
+    <ClInclude Include="include\SimplexEngine\Components\AColliderComponent.h" />
+    <ClInclude Include="include\SimplexEngine\Components\BoxColliderComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\CameraComponent.h" />
+    <ClInclude Include="include\SimplexEngine\Components\CapsuleColliderComponent.h" />
     <ClInclude Include="include\SimplexEngine\Components\MeshComponent.h" />
+    <ClInclude Include="include\SimplexEngine\Components\RigidbodyComponent.h" />
+    <ClInclude Include="include\SimplexEngine\Components\SphereColliderComponent.h" />
     <ClInclude Include="include\SimplexEngine\Inputs\EKey.h" />
     <ClInclude Include="include\SimplexEngine\Materials\NormalMaterial.h" />
+    <ClInclude Include="include\SimplexEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationCullingMode.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationDrawMode.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.h" />

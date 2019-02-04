@@ -80,7 +80,6 @@ namespace SimplexEngine::Eventing
 		void Invoke(ArgTypes... p_args)
 		{
 			for (auto const&[key, val] : m_callbacks)
-
 				val(p_args...);
 		}
 

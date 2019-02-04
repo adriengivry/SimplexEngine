@@ -18,6 +18,7 @@
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
 #include "SimplexEngine/Scenes/SceneManager.h"
+#include "SimplexEngine/Physics/PhysicsManager.h"
 #include "SimplexEngine/Threading/ThreadManager.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Utils/Clock.h"
@@ -98,6 +99,7 @@ namespace SimplexEngine::Core
 		SimplexEngine::Threading::ThreadManager			threadManager;
 		SimplexEngine::Resources::Managers::MeshManager meshManager;
 		SimplexEngine::Scenes::SceneManager				sceneManager;
+		SimplexEngine::Physics::PhysicsManager			physicsManager;
 
 	private:
 		/* Default stuffs */

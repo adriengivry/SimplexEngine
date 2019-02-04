@@ -36,3 +36,27 @@ const std::vector<std::shared_ptr<SimplexEngine::Actors::Actor>>& SimplexEngine:
 {
 	return m_actors;
 }
+
+bool SimplexEngine::Scenes::AScene::RemoveActor(Actors::Actor& p_toRemove)
+{
+	size_t previousSize = m_actors.size();
+	m_actors.erase(std::find_if(m_actors.begin(), m_actors.end(), [&p_toRemove](std::shared_ptr<Actors::Actor> p_element) { return &p_toRemove == p_element.get(); }));
+	return m_actors.size() != previousSize;
+}
+
+bool SimplexEngine::Scenes::AScene::RemoveScript(Scripts::IScript& p_toRemove)
+{
+	size_t previousSize = m_scripts.size();
+	m_scripts.erase(std::find_if(m_scripts.begin(), m_scripts.end(), [&p_toRemove](std::shared_ptr<Scripts::IScript> p_element) { return &p_toRemove == p_element.get(); }));
+	return m_scripts.size() != previousSize;
+}
+
+void SimplexEngine::Scenes::AScene::OnComponentAdded(Components::AActorComponent& p_component)
+{
+	ComponentAddedEvent.Invoke(p_component);
+}
+
+void SimplexEngine::Scenes::AScene::OnComponentRemoved(Components::AActorComponent& p_component)
+{
+	ComponentRemovedEvent.Invoke(p_component);
+}

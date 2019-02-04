@@ -28,6 +28,11 @@
 #include "SimplexEngine/Components/AActorComponent.h"
 #include "SimplexEngine/Components/CameraComponent.h"
 #include "SimplexEngine/Components/MeshComponent.h"
+#include "SimplexEngine/Components/AColliderComponent.h"
+#include "SimplexEngine/Components/BoxColliderComponent.h"
+#include "SimplexEngine/Components/SphereColliderComponent.h"
+#include "SimplexEngine/Components/CapsuleColliderComponent.h"
+#include "SimplexEngine/Components/RigidbodyComponent.h"
 
 /* Core */
 #include "SimplexEngine/Core/Engine.h"

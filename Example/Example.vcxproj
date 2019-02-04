@@ -70,28 +70,28 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
     <IntDir>$(ProjectDir)..\Bin-Int\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include\;$(SolutionDir)SimplexEngine\include\;$(SolutionDir)Dependencies\glm\;$(SolutionDir)Dependencies\bullet3\include\;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)Build\SimplexEngine\lib\$(Platform)\$(Configuration)\;$(LibraryPath)</LibraryPath>
     <SourcePath>$(ProjectDir)src\;$(SourcePath)</SourcePath>
     <OutDir>$(ProjectDir)..\Bin\$(ProjectName)\</OutDir>
@@ -106,6 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -133,6 +134,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SimplexEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -158,6 +160,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <AdditionalDependencies>SimplexEngine.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -185,6 +188,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -208,6 +212,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
   <ItemGroup>
     <ClCompile Include="src\Example\Main.cpp" />
     <ClCompile Include="src\Example\Scenes\DemoScene.cpp" />
+    <ClCompile Include="src\Example\Scenes\PhysicsScene.cpp" />
     <ClCompile Include="src\Example\Scenes\SandboxScene.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -217,6 +222,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Example\Scenes\DemoScene.h" />
+    <ClInclude Include="include\Example\Scenes\PhysicsScene.h" />
     <ClInclude Include="include\Example\Scenes\SandboxScene.h" />
   </ItemGroup>
   <ItemGroup>
