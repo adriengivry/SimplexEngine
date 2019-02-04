@@ -19,7 +19,7 @@ namespace SimplexEngine::Materials
 	* A material is a set of uniforms binded with a shader
 	*/
 	template <typename ShaderClass>
-	class API_SIMPLEXENGINE ABaseMaterial : public AMaterial
+	class ABaseMaterial : public AMaterial
 	{
 		static_assert(std::is_base_of<Shaders::AShader, ShaderClass>::value, "ShaderClass must be a descendant of AShader");
 
