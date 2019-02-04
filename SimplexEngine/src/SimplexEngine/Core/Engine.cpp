@@ -150,7 +150,7 @@ void SimplexEngine::Core::Engine::RasterizeRegion(const Components::CameraCompon
 		/* Render only if there is a material */
 		if (materialToUse)
 		{
-			materialToUse->UpdateUniforms(p_cameraToUse, currentMesh.get());
+			materialToUse->UpdateUniforms({ p_cameraToUse, currentMesh.get(), clock.GetElapsedTime(), clock.GetDeltaTime() });
 			rasterizer.RasterizeMesh(*currentMesh.get().GetMesh(), materialToUse->GetShaderInstance());
 		}
 	}

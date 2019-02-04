@@ -10,6 +10,7 @@
 
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Materials/AMaterial.h"
+#include "SimplexEngine/Materials/MaterialData.h"
 #include "SimplexEngine/Shaders/AShader.h"
 
 namespace SimplexEngine::Materials
@@ -32,10 +33,9 @@ namespace SimplexEngine::Materials
 		/**
 		* Implement this function to determine the behaviour of the material
 		* when UpdateUniforms is called
-		* @param p_cameraComponent
-		* @param p_meshComponent
+		* @param p_materialData
 		*/
-		virtual void UpdateUniforms(const Components::CameraComponent& p_cameraComponent, const Components::MeshComponent& p_meshComponent) = 0;
+		virtual void UpdateUniforms(const MaterialData& p_materialData) = 0;
 
 	protected:
 		/**

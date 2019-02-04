@@ -14,10 +14,13 @@
 
 namespace SimplexEngine::Materials
 {
+	/**
+	* A simple material that send data to the lambert shader
+	*/
 	class API_SIMPLEXENGINE LambertMaterial final : public ABaseMaterial<Shaders::LambertShader>
 	{
 	public:
-		virtual void UpdateUniforms(const Components::CameraComponent& p_cameraComponent, const Components::MeshComponent& p_meshComponent);
+		virtual void UpdateUniforms(const MaterialData& p_materialData);
 	};
 }
 
