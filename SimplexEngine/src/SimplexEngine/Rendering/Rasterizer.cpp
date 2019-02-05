@@ -49,10 +49,10 @@ void SimplexEngine::Rendering::Rasterizer::ResetRasterizedTrianglesCount()
 	m_rasterizedTriangles = 0;
 }
 
-void SimplexEngine::Rendering::Rasterizer::ClearBuffers()
+void SimplexEngine::Rendering::Rasterizer::ClearBuffers(uint32_t p_clearColor)
 {
 	m_depthBuffer.Clear();
-	m_rasterizationOutputBuffer.Clear();
+	m_rasterizationOutputBuffer.Clear(p_clearColor);
 }
 
 void SimplexEngine::Rendering::Rasterizer::RasterizeMesh(const Resources::Mesh& p_mesh, Shaders::AShader& p_shader)

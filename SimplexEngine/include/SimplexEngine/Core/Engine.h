@@ -50,6 +50,12 @@ namespace SimplexEngine::Core
 		void AddGlobalScript(Args&&... p_args) { m_globalScripts.push_back(std::make_unique<T>(p_args...)); }
 
 		/**
+		* Defines a clear color
+		* @param p_color
+		*/
+		void SetClearColor(const Data::Color& p_color);
+
+		/**
 		* Update the engine
 		*/
 		void Update();
@@ -109,6 +115,7 @@ namespace SimplexEngine::Core
 		std::unique_ptr<Materials::DefaultMaterial<Shaders::NormalShader>> m_defaultMaterial;
 
 		/* Other stuffs */
+		uint32_t m_clearColor = 0;
 		bool m_running;
 	};
 }

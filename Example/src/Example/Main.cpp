@@ -28,6 +28,8 @@ int main()
 
 	engine.sceneManager.LoadScene("Physics");
 
+	engine.SetClearColor(SimplexEngine::Data::Color(102, 210, 255, 255));
+
 	while (engine.IsRunning())
 	{
 		engine.Update();

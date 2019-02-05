@@ -55,7 +55,7 @@ namespace SimplexEngine::Buffers
 		/**
 		* Clear the buffer (Fill with 0)
 		*/
-		void Clear() { memset(data, 0, m_bufferSizeInBytes); }
+		void Clear(T p_value = 0) { std::fill(data, data + m_bufferSize - 1, p_value); }
 
 	protected:
 		const uint32_t m_bufferSize;

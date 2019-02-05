@@ -35,6 +35,11 @@ SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSett
 	m_defaultCamera.transform.SetLocalPosition({0.0f, 0.0f, 10.0f});
 }
 
+void SimplexEngine::Core::Engine::SetClearColor(const Data::Color& p_color)
+{
+	m_clearColor = p_color.Pack();
+}
+
 void SimplexEngine::Core::Engine::Update()
 {
 	/* Calculate elapsed time and delta time */
@@ -66,7 +71,7 @@ void SimplexEngine::Core::Engine::Update()
 
 		/* Rasterization process */
 		rasterizer.ResetRasterizedTrianglesCount();
-		rasterizer.ClearBuffers();
+		rasterizer.ClearBuffers(m_clearColor);
 		RasterizeScene();
 		rasterizer.SendRasterizationOutputBufferToGPU();
 

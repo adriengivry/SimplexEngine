@@ -67,8 +67,9 @@ namespace SimplexEngine::Rendering
 
 		/**
 		* Clear rasterization output and depth buffer
+		* @param p_clearColor
 		*/
-		void ClearBuffers();
+		void ClearBuffers(uint32_t p_clearColor);
 
 		/**
 		* Rasterize a mesh to the screen
