@@ -35,11 +35,14 @@ There are 2 projects in this repository, the actual game engine and an example p
 ![Screenshot 1](Screenshots/Bullet_Physics_Lambert.gif)
 ![Screenshot 2](Screenshots/Bullet_Physics_Wireframe.gif)
 
+### Puzzle jump map with Character Controller
+![Screenshot 3](Screenshots/Puzzle_Jump.png)
+
 ### Simple scene with parent/child relations
-![Screenshot 3](Screenshots/Demo_Scene.PNG)
+![Screenshot 4](Screenshots/Demo_Scene.PNG)
 
 ### Unreal Engine 4 mannequin with lambert shader
-![Screenshot 4](Screenshots/Mannequin.PNG)
+![Screenshot 5](Screenshots/Mannequin.PNG)
 
 ### Dynamic rasterization buffer size for pixelized style
-![Screenshot 5](Screenshots/pixelized.png)
+![Screenshot 6](Screenshots/pixelized.png)
