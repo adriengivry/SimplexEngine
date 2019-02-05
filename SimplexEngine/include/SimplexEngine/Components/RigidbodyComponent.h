@@ -11,6 +11,8 @@
 #include <bullet/btBulletCollisionCommon.h>
 #include <bullet/btBulletDynamicsCommon.h>
 
+#include <glm/glm.hpp>
+
 #include "SimplexEngine/Components/AActorComponent.h"
 #include "SimplexEngine/Components/AColliderComponent.h"
 
@@ -33,6 +35,17 @@ namespace SimplexEngine::Components
 		* Destructor of the RigidbodyComponent
 		*/
 		~RigidbodyComponent();
+
+		/**
+		* Defines a velocity for the RigidbodyComponent
+		* @param p_velocity
+		*/
+		void SetVelocity(const glm::vec3& p_velocity);
+
+		/**
+		* Return the current velocity of the rigidbody
+		*/
+		glm::vec3 GetVelocity() const;
 
 		/**
 		* Return the transform

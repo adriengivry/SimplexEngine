@@ -27,6 +27,9 @@
     <ClCompile Include="src\Example\Scenes\PhysicsScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Example\Scripts\KillOnFall.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Example\Scenes\DemoScene.h">
@@ -36,6 +39,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Example\Scenes\PhysicsScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Example\Scripts\KillOnFall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

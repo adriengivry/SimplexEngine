@@ -17,6 +17,7 @@
 
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Components/AActorComponent.h"
+#include "SimplexEngine/Scripts/Behaviours/ABehaviour.h"
 #include "SimplexEngine/Data/Transform.h"
 
 namespace SimplexEngine::Actors
@@ -31,59 +32,37 @@ namespace SimplexEngine::Actors
 		* Try to get a component from the actor
 		*/
 		template<typename T>
-		std::shared_ptr<T> GetComponent()
-		{
-			static_assert(std::is_base_of<Components::AActorComponent, T>::value, "T should derived from AActorComponent");
-
-			std::shared_ptr<T> result(nullptr);
-
-			for (auto component : m_components)
-			{
-				result = std::dynamic_pointer_cast<T>(component);
-				if (result)
-					break;
-			}
-
-			return result;
-		}
+		std::shared_ptr<T> GetComponent();
 
 		/**
 		* Add a component to the actor
 		*/
 		template<typename T, typename ... Args>
-		T& AddComponent(Args&&... p_args)
-		{
-			static_assert(std::is_base_of<Components::AActorComponent, T>::value, "T should derived from AActorComponent");
-
-			m_components.push_back(std::make_shared<T>(*this, p_args...));
-			T& instance = *dynamic_cast<T*>(m_components.at(m_components.size() - 1).get());
-			ComponentAddedEvent.Invoke(instance);
-			return instance;
-		}
+		T& AddComponent(Args&&... p_args);
 
 		/**
 		* Remove a component to the actor
 		*/
 		template<typename T>
-		bool RemoveComponent()
-		{
-			static_assert(std::is_base_of<Components::AActorComponent, T>::value, "T should derived from AActorComponent");
+		bool RemoveComponent();
 
-			std::shared_ptr<T> result(nullptr);
+		/**
+		* Add a behaviour to the actor
+		*/
+		template<typename T, typename ... Args>
+		T& AddBehaviour(Args&&... p_args);
 
-			for (auto it = m_components.begin(); it != m_components.end(); ++it)
-			{
-				result = std::dynamic_pointer_cast<T>(*it);
-				if (result)
-				{
-					ComponentRemovedEvent.Invoke(*result.get());
-					m_components.erase(it);
-					return true;
-				}
-			}
+		/**
+		* Remove a component to the actor
+		*/
+		template<typename T>
+		bool RemoveBehaviour();
 
-			return false;
-		}
+		/**
+		* Update every behaviours attached to this actor
+		* @param p_deltaTime
+		*/
+		void UpdateBehaviours(float p_deltaTime);
 
 		/**
 		* Mark the actor as "dead" and wait the scene cleaner to delete it from the memory
@@ -103,8 +82,11 @@ namespace SimplexEngine::Actors
 
 	private:
 		std::vector<std::shared_ptr<Components::AActorComponent>> m_components;
+		std::vector<std::shared_ptr<Scripts::Behaviours::ABehaviour>> m_behaviours;
 		bool m_destroyed = false;
 	};
 }
+
+#include "SimplexEngine/Actors/Actor.inl"
 
 #endif // _ACTOR_H

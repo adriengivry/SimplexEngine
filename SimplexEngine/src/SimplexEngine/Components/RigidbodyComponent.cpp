@@ -10,8 +10,8 @@
 SimplexEngine::Components::RigidbodyComponent::RigidbodyComponent(SimplexEngine::Actors::Actor & p_owner, float p_mass) :
 	AActorComponent(p_owner)
 {
-	glm::vec3 ownerPos = p_owner.transform.GetLocalPosition();
-	glm::quat ownerRot = p_owner.transform.GetLocalRotation();
+	glm::vec3 ownerPos = p_owner.transform.GetWorldPosition();
+	glm::quat ownerRot = p_owner.transform.GetWorldRotation();
 
 	m_transform.setIdentity();
 	m_transform.setOrigin(btVector3(ownerPos.x, ownerPos.y, ownerPos.z));
@@ -35,6 +35,17 @@ SimplexEngine::Components::RigidbodyComponent::RigidbodyComponent(SimplexEngine:
 
 SimplexEngine::Components::RigidbodyComponent::~RigidbodyComponent()
 {
+}
+
+void SimplexEngine::Components::RigidbodyComponent::SetVelocity(const glm::vec3 & p_velocity)
+{
+	m_body->setLinearVelocity(btVector3(p_velocity.x, p_velocity.y, p_velocity.z));
+}
+
+glm::vec3 SimplexEngine::Components::RigidbodyComponent::GetVelocity() const
+{
+	auto linearVelocity = m_body->getLinearVelocity();
+	return glm::vec3(linearVelocity.getX(), linearVelocity.getY(), linearVelocity.getZ());
 }
 
 btTransform* SimplexEngine::Components::RigidbodyComponent::GetTransform()

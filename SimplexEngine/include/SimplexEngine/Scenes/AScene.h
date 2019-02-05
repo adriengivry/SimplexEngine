@@ -70,6 +70,12 @@ namespace SimplexEngine::Scenes
 		virtual void Update(float p_deltaTime) {};
 
 		/**
+		* Update every behaviour attached to actors on the scene
+		* @param p_deltaTime
+		*/
+		void UpdateBehaviours(float p_deltaTime);
+
+		/**
 		* Remove every "destroyed" marked actors from the memory
 		*/
 		void CollectGarbages();

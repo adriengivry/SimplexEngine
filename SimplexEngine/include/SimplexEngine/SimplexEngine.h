@@ -89,6 +89,8 @@
 #include "SimplexEngine/Scripts/SceneScripts/ISceneScript.h"
 #include "SimplexEngine/Scripts/SceneScripts/CameraController.h"
 #include "SimplexEngine/Scripts/SceneScripts/RotateOverTime.h"
+#include "SimplexEngine/Scripts/Behaviours/ABehaviour.h"
+#include "SimplexEngine/Scripts/Behaviours/FPSController.h"
 
 /* Settings */
 #include "SimplexEngine/Settings/EngineSettings.h"

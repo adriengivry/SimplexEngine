@@ -29,4 +29,4 @@ namespace SimplexEngine::Scripts::GlobalScripts
 	};
 }
 
-#endif // _ISCENESCRIPT_H
+#endif // _IGLOBALSCRIPT_H

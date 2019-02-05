@@ -214,6 +214,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
     <ClCompile Include="src\Example\Scenes\DemoScene.cpp" />
     <ClCompile Include="src\Example\Scenes\PhysicsScene.cpp" />
     <ClCompile Include="src\Example\Scenes\SandboxScene.cpp" />
+    <ClCompile Include="src\Example\Scripts\KillOnFall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SimplexEngine\SimplexEngine.vcxproj">
@@ -224,6 +225,7 @@ xcopy "$(ProjectDir)resources\*" "$(SolutionDir)Build\$(ProjectName)\$(Configura
     <ClInclude Include="include\Example\Scenes\DemoScene.h" />
     <ClInclude Include="include\Example\Scenes\PhysicsScene.h" />
     <ClInclude Include="include\Example\Scenes\SandboxScene.h" />
+    <ClInclude Include="include\Example\Scripts\KillOnFall.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\meshes\.index" />

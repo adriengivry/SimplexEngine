@@ -294,6 +294,8 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClCompile Include="src\SimplexEngine\Buffers\TextureBuffer.cpp" />
     <ClCompile Include="src\SimplexEngine\Materials\AMaterial.cpp" />
     <ClCompile Include="src\SimplexEngine\Maths\Triangle2D.cpp" />
+    <ClCompile Include="src\SimplexEngine\Scripts\Behaviours\ABehaviour.cpp" />
+    <ClCompile Include="src\SimplexEngine\Scripts\Behaviours\FPSController.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\RasterizationModeSelector.cpp" />
     <ClCompile Include="src\SimplexEngine\Scripts\GlobalScripts\ThreadCap.cpp" />
@@ -342,6 +344,8 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <ClInclude Include="include\SimplexEngine\Physics\PhysicsManager.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationCullingMode.h" />
     <ClInclude Include="include\SimplexEngine\Rendering\ERasterizationDrawMode.h" />
+    <ClInclude Include="include\SimplexEngine\Scripts\Behaviours\ABehaviour.h" />
+    <ClInclude Include="include\SimplexEngine\Scripts\Behaviours\FPSController.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\HardwareInfo.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\IGlobalScript.h" />
     <ClInclude Include="include\SimplexEngine\Scripts\GlobalScripts\RasterizationModeSelector.h" />
@@ -401,6 +405,7 @@ xcopy "$(SolutionDir)Dependencies\bullet3\include\*" "$(SolutionDir)Build\$(Proj
     <None Include="config\controls.ini" />
     <None Include="config\resources\meshes.cfg" />
     <None Include="config\window.ini" />
+    <None Include="include\SimplexEngine\Actors\Actor.inl" />
     <None Include="include\SimplexEngine\Resources\Managers\AResourceManager.inl" />
     <None Include="resources\cone.fbx" />
     <None Include="resources\cube.fbx" />

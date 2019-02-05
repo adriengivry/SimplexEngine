@@ -52,11 +52,14 @@ void SimplexEngine::Core::Engine::Update()
 	{
 		physicsManager.Update(clock.GetDeltaTime());
 
+		/* Update scene scripts (Scene-dependant) */
+		UpdateSceneScripts(clock.GetDeltaTime());
+
 		/* Call the update method of the current scene */
 		sceneManager.GetCurrentScene()->Update(clock.GetDeltaTime());
 
-		/* Update scene scripts (Scene-dependant) */
-		UpdateSceneScripts(clock.GetDeltaTime());
+		/* Update every behaviours scripts attached to current scene actors */
+		sceneManager.GetCurrentScene()->UpdateBehaviours(clock.GetDeltaTime());
 
 		/* Remove "destroyed" marked actors from the memory */
 		sceneManager.GetCurrentScene()->CollectGarbages();

@@ -19,6 +19,7 @@ namespace Example::Scenes
 
 		virtual void OnLoad() override;
 		virtual void OnUnload() override;
+		virtual void Update(float p_deltaTime) override;
 	};
 }
 

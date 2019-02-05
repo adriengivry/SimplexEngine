@@ -5,37 +5,82 @@
 */
 
 #include "Example/Scenes/PhysicsScene.h"
+#include "Example/Scripts/KillOnFall.h"
 
 void Example::Scenes::PhysicsScene::OnLoad()
 {
 	/* Create the camera */
 	auto& cameraActor = AddActor<SimplexEngine::Actors::Actor>();
 	auto& cameraComponent = cameraActor.AddComponent<SimplexEngine::Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
-	cameraActor.transform.SetLocalPosition({ 0.0f, 12.0f, 50.0f });
+	cameraActor.transform.SetLocalPosition({ 0.0f, 20.0f, 0.0f });
+	cameraActor.AddComponent<SimplexEngine::Components::CapsuleColliderComponent>(1.0f, 5.0f);
+	cameraActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(1.0f);
+	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 8.0f, 1.0f);
+
+	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
+	gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+	gun.transform.SetLocalPosition({ 1.0f, -0.9f, -3.0f });
+	gun.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
+	gun.transform.SetLocalScale(glm::vec3(0.1f));
+	gun.transform.SetParent(cameraActor.transform);
 
 	/* Floor */
-	auto& floorActor = AddActor<SimplexEngine::Actors::Actor>();
-	floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
-	floorActor.transform.SetLocalPosition({ 0.0f, -2.0f, 0.0f });
-	floorActor.transform.SetLocalScale({ 10.0f, 1.0f, 10.0f });
-	floorActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(10.0f, 1.0f, 10.0f));
-	floorActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(0.0f);
-
-	/* Cube */
-	for (auto i = 0; i < 10; ++i)
+	for (int16_t z = 0; z < 10; z += 1)
 	{
-		auto& cubeActor = AddActor<SimplexEngine::Actors::Actor>();
-		cubeActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
-		cubeActor.transform.SetLocalPosition({ 0.0f, 20.0f + static_cast<float>(i), 0.0f });
-		cubeActor.transform.SetLocalScale({ 1.0f, 1.0f, 1.0f });
-		cubeActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(1.0f, 1.0f, 1.0f));
-		cubeActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(10.0f);
-	}
+		auto& floorActor = AddActor<SimplexEngine::Actors::Actor>();
+		floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		floorActor.transform.SetLocalPosition({ sin(z) * 2.0f, -2.0f, - (z * 10.0f) });
+		floorActor.transform.SetLocalScale({ 2.5f, 0.5f, 2.5f });
+		floorActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(2.5f, 0.5f, 2.5f));
+		floorActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(0.0f);
 
-	/* Add scripts */
-	AddScript<SimplexEngine::Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent, 20.0f, 1.0f);
+		if (z == 9)
+		{
+			auto& statue = AddActor<SimplexEngine::Actors::Actor>();
+			statue.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Statue")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+			statue.transform.SetLocalPosition({ sin(z) * 2.0f, 3.5f, -(z * 10.0f) });
+			statue.transform.SetLocalScale(glm::vec3(0.05f));
+			statue.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
+		}
+	}
 }
 
 void Example::Scenes::PhysicsScene::OnUnload()
 {
+}
+
+void Example::Scenes::PhysicsScene::Update(float p_deltaTime)
+{
+	if (m_inputManager.IsKeyDown(SimplexEngine::Inputs::EKey::KEY_1))
+	{
+		auto& cubeActor = AddActor<SimplexEngine::Actors::Actor>();
+		cubeActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		cubeActor.transform.SetLocalPosition({ 0.0f, 20.0f, -40.0f });
+		cubeActor.transform.SetLocalScale({ 1.0f, 1.0f, 1.0f });
+		cubeActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(1.0f, 1.0f, 1.0f));
+		cubeActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(10.0f);
+		cubeActor.AddBehaviour<Example::Scripts::KillOnFall>(-20.0f);
+	}
+
+	if (m_inputManager.IsKeyDown(SimplexEngine::Inputs::EKey::KEY_2))
+	{
+		auto& sphereActor = AddActor<SimplexEngine::Actors::Actor>();
+		sphereActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Sphere")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		sphereActor.transform.SetLocalPosition({ 0.0f, 20.0f, -40.0f });
+		sphereActor.transform.SetLocalScale({ 1.0f, 1.0f, 1.0f });
+		sphereActor.AddComponent<SimplexEngine::Components::SphereColliderComponent>(1.0f);
+		sphereActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(10.0f);
+		sphereActor.AddBehaviour<Example::Scripts::KillOnFall>(-20.0f);
+	}
+
+	if (m_inputManager.IsKeyDown(SimplexEngine::Inputs::EKey::KEY_3))
+	{
+		auto& capsuleActor = AddActor<SimplexEngine::Actors::Actor>();
+		capsuleActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Sphere")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		capsuleActor.transform.SetLocalPosition({ 0.0f, 20.0f, -40.0f });
+		capsuleActor.transform.SetLocalScale({ 1.0f, 2.0f, 1.0f });
+		capsuleActor.AddComponent<SimplexEngine::Components::CapsuleColliderComponent>(1.0f, 2.0f);
+		capsuleActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(10.0f);
+		capsuleActor.AddBehaviour<Example::Scripts::KillOnFall>(-20.0f);
+	}
 }
