@@ -23,9 +23,9 @@ glm::vec4 SimplexEngine::Shaders::LambertShader::VertexModifier(const Data::Vert
 
 glm::vec3 SimplexEngine::Shaders::LambertShader::FragmentModifier() const
 {
-	glm::vec3 ambient(0.2f, 0.2f, 0.2f);
-	glm::vec3 position(5, 2, 10);
-	glm::vec3 diffuse(0.8f, 0.8f, 0.8f);
+	glm::vec3 ambient(0.3f, 0.3f, 0.3f);
+	glm::vec3 position(5, 10, 5);
+	glm::vec3 diffuse(0.7f, 0.7f, 0.7f);
 	glm::vec3 normal = GetVarying<vec3>("normal");
 
 	return ambient + diffuse * Lambert(normal, position);
