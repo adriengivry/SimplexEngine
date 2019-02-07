@@ -17,7 +17,7 @@ namespace SimplexEngine::Shaders
 	{
 	public:
 		virtual glm::vec4 VertexModifier(const Data::Vertex & p_vertex) override;
-		virtual glm::vec3 FragmentModifier() const override;
+		virtual glm::vec4 FragmentModifier() const override;
 
 		/**
 		* Calculate lambert

@@ -54,7 +54,7 @@ namespace SimplexEngine::Shaders
 		* The fragment modifier is where every pixels are modified.
 		* It is called after the rasterization stage
 		*/
-		virtual glm::vec3 FragmentModifier() const = 0;
+		virtual glm::vec4 FragmentModifier() const = 0;
 
 		/**
 		* Process interpolation for all varying data and output to fragmentData

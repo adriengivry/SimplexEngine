@@ -43,6 +43,11 @@ std::tuple<float, float, float, float> SimplexEngine::Data::Color::GetNormalized
 	return std::make_tuple(r / 255.f, g / 255.f, b / 255.f, a / 255.f);
 }
 
+glm::vec4 SimplexEngine::Data::Color::GetNormalizedVec4() const
+{
+	return glm::vec4(r / 255.f, g / 255.f, b / 255.f, a / 255.f);
+}
+
 uint32_t SimplexEngine::Data::Color::Pack() const
 {
 	return (r << 24) | (g << 16) | (b << 8) | a;

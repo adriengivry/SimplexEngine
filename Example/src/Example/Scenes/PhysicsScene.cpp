@@ -18,7 +18,9 @@ void Example::Scenes::PhysicsScene::OnLoad()
 	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 8.0f, 1.0f);
 
 	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
-	gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+	auto& gunMeshComp = gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun"));
+	auto& gunMaterial = gunMeshComp.DefineMaterial<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::LambertShader>>();
+	gunMaterial.baseColor = SimplexEngine::Data::Color(0, 111, 232);
 	gun.transform.SetLocalPosition({ 1.0f, -0.9f, -3.0f });
 	gun.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
 	gun.transform.SetLocalScale(glm::vec3(0.1f));
@@ -28,7 +30,9 @@ void Example::Scenes::PhysicsScene::OnLoad()
 	for (int16_t z = 0; z < 10; z += 1)
 	{
 		auto& floorActor = AddActor<SimplexEngine::Actors::Actor>();
-		floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		auto& floorMeshComp = floorActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube"));
+		auto& floorMaterial = floorMeshComp.USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		floorMaterial.baseColor = SimplexEngine::Data::Color::Red;
 		floorActor.transform.SetLocalPosition({ sin(z) * 2.0f, -2.0f, - (z * 10.0f) });
 		floorActor.transform.SetLocalScale({ 2.5f, 0.5f, 2.5f });
 		floorActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(2.5f, 0.5f, 2.5f));
@@ -37,7 +41,9 @@ void Example::Scenes::PhysicsScene::OnLoad()
 		if (z == 9)
 		{
 			auto& statue = AddActor<SimplexEngine::Actors::Actor>();
-			statue.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Statue")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+			auto& statueMeshComp = statue.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Statue"));
+			auto& statueMaterial = statueMeshComp.USE_SHADER(SimplexEngine::Shaders::LambertShader);
+			statueMaterial.baseColor = SimplexEngine::Data::Color(185, 122, 87);
 			statue.transform.SetLocalPosition({ sin(z) * 2.0f, 3.5f, -(z * 10.0f) });
 			statue.transform.SetLocalScale(glm::vec3(0.05f));
 			statue.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));

@@ -58,9 +58,14 @@ namespace SimplexEngine::Data
 		uint8_t a;
 
 		/**
-		* Return a normalized version (As a tuple of float between 0.f and 1.f) of the current color
+		* Return a normalized version (tuple of 4 floats) of the current color
 		*/
 		std::tuple<float, float, float, float> GetNormalized() const;
+
+		/**
+		* Return a normalized version (glm::vec4) of the current color
+		*/
+		glm::vec4 GetNormalizedVec4() const;
 
 		/**
 		* Pack data to uint32_t

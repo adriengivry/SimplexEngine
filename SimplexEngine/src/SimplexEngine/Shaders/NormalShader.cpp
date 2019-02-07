@@ -22,11 +22,9 @@ glm::vec4 SimplexEngine::Shaders::NormalShader::VertexModifier(const Data::Verte
 	return vertexWorldPosition;
 }
 
-glm::vec3 SimplexEngine::Shaders::NormalShader::FragmentModifier() const
+glm::vec4 SimplexEngine::Shaders::NormalShader::FragmentModifier() const
 {
 	vec3 normal = normalize(GetVarying<vec3>("normal"));
 
-	vec3 finalColor(normal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f));
-
-	return finalColor;
+	return vec4(normal * 0.5f + glm::vec3(0.5f, 0.5f, 0.5f), 1.0f);
 }

@@ -31,7 +31,10 @@ namespace SimplexEngine::Materials
 			this->SetUniform("mvp", p_materialData.mainCamera.GetViewProjectionMatrix() * p_materialData.mesh.owner->transform.GetWorldMatrix());
 			this->SetUniform("modelMatrix", p_materialData.mesh.owner->transform.GetWorldMatrix());
 			this->SetUniform("time", p_materialData.totalTime);
+			this->SetUniform("baseColor", baseColor.GetNormalizedVec4());
 		}
+
+		Data::Color baseColor = Data::Color::White;
 	};
 }
 

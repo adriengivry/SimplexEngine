@@ -30,7 +30,11 @@ namespace SimplexEngine::Components
 		* is requiered (Template parameter)
 		*/
 		template<typename T, typename ...Args>
-		void DefineMaterial(Args&&... p_args) { m_material = std::make_unique<T>(p_args...); }
+		T& DefineMaterial(Args&&... p_args)
+		{ 
+			m_material = std::make_unique<T>(p_args...);
+			return *static_cast<T*>(m_material.get());
+		}
 
 		/**
 		* Set a mesh for the mesh component
