@@ -41,11 +41,14 @@ There are 2 projects in this repository, the actual game engine and an example p
 ### Material color and alpha blending
 ![Screenshot 4](Screenshots/Alpha_And_Colors.png)
 
+### Random color entity spawning
+![Screenshot 5](Screenshots/Entity_Spawning.png)
+
 ### Simple scene with parent/child relations
-![Screenshot 5](Screenshots/Demo_Scene.PNG)
+![Screenshot 6](Screenshots/Demo_Scene.PNG)
 
 ### Unreal Engine 4 mannequin with lambert shader
-![Screenshot 6](Screenshots/Mannequin.PNG)
+![Screenshot 7](Screenshots/Mannequin.PNG)
 
 ### Dynamic rasterization buffer size for pixelized style
-![Screenshot 7](Screenshots/pixelized.png)
+![Screenshot 8](Screenshots/pixelized.png)
