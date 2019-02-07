@@ -17,15 +17,6 @@ void Example::Scenes::PhysicsScene::OnLoad()
 	cameraActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(1.0f);
 	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 12.0f, 1.0f);
 
-	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
-	auto& gunMeshComp = gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun"));
-	auto& gunMaterial = gunMeshComp.DefineMaterial<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::LambertShader>>();
-	gunMaterial.baseColor = SimplexEngine::Data::Color(0, 111, 232);
-	gun.transform.SetLocalPosition({ 1.0f, -0.9f, -3.0f });
-	gun.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
-	gun.transform.SetLocalScale(glm::vec3(0.1f));
-	gun.transform.SetParent(cameraActor.transform);
-
 	/* Floor */
 	for (int16_t z = 0; z < 10; z += 1)
 	{
@@ -49,6 +40,15 @@ void Example::Scenes::PhysicsScene::OnLoad()
 			statue.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
 		}
 	}
+
+	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
+	auto& gunMeshComp = gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun"));
+	auto& gunMaterial = gunMeshComp.DefineMaterial<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::LambertShader>>();
+	gunMaterial.baseColor = SimplexEngine::Data::Color(0, 111, 232, 128);
+	gun.transform.SetLocalPosition({ 1.0f, -0.9f, -3.0f });
+	gun.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
+	gun.transform.SetLocalScale(glm::vec3(0.1f));
+	gun.transform.SetParent(cameraActor.transform);
 
 	m_physicsManager.SetGravity(glm::vec3(0.0f, -25.0f, 0.0f));
 }

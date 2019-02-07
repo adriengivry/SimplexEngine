@@ -31,6 +31,12 @@ namespace SimplexEngine::Data
 		static const Color Cyan;
 		static const Color Magenta;
 
+
+		uint8_t r;
+		uint8_t g;
+		uint8_t b;
+		uint8_t a;
+
 		/**
 		* Create a color with given integer values
 		* @param p_r (Red value [0 to 255])
@@ -52,10 +58,11 @@ namespace SimplexEngine::Data
 		*/
 		Color(const glm::vec3& p_normalizedColor);
 
-		uint8_t r;
-		uint8_t g;
-		uint8_t b;
-		uint8_t a;
+		/**
+		* Create a color from a packed uint32_t
+		* @param p_packedData
+		*/
+		Color(uint32_t p_packedData);
 
 		/**
 		* Return a normalized version (tuple of 4 floats) of the current color
@@ -68,9 +75,23 @@ namespace SimplexEngine::Data
 		glm::vec4 GetNormalizedVec4() const;
 
 		/**
+		* Return a normalized version (glm::vec3) of the current color
+		* @param p_alpha is lost!
+		*/
+		glm::vec3 GetNormalizedVec3() const;
+
+		/**
 		* Pack data to uint32_t
 		*/
 		uint32_t Pack() const;
+
+		/**
+		* Mix two colors
+		* @param p_color1
+		* @param p_color2
+		* @param p_alpha
+		*/
+		static Color Mix(const Color& p_color1, const Color& p_color2, float p_alpha);
 	};
 }
 

@@ -184,7 +184,10 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragment(const std::pair<int32
 
 	uint32_t index = p_pixelCoordinates.second * m_rasterizationOutputBuffer.width + p_pixelCoordinates.first;
 
-	m_rasterizationOutputBuffer.data[index] = p_shader.ProcessFragment().Pack();
+	Data::Color color = p_shader.ProcessFragment();
+	float alpha = static_cast<float>(color.a / 255.0f);
+
+	m_rasterizationOutputBuffer.data[index] = Data::Color::Mix(Data::Color(m_rasterizationOutputBuffer.data[index]), color, alpha).Pack();
 	m_depthBuffer.data[index] = p_depth;
 }
 

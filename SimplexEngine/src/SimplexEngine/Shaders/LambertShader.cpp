@@ -28,7 +28,7 @@ glm::vec4 SimplexEngine::Shaders::LambertShader::FragmentModifier() const
 	glm::vec4 diffuse = GetUniform<vec4>("baseColor");
 	glm::vec3 normal = GetVarying<vec3>("normal");
 
-	return diffuse * Lambert(normal, lightPosition);
+	return glm::vec4(glm::vec3(diffuse) * Lambert(normal, lightPosition), diffuse.a);
 }
 
 float SimplexEngine::Shaders::LambertShader::Lambert(const glm::vec3 & p_fragmentNormal, const glm::vec3 & p_lightPosition) const

@@ -38,6 +38,14 @@ SimplexEngine::Data::Color::Color(const glm::vec3 & p_normalizedColor) :
 {
 }
 
+SimplexEngine::Data::Color::Color(uint32_t p_packedData) :
+	a(p_packedData),
+	b(p_packedData >> 8),
+	g(p_packedData >> 16),
+	r(p_packedData >> 24)
+{
+}
+
 std::tuple<float, float, float, float> SimplexEngine::Data::Color::GetNormalized() const
 {
 	return std::make_tuple(r / 255.f, g / 255.f, b / 255.f, a / 255.f);
@@ -48,7 +56,17 @@ glm::vec4 SimplexEngine::Data::Color::GetNormalizedVec4() const
 	return glm::vec4(r / 255.f, g / 255.f, b / 255.f, a / 255.f);
 }
 
+glm::vec3 SimplexEngine::Data::Color::GetNormalizedVec3() const
+{
+	return glm::vec3(r / 255.f, g / 255.f, b / 255.f);
+}
+
 uint32_t SimplexEngine::Data::Color::Pack() const
 {
 	return (r << 24) | (g << 16) | (b << 8) | a;
+}
+
+SimplexEngine::Data::Color SimplexEngine::Data::Color::Mix(const Color & p_color1, const Color & p_color2, float p_alpha)
+{
+	return Data::Color(glm::mix(p_color1.GetNormalizedVec3(), p_color2.GetNormalizedVec3(), p_alpha));
 }
