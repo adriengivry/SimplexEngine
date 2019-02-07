@@ -62,7 +62,9 @@ void Example::Scenes::PhysicsScene::Update(float p_deltaTime)
 	if (m_inputManager.IsKeyDown(SimplexEngine::Inputs::EKey::KEY_1))
 	{
 		auto& cubeActor = AddActor<SimplexEngine::Actors::Actor>();
-		cubeActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		auto& cubeMeshComp = cubeActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Cube"));
+		auto& cubeMaterial = cubeMeshComp.USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		cubeMaterial.baseColor = SimplexEngine::Data::Color(m_colorRange(m_randEngine), m_colorRange(m_randEngine), m_colorRange(m_randEngine));
 		cubeActor.transform.SetLocalPosition({ 0.0f, 20.0f, -40.0f });
 		cubeActor.transform.SetLocalScale({ 1.0f, 1.0f, 1.0f });
 		cubeActor.AddComponent<SimplexEngine::Components::BoxColliderComponent>(glm::vec3(1.0f, 1.0f, 1.0f));
@@ -73,7 +75,9 @@ void Example::Scenes::PhysicsScene::Update(float p_deltaTime)
 	if (m_inputManager.IsKeyDown(SimplexEngine::Inputs::EKey::KEY_2))
 	{
 		auto& sphereActor = AddActor<SimplexEngine::Actors::Actor>();
-		sphereActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Sphere")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		auto& sphereMeshComp = sphereActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Sphere"));
+		auto& sphereMaterial = sphereMeshComp.USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		sphereMaterial.baseColor = SimplexEngine::Data::Color(m_colorRange(m_randEngine), m_colorRange(m_randEngine), m_colorRange(m_randEngine));
 		sphereActor.transform.SetLocalPosition({ 0.0f, 20.0f, -40.0f });
 		sphereActor.transform.SetLocalScale({ 1.0f, 1.0f, 1.0f });
 		sphereActor.AddComponent<SimplexEngine::Components::SphereColliderComponent>(1.0f);
@@ -84,7 +88,9 @@ void Example::Scenes::PhysicsScene::Update(float p_deltaTime)
 	if (m_inputManager.IsKeyDown(SimplexEngine::Inputs::EKey::KEY_3))
 	{
 		auto& capsuleActor = AddActor<SimplexEngine::Actors::Actor>();
-		capsuleActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Sphere")).USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		auto& capsuleMeshComp = capsuleActor.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Sphere"));
+		auto& capsuleMaterial = capsuleMeshComp.USE_SHADER(SimplexEngine::Shaders::LambertShader);
+		capsuleMaterial.baseColor = SimplexEngine::Data::Color(m_colorRange(m_randEngine), m_colorRange(m_randEngine), m_colorRange(m_randEngine));
 		capsuleActor.transform.SetLocalPosition({ 0.0f, 20.0f, -40.0f });
 		capsuleActor.transform.SetLocalScale({ 1.0f, 2.0f, 1.0f });
 		capsuleActor.AddComponent<SimplexEngine::Components::CapsuleColliderComponent>(1.0f, 2.0f);

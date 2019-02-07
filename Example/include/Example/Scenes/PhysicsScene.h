@@ -4,7 +4,10 @@
 * @version 1.0
 */
 
+
 #include <SimplexEngine/SimplexEngine.h>
+
+#include <random>
 
 #pragma once
 #ifndef _PHYSICSSCENE_H
@@ -20,6 +23,10 @@ namespace Example::Scenes
 		virtual void OnLoad() override;
 		virtual void OnUnload() override;
 		virtual void Update(float p_deltaTime) override;
+
+	private:
+		std::default_random_engine m_randEngine;
+		std::uniform_int_distribution<int> m_colorRange{ 0, 255 };
 	};
 }
 
