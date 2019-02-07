@@ -12,10 +12,10 @@ void Example::Scenes::PhysicsScene::OnLoad()
 	/* Create the camera */
 	auto& cameraActor = AddActor<SimplexEngine::Actors::Actor>();
 	auto& cameraComponent = cameraActor.AddComponent<SimplexEngine::Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
-	cameraActor.transform.SetLocalPosition({ 0.0f, 20.0f, 0.0f });
+	cameraActor.transform.SetLocalPosition({ 0.0f, 50.0f, 0.0f });
 	cameraActor.AddComponent<SimplexEngine::Components::CapsuleColliderComponent>(1.0f, 5.0f);
 	cameraActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(1.0f);
-	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 8.0f, 1.0f);
+	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 12.0f, 1.0f);
 
 	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
 	auto& gunMeshComp = gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun"));
@@ -49,6 +49,8 @@ void Example::Scenes::PhysicsScene::OnLoad()
 			statue.transform.SetLocalRotation(SimplexEngine::Maths::QuaternionFactory::CreateFromEuler({ 90.0f, 0.0f, 0.0f }));
 		}
 	}
+
+	m_physicsManager.SetGravity(glm::vec3(0.0f, -25.0f, 0.0f));
 }
 
 void Example::Scenes::PhysicsScene::OnUnload()

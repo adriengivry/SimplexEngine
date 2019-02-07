@@ -5,9 +5,9 @@
 */
 
 #include "SimplexEngine/Physics/PhysicsManager.h"
+#include "SimplexEngine/Scenes/SceneManager.h"
 
-SimplexEngine::Physics::PhysicsManager::PhysicsManager(Scenes::SceneManager& p_sceneManager) :
-	m_sceneManager(p_sceneManager)
+SimplexEngine::Physics::PhysicsManager::PhysicsManager()
 {
 	m_collisionConfig = new btDefaultCollisionConfiguration();
 	m_dispatcher = new btCollisionDispatcher(m_collisionConfig);
@@ -15,23 +15,37 @@ SimplexEngine::Physics::PhysicsManager::PhysicsManager(Scenes::SceneManager& p_s
 	m_solver = new btSequentialImpulseConstraintSolver();
 	m_world = new btSimpleDynamicsWorld(m_dispatcher, m_broadphase, m_solver, m_collisionConfig);
 	m_world->setGravity(btVector3(0.0f, -9.8f, 0.0f));
-
-	m_sceneManager.ComponentAddedEvent.AddListener(std::bind(&PhysicsManager::OnComponentAdded, this, std::placeholders::_1));
 }
 
 SimplexEngine::Physics::PhysicsManager::~PhysicsManager()
 {
 }
 
+void SimplexEngine::Physics::PhysicsManager::SetGravity(const glm::vec3 & p_gravity)
+{
+	m_world->setGravity(btVector3(p_gravity.x, p_gravity.y, p_gravity.z));
+}
+
+void SimplexEngine::Physics::PhysicsManager::ProvideSceneManager(Scenes::SceneManager& p_sceneManager)
+{
+	m_sceneManager = &p_sceneManager;
+
+	m_sceneManager->ComponentAddedEvent.AddListener(std::bind(&PhysicsManager::OnComponentAdded, this, std::placeholders::_1));
+	m_sceneManager->ComponentRemovedEvent.AddListener(std::bind(&PhysicsManager::OnComponentRemoved, this, std::placeholders::_1));
+}
+
 void SimplexEngine::Physics::PhysicsManager::Update(float p_deltaTime)
 {
-	m_world->stepSimulation(p_deltaTime);
-
-	for (auto& element : m_sceneManager.GetCurrentScene()->GetActors())
+	if (m_sceneManager)
 	{
-		auto rigidbodyComponent = element->GetComponent<Components::RigidbodyComponent>();
-		if (rigidbodyComponent)
-			MoveRigidbody(*rigidbodyComponent);
+		m_world->stepSimulation(p_deltaTime);
+
+		for (auto& element : m_sceneManager->GetCurrentScene()->GetActors())
+		{
+			auto rigidbodyComponent = element->GetComponent<Components::RigidbodyComponent>();
+			if (rigidbodyComponent)
+				MoveRigidbody(*rigidbodyComponent);
+		}
 	}
 }
 

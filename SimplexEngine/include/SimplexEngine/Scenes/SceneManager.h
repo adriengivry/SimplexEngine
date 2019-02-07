@@ -32,7 +32,7 @@ namespace SimplexEngine::Scenes
 		* @param p_args
 		*/
 		template<typename T, typename ... Args>
-		void RegisterScene(const std::string& p_sceneName) { m_scenes[p_sceneName] = std::make_shared<T>(m_window, m_inputManager, m_userInterface, m_eventHandler, m_meshManager); }
+		void RegisterScene(const std::string& p_sceneName) { m_scenes[p_sceneName] = std::make_shared<T>(m_window, m_inputManager, m_userInterface, m_eventHandler, m_meshManager, m_physicsManager); }
 
 		/**
 		* Remove a scene instance
@@ -77,6 +77,7 @@ namespace SimplexEngine::Scenes
 		Rendering::UserInterface&			m_userInterface;
 		Eventing::EventHandler&				m_eventHandler;
 		Resources::Managers::MeshManager&	m_meshManager;
+		Physics::PhysicsManager&			m_physicsManager;
 
 		std::unordered_map<std::string, std::shared_ptr<Scenes::AScene>> m_scenes;
 

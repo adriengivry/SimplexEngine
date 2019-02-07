@@ -80,5 +80,8 @@ void SimplexEngine::Scripts::Behaviours::FPSController::HandleKeyboard(float p_d
 		m_inputManager.LockMouse();
 
 	if (m_inputManager.HasKeyBeenPressed(Inputs::EKey::KEY_SPACE))
+	{
+		m_rigidbodyComponent.GetBody()->clearForces();
 		m_rigidbodyComponent.GetBody()->applyCentralImpulse(btVector3(0.0f, 1.0f, 0.0f) * m_jumpStrength);
+	}
 }

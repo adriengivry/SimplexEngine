@@ -23,12 +23,13 @@ SimplexEngine::Core::Engine::Engine(const Settings::EngineSettings& p_engineSett
 	userInterface(window, renderer, p_engineSettings.userInterface),
 	rasterizer(renderer, p_engineSettings.video.rasterizationBufferWidth == 0 ? window.GetInitialWidth() : p_engineSettings.video.rasterizationBufferWidth, p_engineSettings.video.rasterizationBufferHeight == 0 ? window.GetInitialHeight() : p_engineSettings.video.rasterizationBufferHeight),
 	meshManager(p_engineSettings.resources.meshIndexerPath),
-	sceneManager(window, inputManager, userInterface, eventHandler, meshManager),
-	physicsManager(sceneManager),
+	sceneManager(window, inputManager, userInterface, eventHandler, meshManager, physicsManager),
 	m_defaultMaterial(std::make_unique<SimplexEngine::Materials::DefaultMaterial<SimplexEngine::Shaders::NormalShader>>()),
 	m_running(true)
 {
 	eventHandler.QuitEvent.AddListener(std::bind(&SimplexEngine::Core::Engine::Stop, this));
+
+	physicsManager.ProvideSceneManager(sceneManager);
 
 	/* Initialize the default camera */
 	m_defaultCamera.AddComponent<Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), window.GetAspectRatio());

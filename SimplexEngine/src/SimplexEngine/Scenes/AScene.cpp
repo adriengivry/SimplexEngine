@@ -11,7 +11,8 @@ SimplexEngine::Scenes::AScene::AScene(SCENE_PARAMETERS) :
 	m_eventHandler(p_eventHandler),
 	m_userInterface(p_userInterface),
 	m_inputManager(p_inputManager),
-	m_meshManager(p_meshManager)
+	m_meshManager(p_meshManager),
+	m_physicsManager(p_physicsManager)
 {
 }
 

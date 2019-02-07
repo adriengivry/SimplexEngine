@@ -18,6 +18,7 @@
 #include "SimplexEngine/Rendering/Renderer.h"
 #include "SimplexEngine/Rendering/UserInterface.h"
 #include "SimplexEngine/Rendering/Rasterizer.h"
+#include "SimplexEngine/Physics/PhysicsManager.h"
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Utils/Clock.h"
 #include "SimplexEngine/Resources/Managers/MeshManager.h"
@@ -48,6 +49,7 @@ namespace SimplexEngine::Scenes
 		* @param p_inputManager
 		* @param p_userInterface
 		* @param p_meshManager
+		* @param p_physicsManager
 		*/
 		AScene(SCENE_PARAMETERS);
 
@@ -150,6 +152,7 @@ namespace SimplexEngine::Scenes
 		Rendering::UserInterface&			m_userInterface;
 		Eventing::EventHandler&				m_eventHandler;
 		Resources::Managers::MeshManager&	m_meshManager;
+		Physics::PhysicsManager&			m_physicsManager;
 
 		/* Scene content */
 		std::vector<std::shared_ptr<Actors::Actor>>		m_actors;
