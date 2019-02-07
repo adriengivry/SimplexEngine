@@ -38,11 +38,14 @@ There are 2 projects in this repository, the actual game engine and an example p
 ### Puzzle jump map with Character Controller
 ![Screenshot 3](Screenshots/Puzzle_Jump.png)
 
+### Material color and alpha blending
+![Screenshot 4](Screenshots/Alpha_And_Colors.png)
+
 ### Simple scene with parent/child relations
-![Screenshot 4](Screenshots/Demo_Scene.PNG)
+![Screenshot 5](Screenshots/Demo_Scene.PNG)
 
 ### Unreal Engine 4 mannequin with lambert shader
-![Screenshot 5](Screenshots/Mannequin.PNG)
+![Screenshot 6](Screenshots/Mannequin.PNG)
 
 ### Dynamic rasterization buffer size for pixelized style
-![Screenshot 6](Screenshots/pixelized.png)
+![Screenshot 7](Screenshots/pixelized.png)
