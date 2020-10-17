@@ -15,7 +15,7 @@
 SimplexEngine::Scripts::SceneScripts::CameraController::CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent, float p_movementSpeed, float p_mouseSensitivity) :
 	m_inputManager(p_inputManager),
 	m_cameraComponent(p_cameraComponent),
-	m_mouseSensitivity(10.0f * p_mouseSensitivity),
+	m_mouseSensitivity(p_mouseSensitivity),
 	m_movementSpeed(p_movementSpeed)
 {
 	m_inputManager.LockMouse();
@@ -37,8 +37,8 @@ void SimplexEngine::Scripts::SceneScripts::CameraController::HandleMouse(float p
 	if (std::abs(motionX) + std::abs(motionY) > 100.0f)
 		return;
 
-	const float xOffset = motionX * m_mouseSensitivity * p_deltaTime;
-	const float yOffset = motionY * m_mouseSensitivity * p_deltaTime;
+	const float xOffset = motionX * m_mouseSensitivity;
+	const float yOffset = motionY * m_mouseSensitivity;
 
 	/* The yaw is influenced by x movements of the mouse */
 	m_yaw -= xOffset;

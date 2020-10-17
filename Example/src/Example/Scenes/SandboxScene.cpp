@@ -12,7 +12,7 @@ void Example::Scenes::SandboxScene::OnLoad()
 	auto& cameraActor = AddActor<SimplexEngine::Actors::Actor>();
 	auto& cameraComponent = cameraActor.AddComponent<SimplexEngine::Components::CameraComponent>(glm::vec3(0.0f, 1.0f, 0.0f), m_window.GetAspectRatio());
 	cameraActor.transform.SetLocalPosition({ 0.0f, 0.0f, 10.0f });
-	AddScript<SimplexEngine::Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent, 20.0f, 1.0f);
+	AddScript<SimplexEngine::Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent, 20.0f, 0.1f);
 
 	auto& gun = AddActor<SimplexEngine::Actors::Actor>();
 	gun.AddComponent<SimplexEngine::Components::MeshComponent>(*m_meshManager.RequireAndGet("Gun")).USE_SHADER(SimplexEngine::Shaders::LambertShader);

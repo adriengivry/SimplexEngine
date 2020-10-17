@@ -65,25 +65,36 @@ namespace SimplexEngine::Data
 		Color(uint32_t p_packedData);
 
 		/**
-		* Return a normalized version (tuple of 4 floats) of the current color
-		*/
-		std::tuple<float, float, float, float> GetNormalized() const;
-
-		/**
 		* Return a normalized version (glm::vec4) of the current color
 		*/
-		glm::vec4 GetNormalizedVec4() const;
+        inline glm::vec4 GetNormalizedVec4() const
+        {
+            glm::vec4 frgba(static_cast<float>(r), static_cast<float>(g), static_cast<float>(b), static_cast<float>(a));
+
+            __m128 m_frgba = _mm_load_ps(&frgba.x);
+            __m128 m_cbits = _mm_set1_ps(1 / 255.0f);
+
+            _mm_store_ps(&frgba.x, _mm_mul_ps(m_frgba, m_cbits));
+
+            return frgba;
+        }
 
 		/**
 		* Return a normalized version (glm::vec3) of the current color
 		* @param p_alpha is lost!
 		*/
-		glm::vec3 GetNormalizedVec3() const;
+        inline glm::vec3 GetNormalizedVec3() const
+        {
+            return glm::vec3(r / 255.f, g / 255.f, b / 255.f);
+        }
 
 		/**
 		* Pack data to uint32_t
 		*/
-		uint32_t Pack() const;
+        inline uint32_t Pack() const
+        {
+            return (r << 24) | (g << 16) | (b << 8) | a;
+        }
 
 		/**
 		* Mix two colors
@@ -91,7 +102,10 @@ namespace SimplexEngine::Data
 		* @param p_color2
 		* @param p_alpha
 		*/
-		static Color Mix(const Color& p_color1, const Color& p_color2, float p_alpha);
+        static inline Color Mix(const Color& p_color1, const Color& p_color2, float p_alpha)
+        {
+            return Data::Color(glm::mix(p_color1.GetNormalizedVec3(), p_color2.GetNormalizedVec3(), p_alpha));
+        }
 	};
 }
 
