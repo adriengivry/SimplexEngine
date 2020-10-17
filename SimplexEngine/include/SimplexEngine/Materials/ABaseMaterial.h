@@ -52,7 +52,11 @@ namespace SimplexEngine::Materials
 		* @param p_name
 		* @param p_value
 		*/
-		void SetUniform(const std::string& p_name, const Shaders::AShader::ShaderValue& p_value) { m_shaderInstance->SetUniform(p_name, p_value); }
+        template<typename T>
+		void SetUniform(int p_index, T p_value)
+        {
+            m_shaderInstance->SetUniform(p_index, p_value);
+        }
 	};
 }
 

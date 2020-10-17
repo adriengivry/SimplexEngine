@@ -159,8 +159,10 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragments(Shaders::AShader& p_
 	ymax = std::min(ymax, static_cast<int32_t>(m_rasterizationOutputBuffer.height));
 
 	/* Here we iterate over the bounding box (Clamped to window size) */
+    #pragma loop( ivdep )
 	for (int32_t x = xmin; x < xmax; ++x)
 	{
+        #pragma loop( ivdep )
 		for (int32_t y = ymin; y < ymax; ++y)
 		{
 			if (glm::vec3 barycentricCoords = p_triangle.GetBarycentricCoordinates({ x, y }); BarycentricCoordsAreValid(barycentricCoords))
@@ -185,9 +187,18 @@ void SimplexEngine::Rendering::Rasterizer::ComputeFragment(const std::pair<int32
 	uint32_t index = p_pixelCoordinates.second * m_rasterizationOutputBuffer.width + p_pixelCoordinates.first;
 
 	Data::Color color = p_shader.ProcessFragment();
-	float alpha = static_cast<float>(color.a / 255.0f);
 
-	m_rasterizationOutputBuffer.data[index] = Data::Color::Mix(Data::Color(m_rasterizationOutputBuffer.data[index]), color, alpha).Pack();
+    // Alpha blending
+    if (color.a < 255)
+    {
+        m_rasterizationOutputBuffer.data[index] = Data::Color::Mix(Data::Color(m_rasterizationOutputBuffer.data[index]), color, color.a / 255.0f).Pack();
+    }
+    // No alpha blending
+    else
+    {
+        m_rasterizationOutputBuffer.data[index] = color.Pack();
+    }
+
 	m_depthBuffer.data[index] = p_depth;
 }
 

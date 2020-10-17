@@ -9,6 +9,7 @@
 #define _MESH_H
 
 #include <vector>
+#include <string>
 
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Data/Vertex.h"

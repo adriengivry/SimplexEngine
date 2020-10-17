@@ -63,12 +63,13 @@ namespace SimplexEngine::Shaders
 		void ProcessInterpolation(const glm::vec3& p_barycentricCoords);
 
 		/**
-		* Send a value to the shader (Identified by the given name)
+		* Send a value to the shader (Identified by the given index)
 		* to use it in vertex and fragment modifier
-		* @param p_name
+		* @param p_index
 		* @param p_value
 		*/
-		void SetUniform(const std::string& p_name, ShaderValue p_value);
+        template<typename T>
+        void SetUniform(uint8_t p_index, T p_value) { reinterpret_cast<T&>(m_uniforms[p_index]) = p_value; }
 
 		/**
 		* Clear any data stored in this shader
@@ -77,63 +78,52 @@ namespace SimplexEngine::Shaders
 
 	protected:
 		/**
-		* Return the value of the uniform identified by the given name
-		* @param p_name
+		* Return the value of the uniform identified by the given index
+		* @param p_index
 		*/
 		template<typename T>
-		T GetUniform(const std::string& p_name) const { return std::get<T>(m_uniforms.at(p_name)); }
+		T GetUniform(uint8_t p_index) const { return reinterpret_cast<const T&>(m_uniforms[p_index]); }
 
 		/**
-		* Set the varying value identified by the given name to p_value
-		* @param p_name
+		* Set the varying value identified by the given index to p_value
+		* @param p_index
 		* @param p_value
 		*/
-		void SetVarying(const std::string& p_name, ShaderValue p_value);
+        template<typename T>
+        void SetVarying(uint8_t p_index, T p_value)
+        {
+            m_lastVaryingIndex = p_index + 1;
+            reinterpret_cast<T&>(m_varying[p_index][m_index]) = p_value;
+        }
 
 		/**
-		* Set the flat value identified by the given name to p_value
-		* @param p_name
+		* Set the flat value identified by the given index
+		* @param uint8_t
 		* @param p_value
 		*/
-		void SetFlat(const std::string& p_name, ShaderValue p_value);
+        template<typename T>
+        void SetFlat(uint8_t p_index, T p_value)  { reinterpret_cast<T&>(m_flat[p_index]) = p_value; }
 
 		/**
-		* Return the varying value identified by the given name
-		* @param p_name
+		* Return the varying value identified by the given index
+		* @param p_index
 		*/
 		template<typename T>
-		T GetVarying(const std::string& p_name) const { return std::get<T>(m_interpolatedVarying.at(p_name)); }
+		T GetVarying(uint8_t p_index) const { return reinterpret_cast<const T&>(m_interpolatedVarying[p_index]); }
 
 		/**
-		* Return the flat value identified by the given name
-		* @param p_name
+		* Return the flat value identified by the given index
+		* @param p_index
 		*/
 		template<typename T>
-		T GetFlat(const std::string& p_name) const { return std::get<T>(m_flat.at(p_name)); }
-
-		/**
-		* Interpolate an array of data with the given barycentric coordinates
-		* @param p_key (Identifier of where to store the result)
-		* @param p_data1
-		* @param p_data2
-		* @param p_data3
-		* @param p_barycentricCoords
-		*/
-		template<typename T>
-		void InterpolateData(const std::string& p_key, const T& p_data1, const T& p_data2, const T& p_data3, const glm::vec3& p_barycentricCoords)
-		{
-			m_interpolatedVarying[p_key] = 
-				p_data1 * p_barycentricCoords.z +
-				p_data2 * p_barycentricCoords.y +
-				p_data3 * p_barycentricCoords.x;
-		}
+        T GetFlat(uint8_t p_index) const { return reinterpret_cast<const T&>(m_flat[p_index] ); }
 
 	private:
-		std::unordered_map<std::string, ShaderValue> m_uniforms;
-		std::unordered_map<std::string, ShaderValue> m_varying[3];
-		std::unordered_map<std::string, ShaderValue> m_interpolatedVarying;
-		std::unordered_map<std::string, ShaderValue> m_flat;
-
+		glm::mat4 m_uniforms[256];
+		glm::vec4 m_flat[256];
+		glm::vec4 m_varying[256][3];
+		glm::vec4 m_interpolatedVarying[256];
+        uint8_t m_lastVaryingIndex = 0;
 		uint8_t m_index = 0;
 	};
 }

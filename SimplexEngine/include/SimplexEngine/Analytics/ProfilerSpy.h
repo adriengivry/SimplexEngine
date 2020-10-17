@@ -15,14 +15,18 @@
 #include "SimplexEngine/Analytics/Profiler.h"
 #include "SimplexEngine/Analytics/ProfilerSpy.h"
 
+#ifdef _DEBUG
 /**
 * This macro allow the creation of profiler spies
 * Any spy will die and send data to the profiler at
 * the end of the scope where this macro get called
 */
-#define PROFILER_SPY(name)\
-		std::unique_ptr<SimplexEngine::Analytics::ProfilerSpy> __profiler_spy__ = \
-		SimplexEngine::Analytics::Profiler::IsEnabled() ? std::make_unique<SimplexEngine::Analytics::ProfilerSpy>(name) : nullptr
+    #define PROFILER_SPY(name)\
+        std::unique_ptr<SimplexEngine::Analytics::ProfilerSpy> __profiler_spy__ = \
+        SimplexEngine::Analytics::Profiler::IsEnabled() ? std::make_unique<SimplexEngine::Analytics::ProfilerSpy>(name) : nullptr
+#else
+    #define PROFILER_SPY(name) do {} while(false)
+#endif
 
 namespace SimplexEngine::Analytics
 {

@@ -150,7 +150,17 @@ void SimplexEngine::Core::Engine::RasterizeScene()
 
 void SimplexEngine::Core::Engine::RasterizeRegion(const Components::CameraComponent& p_cameraToUse, uint32_t p_regionID, uint32_t p_totalRegions)
 {
-	const std::vector<std::reference_wrapper<const SimplexEngine::Components::MeshComponent>>& meshes = Utils::SceneParser::FindMeshes(*sceneManager.GetCurrentScene());
+	std::vector<std::reference_wrapper<const SimplexEngine::Components::MeshComponent>> meshes = Utils::SceneParser::FindMeshes(*sceneManager.GetCurrentScene());
+
+    const auto& cameraPosition = p_cameraToUse.owner->transform.GetWorldPosition();
+
+    std::sort(meshes.begin(), meshes.end(), [&cameraPosition](std::reference_wrapper<const SimplexEngine::Components::MeshComponent> a, std::reference_wrapper<const SimplexEngine::Components::MeshComponent> b)
+    {
+        const auto distanceToA = glm::distance(a.get().owner->transform.GetWorldPosition(), cameraPosition);
+        const auto distanceToB = glm::distance(b.get().owner->transform.GetWorldPosition(), cameraPosition);
+
+        return distanceToA < distanceToB;
+    });
 
 	for (uint32_t i = p_regionID; i < meshes.size(); i += p_totalRegions)
 	{

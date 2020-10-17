@@ -26,64 +26,44 @@ void SimplexEngine::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_ba
 {
 	PROFILER_SPY("AShader::ProcessInterpolation");
 
-	for (const auto&[key, value] : m_varying[0])
-	{
-		if (auto data = std::get_if<glm::vec3>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<glm::vec3>(m_varying[1].at(key)), std::get<glm::vec3>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<glm::vec4>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<glm::vec4>(m_varying[1].at(key)), std::get<glm::vec4>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<float>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<float>(m_varying[1].at(key)), std::get<float>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<glm::vec2>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<glm::vec2>(m_varying[1].at(key)), std::get<glm::vec2>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<int>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<int>(m_varying[1].at(key)), std::get<int>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<glm::mat3>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<glm::mat3>(m_varying[1].at(key)), std::get<glm::mat3>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<glm::mat4>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<glm::mat4>(m_varying[1].at(key)), std::get<glm::mat4>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-		else if (auto data = std::get_if<glm::mat2>(&m_varying[0].at(key)); data)
-		{
-			InterpolateData(key, *data, std::get<glm::mat2>(m_varying[1].at(key)), std::get<glm::mat2>(m_varying[2].at(key)), p_barycentricCoords);
-		}
-	}
-}
+    /*
+    for (int i = 0; i < 128; ++i)
+    {
+        m_interpolatedVarying[i] =
+            m_varying[i][0] * p_barycentricCoords.z +
+            m_varying[i][1] * p_barycentricCoords.y +
+            m_varying[i][2] * p_barycentricCoords.x;
+    }
+    */
+    // Load barycentric coordinates in xmm register
+    __m128 bcx = _mm_broadcast_ss(&p_barycentricCoords.x);
+    __m128 bcy = _mm_broadcast_ss(&p_barycentricCoords.y);
+    __m128 bcz = _mm_broadcast_ss(&p_barycentricCoords.z);
 
-void SimplexEngine::Shaders::AShader::SetUniform(const std::string& p_name, ShaderValue p_value)
-{
-	m_uniforms[p_name] = p_value;
+    for (int i = 0; i < m_lastVaryingIndex; ++i)
+    {
+        // Load the three vertex varings into xmm registers
+        __m128 v0 = _mm_load_ps(&m_varying[i][0].x);
+        __m128 v1 = _mm_load_ps(&m_varying[i][1].x);
+        __m128 v2 = _mm_load_ps(&m_varying[i][2].x);
+
+        // Interpolation result
+        __m128 result = 
+            _mm_add_ps(
+                _mm_add_ps(
+                    _mm_mul_ps(v0, bcz),
+                    _mm_mul_ps(v1, bcy)),
+                _mm_mul_ps(v2, bcx)
+            );
+
+
+
+        // Store interpolation result
+        _mm_store_ps(&m_interpolatedVarying[i].x, result);
+    }
 }
 
 void SimplexEngine::Shaders::AShader::ClearData()
 {
-	m_uniforms.clear();
-	m_varying[0].clear();
-	m_varying[1].clear();
-	m_varying[2].clear();
-	m_flat.clear();
-	m_interpolatedVarying.clear();
-}
-
-void SimplexEngine::Shaders::AShader::SetVarying(const std::string & p_name, ShaderValue p_value)
-{
-	m_varying[m_index][p_name] = p_value;
-}
-
-void SimplexEngine::Shaders::AShader::SetFlat(const std::string & p_name, ShaderValue p_value)
-{
-	m_flat[p_name] = p_value;
+    m_lastVaryingIndex = 0;
 }

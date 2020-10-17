@@ -8,6 +8,8 @@
 #ifndef _AMATERIAL_H
 #define _AMATERIAL_H
 
+#include <memory>
+
 #include "SimplexEngine/API/Export.h"
 #include "SimplexEngine/Shaders/AShader.h"
 #include "SimplexEngine/Components/CameraComponent.h"
