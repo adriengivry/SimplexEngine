@@ -15,6 +15,13 @@
 
 namespace GyvrIni::Core
 {
+	template<class T>
+	concept IniType =
+		std::is_same<bool, T>::value ||
+		std::is_same<std::string, T>::value ||
+		std::is_integral<T>::value ||
+		std::is_floating_point<T>::value;
+
 	/**
 	* The IniFile class represents a file .ini that stores a set of attributes/values that can get read and written
 	*/
@@ -46,7 +53,7 @@ namespace GyvrIni::Core
 		* If the key doesn't exist, a default value is returned (0, false, "NULL")
 		* @param p_key
 		*/
-		template<typename T>
+		template<IniType T>
 		T Get(const std::string& p_key);
 
 		/**
@@ -54,7 +61,7 @@ namespace GyvrIni::Core
 		* @param p_key
 		* @param p_value
 		*/
-		template<typename T>
+		template<IniType T>
 		bool Set(const std::string& p_key, const T& p_value);
 		
 		/**
@@ -62,7 +69,7 @@ namespace GyvrIni::Core
 		* @param p_key
 		* @param p_value
 		*/
-		template<typename T>
+		template<IniType T>
 		bool Add(const std::string& p_key, const T& p_value);
 
 		/**

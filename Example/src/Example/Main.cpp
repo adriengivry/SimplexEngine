@@ -26,7 +26,7 @@ int main()
 	engine.sceneManager.RegisterScene<Example::Scenes::PhysicsScene>("Physics");
 	engine.sceneManager.RegisterScene<Example::Scenes::SandboxScene>("Sandbox");
 
-	engine.sceneManager.LoadScene("Physics");
+	engine.sceneManager.LoadScene("Demo");
 
 	engine.SetClearColor(SimplexEngine::Data::Color(102, 210, 255, 255));
 

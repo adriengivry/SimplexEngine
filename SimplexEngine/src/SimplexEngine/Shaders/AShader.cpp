@@ -26,15 +26,6 @@ void SimplexEngine::Shaders::AShader::ProcessInterpolation(const glm::vec3& p_ba
 {
 	PROFILER_SPY("AShader::ProcessInterpolation");
 
-    /*
-    for (int i = 0; i < 128; ++i)
-    {
-        m_interpolatedVarying[i] =
-            m_varying[i][0] * p_barycentricCoords.z +
-            m_varying[i][1] * p_barycentricCoords.y +
-            m_varying[i][2] * p_barycentricCoords.x;
-    }
-    */
     // Load barycentric coordinates in xmm register
     __m128 bcx = _mm_broadcast_ss(&p_barycentricCoords.x);
     __m128 bcy = _mm_broadcast_ss(&p_barycentricCoords.y);

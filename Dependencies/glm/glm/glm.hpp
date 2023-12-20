@@ -49,6 +49,8 @@
 ///
 /// @ingroup core
 
+#define GLM_FORCE_SIMD_SSE2
+
 #include "detail/_fixes.hpp"
 
 #pragma once

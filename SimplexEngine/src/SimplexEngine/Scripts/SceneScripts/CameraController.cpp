@@ -12,6 +12,8 @@
 #include "SimplexEngine/Maths/QuaternionFactory.h"
 #include "SimplexEngine/Actors/Actor.h"
 
+constexpr float kMouseSensitivityBase = 100.0f;
+
 SimplexEngine::Scripts::SceneScripts::CameraController::CameraController(const Inputs::InputManager& p_inputManager, Components::CameraComponent& p_cameraComponent, float p_movementSpeed, float p_mouseSensitivity) :
 	m_inputManager(p_inputManager),
 	m_cameraComponent(p_cameraComponent),
@@ -37,18 +39,15 @@ void SimplexEngine::Scripts::SceneScripts::CameraController::HandleMouse(float p
 	if (std::abs(motionX) + std::abs(motionY) > 100.0f)
 		return;
 
-	const float xOffset = motionX * m_mouseSensitivity;
-	const float yOffset = motionY * m_mouseSensitivity;
+	const float mouseSpeed = m_mouseSensitivity * kMouseSensitivityBase * p_deltaTime;
+
+	const float xOffset = motionX * mouseSpeed;
+	const float yOffset = motionY * mouseSpeed;
 
 	/* The yaw is influenced by x movements of the mouse */
 	m_yaw -= xOffset;
 	m_pitch -= yOffset;
-
-	/* We prevent the camera from doing a barrel roll */
-	if (m_pitch <= -89.0f)
-		m_pitch = -89.0f;
-	if (m_pitch >= 89.0f)
-		m_pitch = 89.0f;
+	m_pitch = std::max(std::min(m_pitch, 89.0f), -89.0f);
 
 	m_cameraComponent.owner->transform.SetLocalRotation(Maths::QuaternionFactory::CreateFromEuler({ m_pitch, m_yaw, 0.0f }));
 }
