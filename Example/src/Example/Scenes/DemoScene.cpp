@@ -49,7 +49,7 @@ void Example::Scenes::DemoScene::OnLoad()
 	secondIcoSphere.transform.SetParent(icoSphere.transform);
 
 	/* Add scripts */
-	AddScript<SimplexEngine::Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent, 20.0f, 1.0f);
+	AddScript<SimplexEngine::Scripts::SceneScripts::CameraController>(m_inputManager, cameraComponent, 20.0f);
 	AddScript<SimplexEngine::Scripts::SceneScripts::RotateOverTime>(icoSphere, 90.0f);
 }
 

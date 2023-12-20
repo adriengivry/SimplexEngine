@@ -15,7 +15,7 @@ void Example::Scenes::PhysicsScene::OnLoad()
 	cameraActor.transform.SetLocalPosition({ 0.0f, 50.0f, 0.0f });
 	cameraActor.AddComponent<SimplexEngine::Components::CapsuleColliderComponent>(1.0f, 5.0f);
 	cameraActor.AddComponent<SimplexEngine::Components::RigidbodyComponent>(1.0f);
-	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 12.0f, 1.0f);
+	cameraActor.AddBehaviour<SimplexEngine::Scripts::Behaviours::FPSController>(m_inputManager, 10.0f, 12.0f);
 
 	/* Floor */
 	for (int16_t z = 0; z < 10; z += 1)

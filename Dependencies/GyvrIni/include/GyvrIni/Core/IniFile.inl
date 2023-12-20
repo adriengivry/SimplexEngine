@@ -11,7 +11,7 @@
 #include "IniFile.h"
 #include <assert.h>
 
-template<typename T>
+template<GyvrIni::Core::IniType T>
 inline T GyvrIni::Core::IniFile::Get(const std::string& p_key)
 {
 	if constexpr (std::is_same<bool, T>::value)
@@ -42,14 +42,9 @@ inline T GyvrIni::Core::IniFile::Get(const std::string& p_key)
 
 		return static_cast<T>(std::atof(m_data[p_key].c_str()));
 	}
-	else
-	{
-		static_assert(false, "The given type must be : bool, integral, floating point or string");
-		return T();
-	}
 }
 
-template<typename T>
+template<GyvrIni::Core::IniType T>
 inline bool GyvrIni::Core::IniFile::Set(const std::string& p_key, const T& p_value)
 {
 	if (IsKeyExisting(p_key))
@@ -70,10 +65,6 @@ inline bool GyvrIni::Core::IniFile::Set(const std::string& p_key, const T& p_val
 		{
 			m_data[p_key] = std::to_string(p_value);
 		}
-		else
-		{
-			static_assert(false, "The given type must be : bool, integral, floating point or string");
-		}
 
 		return true;
 	}
@@ -81,7 +72,7 @@ inline bool GyvrIni::Core::IniFile::Set(const std::string& p_key, const T& p_val
 	return false;
 }
 
-template<typename T>
+template<GyvrIni::Core::IniType T>
 inline bool GyvrIni::Core::IniFile::Add(const std::string & p_key, const T & p_value)
 {
 	if (!IsKeyExisting(p_key))
@@ -101,10 +92,6 @@ inline bool GyvrIni::Core::IniFile::Add(const std::string & p_key, const T & p_v
 		else if constexpr (std::is_floating_point<T>::value)
 		{
 			RegisterPair(p_key, std::to_string(p_value));
-		}
-		else
-		{
-			static_assert(false, "The given type must be : bool, integral, floating point or std::string");
 		}
 
 		return true;
