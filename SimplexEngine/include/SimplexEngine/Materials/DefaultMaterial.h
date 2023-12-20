@@ -18,10 +18,10 @@
 */
 #define USE_SHADER(ShaderClass) DefineMaterial<SimplexEngine::Materials::DefaultMaterial<ShaderClass>>()
 
-constexpr uint8_t MVP = 0;
-constexpr uint8_t MODEL_MATRIX = 1;
-constexpr uint8_t TIME = 2;
-constexpr uint8_t BASE_COLOR = 3;
+constexpr uint8_t kMVP = 0;
+constexpr uint8_t kModel = 1;
+constexpr uint8_t kTime = 2;
+constexpr uint8_t kBaseColor = 3;
 
 namespace SimplexEngine::Materials
 {
@@ -34,10 +34,10 @@ namespace SimplexEngine::Materials
 	public:
 		virtual void UpdateUniforms(const MaterialData& p_materialData)
 		{
-			this->SetUniform(MVP, p_materialData.mainCamera.GetViewProjectionMatrix() * p_materialData.mesh.owner->transform.GetWorldMatrix());
-			this->SetUniform(MODEL_MATRIX, p_materialData.mesh.owner->transform.GetWorldMatrix());
-			this->SetUniform(TIME, p_materialData.totalTime);
-			this->SetUniform(BASE_COLOR, baseColor.GetNormalizedVec4());
+			this->SetUniform(kMVP, p_materialData.mainCamera.GetViewProjectionMatrix() * p_materialData.mesh.owner->transform.GetWorldMatrix());
+			this->SetUniform(kModel, p_materialData.mesh.owner->transform.GetWorldMatrix());
+			this->SetUniform(kTime, p_materialData.totalTime);
+			this->SetUniform(kBaseColor, baseColor.GetNormalizedVec4());
 		}
 
 		Data::Color baseColor = Data::Color::White;
